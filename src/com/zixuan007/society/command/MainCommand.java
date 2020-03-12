@@ -176,6 +176,7 @@ public class MainCommand extends Command {
                         player.sendMessage(">> §c当前的金额不足,请及时联系管理员充值");
                         return true;
                     }
+                    EconomyAPI.getInstance().reduceMoney(player, contributeMoney, true);
                     society = Utils.getSocietyByName(player.getName());
                     society.setSocietyMoney(society.getSocietyMoney()+contributeMoney);
                     society.saveData();//保存数据
