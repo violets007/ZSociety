@@ -59,6 +59,7 @@ public class WindowListener implements Listener {
                 case 2:
                     player.sendMessage(">> §a解散公会成功");
                     Utils.removeSociety(society.getSocietyName());
+                    SocietyPlugin.getInstance().getSocieties().remove(society);
                     break;
                 case 3:
                     if ((society.getTempApply().size() == 0)) {
