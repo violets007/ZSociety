@@ -54,8 +54,10 @@ public class SocietyPlugin extends PluginBase {
         String configPath = getServer().getPluginPath() + getName() + Utils.FILE_SEPARATOR + "Config.yml"; //配置文件路径
         config = new Config(configPath);//把指定配置文件转换为对象
         loadSocietyConfig();//加载配置文件
-        if(((boolean)config.get("isTip")) == true)
-        getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this),10);
+        //if(((boolean)config.get("isTip")) == true)
+        if (config.getBoolean("isTip",false)) {
+            getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
+        }
         getServer().getPluginManager().registerEvents(new SocietyListener(this),this);
         getServer().getPluginManager().registerEvents(new WindowListener(this),this);
     }
