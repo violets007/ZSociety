@@ -52,9 +52,9 @@ public class SocietyPlugin extends PluginBase {
         if (this.config.getBoolean("是否开启底部", false)) {
             getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
         }
-        getServer().getPluginManager().registerEvents(new ResponseLister(), (Plugin) this);
-        getServer().getPluginManager().registerEvents(new SocietyListener(this), (Plugin) this);
-        getServer().getPluginManager().registerEvents(new TitleListener(this), (Plugin) this);
+        getServer().getPluginManager().registerEvents(new ResponseLister(), this);
+        getServer().getPluginManager().registerEvents(new SocietyListener(this), this);
+        getServer().getPluginManager().registerEvents(new TitleListener(this), this);
     }
 
     public void registerCommand() {
