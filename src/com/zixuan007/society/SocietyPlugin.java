@@ -27,29 +27,19 @@
 /*     */   private static SocietyPlugin instance;
 /*  30 */   private ArrayList<Society> societies = new ArrayList<>();
 /*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   public void onEnable() {
-/*  38 */     init();
-/*  39 */     getLogger().info("§2公会插件开启 §c作者§f:§bzixuan007");
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   public void onDisable() {
-/*  47 */     getLogger().info("§2公会插件关闭 §c数据保存中...");
-/*  48 */     this.societies.forEach(society -> society.saveData());
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
+
+    public void onEnable() {
+        this.init();
+        this.getLogger().info("§2公会插件开启 §c作者§f:§bzixuan007");
+    }
+
+    public void onDisable() {
+        this.getLogger().info("§2公会插件关闭 §c数据保存中...");
+        this.societies.forEach((society) -> {
+            society.saveData();
+        });
+    }
+
 /*     */   
 /*     */   public void init() {
 /*  57 */     checkPlugin("EconomyAPI");

@@ -5,8 +5,6 @@ import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 
 public class ZsocietyAPI {
-    public ZsocietyAPI() {
-    }
 
     public static String getSocietyName(String playerNmae) {
         Society society = SocietyUtils.getSocietyByPlayerName(playerNmae);
@@ -30,4 +28,5 @@ public class ZsocietyAPI {
         String title = (String)SocietyPlugin.getInstance().getTitleConfig().get(playerName);
         return title != null ? title : "无称号";
     }
+    
 }

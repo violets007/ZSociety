@@ -1,4 +1,4 @@
-/*     */ package com.zixuan007.society.domain;
+package com.zixuan007.society.domain;
 /*     */ 
 /*     */ import cn.nukkit.utils.Config;
 /*     */ import com.zixuan007.society.utils.SocietyUtils;

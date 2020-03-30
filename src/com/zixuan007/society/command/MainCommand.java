@@ -20,7 +20,6 @@ public class MainCommand extends Command {
     public boolean execute(CommandSender sender, String commandName, String[] args) {
         if (sender instanceof ConsoleCommandSender) {
             sender.sendMessage("§c进制控制台输入命令");
-            return false;
         } else {
             Player player = (Player)sender;
             if (commandName.equals(this.getName())) {
@@ -28,7 +27,7 @@ public class MainCommand extends Command {
                 player.showFormWindow(societyWindow);
             }
 
-            return false;
         }
+        return false;
     }
 }
