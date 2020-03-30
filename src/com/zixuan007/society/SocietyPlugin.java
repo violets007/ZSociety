@@ -18,9 +18,7 @@
 /*     */ import java.util.ArrayList;
 /*     */ import java.util.List;
 /*     */ 
-/*     */ public class SocietyPlugin
-/*     */   extends PluginBase
-/*     */ {
+/*     */ public class SocietyPlugin extends PluginBase {
 /*     */   private Config config;
 /*  25 */   private List<Config> societyConfigList = new ArrayList<>();
 /*     */   private Config titleConfig;
