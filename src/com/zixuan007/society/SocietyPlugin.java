@@ -1,112 +1,201 @@
-package com.zixuan007.society;
+/*     */ package com.zixuan007.society;
+/*     */ 
+/*     */ import cn.nukkit.command.Command;
+/*     */ import cn.nukkit.event.Listener;
+/*     */ import cn.nukkit.plugin.Plugin;
+/*     */ import cn.nukkit.plugin.PluginBase;
+/*     */ import cn.nukkit.scheduler.Task;
+/*     */ import cn.nukkit.utils.Config;
+/*     */ import com.zixuan007.society.command.MainCommand;
+/*     */ import com.zixuan007.society.command.TitleCommand;
+/*     */ import com.zixuan007.society.domain.Society;
+/*     */ import com.zixuan007.society.listener.ResponseLister;
+/*     */ import com.zixuan007.society.listener.SocietyListener;
+/*     */ import com.zixuan007.society.listener.TitleListener;
+/*     */ import com.zixuan007.society.task.BottomTask;
+/*     */ import com.zixuan007.society.utils.SocietyUtils;
+/*     */ import java.io.File;
+/*     */ import java.util.ArrayList;
+/*     */ import java.util.List;
+/*     */ 
+/*     */ public class SocietyPlugin
+/*     */   extends PluginBase
+/*     */ {
+/*     */   private Config config;
+/*  25 */   private List<Config> societyConfigList = new ArrayList<>();
+/*     */   private Config titleConfig;
+/*     */   private Config LangConfig;
+/*     */   private Config titleShopConfig;
+/*     */   private static SocietyPlugin instance;
+/*  30 */   private ArrayList<Society> societies = new ArrayList<>();
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public void onEnable() {
+/*  38 */     init();
+/*  39 */     getLogger().info("§2公会插件开启 §c作者§f:§bzixuan007");
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public void onDisable() {
+/*  47 */     getLogger().info("§2公会插件关闭 §c数据保存中...");
+/*  48 */     this.societies.forEach(society -> society.saveData());
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public void init() {
+/*  57 */     checkPlugin("EconomyAPI");
+/*  58 */     checkPlugin("Tips");
+/*  59 */     checkPlugin("FloatingText");
+/*  60 */     if (instance == null) instance = this; 
+/*  61 */     checkConfig();
+/*  62 */     saveResource("cn_ language.yml", true);
+/*  63 */     registerCommand();
+/*  64 */     loadConfig();
+/*  65 */     loadSocietyConfig();
+/*  66 */     if (((Boolean)this.config.get("是否开启底部")).booleanValue() == true)
+/*  67 */       getServer().getScheduler().scheduleRepeatingTask((Task)new BottomTask(this), 10); 
+/*  68 */     getServer().getPluginManager().registerEvents((Listener)new ResponseLister(), (Plugin)this);
+/*  69 */     getServer().getPluginManager().registerEvents((Listener)new SocietyListener(this), (Plugin)this);
+/*  70 */     getServer().getPluginManager().registerEvents((Listener)new TitleListener(this), (Plugin)this);
+/*     */   }
+/*     */   
+/*     */   public void registerCommand() {
+/*  74 */     getServer().getCommandMap().register("society", (Command)new MainCommand(), "公会");
+/*  75 */     getServer().getCommandMap().register("title", (Command)new TitleCommand(), "称号");
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public void loadSocietyConfig() {
+/*  82 */     File societyFolder = new File(SocietyUtils.SOCIETYFOLDER);
+/*  83 */     if (!societyFolder.exists()) societyFolder.mkdirs(); 
+/*  84 */     File[] files = societyFolder.listFiles();
+/*  85 */     for (File file : files) {
+/*  86 */       Config config = new Config(file);
+/*  87 */       this.societyConfigList.add(config);
+/*  88 */       if (file.getName().endsWith(".yml")) this.societies.add(Society.init(config));
+/*     */     
+/*     */     } 
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public void loadConfig() {
+/*  96 */     String titleConfigPath = SocietyUtils.CONFIGFOLDER + "Title.yml";
+/*  97 */     String langPath = SocietyUtils.CONFIGFOLDER + "cn_ language.yml";
+/*  98 */     String titleShopPath = SocietyUtils.CONFIGFOLDER + "TitleShopData.yml";
+/*  99 */     this.titleConfig = new Config(titleConfigPath);
+/* 100 */     this.LangConfig = new Config(langPath);
+/* 101 */     this.titleShopConfig = new Config(titleShopPath);
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public void checkPlugin(String pluginName) {
+/* 108 */     Plugin economyAPI = getServer().getPluginManager().getPlugin(pluginName);
+/* 109 */     if (economyAPI == null) {
+/* 110 */       getLogger().error("§c检测到 §b" + pluginName + " §c插件不存在,请先安装");
+/* 111 */       getServer().shutdown();
+/*     */     } 
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public void checkConfig() {
+/* 120 */     String path = SocietyUtils.CONFIGFOLDER + "Config.yml";
+/* 121 */     File file = new File(path);
+/* 122 */     if (!file.exists()) {
+/* 123 */       saveResource("Config.yml");
+/*     */     } else {
+/* 125 */       Config config = new Config(file, 2);
+/* 126 */       String version = (String)config.get("version");
+/* 127 */       String pluginVersion = getDescription().getVersion();
+/* 128 */       if (version == null || !version.equals(pluginVersion)) {
+/* 129 */         saveResource("Config.yml", true);
+/* 130 */         getLogger().info("§c检测到配置文件版本太低,自动进行覆盖");
+/*     */       } else {
+/* 132 */         saveResource("Config.yml");
+/*     */       } 
+/*     */     } 
+/* 135 */     String configPath = SocietyUtils.CONFIGFOLDER + "Config.yml";
+/* 136 */     this.config = new Config(configPath);
+/*     */   }
+/*     */ 
+/*     */   
+/*     */   public Config getConfig() {
+/* 141 */     return this.config;
+/*     */   }
+/*     */   
+/*     */   public void setConfig(Config config) {
+/* 145 */     this.config = config;
+/*     */   }
+/*     */   
+/*     */   public static SocietyPlugin getInstance() {
+/* 149 */     return instance;
+/*     */   }
+/*     */   
+/*     */   public static void setInstance(SocietyPlugin instance) {
+/* 153 */     SocietyPlugin.instance = instance;
+/*     */   }
+/*     */   
+/*     */   public ArrayList<Society> getSocieties() {
+/* 157 */     return this.societies;
+/*     */   }
+/*     */   
+/*     */   public void setSocieties(ArrayList<Society> societies) {
+/* 161 */     this.societies = societies;
+/*     */   }
+/*     */   
+/*     */   public Config getTitleConfig() {
+/* 165 */     return this.titleConfig;
+/*     */   }
+/*     */   
+/*     */   public void setTitleConfig(Config titleConfig) {
+/* 169 */     this.titleConfig = titleConfig;
+/*     */   }
+/*     */   
+/*     */   public Config getLangConfig() {
+/* 173 */     return this.LangConfig;
+/*     */   }
+/*     */   
+/*     */   public void setLangConfig(Config langConfig) {
+/* 177 */     this.LangConfig = langConfig;
+/*     */   }
+/*     */   
+/*     */   public List<Config> getSocietyConfigList() {
+/* 181 */     return this.societyConfigList;
+/*     */   }
+/*     */   
+/*     */   public void setSocietyConfigList(List<Config> societyConfigList) {
+/* 185 */     this.societyConfigList = societyConfigList;
+/*     */   }
+/*     */   
+/*     */   public Config getTitleShopConfig() {
+/* 189 */     return this.titleShopConfig;
+/*     */   }
+/*     */   
+/*     */   public void setTitleShopConfig(Config titleShopConfig) {
+/* 193 */     this.titleShopConfig = titleShopConfig;
+/*     */   }
+/*     */ }
 
-import cn.nukkit.plugin.Plugin;
-import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.utils.Config;
-import com.zixuan007.society.command.MainCommand;
-import com.zixuan007.society.domain.Society;
-import com.zixuan007.society.listener.SocietyListener;
-import com.zixuan007.society.listener.WindowListener;
-import com.zixuan007.society.task.BottomTask;
-import com.zixuan007.society.utils.Utils;
 
-import java.io.File;
-import java.util.ArrayList;
-
-/**
- * 公会插件主类
- * @author zixuan007
+/* Location:              D:\下载\ZSociety-1.0.3alpha.jar!\com\zixuan007\society\SocietyPlugin.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
  */
-public class SocietyPlugin extends PluginBase {
-    private Config config;//公会主配置文件
-    private static SocietyPlugin instance;//插件实例对象
-    private ArrayList<Society> societies=new ArrayList<Society>(); //公会列表
-
-
-    /**
-     * @Description 插件开启
-     */
-    @Override
-    public void onEnable() {
-        init();
-        getLogger().info("§2公会插件开启 作者§f:§bzixuan007");
-    }
-
-    /**
-     * @Description 插件关闭
-     */
-    @Override
-    public void onDisable() {
-        getLogger().info("§2公会插件关闭 §c数据保存中...");
-        societies.forEach(society -> {
-            society.saveData();
-        });
-    }
-
-    /**
-     * @deprecated 插件初始化
-     */
-    public void init() {
-        checkPlugin("EconomyAPI");
-        if (instance == null) instance = this;
-        saveResource("Config.yml"); //保存配置文件资源
-        getServer().getCommandMap().register("society", new MainCommand(), "公会"); //把指定命令加载进命令存储区
-        String configPath = getServer().getPluginPath() + getName() + Utils.FILE_SEPARATOR + "Config.yml"; //配置文件路径
-        config = new Config(configPath);//把指定配置文件转换为对象
-        loadSocietyConfig();//加载配置文件
-        //if(((boolean)config.get("isTip")) == true)
-        if (config.getBoolean("isTip",false)) {
-            getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
-        }
-        getServer().getPluginManager().registerEvents(new SocietyListener(this),this);
-        getServer().getPluginManager().registerEvents(new WindowListener(this),this);
-    }
-
-    /**
-     * @deprecated 加载公会配置文件夹
-     */
-    public void loadSocietyConfig() {
-        File societyFolder = new File(Utils.SOCIETYFOLDER);
-        if (!societyFolder.exists()) societyFolder.mkdirs();
-        File[] files = societyFolder.listFiles();
-        for (File file : files) {
-            if(file.getName().endsWith(".yml")) societies.add(Society.init(new Config(file)));
-        }
-    }
-
-    /**
-     * @deprecated 检测依赖插件
-     */
-    public void checkPlugin(String pluginName) {
-        Plugin economyAPI = getServer().getPluginManager().getPlugin(pluginName);
-        if (economyAPI == null) {
-            getLogger().error("检测到 " + pluginName + " 插件不存在,请先安装");
-            getServer().shutdown();
-        }
-    }
-
-    @Override
-    public Config getConfig() {
-        return config;
-    }
-
-    public void setConfig(Config config) {
-        this.config = config;
-    }
-
-    public static SocietyPlugin getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(SocietyPlugin instance) {
-        SocietyPlugin.instance = instance;
-    }
-
-    public ArrayList<Society> getSocieties() {
-        return societies;
-    }
-
-    public void setSocieties(ArrayList<Society> societies) {
-        this.societies = societies;
-    }
-}
