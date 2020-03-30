@@ -2,7 +2,6 @@ package com.zixuan007.society.task;
 
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.PluginTask;
-import cn.nukkit.scheduler.Task;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.utils.SocietyUtils;
 import java.util.Collection;
