@@ -26,9 +26,12 @@ import com.zixuan007.society.window.title.admin.TitleWindow;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 窗口管理界面
+ */
 public class WindowManager {
-    public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
-    private HashMap<String, HashMap<String, FormWindow>> forms = new HashMap();
+    public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance(); //公会插件类
+    private HashMap<String, HashMap<String, FormWindow>> forms = new HashMap(); //存储玩家打开过的表单
 
     public WindowManager() {
     }

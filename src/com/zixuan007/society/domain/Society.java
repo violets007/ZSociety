@@ -19,9 +19,7 @@ public class Society {
     private int grade = 1;
     private ArrayList<String> tempApply = new ArrayList<>();
 
-    public Society() {
-
-    }
+    public Society() {}
 
     public Society(long sid, String societyName, String presidentName, String createTime, Double societyMoney, HashMap<String, ArrayList<Object>> psots) {
         this.sid = sid;
@@ -40,11 +38,9 @@ public class Society {
             if (config.get("sid") instanceof Integer) {
                 society.sid = ((Integer)config.get("sid")).longValue();
             }
-
             if (config.get("sid") instanceof Long) {
                 society.sid = (Long)config.get("sid");
             }
-
             society.societyName = config.getString("societyName");
             society.presidentName = config.getString("presidentName");
             society.createTime = config.getString("createTime");

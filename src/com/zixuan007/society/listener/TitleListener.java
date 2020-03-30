@@ -61,7 +61,7 @@ public class TitleListener implements Listener {
         int id = block.getId();
         BlockEntity blockEntity = level.getBlockEntity(new Vector3(block.getX(), block.getY(), block.getZ()));
         if (TitleUtils.onCreateName.containsKey(playerName)) {
-            if (id == 68) {
+            if (id == Block.WALL_SIGN) {
                 if (blockEntity instanceof BlockEntitySign) {
                     ArrayList<String> titleText = (ArrayList<String>) this.societyPlugin.getConfig().getList("称号商店木牌格式");
                     ArrayList<String> tempList = new ArrayList<>();
@@ -171,6 +171,10 @@ public class TitleListener implements Listener {
         TitleUtils.onCreateName.remove(player.getName());
     }
 
+    /**
+     * 玩家退出游戏
+     * @param event
+     */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onQuit(PlayerQuitEvent event) {
         String playerName = event.getPlayer().getName();
@@ -178,6 +182,10 @@ public class TitleListener implements Listener {
         this.affirmBuyTitlePlayer.remove(playerName);
     }
 
+    /**
+     * 移除称号商店方块
+     * @param event
+     */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
@@ -194,11 +202,9 @@ public class TitleListener implements Listener {
             int titleShopY = (Integer) titleShopDataList.get(1);
             int titleShopZ = (Integer) titleShopDataList.get(2);
             String titleShopLevelName = (String) titleShopDataList.get(3);
-            System.out.println(levelName.equals(titleShopLevelName));
             boolean isX = (x + 1 == titleShopX || x - 1 == titleShopX || x == titleShopX);
             boolean isZ = (z + 1 == titleShopZ || z - 1 == titleShopZ || z == titleShopZ);
             if (isX && isZ && levelName.equals(titleShopLevelName)) {
-                System.out.println("执行进入");
                 if (!player.isOp()) {
                     player.sendMessage(">> §c你没有权限移除称号商店");
                     event.setCancelled();
@@ -219,7 +225,6 @@ public class TitleListener implements Listener {
         Config config = SocietyPlugin.getInstance().getConfig();
         ArrayList<String> textList = (ArrayList) config.getList("称号商店木牌格式");
         String signTitle = textList.get(1);
-        System.out.println(signTitle);
         signTitle = signTitle.replaceAll("\\$\\{title\\}", event.getTitle());
         FloatingTextAPI.removeFloatingText(player, signTitle);
         player.sendMessage(">> §a移除商店成功");

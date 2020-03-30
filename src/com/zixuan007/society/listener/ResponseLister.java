@@ -12,6 +12,9 @@ import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.ModalWindow;
 import com.zixuan007.society.window.SimpleWindow;
 
+/**
+ * 窗口事件响应
+ */
 public class ResponseLister implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

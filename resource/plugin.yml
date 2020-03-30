@@ -1,0 +1,5 @@
+name: ZSociety
+main: com.zixuan007.society.SocietyPlugin
+version: "1.0.3alpha"
+author: "zixuan007"
+api: ["1.0.0"]

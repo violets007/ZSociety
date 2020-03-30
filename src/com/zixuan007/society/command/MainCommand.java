@@ -19,7 +19,7 @@ public class MainCommand extends Command {
 
     public boolean execute(CommandSender sender, String commandName, String[] args) {
         if (sender instanceof ConsoleCommandSender) {
-            sender.sendMessage("§c进制控制台输入命令");
+            sender.sendMessage("§c禁止控制台输入命令");
         } else {
             Player player = (Player)sender;
             if (commandName.equals(this.getName())) {

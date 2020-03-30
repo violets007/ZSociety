@@ -28,7 +28,7 @@
 /*     */   public static boolean onEvent(FormWindow formWindow, FormResponse response, Player player) {
 /*  29 */     if (formWindow instanceof ModalWindow) {
 /*  30 */       ModalWindow window = (ModalWindow)formWindow;
-/*     */       
+/*     */
 /*  32 */       if (window.wasClosed() || response == null) {
 /*  33 */         if (window.isBack.booleanValue()) {
 /*  34 */           window.callBack(player);

@@ -25,6 +25,10 @@ public class SocietyListener implements Listener {
         this.societyPlugin = societyPlugin;
     }
 
+    /**
+     * 当创建公会的时候调用此事件
+     * @param event
+     */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onCreate(PlayerCreateSocietyEvent event) {
         Player player = event.getPlayer();

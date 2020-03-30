@@ -1,151 +1,121 @@
-/*     */ package com.zixuan007.society.window;
-/*     */ 
-/*     */ import cn.nukkit.Player;
-/*     */ import cn.nukkit.form.response.FormResponse;
-/*     */ import cn.nukkit.form.response.FormResponseSimple;
-/*     */ import cn.nukkit.form.window.FormWindow;
-/*     */ import cn.nukkit.form.window.FormWindowSimple;
-/*     */ import com.sun.istack.internal.NotNull;
-/*     */ import com.zixuan007.society.window.response.ResponseListenerSimple;
-/*     */ import java.util.Objects;
-/*     */ import java.util.function.BiConsumer;
-/*     */ import java.util.function.Consumer;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ public class SimpleWindow
-/*     */   extends FormWindowSimple
-/*     */   implements ResponseListenerSimple
-/*     */ {
-/*  20 */   protected transient BiConsumer<Integer, Player> buttonClickedListener = null;
-/*  21 */   protected transient Consumer<Player> windowClosedListener = null;
-/*     */   private transient FormWindow parent;
-/*  23 */   private Boolean isBack = Boolean.valueOf(false);
-/*     */   
-/*     */   public SimpleWindow(String title, String content) {
-/*  26 */     super(title, content);
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   public static boolean onEvent(FormWindow formWindow, FormResponse response, Player player) {
-/*  37 */     if (formWindow instanceof SimpleWindow) {
-/*  38 */       SimpleWindow window = (SimpleWindow)formWindow;
-/*     */       
-/*  40 */       if (window.wasClosed() || response == null) {
-/*  41 */         if (window.isBack.booleanValue()) {
-/*  42 */           window.callBack(player);
-/*     */         } else {
-/*  44 */           window.callClosed(player);
-/*     */         } 
-/*  46 */         window.closed = false;
-/*     */       } else {
-/*     */         
-/*  49 */         window.callClicked(((FormResponseSimple)response).getClickedButtonId(), player);
-/*     */       } 
-/*     */       
-/*  52 */       return true;
-/*     */     } 
-/*  54 */     return false;
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   private void callClicked(int clickedButtonId, Player player) {
-/*  64 */     onClick(clickedButtonId, player);
-/*  65 */     if (this.buttonClickedListener != null) {
-/*  66 */       this.buttonClickedListener.accept(Integer.valueOf(clickedButtonId), player);
-/*     */     }
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   private void callClosed(Player player) {
-/*  75 */     onClose(player);
-/*  76 */     if (this.buttonClickedListener != null) {
-/*  77 */       this.windowClosedListener.accept(player);
-/*     */     }
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   public void callBack(Player player) {
-/*  86 */     player.showFormWindow(this.parent);
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   public final void onClicked(@NotNull BiConsumer<Integer, Player> listener) {
-/*  96 */     Objects.requireNonNull(listener);
-/*  97 */     if (this.buttonClickedListener != null) {
-/*  98 */       this.buttonClickedListener = listener;
-/*     */     }
-/*     */   }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   public final void onClosed(@NotNull Consumer<Player> listener) {
-/* 108 */     Objects.requireNonNull(listener);
-/* 109 */     if (this.windowClosedListener != null) {
-/* 110 */       this.windowClosedListener = listener;
-/*     */     }
-/*     */   }
-/*     */   
-/*     */   public BiConsumer<Integer, Player> getButtonClickedListener() {
-/* 115 */     return this.buttonClickedListener;
-/*     */   }
-/*     */   
-/*     */   public void setButtonClickedListener(BiConsumer<Integer, Player> buttonClickedListener) {
-/* 119 */     this.buttonClickedListener = buttonClickedListener;
-/*     */   }
-/*     */   
-/*     */   public Consumer<Player> getWindowClosedListener() {
-/* 123 */     return this.windowClosedListener;
-/*     */   }
-/*     */   
-/*     */   public void setWindowClosedListener(Consumer<Player> windowClosedListener) {
-/* 127 */     this.windowClosedListener = windowClosedListener;
-/*     */   }
-/*     */   
-/*     */   public FormWindow getParent() {
-/* 131 */     return this.parent;
-/*     */   }
-/*     */   
-/*     */   public void setParent(FormWindow parent) {
-/* 135 */     this.parent = parent;
-/*     */   }
-/*     */   
-/*     */   public Boolean getBack() {
-/* 139 */     return this.isBack;
-/*     */   }
-/*     */   
-/*     */   public void setBack(Boolean back) {
-/* 143 */     this.isBack = back;
-/*     */   }
-/*     */ }
+package com.zixuan007.society.window;
+
+import cn.nukkit.Player;
+import cn.nukkit.form.response.FormResponse;
+import cn.nukkit.form.response.FormResponseSimple;
+import cn.nukkit.form.window.FormWindow;
+import cn.nukkit.form.window.FormWindowSimple;
+import com.sun.istack.internal.NotNull;
+import com.zixuan007.society.window.response.ResponseListenerSimple;
+import java.util.Objects;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 
-/* Location:              D:\下载\ZSociety-1.0.3alpha.jar!\com\zixuan007\society\window\SimpleWindow.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */
+
+public class SimpleWindow extends FormWindowSimple implements ResponseListenerSimple {
+    protected transient BiConsumer<Integer, Player> buttonClickedListener = null;
+    protected transient Consumer<Player> windowClosedListener = null;
+    private transient FormWindow parent;
+    private Boolean isBack = Boolean.valueOf(false);
+
+    public SimpleWindow(String title, String content) {
+        super(title, content);
+    }
+
+    /**
+     * 响应表单事件调用
+     * @param formWindow 当前类型窗口
+     * @param response 响应数据
+     * @param player 玩家
+     * @return
+     */
+    public static boolean onEvent(FormWindow formWindow, FormResponse response, Player player) {
+        if (formWindow instanceof SimpleWindow) {
+            SimpleWindow window = (SimpleWindow)formWindow;
+
+            if (window.wasClosed() || response == null) {
+                if (window.isBack.booleanValue()) {
+                    window.callBack(player);
+                } else {
+                    window.callClosed(player);
+                }
+                window.closed = false;
+            } else {
+
+                window.callClicked(((FormResponseSimple)response).getClickedButtonId(), player);
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+
+    private void callClicked(int clickedButtonId, Player player) {
+        onClick(clickedButtonId, player);
+        if (this.buttonClickedListener != null) {
+            this.buttonClickedListener.accept(Integer.valueOf(clickedButtonId), player);
+        }
+    }
+
+    private void callClosed(Player player) {
+        onClose(player);
+        if (this.buttonClickedListener != null) {
+            this.windowClosedListener.accept(player);
+        }
+    }
+
+    public void callBack(Player player) {
+        player.showFormWindow(this.parent);
+    }
+
+
+    public final void onClicked(@NotNull BiConsumer<Integer, Player> listener) {
+        Objects.requireNonNull(listener);
+        if (this.buttonClickedListener != null) {
+            this.buttonClickedListener = listener;
+        }
+    }
+
+    public final void onClosed(@NotNull Consumer<Player> listener) {
+        Objects.requireNonNull(listener);
+        if (this.windowClosedListener != null) {
+            this.windowClosedListener = listener;
+        }
+    }
+
+    public BiConsumer<Integer, Player> getButtonClickedListener() {
+        return this.buttonClickedListener;
+    }
+
+    public void setButtonClickedListener(BiConsumer<Integer, Player> buttonClickedListener) {
+        this.buttonClickedListener = buttonClickedListener;
+    }
+
+    public Consumer<Player> getWindowClosedListener() {
+        return this.windowClosedListener;
+    }
+
+    public void setWindowClosedListener(Consumer<Player> windowClosedListener) {
+        this.windowClosedListener = windowClosedListener;
+    }
+
+    public FormWindow getParent() {
+        return this.parent;
+    }
+
+    public void setParent(FormWindow parent) {
+        this.parent = parent;
+    }
+
+    public Boolean getBack() {
+        return this.isBack;
+    }
+
+    public void setBack(Boolean back) {
+        this.isBack = back;
+    }
+}
+
+

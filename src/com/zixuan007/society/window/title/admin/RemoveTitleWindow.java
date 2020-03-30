@@ -33,7 +33,3 @@
 /*    */ }
 
 
-/* Location:              D:\下载\ZSociety-1.0.3alpha.jar!\com\zixuan007\society\window\title\admin\RemoveTitleWindow.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */

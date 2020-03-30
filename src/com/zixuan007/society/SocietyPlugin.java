@@ -83,8 +83,8 @@ public class SocietyPlugin extends PluginBase {
     }
 
     public void checkPlugin(String pluginName) {
-        Plugin economyAPI = getServer().getPluginManager().getPlugin(pluginName);
-        if (economyAPI == null) {
+        Plugin plugin = getServer().getPluginManager().getPlugin(pluginName);
+        if (plugin == null) {
             getLogger().error("§c检测到 §b" + pluginName + " §c插件不存在,请先安装");
             getServer().shutdown();
         }

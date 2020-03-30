@@ -26,7 +26,23 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="ZSociety-1.0.3alpha" level="project" />
-    <orderEntry type="library" name="NukkitX" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Nukkit1.0/plugins/FloatingText1.0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Nukkit1.0/plugins/[DEFAULT]Tips_v1.3.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

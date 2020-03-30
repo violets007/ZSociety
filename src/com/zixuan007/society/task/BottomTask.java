@@ -6,7 +6,9 @@ import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.utils.SocietyUtils;
 import java.util.Collection;
 
-
+/**
+ * 底部Tip显示
+ */
 public class BottomTask extends PluginTask<SocietyPlugin> {
 
     public BottomTask(SocietyPlugin owner) {
