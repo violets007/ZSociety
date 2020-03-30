@@ -19,6 +19,10 @@ public class Society {
     private int grade = 1;
     private ArrayList<String> tempApply = new ArrayList<>();
 
+    public Society() {
+
+    }
+
     public Society(long sid, String societyName, String presidentName, String createTime, Double societyMoney, HashMap<String, ArrayList<Object>> psots) {
         this.sid = sid;
         this.societyName = societyName;
@@ -28,23 +32,28 @@ public class Society {
         this.psots = psots;
     }
 
-    public Society() {
-
-    }
-
     public static Society init(Config config) {
-        if (config.get("sid") == null) return null;
-        Society society = new Society();
-        if (config.get("sid") instanceof Integer) society.sid = config.getInt("sid");
-        if (config.get("sid") instanceof Long) society.sid = config.getLong("sid");
-        society.societyName = config.getString("societyName");
-        society.presidentName = config.getString("presidentName");
-        society.createTime = config.getString("createTime");
-        society.societyMoney = (Double) config.get("societyMoney");
-        society.psots = (HashMap<String, ArrayList<Object>>) config.get("psots");
-        society.grade = config.getInt("grade");
-        society.tempApply = (ArrayList<String>) config.get("tempApply");
-        return society;
+        if (config.get("sid") == null) {
+            return null;
+        } else {
+            Society society = new Society();
+            if (config.get("sid") instanceof Integer) {
+                society.sid = ((Integer)config.get("sid")).longValue();
+            }
+
+            if (config.get("sid") instanceof Long) {
+                society.sid = (Long)config.get("sid");
+            }
+
+            society.societyName = config.getString("societyName");
+            society.presidentName = config.getString("presidentName");
+            society.createTime = config.getString("createTime");
+            society.societyMoney = config.getDouble("societyMoney");
+            society.psots = (HashMap<String, ArrayList<Object>>)config.get("psots");
+            society.grade = config.getInt("grade");
+            society.tempApply = (ArrayList)config.getList("tempApply");
+            return society;
+        }
     }
 
     public void saveData() {

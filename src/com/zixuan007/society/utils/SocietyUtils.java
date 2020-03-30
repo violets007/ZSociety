@@ -278,7 +278,7 @@
 /*     */ 
 /*     */   
 /*     */   public static String getPostByName(String playerName, Society society) {
-/* 281 */     ArrayList<Object> list = (ArrayList<Object>)society.getPost().get(playerName);
+/* 281 */     ArrayList<Object> list = society.getPost().get(playerName);
 /* 282 */     return (String)list.get(0);
 /*     */   }
 /*     */ 
@@ -305,35 +305,25 @@
 /* 305 */     return formatText(chatText, player);
 /*     */   }
 /*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   
-/*     */   public static String formatText(String text, Player player) {
-/* 315 */     Item itemInHand = player.getInventory().getItemInHand();
-/* 316 */     String itemID = itemInHand.getId() + ":" + itemInHand.getDamage();
-/* 317 */     Double myMoney = Double.valueOf(EconomyAPI.getInstance().myMoney(player));
-/* 318 */     Society society = getSocietyByPlayerName(player.getName());
-/* 319 */     String societyNam = (society != null) ? ("§9" + society.getSocietyName()) : "无公会";
-/* 320 */     String societyGrade = (society != null) ? (society.getGrade() + "") : "无等级";
-/* 321 */     String postName = (society != null) ? (new StringBuilder()).append(((ArrayList)society.getPost().get(player.getName())).get(0)).append("").toString() : "无职位";
-/* 322 */     String title = (String)SocietyPlugin.getInstance().getTitleConfig().get(player.getName());
-/* 323 */     String name = player.getLevel().getName();
-/* 324 */     float ticksPerSecond = SocietyPlugin.getInstance().getServer().getTicksPerSecond();
-/* 325 */     text = Api.strReplace(text, player);
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */     
-/* 334 */     text = text.replaceAll("\\$\\{world\\}", name).replaceAll("\\$\\{societyName\\}", societyNam).replaceAll("\\$\\{societyGrade\\}", societyGrade).replaceAll("\\$\\{playerName\\}", player.getName()).replaceAll("\\$\\{post\\}", postName).replaceAll("\\$\\{tps\\}", ticksPerSecond + "").replaceAll("\\$\\{money\\}", myMoney.toString()).replaceAll("\\$\\{itemID\\}", itemID).replaceAll("\\$\\{title\\}", title);
-/* 335 */     return text;
-/*     */   }
+/*     */
+
+
+    public static String formatText(String text, Player player) {
+        Item itemInHand = player.getInventory().getItemInHand();
+        String itemID = itemInHand.getId() + ":" + itemInHand.getDamage();
+        Double myMoney = EconomyAPI.getInstance().myMoney(player);
+        Society society = getSocietyByPlayerName(player.getName());
+        String societyNam = society != null ? "§9" + society.getSocietyName() : "无公会";
+        String societyGrade = society != null ? society.getGrade() + "" : "无等级";
+        String postName = society != null ? society.getPost().get(player.getName()).get(0) + "" : "无职位";
+        String title = (String)SocietyPlugin.getInstance().getTitleConfig().get(player.getName());
+        String name = player.getLevel().getName();
+        float ticksPerSecond = SocietyPlugin.getInstance().getServer().getTicksPerSecond();
+        text = Api.strReplace(text, player);
+        text = text.replaceAll("\\$\\{world\\}", name).replaceAll("\\$\\{societyName\\}", societyNam).replaceAll("\\$\\{societyGrade\\}", societyGrade).replaceAll("\\$\\{playerName\\}", player.getName()).replaceAll("\\$\\{post\\}", postName).replaceAll("\\$\\{tps\\}", ticksPerSecond + "").replaceAll("\\$\\{money\\}", myMoney.toString()).replaceAll("\\$\\{itemID\\}", itemID).replaceAll("\\$\\{title\\}", title);
+        return text;
+    }
+
 /*     */ 
 /*     */ 
 /*     */ 
@@ -386,9 +376,3 @@
 /* 386 */     society.saveData();
 /*     */   }
 /*     */ }
-
-
-/* Location:              D:\下载\ZSociety-1.0.3alpha.jar!\com\zixuan007\societ\\utils\SocietyUtils.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */

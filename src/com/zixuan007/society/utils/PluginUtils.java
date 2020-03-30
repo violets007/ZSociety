@@ -9,8 +9,7 @@
 /*    */ import java.net.URLClassLoader;
 
 /*    */ 
-/*    */ public class PluginUtils
-/*    */ {
+/*    */ public class PluginUtils {
 /*    */   public static void loadJar(String jarPath) throws MalformedURLException {
 /* 22 */     File jarFile = new File(jarPath);
 /*    */     
