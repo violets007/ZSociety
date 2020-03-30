@@ -5,7 +5,6 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerChatEvent;
-import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
@@ -43,6 +42,18 @@ public class SocietyListener implements Listener {
         SocietyPlugin.getInstance().getSocieties().add(event.getSociety());
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b" + player.getName() + " §a创建公会名称: §e" + society.getSocietyName());
         MessageWindow messageWindow = WindowManager.getMessageWindow("§a创建 §l§b" + society.getSocietyName() + " §a公会成功", new SocietyWindow(player), "返回上级");
+        player.showFormWindow(messageWindow);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onJoin(PlayerApplyJoinSocietyEvent event) {
+        Player player = event.getPlayer();
+        Society society = event.getSociety();
+        Config config = this.societyPlugin.getConfig();
+        society.getTempApply().remove(player.getName());
+        society.getTempApply().add(player.getName());
+        society.saveData();
+        MessageWindow messageWindow = WindowManager.getMessageWindow(" §a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理", new SocietyWindow(player), "返回上级");
         player.showFormWindow(messageWindow);
     }
 
