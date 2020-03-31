@@ -1,18 +1,18 @@
 package com.zixuan007.society;
 
 import cn.nukkit.command.Command;
-import cn.nukkit.event.Listener;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.MainCommand;
 import com.zixuan007.society.command.TitleCommand;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.listener.ResponseLister;
 import com.zixuan007.society.listener.SocietyListener;
 import com.zixuan007.society.listener.TitleListener;
 import com.zixuan007.society.task.BottomTask;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import java.io.File;
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class SocietyPlugin extends PluginBase {
     private List<Config> societyConfigList = new ArrayList<>();
     private Config titleConfig;
     private Config LangConfig;
+    private Lang lang;
     private Config titleShopConfig;
     private static SocietyPlugin instance;
     private ArrayList<Society> societies = new ArrayList<>();
@@ -39,16 +40,20 @@ public class SocietyPlugin extends PluginBase {
         this.societies.forEach((society) -> { society.saveData(); });
     }
 
+    /**
+     * 初始化插件数据
+     */
     public void init() {
         checkPlugin("EconomyAPI");
         checkPlugin("Tips");
         checkPlugin("FloatingText");
         if (instance == null) instance = this;
         checkConfig();
-        saveResource("cn_ language.yml", true);
+        saveResource("cn_language.yml", true);
         registerCommand();
         loadConfig();
         loadSocietyConfig();
+        this.lang=PluginUtils.getLang();
         if (this.config.getBoolean("是否开启底部", false)) {
             getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
         }
@@ -57,11 +62,17 @@ public class SocietyPlugin extends PluginBase {
         getServer().getPluginManager().registerEvents(new TitleListener(this), this);
     }
 
+    /**
+     * 注册插件命令
+     */
     public void registerCommand() {
         getServer().getCommandMap().register("society", (Command) new MainCommand(), "公会");
         getServer().getCommandMap().register("title", (Command) new TitleCommand(), "称号");
     }
 
+    /**
+     * 加载公会配置文件
+     */
     public void loadSocietyConfig() {
         File societyFolder = new File(SocietyUtils.SOCIETYFOLDER);
         if (!societyFolder.exists()) societyFolder.mkdirs();
@@ -73,15 +84,24 @@ public class SocietyPlugin extends PluginBase {
         }
     }
 
+    /**
+     * 加载配置文件
+     */
     public void loadConfig() {
         String titleConfigPath = SocietyUtils.CONFIGFOLDER + "Title.yml";
-        String langPath = SocietyUtils.CONFIGFOLDER + "cn_ language.yml";
+        String language = (String) config.get("language");
+        String langPath = SocietyUtils.CONFIGFOLDER +language+"_language.yml";
+        getLogger().info(langPath);
         String titleShopPath = SocietyUtils.CONFIGFOLDER + "TitleShopData.yml";
         this.titleConfig = new Config(titleConfigPath);
         this.LangConfig = new Config(langPath);
         this.titleShopConfig = new Config(titleShopPath);
     }
 
+    /**
+     * 检测插件
+     * @param pluginName 插件名称
+     */
     public void checkPlugin(String pluginName) {
         Plugin plugin = getServer().getPluginManager().getPlugin(pluginName);
         if (plugin == null) {
@@ -90,6 +110,9 @@ public class SocietyPlugin extends PluginBase {
         }
     }
 
+    /**
+     * 检测主配置文件的版本是否相同
+     */
     public void checkConfig() {
         String path = SocietyUtils.CONFIGFOLDER + "Config.yml";
         File file = new File(path);
@@ -109,6 +132,8 @@ public class SocietyPlugin extends PluginBase {
         String configPath = SocietyUtils.CONFIGFOLDER + "Config.yml";
         this.config = new Config(configPath);
     }
+
+
 
     public Config getConfig() {
         return this.config;

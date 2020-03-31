@@ -11,8 +11,9 @@ import com.zixuan007.society.window.society.SocietyWindow;
 public class MainCommand extends Command {
     private SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
 
+
     public MainCommand() {
-        super((String)SocietyPlugin.getInstance().getConfig().get("公会主命令"), "公会插件总命令", "/§b公会 §e帮助");
+        super((String)SocietyPlugin.getInstance().getConfig().get("comands"), "公会插件总命令", "/§b公会 §e帮助");
         this.setPermission("");
         this.getCommandParameters().clear();
     }

@@ -1,12 +1,15 @@
 #公会配置文件
 ##用于检测配置文件版本
-version: 1.0.3alpha
+version: 1.0.4alpha
 
-#玩家输入指定命令展示公会功能列表
-公会主命令: 公会
+#公会界面窗口 玩家输入指定命令显示公会
+comands: 公会
 
 #默认创建公会金额
 createSocietyMoney: 100000.0
+
+##插件默认语言
+language: cn
 
 #是否开启聊天显示
 是否更改聊天: true

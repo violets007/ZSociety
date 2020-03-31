@@ -28,6 +28,7 @@ import java.util.List;
 
 /**
  * 窗口管理界面
+ * (后面会进行优化)
  */
 public class WindowManager {
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance(); //公会插件类

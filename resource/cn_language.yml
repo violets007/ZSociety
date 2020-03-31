@@ -1,0 +1,50 @@
+#语言提示部分
+
+##公会窗口提示部分
+##创建公会按钮信息
+societyWindow_Title: §e公会功能列表
+societyWindow_CreateSocietyButton: §e创建公会
+societyWindow_CreateSocietyButton_ImgPath: textures/ui/realms_red_x
+##管理公会按钮信息
+societyWindow_ManagerSocietyButton: §e管理公会
+societyWindow_ManagerSocietyButton_ImgPath: textures/ui/invite_base
+##退出公会按钮信息
+societyWindow_QuitSocietyButton: §e退出公会
+societyWindow_QuitSocietyButton_ImgPath: textures/ui/invite_base
+##加入公会按钮信息
+societyWindow_JoinSocietyButton: §e加入公会
+societyWindow_JoinSocietyButton_ImgPath: textures/ui/invite_base
+##成员列表按钮信息
+societyWindow_MenberListButton: §e加入公会
+societyWindow_MenberListButton_ImgPath: textures/ui/invite_base
+##公会贡献榜按钮信息
+societyWindow_ContributionRankingButton: §e公会贡献榜
+societyWindow_ContributionRankingButton_ImgPath: textures/ui/recipe_book_icon
+##公会等级按钮信息
+societyWindow_LevelRankButton: §e公会等级排行榜
+societyWindow_LevelRankButton_ImgPath: textures/ui/Feedback
+##公会贡献按钮信息
+societyWindow_ContributionButton: §e贡献经济
+societyWindow_ContributionButton_ImgPath: textures/ui/dev_glyph_color
+
+#公会内容部分
+玩家公会功能窗口标题: §e公会功能列表
+会长公会管理窗口标题: ${societyName}§e管理窗口
+玩家申请公会窗口标题: §e玩家申请公会窗口
+设置玩家职位窗口标题: §e设置成员职位窗口
+移除人员窗口标题: §e移除人员窗口
+公会列表窗口标题: §e公会列表
+成员列表窗口标题: §e成员列表
+玩家申请加入公会标题: §e申请入会玩家
+公会经济排行榜: §e公会经济排行榜
+公会等级排行榜: §e公会等级排行榜
+会长管理窗口: §e会长管理窗口
+确认窗口标题: §e确认提示
+消息窗口标题: §e消息提示
+贡献窗口标题: §e贡献窗口
+
+#称号内容部分
+称号管理窗口标题: §e称号管理窗口
+设置称号窗口标题: §e设置称号窗口
+移除玩家称号窗口标题: §e移除玩家称号窗口
+创建称号商店窗口标题: §e创建称号窗口

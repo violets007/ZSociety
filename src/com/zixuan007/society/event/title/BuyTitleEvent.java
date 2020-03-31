@@ -26,4 +26,12 @@ public class BuyTitleEvent extends PlayerEvent {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
 }

@@ -2,7 +2,9 @@ package com.zixuan007.society.window.society;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.element.ElementButtonImageData;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -14,15 +16,28 @@ import java.util.Arrays;
 
 public class SocietyWindow extends SimpleWindow {
     public SocietyWindow(Player player) {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("玩家公会功能窗口标题"), "");
-        this.addButton(new ElementButton("创建公会"));
-        this.addButton(new ElementButton("管理公会"));
-        this.addButton(new ElementButton("退出公会"));
-        this.addButton(new ElementButton("加入公会"));
-        this.addButton(new ElementButton("成员列表"));
-        this.addButton(new ElementButton("公会贡献排行榜"));
-        this.addButton(new ElementButton("公会等级排行榜"));
-        this.addButton(new ElementButton("贡献经济"));
+        super(Lang.societyWindow_Title, "");
+        init();
+    }
+
+    /**
+     * 初始化窗口按钮
+     */
+    public void init(){
+        ElementButtonImageData buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_CreateSocietyButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_CreateSocietyButton,buttonImageData));
+        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_ManagerSocietyButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_ManagerSocietyButton,buttonImageData));
+        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_QuitSocietyButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_QuitSocietyButton,buttonImageData));
+        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_JoinSocietyButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_JoinSocietyButton,buttonImageData));
+        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_ContributionRankingButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_ContributionRankingButton,buttonImageData));
+        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_LevelRankButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_LevelRankButton,buttonImageData));
+        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_ContributionButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_ContributionButton,buttonImageData));
     }
 
     public void onClick(int id, Player player) {
