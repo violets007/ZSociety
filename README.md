@@ -8,9 +8,9 @@
 
 - ###### **一款全面的公会插件,当前仅支持(Nukkit1.0)**
 
-- **Version:**1.0.3aplah
+- Version: 1.0.3aplah
 
-- 当前插件处于快速版本迭代,如果有删除你的配置文件和你的
+- 当前插件处于快速版本迭代,可能会删除你的配置文件和数据
 
 - 前置所需要的插件: FloatingText Tips
 
@@ -37,7 +37,7 @@
    - 进服性别选择
    - 可以情侣之间的相互传送
    - 情侣之间可以存储公共财产
-   - 情侣之间
+   - 情侣之间可以Tpa
 4. **SVIP系统**
    - VIP系统
      - 
@@ -61,7 +61,8 @@ ZsocietyAPI.getPostName(Society society,String playerName);//获取玩家名字
 ZsocietyAPI.getSocietyByPlayerName(String playerName); //获取玩家当前所在的公会
 ZsocietyAPI.getSocietyGradeByPlayerName(Society society,String playerName);//获取玩家当前加入公会的等级
 ZsocietyAPi.getTitleByPlayerName(String playerName);//获取当前玩家的称号
-ZsocietyAPi.isMarry(String playerName);//检查当前玩家是否已经结婚
+ZsocietyAPi.isMarry(String playerName);
+//检查当前玩家是否已经结婚
 ```
 
 
@@ -106,11 +107,11 @@ ZsocietyAPi.isMarry(String playerName);//检查当前玩家是否已经结婚
 - ### 称号数据配置文件格式
 
   ```yml
-  玩家名字:
-  称号列表:
-      - Title
-      - Title2
-      - Title3
+    玩家名字:
+  	  称号列表:
+  	    -  Title
+        -  Title2
+        -  Title3
   
   ```
 

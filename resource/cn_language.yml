@@ -27,6 +27,17 @@ societyWindow_LevelRankButton_ImgPath: textures/ui/Feedback
 societyWindow_ContributionButton: §e贡献经济
 societyWindow_ContributionButton_ImgPath: textures/ui/dev_glyph_color
 
+
+##结婚窗口部分
+marryWindow_Title: §e结婚功能窗口
+marryWindow_ProposeButton: §e求婚
+marryWindow_ProposeButton_ImgPath: textures/ui/water_breathing_effect
+marryWindow_Propose_Title: §e求婚窗口
+##增加公共资金窗口
+AddPublicFundsWindow_Title: §e增加公共资金窗口
+
+
+
 #公会内容部分
 玩家公会功能窗口标题: §e公会功能列表
 会长公会管理窗口标题: ${societyName}§e管理窗口

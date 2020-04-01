@@ -7,6 +7,9 @@ import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
+import com.zixuan007.society.window.marry.AddPublicFunds;
+import com.zixuan007.society.window.marry.MarryWindow;
+import com.zixuan007.society.window.marry.ProposeWindow;
 import com.zixuan007.society.window.society.ContributionRankingWindow;
 import com.zixuan007.society.window.society.ContributionWindow;
 import com.zixuan007.society.window.society.CreateSocietyWindow;
@@ -142,4 +145,17 @@ public class WindowManager {
     public static CreateShopWindow getCreateTitleShopWindow() {
         return new CreateShopWindow();
     }
+
+    public static MarryWindow getMarryWindow(){
+        return new MarryWindow();
+    }
+
+    public static ProposeWindow getProposeWindow(){
+        return new ProposeWindow();
+    }
+
+    public static AddPublicFunds getAddPublicFunds(){
+        return new AddPublicFunds();
+    }
+
 }

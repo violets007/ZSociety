@@ -21,6 +21,13 @@ public class Lang {
     public static String societyWindow_ContributionButton;
     public static String societyWindow_ContributionButton_ImgPath;
 
+    //结婚窗口部分
+    public static String marryWindow_Title;
+    public static String marryWindow_ProposeButton;
+    public static String marryWindow_ProposeButton_ImgPath;
+    public static String marryWindow_Propose_Title;
+    public static String AddPublicFundsWindow_Title;
+
 
 
 }

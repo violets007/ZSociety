@@ -8,6 +8,9 @@ comands: 公会
 #默认创建公会金额
 createSocietyMoney: 100000.0
 
+#每次求婚最低金额
+proposeMoney: 100000.0
+
 ##插件默认语言
 language: cn
 

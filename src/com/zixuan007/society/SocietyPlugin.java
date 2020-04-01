@@ -5,15 +5,19 @@ import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.MainCommand;
+import com.zixuan007.society.command.MarryCommand;
 import com.zixuan007.society.command.TitleCommand;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.listener.BaseListener;
 import com.zixuan007.society.listener.ResponseLister;
 import com.zixuan007.society.listener.SocietyListener;
 import com.zixuan007.society.listener.TitleListener;
 import com.zixuan007.society.task.BottomTask;
+import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,7 @@ public class SocietyPlugin extends PluginBase {
     private Config titleConfig;
     private Config LangConfig;
     private Lang lang;
+    private Config marryConfig;
     private Config titleShopConfig;
     private static SocietyPlugin instance;
     private ArrayList<Society> societies = new ArrayList<>();
@@ -52,7 +57,6 @@ public class SocietyPlugin extends PluginBase {
         saveResource("cn_language.yml", true);
         registerCommand();
         loadConfig();
-        loadSocietyConfig();
         this.lang=PluginUtils.getLang();
         if (this.config.getBoolean("是否开启底部", false)) {
             getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
@@ -60,6 +64,7 @@ public class SocietyPlugin extends PluginBase {
         getServer().getPluginManager().registerEvents(new ResponseLister(), this);
         getServer().getPluginManager().registerEvents(new SocietyListener(this), this);
         getServer().getPluginManager().registerEvents(new TitleListener(this), this);
+        getServer().getPluginManager().registerEvents(new BaseListener(this), this);
     }
 
     /**
@@ -68,34 +73,26 @@ public class SocietyPlugin extends PluginBase {
     public void registerCommand() {
         getServer().getCommandMap().register("society", (Command) new MainCommand(), "公会");
         getServer().getCommandMap().register("title", (Command) new TitleCommand(), "称号");
+        getServer().getCommandMap().register("title", (Command) new MarryCommand(), "结婚");
     }
 
-    /**
-     * 加载公会配置文件
-     */
-    public void loadSocietyConfig() {
-        File societyFolder = new File(SocietyUtils.SOCIETYFOLDER);
-        if (!societyFolder.exists()) societyFolder.mkdirs();
-        File[] files = societyFolder.listFiles();
-        for (File file : files) {
-            Config config = new Config(file);
-            this.societyConfigList.add(config);
-            if (file.getName().endsWith(".yml")) this.societies.add(Society.init(config));
-        }
-    }
+
 
     /**
      * 加载配置文件
      */
     public void loadConfig() {
-        String titleConfigPath = SocietyUtils.CONFIGFOLDER + "Title.yml";
+        String titleConfigPath = PluginUtils.CONFIGFOLDER + "Title.yml";
         String language = (String) config.get("language");
-        String langPath = SocietyUtils.CONFIGFOLDER +language+"_language.yml";
-        getLogger().info(langPath);
-        String titleShopPath = SocietyUtils.CONFIGFOLDER + "TitleShopData.yml";
+        String langPath = PluginUtils.CONFIGFOLDER +language+"_language.yml";
+        String titleShopPath = PluginUtils.CONFIGFOLDER + "TitleShopData.yml";
+        String marryPath=PluginUtils.CONFIGFOLDER+"Marry.yml";
         this.titleConfig = new Config(titleConfigPath);
         this.LangConfig = new Config(langPath);
         this.titleShopConfig = new Config(titleShopPath);
+        this.marryConfig=new Config(marryPath);
+        MarryUtils.loadMarryConfig();
+        SocietyUtils.loadSocietyConfig();
     }
 
     /**
@@ -114,7 +111,7 @@ public class SocietyPlugin extends PluginBase {
      * 检测主配置文件的版本是否相同
      */
     public void checkConfig() {
-        String path = SocietyUtils.CONFIGFOLDER + "Config.yml";
+        String path = PluginUtils.CONFIGFOLDER + "Config.yml";
         File file = new File(path);
         if (!file.exists()) {
             saveResource("Config.yml");
@@ -129,7 +126,7 @@ public class SocietyPlugin extends PluginBase {
                 saveResource("Config.yml");
             }
         }
-        String configPath = SocietyUtils.CONFIGFOLDER + "Config.yml";
+        String configPath = PluginUtils.CONFIGFOLDER + "Config.yml";
         this.config = new Config(configPath);
     }
 
@@ -191,4 +188,11 @@ public class SocietyPlugin extends PluginBase {
         this.titleShopConfig = titleShopConfig;
     }
 
+    public Config getMarryConfig() {
+        return marryConfig;
+    }
+
+    public void setMarryConfig(Config marryConfig) {
+        this.marryConfig = marryConfig;
+    }
 }

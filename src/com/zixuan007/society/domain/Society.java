@@ -1,6 +1,7 @@
 package com.zixuan007.society.domain;
 
 import cn.nukkit.utils.Config;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class Society {
     }
 
     public void saveData() {
-        String societyFilePath = SocietyUtils.SOCIETYFOLDER + this.societyName + ".yml";
+        String societyFilePath = PluginUtils.SOCIETYFOLDER + this.societyName + ".yml";
         File file = new File(societyFilePath);
         if (!file.exists()) {
             try {

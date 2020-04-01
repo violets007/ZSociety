@@ -16,13 +16,12 @@ import java.util.Map;
 import me.onebone.economyapi.EconomyAPI;
 import tip.utils.Api;
 
+import static com.zixuan007.society.utils.PluginUtils.SOCIETYFOLDER;
+
 /**
  * 公会插件工具类
  */
 public class SocietyUtils {
-    public static final String FILE_SEPARATOR = System.getProperty("file.separator");//系统分隔符 Linux \  Window /
-    public static final String SOCIETYFOLDER = SocietyPlugin.getInstance().getServer().getPluginPath() + SocietyPlugin.getInstance().getName() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR; //公会数据文件路径
-    public static final String CONFIGFOLDER = SocietyPlugin.getInstance().getServer().getPluginPath() + SocietyPlugin.getInstance().getName() + FILE_SEPARATOR;//公会配置文件夹
 
     /**
      * 指定的公会名称是否存在
@@ -298,7 +297,7 @@ public class SocietyUtils {
 
 
     /**
-     * 格式化传入的文本,通过玩家名称
+     * 格式化传入的文本,通过玩家
      * @param text
      * @param player
      * @return
@@ -369,5 +368,21 @@ public class SocietyUtils {
         society.getPost().put(playerNmae, new ArrayList() {
         });
         society.saveData();
+    }
+
+    /**
+     * 加载公会配置文件
+     */
+    public static void loadSocietyConfig() {
+        File societyFolder = new File(PluginUtils.SOCIETYFOLDER);
+        SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
+        if (!societyFolder.exists()) societyFolder.mkdirs();
+        File[] files = societyFolder.listFiles();
+        for (File file : files) {
+            Config config = new Config(file);
+            societyPlugin.getSocietyConfigList().add(config);
+            if (file.getName().endsWith(".yml")) societyPlugin.getSocieties().add(Society.init(config));
+        }
+        System.out.println(societyPlugin.getSocieties());
     }
 }

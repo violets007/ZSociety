@@ -17,6 +17,10 @@ import java.net.URLClassLoader;
  * 插件工具类
  */
 public class PluginUtils {
+    public static final String FILE_SEPARATOR = System.getProperty("file.separator");//系统分隔符 Linux \  Window /
+    public static final String SOCIETYFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR; //公会数据文件路径
+    public static final String CONFIGFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;//公会配置文件夹
+    public static final String MARRY_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Marry"+FILE_SEPARATOR;
     /**
      * 加载jar包
      * @param jarPath
@@ -81,7 +85,7 @@ public class PluginUtils {
             }else{
                 SocietyPlugin.getInstance().getLogger().info("语言配置文件信息更改有误");
                 String language = (String) SocietyPlugin.getInstance().getConfig().get("language");
-                String langPath = SocietyUtils.CONFIGFOLDER +language+"_language.yml";
+                String langPath = PluginUtils.CONFIGFOLDER +language+"_language.yml";
                 SocietyPlugin.getInstance().saveResource(langPath);
             }
         }
