@@ -14,6 +14,8 @@ public class Lang {
     public static String societyWindow_QuitSocietyButton_ImgPath;
     public static String societyWindow_JoinSocietyButton;
     public static String societyWindow_JoinSocietyButton_ImgPath;
+    public static String societyWindow_MenberListButton;
+    public static String societyWindow_MenberListButton_ImgPath;
     public static String societyWindow_ContributionRankingButton;
     public static String societyWindow_ContributionRankingButton_ImgPath;
     public static String societyWindow_LevelRankButton;
@@ -25,8 +27,13 @@ public class Lang {
     public static String marryWindow_Title;
     public static String marryWindow_ProposeButton;
     public static String marryWindow_ProposeButton_ImgPath;
+
     public static String marryWindow_Propose_Title;
     public static String AddPublicFundsWindow_Title;
+
+    public static String MoneyRankWindow_Title;
+
+
 
 
 

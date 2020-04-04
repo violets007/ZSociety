@@ -21,7 +21,6 @@ import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.event.title.BuyTitleEvent;
 import com.zixuan007.society.event.title.CreateTitleShopEvent;
 import com.zixuan007.society.event.title.RemoveTitleShopEvent;
-import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.utils.TitleUtils;
 import java.util.ArrayList;
 import java.util.Map;
@@ -45,11 +44,7 @@ public class TitleListener implements Listener {
             titleConfig.save();
         }
         Config config = this.societyPlugin.getConfig();
-        if (config.getBoolean("是否开启更改头部", false)) {
-            String configNameTag = (String) config.get("头部更改");
-            String formatNameTag = SocietyUtils.formatText(configNameTag, player);
-            player.setNameTag(formatNameTag);
-        }
+
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -79,7 +74,7 @@ public class TitleListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onClickTitleShop(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
@@ -159,6 +154,7 @@ public class TitleListener implements Listener {
         list.add(wallSign.getFloorZ());
         list.add(wallSign.getLevel().getName());
         list.add(money);
+        SocietyPlugin.getInstance().getLogger().debug("创建称号商店的内容: "+list);
         titleShopConfig.set(title, list);
         titleShopConfig.save();
         StringBuilder sb = new StringBuilder();

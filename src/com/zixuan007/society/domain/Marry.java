@@ -4,6 +4,7 @@ import java.util.Date;
 
 
 import cn.nukkit.utils.Config;
+import com.zixuan007.society.SocietyPlugin;
 
 /**
  * 结婚数据实体类
@@ -28,13 +29,18 @@ public class Marry{
      */
     public static Marry init(Config config){
         Marry marry=new Marry();
-        long mid= (long) config.get("mid");
-        String propose= (String) config.get("propose");
-        int proposeSex= (int) config.get("proposeSex");
-        String recipient= (String) config.get("recipient");
-        int recipientSex= (int) config.get("recipientSex");
-        Double money= (double) config.get("money");
-        String marryDate=(String)config.get("marryDate");
+        long mid=0;
+        if(config.get("mid") instanceof Lang){
+            mid= (long) config.get("mid");
+        }else{
+            mid= ((Integer) config.get("mid")).longValue();
+        }
+        String propose= (String) config.get("求婚者");
+        int proposeSex= (int) config.get("求婚者性别");
+        String recipient= (String) config.get("被求婚者");
+        int recipientSex= (int) config.get("被求婚者性别");
+        Double money= (double) config.get("公共资金");
+        String marryDate=(String)config.get("结婚时间");
 
         marry.mid=mid;
         marry.propose=propose;
@@ -104,5 +110,28 @@ public class Marry{
         this.marryDate=marryDate;
     }
 
-    
+    public void setMarryDate(String marryDate) {
+        this.marryDate = marryDate;
+    }
+
+    public void setMid(long mid) {
+        this.mid = mid;
+    }
+
+    public void setRecipientSex(int recipientSex) {
+        this.recipientSex = recipientSex;
+    }
+
+    @Override
+    public String toString() {
+        return "Marry{" +
+                "mid=" + mid +
+                ", propose='" + propose + '\'' +
+                ", proposeSex=" + proposeSex +
+                ", recipient='" + recipient + '\'' +
+                ", recipientSex=" + recipientSex +
+                ", money=" + money +
+                ", marryDate='" + marryDate + '\'' +
+                '}';
+    }
 }

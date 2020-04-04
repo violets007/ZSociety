@@ -2,9 +2,14 @@ package com.zixuan007.society.utils;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.item.Item;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
+import com.zixuan007.society.domain.Marry;
+import com.zixuan007.society.domain.Society;
+import me.onebone.economyapi.EconomyAPI;
+import tip.utils.Api;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -90,5 +95,38 @@ public class PluginUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 格式化传入的文本,通过玩家
+     * @param text
+     * @param player
+     * @return
+     */
+    public static String formatText(String text, Player player) {
+        Item itemInHand = player.getInventory().getItemInHand();
+        String itemID = itemInHand.getId() + ":" + itemInHand.getDamage();
+        Double myMoney = EconomyAPI.getInstance().myMoney(player);
+        Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
+        String societyNam = society != null ? "§9" + society.getSocietyName() : "无公会";
+        String societyGrade = society != null ? society.getGrade() + "" : "无等级";
+        String postName = SocietyUtils.getPostByName(player.getName(),society);
+        String title = SocietyPlugin.getInstance().getTitleConfig().get(player.getName())==null?"无称号":(String) SocietyPlugin.getInstance().getTitleConfig().get(player.getName());
+        String marry= MarryUtils.isMarry(player.getName())?"已结婚":"单身";
+        String name = player.getLevel().getName();
+        float ticksPerSecond = SocietyPlugin.getInstance().getServer().getTicksPerSecond();
+        text = Api.strReplace(text, player);
+        text = text.replaceAll("\\$\\{world\\}", name)
+                .replaceAll("\\$\\{societyName\\}", societyNam)
+                .replaceAll("\\$\\{societyGrade\\}", societyGrade)
+                .replaceAll("\\$\\{playerName\\}", player.getName())
+                .replaceAll("\\$\\{post\\}", postName)
+                .replaceAll("\\$\\{tps\\}", ticksPerSecond + "")
+                .replaceAll("\\$\\{money\\}", myMoney.toString())
+                .replaceAll("\\$\\{itemID\\}", itemID)
+                .replaceAll("\\$\\{title\\}", title)
+                .replaceAll("\\$\\{zmarry\\}", marry);
+
+        return text;
     }
 }

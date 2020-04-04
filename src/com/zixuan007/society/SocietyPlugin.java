@@ -9,7 +9,7 @@ import com.zixuan007.society.command.MarryCommand;
 import com.zixuan007.society.command.TitleCommand;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
-import com.zixuan007.society.listener.BaseListener;
+import com.zixuan007.society.listener.MarryListener;
 import com.zixuan007.society.listener.ResponseLister;
 import com.zixuan007.society.listener.SocietyListener;
 import com.zixuan007.society.listener.TitleListener;
@@ -58,13 +58,14 @@ public class SocietyPlugin extends PluginBase {
         registerCommand();
         loadConfig();
         this.lang=PluginUtils.getLang();
+
         if (this.config.getBoolean("是否开启底部", false)) {
             getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
         }
         getServer().getPluginManager().registerEvents(new ResponseLister(), this);
         getServer().getPluginManager().registerEvents(new SocietyListener(this), this);
         getServer().getPluginManager().registerEvents(new TitleListener(this), this);
-        getServer().getPluginManager().registerEvents(new BaseListener(this), this);
+        getServer().getPluginManager().registerEvents(new MarryListener(this), this);
     }
 
     /**

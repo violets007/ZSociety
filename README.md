@@ -40,11 +40,11 @@
    - 情侣之间可以Tpa
 4. **SVIP系统**
    - VIP系统
-     - 
+     - 待定
    - SVIP系统
-     - 
+     - 待定
    - MVP+系统
-     - 
+     - 待定
 
 ## 命令
 
@@ -52,17 +52,18 @@
 >
 > /**称号** 展示管理称号GUI(只能op进行操作)
 >
+> /**结婚** 展示结婚功能GUI
 
 
 
 ## API
 ```java
-ZsocietyAPI.getPostName(Society society,String playerName);//获取玩家名字
-ZsocietyAPI.getSocietyByPlayerName(String playerName); //获取玩家当前所在的公会
-ZsocietyAPI.getSocietyGradeByPlayerName(Society society,String playerName);//获取玩家当前加入公会的等级
-ZsocietyAPi.getTitleByPlayerName(String playerName);//获取当前玩家的称号
-ZsocietyAPi.isMarry(String playerName);
-//检查当前玩家是否已经结婚
+ZsocietyAPI.getSocietyName(String playerNmae);//获取公会名称
+ZsocietyAPI.getPostName(String playerName); //获取职位名称
+ZsocietyAPI.getSocietyGrade(Society society);//获取公会等级
+ZsocietyAPi.getTitle(String playerName);//获取职位标题
+ZsocietyAPi.isMarry(String playerName);//检测玩家是否结婚
+ZsocietyAPi.getGenderbyPlayerName(String playerName);//获取玩家性别
 ```
 
 
@@ -90,6 +91,7 @@ ZsocietyAPi.isMarry(String playerName);
   ##底部显示的格式信息
   TipFormat: "底部显示信息"
   
+  #(暂时还没有加入)
   ##是否开启Boss血条信息显示
   isBossBar: false
   ##Boss血条的格式信息
@@ -97,21 +99,21 @@ ZsocietyAPi.isMarry(String playerName);
   
   ##木牌称号商店格式信息
   SignTitleShopFormat:
-  	- "[称号商店]"
-  	- "[称号格式]"
-  	- "[称号经济]"
-  	- "[木牌格式信息]"
+  - "[称号商店]"
+  - "[称号格式]"
+  - "[称号经济]"
+  - "[木牌格式信息]"
   	
   ```
 
 - ### 称号数据配置文件格式
 
   ```yml
-    玩家名字:
-  	  称号列表:
-  	    -  Title
-        -  Title2
-        -  Title3
+  玩家名字:
+  称号列表:
+  -  Title
+  -  Title2
+  -  Title3
   
   ```
 

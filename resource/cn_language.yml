@@ -15,10 +15,10 @@ societyWindow_QuitSocietyButton_ImgPath: textures/ui/invite_base
 societyWindow_JoinSocietyButton: §e加入公会
 societyWindow_JoinSocietyButton_ImgPath: textures/ui/invite_base
 ##成员列表按钮信息
-societyWindow_MenberListButton: §e加入公会
+societyWindow_MenberListButton: §e公会成员列表
 societyWindow_MenberListButton_ImgPath: textures/ui/invite_base
 ##公会贡献榜按钮信息
-societyWindow_ContributionRankingButton: §e公会贡献榜
+societyWindow_ContributionRankingButton: §e公会经济贡献排行榜
 societyWindow_ContributionRankingButton_ImgPath: textures/ui/recipe_book_icon
 ##公会等级按钮信息
 societyWindow_LevelRankButton: §e公会等级排行榜
@@ -33,8 +33,10 @@ marryWindow_Title: §e结婚功能窗口
 marryWindow_ProposeButton: §e求婚
 marryWindow_ProposeButton_ImgPath: textures/ui/water_breathing_effect
 marryWindow_Propose_Title: §e求婚窗口
-##增加公共资金窗口
+
 AddPublicFundsWindow_Title: §e增加公共资金窗口
+
+MoneyRankWindow_Title: §e公共资产排行榜
 
 
 

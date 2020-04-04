@@ -2,6 +2,8 @@ package com.zixuan007.society.api;
 
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.utils.MarryUtils;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 
 public class ZsocietyAPI {
@@ -49,5 +51,24 @@ public class ZsocietyAPI {
         String title = (String)SocietyPlugin.getInstance().getTitleConfig().get(playerName);
         return title != null ? title : "无称号";
     }
-    
+
+    /**
+     * 检测玩家是否结婚
+     * @return
+     */
+    public static boolean isMarry(String playerName){
+        return MarryUtils.isMarry(playerName);
+    }
+
+    /**
+     * 获取玩家性别
+     * @param playerName
+     * @return
+     */
+    public static String getGenderbyPlayerName(String playerName){
+        if(!PluginUtils.isOnlineByName(playerName)) return "未知性别";
+        int genderByPlayerName = MarryUtils.getGenderByPlayerName(playerName);
+        if (genderByPlayerName < 0) return "未知性别";
+        return (genderByPlayerName == 0)? "女" : "男";
+    }
 }

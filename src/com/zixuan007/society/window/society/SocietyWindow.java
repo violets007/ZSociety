@@ -31,6 +31,8 @@ public class SocietyWindow extends SimpleWindow {
         this.addButton(new ElementButton(Lang.societyWindow_QuitSocietyButton,buttonImageData));
         buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_JoinSocietyButton_ImgPath);
         this.addButton(new ElementButton(Lang.societyWindow_JoinSocietyButton,buttonImageData));
+        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_MenberListButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_MenberListButton,buttonImageData));
         buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_ContributionRankingButton_ImgPath);
         this.addButton(new ElementButton(Lang.societyWindow_ContributionRankingButton,buttonImageData));
         buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_LevelRankButton_ImgPath);
@@ -128,7 +130,6 @@ public class SocietyWindow extends SimpleWindow {
                     player.showFormWindow(messageWindow);
                     return;
                 }
-
                 ContributionWindow contributionWindow = WindowManager.getContributionWindow(society.getSid());
                 contributionWindow.setParent(this);
                 player.showFormWindow(contributionWindow);

@@ -17,6 +17,7 @@ import me.onebone.economyapi.EconomyAPI;
 import tip.utils.Api;
 
 import static com.zixuan007.society.utils.PluginUtils.SOCIETYFOLDER;
+import static com.zixuan007.society.utils.PluginUtils.formatText;
 
 /**
  * 公会插件工具类
@@ -268,7 +269,9 @@ public class SocietyUtils {
      * @return
      */
     public static String getPostByName(String playerName, Society society) {
+        if(society == null) return "无职位";
         ArrayList<Object> list = society.getPost().get(playerName);
+        if(list.size() < 1) return "无职位";
         return (String)list.get(0);
     }
 
@@ -296,35 +299,7 @@ public class SocietyUtils {
     }
 
 
-    /**
-     * 格式化传入的文本,通过玩家
-     * @param text
-     * @param player
-     * @return
-     */
-    public static String formatText(String text, Player player) {
-        Item itemInHand = player.getInventory().getItemInHand();
-        String itemID = itemInHand.getId() + ":" + itemInHand.getDamage();
-        Double myMoney = EconomyAPI.getInstance().myMoney(player);
-        Society society = getSocietyByPlayerName(player.getName());
-        String societyNam = society != null ? "§9" + society.getSocietyName() : "无公会";
-        String societyGrade = society != null ? society.getGrade() + "" : "无等级";
-        String postName = society != null ? society.getPost().get(player.getName()).get(0) + "" : "无职位";
-        String title = (String)SocietyPlugin.getInstance().getTitleConfig().get(player.getName());
-        String name = player.getLevel().getName();
-        float ticksPerSecond = SocietyPlugin.getInstance().getServer().getTicksPerSecond();
-        text = Api.strReplace(text, player);
-        text = text.replaceAll("\\$\\{world\\}", name)
-                .replaceAll("\\$\\{societyName\\}", societyNam)
-                .replaceAll("\\$\\{societyGrade\\}", societyGrade)
-                .replaceAll("\\$\\{playerName\\}", player.getName())
-                .replaceAll("\\$\\{post\\}", postName)
-                .replaceAll("\\$\\{tps\\}", ticksPerSecond + "")
-                .replaceAll("\\$\\{money\\}", myMoney.toString())
-                .replaceAll("\\$\\{itemID\\}", itemID)
-                .replaceAll("\\$\\{title\\}", title);
-        return text;
-    }
+
 
     /**
      * 获取创建下一个公会的ID
@@ -366,6 +341,10 @@ public class SocietyUtils {
     public static void addMember(String playerNmae, Society society) {
         SocietyPlugin.getInstance().getSocieties().forEach(society1 -> society1.getTempApply().remove(playerNmae));
         society.getPost().put(playerNmae, new ArrayList() {
+            {
+                add("精英");
+                add(1);
+            }
         });
         society.saveData();
     }
@@ -383,6 +362,6 @@ public class SocietyUtils {
             societyPlugin.getSocietyConfigList().add(config);
             if (file.getName().endsWith(".yml")) societyPlugin.getSocieties().add(Society.init(config));
         }
-        System.out.println(societyPlugin.getSocieties());
+        SocietyPlugin.getInstance().getLogger().debug(societyPlugin.getSocieties().toString());
     }
 }

@@ -42,12 +42,14 @@ public class PresidentWindow extends SimpleWindow {
             case 1:
                 tempApply = society.getTempApply();
                 if (tempApply == null || tempApply.size() <= 0) {
-                    MessageWindow messageWindow = WindowManager.getMessageWindow("§c当前还没有玩家申请加入公会", (FormWindow)this, "返回上级");
+                    MessageWindow messageWindow = WindowManager.getMessageWindow("§c当前还没有玩家申请加入公会", this, "返回上级");
                     player.showFormWindow((FormWindow)messageWindow);
                     return;
                 }
                 playerApplyListWindow = WindowManager.getPlayerApplyListWindow(tempApply, society.getSid());
-                player.showFormWindow((FormWindow)playerApplyListWindow);
+                playerApplyListWindow.setBack(true);
+                playerApplyListWindow.setParent(this);
+                player.showFormWindow(playerApplyListWindow);
                 break;
             case 2:
                 list = (ArrayList<Object>)societyPlugin.getConfig().get("等级" + society.getGrade());

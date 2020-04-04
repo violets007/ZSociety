@@ -28,7 +28,11 @@ public class ProposeWindow extends CustomWindow {
     public void onClick(FormResponseCustom response, Player player) {
         String playerName = response.getInputResponse(0);
         if (!PluginUtils.isOnlineByName(playerName)) {
-            WindowManager.getMessageWindow("§c当前玩家不在线,请上线在进行求婚",this,"返回上级");
+            player.showFormWindow(WindowManager.getMessageWindow("§c当前玩家不在线,请上线在进行求婚",this,"返回上级"));
+            return;
+        }
+        if(playerName.equals(player.getName())){
+            player.showFormWindow(WindowManager.getMessageWindow("§c求婚的人不能是自己",this,"返回上级"));
             return;
         }
         Object proposeMoneyOBJ = SocietyPlugin.getInstance().getConfig().get("proposeMoney");
@@ -40,12 +44,12 @@ public class ProposeWindow extends CustomWindow {
         }
         double myMoney = EconomyAPI.getInstance().myMoney(player);
         if(myMoney < proposeMoney){
-            WindowManager.getMessageWindow("§c求婚资金不足,求婚需要: "+proposeMoney,this,"返回上级");
+            player.showFormWindow(WindowManager.getMessageWindow("§c求婚资金不足,求婚需要: "+proposeMoney,this,"返回上级"));
             return;
         }
 
         Player player1 = Server.getInstance().getPlayer(playerName);
-        ModalWindow affrimWindow = WindowManager.getAffrimWindow("§c求婚请求", "接受求婚", "拒绝求婚");
+        ModalWindow affrimWindow = WindowManager.getAffrimWindow("§b"+player.getName()+" §c求婚请求", "§a接受求婚", "§c拒绝求婚");
         affrimWindow.setButtonClickedListener((affrim,clickPlayer)->{
             if(affrim){
                 Server.getInstance().broadcastMessage("§b"+player.getName()+" §a向§c "+clickPlayer.getName()+" §a求婚成功");

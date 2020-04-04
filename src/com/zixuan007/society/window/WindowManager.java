@@ -9,6 +9,7 @@ import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.marry.AddPublicFunds;
 import com.zixuan007.society.window.marry.MarryWindow;
+import com.zixuan007.society.window.marry.MoneyRankWindow;
 import com.zixuan007.society.window.marry.ProposeWindow;
 import com.zixuan007.society.window.society.ContributionRankingWindow;
 import com.zixuan007.society.window.society.ContributionWindow;
@@ -158,4 +159,7 @@ public class WindowManager {
         return new AddPublicFunds();
     }
 
+    public static MoneyRankWindow getMoneyRankWindow(){
+        return new MoneyRankWindow();
+    }
 }

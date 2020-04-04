@@ -1,4 +1,11 @@
-#公会配置文件
+#  _____              _      _
+# |__  /___  ___ ___ (_) ___| |_ _   _
+#   / // __|/ __/ _ \| |/ _ \ __| | | |
+#  / /_\__ \ (_| (_) | |  __/ |_| |_| |
+# /____|___/\___\___/|_|\___|\__|\__, |
+#                                |___/
+
+
 ##用于检测配置文件版本
 version: 1.0.4alpha
 
@@ -17,17 +24,17 @@ language: cn
 #是否开启聊天显示
 是否更改聊天: true
 #称号格式 可以兼容Zsociety ${变量名}（Zsociety变量暂时有限）和Tip的{变量名}
-聊天信息格式: "§7[§6${world}§7][${title}§7][§e${societyName}§7]§b${playerName}§f➣ ${message}"
+聊天信息格式: "§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${zmarry}§7]§b${playerName}§f➣ ${message}"
 
 #是否显示底部信息 （如果有底部显示建议false）
-是否开启底部: false
+是否开启底部: true
 #底部显示格式 (新手腐竹勿动) 可以兼容Zsociety ${变量名}和Tip的{变量名}
 tipText: "§c✎手持>{id}:{damage}  §9☣地图>{levelName}  §d♨生命>{h}/{mh}  §f۞在线>{online}/{maxplayer}  §b❉延迟>{ms} \n §2✤职位>${post}
                    §e♈金币>{money}   §7☼公会>${societyName}  §3❤公会等级>${societyGrade}"
 
 是否开启更改头部: true
 ##更改头部可以兼容Zsociety ${变量名}和Tip的{变量名}
-头部更改: "${title} ✤ ${societyName} ✤ {name}"
+头部更改: "§e${title} §a✤ §b${societyName} §a✤ §9{name}"
 
 ##不支持Tip变量
 称号商店木牌格式:
