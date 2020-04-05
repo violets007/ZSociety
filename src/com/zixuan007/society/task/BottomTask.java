@@ -21,7 +21,7 @@ public class BottomTask extends PluginTask<SocietyPlugin> {
         Collection<Player> players = owner.getServer().getOnlinePlayers().values();
         Config config = SocietyPlugin.getInstance().getConfig();
         String tipText = config.getString("tipText", null);
-        String tempText;
+        String tempText="";
         String configNameTag = (String) config.get("头部更改");
         for (Player player : players) {
             tempText = SocietyUtils.formatButtomText(tipText, player);

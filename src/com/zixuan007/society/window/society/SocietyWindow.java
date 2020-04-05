@@ -3,6 +3,7 @@ package com.zixuan007.society.window.society;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
+import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
@@ -111,7 +112,6 @@ public class SocietyWindow extends SimpleWindow {
                     player.showFormWindow(messageWindow);
                     return;
                 }
-
                 MemberListWindow memberListWindow = WindowManager.getMemberListWindow(society, Arrays.asList(society.getPost().keySet().toArray(new String[society.getPost().keySet().size()])), this);
                 memberListWindow.setBack(true);
                 player.showFormWindow(memberListWindow);

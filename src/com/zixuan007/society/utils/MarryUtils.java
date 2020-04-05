@@ -103,7 +103,7 @@ public class MarryUtils{
      * @param marry
      */
     public static void removeMarry(Marry marry){
-        String fileName = marry.getPropose() + marry.getRecipient() + ".yml";
+        String fileName = marry.getPropose() +"_"+ marry.getRecipient() + ".yml";
         String configPath = PluginUtils.MARRY_FOLDER + fileName;
         File file = new File(configPath);
         System.gc();
@@ -112,6 +112,7 @@ public class MarryUtils{
         }else{
             SocietyPlugin.getInstance().getLogger().debug("§c移除 §b"+configPath+" §c失败,建议手动删除");
         }
+        marrys.remove(marry);
     }
 
     /**

@@ -109,6 +109,7 @@ ZsocietyAPi.getGenderbyPlayerName(String playerName);//获取玩家性别
 - ### 称号数据配置文件格式
 
   ```yml
+  ##暂时还没有进行更改
   玩家名字:
   称号列表:
   -  Title

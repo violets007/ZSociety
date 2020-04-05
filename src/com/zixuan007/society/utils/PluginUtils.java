@@ -115,7 +115,6 @@ public class PluginUtils {
         String marry= MarryUtils.isMarry(player.getName())?"已结婚":"单身";
         String name = player.getLevel().getName();
         float ticksPerSecond = SocietyPlugin.getInstance().getServer().getTicksPerSecond();
-        text = Api.strReplace(text, player);
         text = text.replaceAll("\\$\\{world\\}", name)
                 .replaceAll("\\$\\{societyName\\}", societyNam)
                 .replaceAll("\\$\\{societyGrade\\}", societyGrade)
@@ -126,7 +125,20 @@ public class PluginUtils {
                 .replaceAll("\\$\\{itemID\\}", itemID)
                 .replaceAll("\\$\\{title\\}", title)
                 .replaceAll("\\$\\{zmarry\\}", marry);
-
+        text = Api.strReplace(text, player);
         return text;
+    }
+
+    /**
+     * 获取求婚所需要的金额
+     * @return
+     */
+    public static Double getproposeMoney(){
+        Object proposeMoneyOBJ = SocietyPlugin.getInstance().getConfig().get("proposeMoney");
+        if(proposeMoneyOBJ instanceof Integer){
+            return ((Integer) proposeMoneyOBJ).doubleValue();
+        }else{
+            return (Double)proposeMoneyOBJ;
+        }
     }
 }

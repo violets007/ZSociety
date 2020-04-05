@@ -7,7 +7,6 @@ import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.MainCommand;
 import com.zixuan007.society.command.MarryCommand;
 import com.zixuan007.society.command.TitleCommand;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.listener.MarryListener;
 import com.zixuan007.society.listener.ResponseLister;
@@ -29,7 +28,6 @@ public class SocietyPlugin extends PluginBase {
     private List<Config> societyConfigList = new ArrayList<>();
     private Config titleConfig;
     private Config LangConfig;
-    private Lang lang;
     private Config marryConfig;
     private Config titleShopConfig;
     private static SocietyPlugin instance;
@@ -57,7 +55,7 @@ public class SocietyPlugin extends PluginBase {
         saveResource("cn_language.yml", true);
         registerCommand();
         loadConfig();
-        this.lang=PluginUtils.getLang();
+        PluginUtils.getLang();
 
         if (this.config.getBoolean("是否开启底部", false)) {
             getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);

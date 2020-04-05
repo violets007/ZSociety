@@ -16,7 +16,7 @@ public class Society {
     private String presidentName;
     private String createTime;
     private Double societyMoney;
-    private HashMap<String, ArrayList<Object>> psots;
+    private HashMap<String, ArrayList<Object>> psots=new HashMap<String, ArrayList<Object>>();
     private int grade = 1;
     private ArrayList<String> tempApply = new ArrayList<>();
 

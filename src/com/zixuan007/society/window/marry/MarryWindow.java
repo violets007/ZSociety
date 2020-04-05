@@ -4,17 +4,14 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
-import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Marry;
-import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.marry.DivorceMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowManager;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -67,11 +64,14 @@ public class MarryWindow extends SimpleWindow {
                 String recipientName = marry.getRecipient();
                 String proposeName = marry.getPropose();
                 if(PluginUtils.isOnlineByName(recipientName) && PluginUtils.isOnlineByName(proposeName)){
+                    Player recipientPlayer = Server.getInstance().getPlayer(recipientName);
+                    Player proposePlayer = Server.getInstance().getPlayer(proposeName);
                     if(!player.getName().equals(recipientName)){
-                        Player player1 = Server.getInstance().getPlayer(recipientName);
-                        player.teleport(player1);
-                        player.sendMessage("§a传送成功");
+                        proposePlayer.teleport(recipientPlayer);
+                    }else{
+                       recipientPlayer.teleport(proposePlayer);
                     }
+                    player.sendMessage("§a传送成功");
                     return;
                 }else{
                     player.showFormWindow(WindowManager.getMessageWindow("§c当前伴侣不在线",this,"返回上级"));
@@ -83,7 +83,8 @@ public class MarryWindow extends SimpleWindow {
                     return;
                 }
                 player.showFormWindow(WindowManager.getMessageWindow("§c离婚成功",this,"返回上级"));
-                SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new DivorceMarryEvent());
+
+                Server.getInstance().getPluginManager().callEvent(new DivorceMarryEvent(player));
                 break;
             case 4:
                 if(MarryUtils.marrys.size() <1){
