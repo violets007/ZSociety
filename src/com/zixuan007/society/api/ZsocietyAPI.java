@@ -19,6 +19,15 @@ public class ZsocietyAPI {
     }
 
     /**
+     * 获取指定玩家所在的公会
+     * @param playerName
+     * @return
+     */
+    public static Society getSocietyByPlayerName(String playerName){
+        return SocietyUtils.getSocietyByPlayerName(playerName);
+    }
+
+    /**
      * 获取职位名称
      * @param playerName 玩家名字
      * @param society 玩家所在的公会

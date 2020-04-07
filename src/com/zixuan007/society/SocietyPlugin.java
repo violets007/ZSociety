@@ -48,7 +48,6 @@ public class SocietyPlugin extends PluginBase {
      */
     public void init() {
         checkPlugin("EconomyAPI");
-        checkPlugin("Tips");
         checkPlugin("FloatingText");
         if (instance == null) instance = this;
         checkConfig();
@@ -86,12 +85,14 @@ public class SocietyPlugin extends PluginBase {
         String langPath = PluginUtils.CONFIGFOLDER +language+"_language.yml";
         String titleShopPath = PluginUtils.CONFIGFOLDER + "TitleShopData.yml";
         String marryPath=PluginUtils.CONFIGFOLDER+"Marry.yml";
+
         this.titleConfig = new Config(titleConfigPath);
         this.LangConfig = new Config(langPath);
         this.titleShopConfig = new Config(titleShopPath);
         this.marryConfig=new Config(marryPath);
         MarryUtils.loadMarryConfig();
         SocietyUtils.loadSocietyConfig();
+
     }
 
     /**

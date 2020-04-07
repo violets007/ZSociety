@@ -3,13 +3,14 @@ package com.zixuan007.society.utils;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;
+import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
-import com.zixuan007.society.domain.Marry;
 import com.zixuan007.society.domain.Society;
 import me.onebone.economyapi.EconomyAPI;
 import tip.utils.Api;
+
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -17,6 +18,9 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * 插件工具类
@@ -26,6 +30,7 @@ public class PluginUtils {
     public static final String SOCIETYFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR; //公会数据文件路径
     public static final String CONFIGFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;//公会配置文件夹
     public static final String MARRY_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Marry"+FILE_SEPARATOR;
+    public static final String VIP_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Vip"+FILE_SEPARATOR;
     /**
      * 加载jar包
      * @param jarPath
@@ -125,7 +130,29 @@ public class PluginUtils {
                 .replaceAll("\\$\\{itemID\\}", itemID)
                 .replaceAll("\\$\\{title\\}", title)
                 .replaceAll("\\$\\{zmarry\\}", marry);
-        text = Api.strReplace(text, player);
+        Plugin tips = SocietyPlugin.getInstance().getServer().getPluginManager().getPlugin("Tips");
+        text=Api.strReplace(text,player);
+        Calendar now = Calendar.getInstance();
+        TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
+        now.setTimeZone(timeZone);
+        now.setTime(new Date());
+        text = text.replace("{年}", now.get(1) + "");
+        text = text.replace("{月}", now.get(2) + 1 + "");
+        text = text.replace("{日}", now.get(5) + "");
+        text = text.replace("{时}", now.get(11) + "");
+        text = text.replace("{分}", now.get(12) + "");
+        text = text.replace("{秒}", now.get(13) + "");
+        text = text.replace("{星期}", now.get(4) + "");
+        text = text.replace("{ms}", player.getPing() + "ms");
+        text = text.replace("{levelName}", player.getLevel().getFolderName());
+        text = text.replace("{x}", Math.round(player.getX()) + "");
+        text = text.replace("{y}", Math.round(player.getY()) + "");
+        text = text.replace("{z}", Math.round(player.getZ()) + "");
+        text = text.replace("{tps}", Server.getInstance().getTicksPerSecond() + "");
+        text = text.replace("{money}", String.format("%.2f", EconomyAPI.getInstance().myMoney(player)));
+        text=text.replace("{online}", Server.getInstance().getOnlinePlayers().size() + "")
+                .replace("{maxplayer}", Server.getInstance().getMaxPlayers() + "");
+        text=text.replace("{h}", player.getHealth() + "").replace("{mh}", player.getMaxHealth() + "");
         return text;
     }
 
@@ -141,4 +168,6 @@ public class PluginUtils {
             return (Double)proposeMoneyOBJ;
         }
     }
+
+
 }

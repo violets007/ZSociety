@@ -79,6 +79,5 @@ public class SocietyListener implements Listener {
             message = SocietyUtils.formatChat(player, message);
             event.setFormat(message);
         }
-
     }
 }

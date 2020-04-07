@@ -1,7 +1,6 @@
 package com.zixuan007.society.utils;
 
 import cn.nukkit.Player;
-import cn.nukkit.item.Item;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
@@ -13,8 +12,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import me.onebone.economyapi.EconomyAPI;
-import tip.utils.Api;
+
 
 import static com.zixuan007.society.utils.PluginUtils.SOCIETYFOLDER;
 import static com.zixuan007.society.utils.PluginUtils.formatText;
@@ -99,9 +97,11 @@ public class SocietyUtils {
             ArrayList<Object> value = entry.getValue();
             final String playerName = entry.getKey();
             final Integer grade = (Integer)value.get(1);
-            postList.add(new HashMap<String, Object>()
-            {
-
+            postList.add(new HashMap<String, Object>() {
+                {
+                    put("name",playerName);
+                    put("grade",grade);
+                }
             });
         }
 
