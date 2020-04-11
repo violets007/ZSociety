@@ -13,6 +13,7 @@ import com.zixuan007.society.window.society.PlayerApplyListWindow;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PresidentWindow extends SimpleWindow {
     private long sid;
@@ -85,6 +86,7 @@ public class PresidentWindow extends SimpleWindow {
                 break;
             case 4:
                 player.showFormWindow((FormWindow)WindowManager.getMessageWindow("§a成功解散 §b" + society.getSocietyName(), (FormWindow)WindowManager.getSocietyWindow(player), "返回主界面"));
+                SocietyUtils.sendMemberTitle("§b"+player.getName()+"§c解散了公会",society);
                 societyPlugin.getSocieties().remove(society);
                 SocietyUtils.removeSociety(society.getSocietyName());
                 break;

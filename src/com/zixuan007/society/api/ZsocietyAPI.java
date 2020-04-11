@@ -7,7 +7,14 @@ import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 
 public class ZsocietyAPI {
+    public static ZsocietyAPI instance;
 
+    private ZsocietyAPI(){
+
+    }
+    static {
+        instance=new ZsocietyAPI();
+    }
     /**
      * 获取公会名称
      * @param playerNmae 玩家名字
@@ -79,5 +86,13 @@ public class ZsocietyAPI {
         int genderByPlayerName = MarryUtils.getGenderByPlayerName(playerName);
         if (genderByPlayerName < 0) return "未知性别";
         return (genderByPlayerName == 0)? "女" : "男";
+    }
+
+    public static ZsocietyAPI getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(ZsocietyAPI instance) {
+        ZsocietyAPI.instance = instance;
     }
 }

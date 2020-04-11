@@ -7,6 +7,7 @@ import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.MainCommand;
 import com.zixuan007.society.command.MarryCommand;
 import com.zixuan007.society.command.TitleCommand;
+import com.zixuan007.society.command.VipCommand;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.listener.MarryListener;
 import com.zixuan007.society.listener.ResponseLister;
@@ -16,6 +17,7 @@ import com.zixuan007.society.task.BottomTask;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
+import com.zixuan007.society.utils.PrivilegeUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,6 +61,13 @@ public class SocietyPlugin extends PluginBase {
         if (this.config.getBoolean("是否开启底部", false)) {
             getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
         }
+        resisterListener();
+    }
+
+    /**
+     * 注册事件监听器
+     */
+    public void resisterListener(){
         getServer().getPluginManager().registerEvents(new ResponseLister(), this);
         getServer().getPluginManager().registerEvents(new SocietyListener(this), this);
         getServer().getPluginManager().registerEvents(new TitleListener(this), this);
@@ -71,7 +80,8 @@ public class SocietyPlugin extends PluginBase {
     public void registerCommand() {
         getServer().getCommandMap().register("society", (Command) new MainCommand(), "公会");
         getServer().getCommandMap().register("title", (Command) new TitleCommand(), "称号");
-        getServer().getCommandMap().register("title", (Command) new MarryCommand(), "结婚");
+        getServer().getCommandMap().register("marry", (Command) new MarryCommand(), "结婚");
+        getServer().getCommandMap().register("privilege", (Command) new VipCommand(), "特权");
     }
 
 
@@ -92,7 +102,7 @@ public class SocietyPlugin extends PluginBase {
         this.marryConfig=new Config(marryPath);
         MarryUtils.loadMarryConfig();
         SocietyUtils.loadSocietyConfig();
-
+        PrivilegeUtils.loadVipConfig();
     }
 
     /**

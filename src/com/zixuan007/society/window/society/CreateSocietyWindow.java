@@ -30,7 +30,12 @@ public class CreateSocietyWindow extends CustomWindow {
             messageWindow = WindowManager.getMessageWindow("§c此公会名称已经存在", this, "返回上级");
             player.showFormWindow(messageWindow);
         } else {
-            Double createSocietyMoney = (Double)societyPlugin.getConfig().get("createSocietyMoney");
+            Double createSocietyMoney=null;
+            if(societyPlugin.getConfig().get("createSocietyMoney") instanceof Integer){
+                createSocietyMoney=((Integer) societyPlugin.getConfig().get("createSocietyMoney")).doubleValue();
+            }else{
+                createSocietyMoney= (Double) societyPlugin.getConfig().get("createSocietyMoney");
+            }
             double myMoney = EconomyAPI.getInstance().myMoney(player);
             if (myMoney < createSocietyMoney) {
                 messageWindow = WindowManager.getMessageWindow("§c当前余额不足,创建公会需要: §l§a" + createSocietyMoney, this, "返回上级");

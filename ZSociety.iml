@@ -38,7 +38,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Nukkit1.0/plugins/[DEFAULT]Tips_v1.3.4(1).jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Nukkit1.0/plugins/Tips_v1.5.3.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

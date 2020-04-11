@@ -1,12 +1,14 @@
 package com.zixuan007.society.window.society;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.event.Event;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerApplyJoinSocietyEvent;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.ModalWindow;
 import com.zixuan007.society.window.SimpleWindow;
@@ -68,6 +70,7 @@ public class SocietyListWindow extends SimpleWindow {
         }
         affirmWindow.setButtonClickedListener((affirm, player1) -> {
             if (affirm.booleanValue()) {
+                if (PluginUtils.isOnlineByName(society.getPresidentName())) Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(">> §a玩家 §b"+player1.getName()+" §a正在申请进入公会,§c请审核");
                 SocietyPlugin.getInstance().getServer().getPluginManager().callEvent((Event)new PlayerApplyJoinSocietyEvent(player1, society));
             } else {
                 player1.showFormWindow(getParent());

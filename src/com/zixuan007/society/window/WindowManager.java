@@ -27,6 +27,13 @@ import com.zixuan007.society.window.title.admin.CreateShopWindow;
 import com.zixuan007.society.window.title.admin.RemoveTitleWindow;
 import com.zixuan007.society.window.title.admin.SetTitleWindow;
 import com.zixuan007.society.window.title.admin.TitleWindow;
+import com.zixuan007.society.window.vip.SvipWindow;
+import com.zixuan007.society.window.vip.VipWindow;
+import com.zixuan007.society.window.vip.admin.PrivilegeListWindow;
+import com.zixuan007.society.window.vip.admin.PrivilegeManagerWindow;
+import com.zixuan007.society.window.vip.admin.RemovePrivilegeWindow;
+import com.zixuan007.society.window.vip.admin.SetPrivilegeWindow;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -161,5 +168,29 @@ public class WindowManager {
 
     public static MoneyRankWindow getMoneyRankWindow(){
         return new MoneyRankWindow();
+    }
+
+    public static SetPrivilegeWindow getSetPrivilegeWindow(){
+        return new SetPrivilegeWindow();
+    }
+
+    public static PrivilegeManagerWindow getPrivilegeManagerWindow(){
+        return new PrivilegeManagerWindow();
+    }
+
+    public static RemovePrivilegeWindow getRemovePrivilegeWindow(){
+        return new RemovePrivilegeWindow();
+    }
+
+    public static VipWindow getVipWindow(){
+        return new VipWindow();
+    }
+
+    public static SvipWindow getSvipWindow(){
+        return new SvipWindow();
+    }
+
+    public static PrivilegeListWindow getPrivilegeListWindow(){
+        return new PrivilegeListWindow();
     }
 }

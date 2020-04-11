@@ -26,7 +26,7 @@ public class BottomTask extends PluginTask<SocietyPlugin> {
         for (Player player : players) {
             tempText = SocietyUtils.formatButtomText(tipText, player);
             player.sendTip(tempText);
-            if (config.getBoolean("是否开启更改头部", false)) {
+            if (config.getBoolean("是否开启更改头部")) {
                 String formatNameTag = PluginUtils.formatText(configNameTag, player);
                 player.setNameTag(formatNameTag);
             }

@@ -1,6 +1,7 @@
 package com.zixuan007.society.utils;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
@@ -350,6 +351,20 @@ public class SocietyUtils {
     }
 
     /**
+     * 给公会所有成员发送标题信息
+     * @param title
+     */
+    public static void sendMemberTitle(String title,Society society){
+        if (society.getPost().size() <= 0) return;
+        for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
+            String playerName = entry.getKey();
+            if(!PluginUtils.isOnlineByName(playerName)) continue;
+            if(society.getPresidentName().equals(playerName)) continue;
+            Server.getInstance().getPlayer(playerName).sendTitle(title);
+        }
+    }
+
+    /**
      * 加载公会配置文件
      */
     public static void loadSocietyConfig() {
@@ -364,4 +379,5 @@ public class SocietyUtils {
         }
         SocietyPlugin.getInstance().getLogger().debug(societyPlugin.getSocieties().toString());
     }
+
 }

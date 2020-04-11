@@ -6,25 +6,30 @@ import cn.nukkit.utils.Config;
  * Vip数据模板
  */
 public class Vip {
-    private static VipType  Vip_Type=VipType.VIP;
+    private  VipType vip_Type =VipType.VIP;
 
     private long vid;
     private String BuyDate;
     private String playerName;
-    private String holdTime;
+    private int holdTime;
 
     public static Vip init(Config config){
         Vip vip = new Vip();
-        long vid = (long) config.get("vid");
+        long vid=0;
+        if(config.get("vid") instanceof Integer){
+            vid=((Integer) config.get("vid")).longValue();
+        }else {
+            vid = (long) config.get("vid");
+        }
         String buyDate = (String) config.get("BuyDate");
         String playerName = (String) config.get("playerName");
-        String holdTime = (String) config.get("holdTime");
-        VipType vip_type = (VipType) config.get("vip_type");
+        int holdTime = (int) config.get("holdTime");
+        String vip_type = (String) config.get("Vip_Type");
         vip.setVid(vid);
         vip.setBuyDate(buyDate);
         vip.setPlayerName(playerName);
         vip.setHoldTime(holdTime);
-        vip.setVip_Type(vip_type);
+        vip.setVip_Type(vip_type.equals(VipType.VIP.getTypeName()) ? VipType.VIP : VipType.SVIP);
 
         return vip;
     }
@@ -53,19 +58,30 @@ public class Vip {
         this.playerName = playerName;
     }
 
-    public String getHoldTime() {
+    public int getHoldTime() {
         return holdTime;
     }
 
-    public void setHoldTime(String holdTime) {
+    public void setHoldTime(int holdTime) {
         this.holdTime = holdTime;
     }
 
-    public static VipType getVip_Type() {
-        return Vip_Type;
+    public  VipType getVip_Type() {
+        return vip_Type;
     }
 
-    public static void setVip_Type(VipType vip_Type) {
-        Vip_Type = vip_Type;
+    public  void setVip_Type(VipType vip_Type) {
+        this.vip_Type = vip_Type;
+    }
+
+    @Override
+    public String toString() {
+        return "Vip{" +
+                "vip_Type=" + vip_Type +
+                ", vid=" + vid +
+                ", BuyDate='" + BuyDate + '\'' +
+                ", playerName='" + playerName + '\'' +
+                ", holdTime=" + holdTime +
+                '}';
     }
 }

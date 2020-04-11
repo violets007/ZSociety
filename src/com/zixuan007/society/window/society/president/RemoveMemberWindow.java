@@ -1,15 +1,20 @@
 package com.zixuan007.society.window.society.president;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.society.MessageWindow;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RemoveMemberWindow extends SimpleWindow {
     public RemoveMemberWindow(long sid, List<String> memberList) {
@@ -30,6 +35,7 @@ public class RemoveMemberWindow extends SimpleWindow {
         society.getPost().remove(playerName);
         society.saveData();
         MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功移除成员 §b" + playerName, getParent(), "返回上级");
+        SocietyUtils.sendMemberTitle("§c成员: §b"+playerName+" 被踢出公会",society);
         player.showFormWindow((FormWindow)messageWindow);
     }
 }

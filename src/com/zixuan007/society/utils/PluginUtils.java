@@ -9,7 +9,6 @@ import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import me.onebone.economyapi.EconomyAPI;
-import tip.utils.Api;
 
 
 import java.io.File;
@@ -30,7 +29,7 @@ public class PluginUtils {
     public static final String SOCIETYFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR; //公会数据文件路径
     public static final String CONFIGFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;//公会配置文件夹
     public static final String MARRY_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Marry"+FILE_SEPARATOR;
-    public static final String VIP_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Vip"+FILE_SEPARATOR;
+    public static final String PRIVILEGE_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Vip"+FILE_SEPARATOR;
     /**
      * 加载jar包
      * @param jarPath
@@ -117,6 +116,8 @@ public class PluginUtils {
         String societyGrade = society != null ? society.getGrade() + "" : "无等级";
         String postName = SocietyUtils.getPostByName(player.getName(),society);
         String title = SocietyPlugin.getInstance().getTitleConfig().get(player.getName())==null?"无称号":(String) SocietyPlugin.getInstance().getTitleConfig().get(player.getName());
+        String privilege="";
+        if(PrivilegeUtils.isVIP(player.getName()) || PrivilegeUtils.isSvip(player.getName())) privilege=PrivilegeUtils.isVIP(player.getName()) ? "§l§eVIP§f+":"§l§cS§aV§l§bIP§f+";
         String marry= MarryUtils.isMarry(player.getName())?"已结婚":"单身";
         String name = player.getLevel().getName();
         float ticksPerSecond = SocietyPlugin.getInstance().getServer().getTicksPerSecond();
@@ -129,14 +130,14 @@ public class PluginUtils {
                 .replaceAll("\\$\\{money\\}", myMoney.toString())
                 .replaceAll("\\$\\{itemID\\}", itemID)
                 .replaceAll("\\$\\{title\\}", title)
-                .replaceAll("\\$\\{zmarry\\}", marry);
-        Plugin tips = SocietyPlugin.getInstance().getServer().getPluginManager().getPlugin("Tips");
-        text=Api.strReplace(text,player);
+                .replaceAll("\\$\\{zmarry\\}", marry)
+                .replaceAll("\\$\\{privilege\\}", privilege);
         Calendar now = Calendar.getInstance();
         TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
         now.setTimeZone(timeZone);
         now.setTime(new Date());
         text = text.replace("{年}", now.get(1) + "");
+        text = text.replace("{name}", player.getName());
         text = text.replace("{月}", now.get(2) + 1 + "");
         text = text.replace("{日}", now.get(5) + "");
         text = text.replace("{时}", now.get(11) + "");

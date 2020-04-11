@@ -3,7 +3,6 @@ package com.zixuan007.society.window.society;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
-import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
@@ -87,6 +86,7 @@ public class SocietyWindow extends SimpleWindow {
                 ModalWindow modalWindow = WindowManager.getAffrimWindow("§c您确认要退出 §b" + society.getSocietyName() + " §c公会吗?", "§a确认退出", "§c取消退出");
                 modalWindow.setButtonClickedListener((affrim, player1) -> {
                     if (affrim) {
+                        SocietyUtils.sendMemberTitle("§a玩家 §b"+player1.getName()+" §a成功退出公会",society);
                         Society society1 = SocietyUtils.getSocietyByPlayerName(player1.getName());
                         WindowManager.societyPlugin.getServer().getPluginManager().callEvent(new PlayerQuitSocietyEvent(player1, society1));
                     } else {

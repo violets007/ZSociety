@@ -1,6 +1,7 @@
 package com.zixuan007.society.window.society.president;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.form.element.Element;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
@@ -9,6 +10,7 @@ import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowManager;
@@ -53,7 +55,11 @@ public class SetJobWindow extends CustomWindow {
             }
         });
         society.saveData();
+
         MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功设置 §b" + playerName + " §a职位为 §e" + jobName, (FormWindow)this, "返回上级");
+        if(PluginUtils.isOnlineByName(playerName)){
+            Server.getInstance().getPlayer(playerName).sendTitle("§a职位成功升级为 §e"+jobName);
+        }
         player.showFormWindow((FormWindow)messageWindow);
     }
 }
