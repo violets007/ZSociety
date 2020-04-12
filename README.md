@@ -10,29 +10,31 @@
 
 - Version: 1.0.5aplah
 
-- 当前插件处于快速版本迭代,可能会删除你的配置文件和数据
+- 当前插件处于快速版本迭代,可能会删除你的配置文件和数据,插件**不会**向下版本配置文件兼容！
 
-- 前置所需要的插件: FloatingText Tips
+- 前置所需要的插件: **FloatingText** 
 
 
 
 ## 功能
 
 1. **公会系统**
-   - 公会进入
-   - 公会退出
    - 公会成员列表
    - 公会经济贡献榜
    - 公会等级榜
+   - 公会商店
    - 会长管理界面
      - 设置成员职位
      - 移除人员职位
      - 升级公会
      - 解散公会
 2. **称号系统**
-   - 设置玩家称号
-   - 移除玩家称号
-   - 创建称号商店
+   1. 管理称号
+      - 设置玩家称号
+      - 移除玩家称号
+      - 创建称号商店
+   2. 称号选择
+      - 待定
 3. **结婚系统**
    - 进服性别选择
    - 可以情侣之间的相互传送
@@ -40,11 +42,9 @@
    - 情侣之间可以Tpa
 4. **SVIP系统**
    - VIP系统
-     - 待定
+     - 生存飞行
    - SVIP系统
-     - 待定
-   - MVP+系统
-     - 待定
+     - 生存飞行
 
 ## 命令
 
@@ -53,24 +53,129 @@
 > /**称号** 展示管理称号GUI(只能op进行操作)
 >
 > /**结婚** 展示结婚功能GUI
+>
+> /**特权** 展示特权功能界面
 
 
 
 ## API
 ```java
-ZsocietyAPI.getSocietyName(String playerNmae);//获取公会名称
-ZsocietyAPI.getPostName(String playerName); //获取职位名称
-ZsocietyAPI.getSocietyGrade(Society society);//获取公会等级
-ZsocietyAPi.getTitle(String playerName);//获取职位标题
-ZsocietyAPi.isMarry(String playerName);//检测玩家是否结婚
-ZsocietyAPi.getGenderbyPlayerName(String playerName);//获取玩家性别
+public class ZsocietyAPI {
+    public static ZsocietyAPI instance;
+
+    private ZsocietyAPI(){
+    }
+    static {
+        instance=new ZsocietyAPI();
+    }
+    /**
+     * 获取公会名称
+     * @param playerNmae 玩家名字
+     * @return
+     */
+    public static String getSocietyName(String playerNmae) {
+        Society society = SocietyUtils.getSocietyByPlayerName(playerNmae);
+        return society != null ? society.getSocietyName() : "无公会";
+    }
+
+    /**
+     * 获取指定玩家所在的公会
+     * @param playerName
+     * @return
+     */
+    public static Society getSocietyByPlayerName(String playerName){
+        return SocietyUtils.getSocietyByPlayerName(playerName);
+    }
+
+    /**
+     * 获取职位名称
+     * @param playerName 玩家名字
+     * @param society 玩家所在的公会
+     * @return
+     */
+    public static String getPostName(String playerName, Society society) {
+        String postByName = null;
+        if (society != null) {
+            postByName = SocietyUtils.getPostByName(playerName, society);
+        }
+
+        return postByName != null ? postByName : "无职位";
+    }
+
+    /**
+     * 获取公会等级
+     * @param society 玩家当前所存在的公会
+     * @return
+     */
+    public static int getSocietyGrade(Society society) {
+        return society != null ? society.getGrade() : -1;
+    }
+
+    /**
+     * 获取指定玩家的称号
+     * @param playerName 玩家名字
+     * @return
+     */
+    public static String getTitle(String playerName) {
+        String title = (String)SocietyPlugin.getInstance().getTitleConfig().get(playerName);
+        return title != null ? title : "无称号";
+    }
+
+    /**
+     * 检测玩家是否结婚
+     * @return
+     */
+    public static boolean isMarry(String playerName){
+        return MarryUtils.isMarry(playerName);
+    }
+
+    /**
+     * 获取玩家性别
+     * @param playerName
+     * @return
+     */
+    public static String getGenderbyPlayerName(String playerName){
+        if(!PluginUtils.isOnlineByName(playerName)) return "未知性别";
+        int genderByPlayerName = MarryUtils.getGenderByPlayerName(playerName);
+        if (genderByPlayerName < 0) return "未知性别";
+        return (genderByPlayerName == 0)? "女" : "男";
+    }
+
+    /**
+     * 是否是VIP
+     * @param playerName
+     * @return
+     */
+    public static boolean isVIP(String playerName){
+        if(PrivilegeUtils.isVIP(playerName)) return true;
+        return false;
+    }
+
+    /**
+     * 是否是SVIP
+     * @param playerName
+     * @return
+     */
+    public static boolean isSVIP(String playerName){
+        if(PrivilegeUtils.isSvip(playerName)) return true;
+        return false;
+    }
+
+    public static ZsocietyAPI getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(ZsocietyAPI instance) {
+        ZsocietyAPI.instance = instance;
+    }
+}
 ```
 
 
 
 ## Config
 
-- ### 主配置文件
+- ### Config.yml
 
   ```yml
   #公会插件主配置文件
@@ -106,7 +211,7 @@ ZsocietyAPi.getGenderbyPlayerName(String playerName);//获取玩家性别
   	
   ```
 
-- ### 称号数据配置文件格式
+- ### Title.yml
 
   ```yml
   ##暂时还没有进行更改
@@ -118,7 +223,7 @@ ZsocietyAPi.getGenderbyPlayerName(String playerName);//获取玩家性别
   
   ```
 
-- ### 结婚数数据配置文件格式
+- ### 结婚配置文件
 
   ```yml
   发起求婚玩家名_同意结婚玩家玩家名:
