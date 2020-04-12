@@ -5,7 +5,6 @@ import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
-import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Vip;
 import com.zixuan007.society.domain.VipType;
 import com.zixuan007.society.utils.PrivilegeUtils;
@@ -14,7 +13,9 @@ import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowManager;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SetPrivilegeWindow extends CustomWindow {
 
@@ -42,14 +43,16 @@ public class SetPrivilegeWindow extends CustomWindow {
 
         Vip vip = new Vip();
         vip.setVid(PrivilegeUtils.getNextVid());
-        vip.setHoldTime(time);
+        long expireTime = new Date().getTime() + 60 * 60 * 24 * time * 1000;
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
+        String format = simpleDateFormat.format(new Date(expireTime));
+        vip.setHoldTime(format);
         vip.setBuyDate("");
         vip.setPlayerName(setPrivilePlayerName);
         vip.setVip_Type(elementContent.equals(VipType.VIP.getTypeName())?VipType.VIP:VipType.SVIP);
         PrivilegeUtils.saveData(vip);
-        if(!PrivilegeUtils.isSvip(setPrivilePlayerName) && PrivilegeUtils.isVIP(setPrivilePlayerName))
-        PrivilegeUtils.privilegeList.add(vip);
+        if(!PrivilegeUtils.isSvip(setPrivilePlayerName) && !PrivilegeUtils.isVIP(setPrivilePlayerName)) PrivilegeUtils.privilegeList.add(vip);
 
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功设置玩家 §b"+setPrivilePlayerName+" §a的 §c"+elementContent+" §a天数为 §e"+time+"天",this,"返回上级"));
+        player.showFormWindow(WindowManager.getMessageWindow("§a成功设置玩家 §b"+setPrivilePlayerName+" §a的 §c"+elementContent+" §a天数为 §e"+time+" §a天",this,"返回上级"));
     }
 }

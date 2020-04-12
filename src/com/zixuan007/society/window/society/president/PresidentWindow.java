@@ -2,18 +2,19 @@ package com.zixuan007.society.window.society.president;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.society.MessageWindow;
-import com.zixuan007.society.window.society.PlayerApplyListWindow;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class PresidentWindow extends SimpleWindow {
     private long sid;
@@ -21,13 +22,18 @@ public class PresidentWindow extends SimpleWindow {
     public PresidentWindow(long sid) {
         super("", "");
         this.sid = sid;
-        addButton(new ElementButton("设置成员职位"));
-        addButton(new ElementButton("查看玩家申请"));
-        addButton(new ElementButton("升级公会"));
-        addButton(new ElementButton("移除人员"));
-        addButton(new ElementButton("解散"));
+        ElementButtonImageData imgData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.presidentWindow_SetJobWindowButton_ImgPath);
+        addButton(new ElementButton(Lang.presidentWindow_SetJobWindowButton,imgData));
+        imgData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.presidentWindow_PlayerApplyListButton_ImgPath);
+        addButton(new ElementButton(Lang.presidentWindow_PlayerApplyListButton,imgData));
+        imgData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.presidentWindow_UpgradeButton_ImgPath);
+        addButton(new ElementButton(Lang.presidentWindow_UpgradeButton,imgData));
+        imgData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.presidentWindow_RemoveMemberButton_ImgPath);
+        addButton(new ElementButton(Lang.presidentWindow_RemoveMemberButton,imgData));
+        imgData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.presidentWindow_DissolveButton_ImgPath);
+        addButton(new ElementButton(Lang.presidentWindow_DissolveButton,imgData));
         Society society = SocietyUtils.getSocietysByID(sid);
-        setTitle(((String)SocietyPlugin.getInstance().getLangConfig().get("会长公会管理窗口标题")).replaceAll("\\$\\{societyName\\}", society.getSocietyName())); } public void onClick(int id, Player player) { SetJobWindow setJobWindow; ArrayList<String> tempApply; PlayerApplyListWindow playerApplyListWindow; ArrayList<Object> list;
+        setTitle((Lang.presidentWindow_Title).replaceAll("\\$\\{societyName\\}", society.getSocietyName())); } public void onClick(int id, Player player) { SetJobWindow setJobWindow; ArrayList<String> tempApply; PlayerApplyListWindow playerApplyListWindow; ArrayList<Object> list;
         Double societyMoney;
         int updateMoney;
         List<String> memberList;

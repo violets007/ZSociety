@@ -5,6 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 public class RemoveMemberWindow extends SimpleWindow {
     public RemoveMemberWindow(long sid, List<String> memberList) {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("移除人员窗口标题"), "");
+        super(Lang.removeMemberWindow_Title, "");
         this.sid = sid;
         Society society = SocietyUtils.getSocietysByID(sid);
         for (String name : memberList) {
@@ -36,6 +37,7 @@ public class RemoveMemberWindow extends SimpleWindow {
         society.saveData();
         MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功移除成员 §b" + playerName, getParent(), "返回上级");
         SocietyUtils.sendMemberTitle("§c成员: §b"+playerName+" 被踢出公会",society);
+        if(PluginUtils.isOnlineByName(playerName)) Server.getInstance().getPlayer(playerName).sendTitle("§c你被被踢出公会");
         player.showFormWindow((FormWindow)messageWindow);
     }
 }

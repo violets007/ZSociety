@@ -1,12 +1,15 @@
-package com.zixuan007.society.window.society;
+package com.zixuan007.society.window.society.president;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.society.MessageWindow;
+
 import java.util.List;
 
 public class PlayerApplyListWindow extends SimpleWindow {
@@ -14,7 +17,7 @@ public class PlayerApplyListWindow extends SimpleWindow {
     private long sid;
 
     public PlayerApplyListWindow(List<String> tempApply, long sid) {
-        super((String) SocietyPlugin.getInstance().getLangConfig().get("玩家申请加入公会标题"), "§e申请加入公会人员");
+        super(Lang.playerApplyListWindow_Title, "§e申请加入公会人员");
         this.tempApply = tempApply;
         this.sid = sid;
         tempApply.forEach(name -> addButton(new ElementButton(name)));

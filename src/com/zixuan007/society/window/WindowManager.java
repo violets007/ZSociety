@@ -5,6 +5,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.marry.AddPublicFunds;
@@ -17,16 +18,16 @@ import com.zixuan007.society.window.society.CreateSocietyWindow;
 import com.zixuan007.society.window.society.LevelRankWindow;
 import com.zixuan007.society.window.society.MemberListWindow;
 import com.zixuan007.society.window.society.MessageWindow;
-import com.zixuan007.society.window.society.PlayerApplyListWindow;
+import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.SocietyListWindow;
 import com.zixuan007.society.window.society.SocietyWindow;
 import com.zixuan007.society.window.society.president.PresidentWindow;
 import com.zixuan007.society.window.society.president.RemoveMemberWindow;
 import com.zixuan007.society.window.society.president.SetJobWindow;
-import com.zixuan007.society.window.title.admin.CreateShopWindow;
+import com.zixuan007.society.window.title.admin.CreateTitleShopWindow;
 import com.zixuan007.society.window.title.admin.RemoveTitleWindow;
 import com.zixuan007.society.window.title.admin.SetTitleWindow;
-import com.zixuan007.society.window.title.admin.TitleWindow;
+import com.zixuan007.society.window.title.admin.TitleManagerWindow;
 import com.zixuan007.society.window.vip.SvipWindow;
 import com.zixuan007.society.window.vip.VipWindow;
 import com.zixuan007.society.window.vip.admin.PrivilegeListWindow;
@@ -53,8 +54,7 @@ public class WindowManager {
     }
 
     public static MessageWindow getMessageWindow(String content, FormWindow formWindow, String buttonName) {
-        String title = (String)societyPlugin.getLangConfig().get("消息窗口标题");
-        MessageWindow messageWindow = new MessageWindow(title, content);
+        MessageWindow messageWindow = new MessageWindow(Lang.messageWindow_Title, content);
         messageWindow.setParent(formWindow);
         messageWindow.addButton(new ElementButton(buttonName));
         return messageWindow;
@@ -67,18 +67,16 @@ public class WindowManager {
     }
 
     public static ModalWindow getAffrimWindow(String content, String trueButtonName, String falseButtoName) {
-        String affrimTitle = (String)societyPlugin.getLangConfig().get("确认窗口标题");
-        ModalWindow modalWindow = new ModalWindow(affrimTitle, content, trueButtonName, falseButtoName);
+        ModalWindow modalWindow = new ModalWindow(Lang.affrimWindow_Title, content, trueButtonName, falseButtoName);
         return modalWindow;
     }
 
     public static SocietyListWindow getSocietyListWindow(int cuurent, FormWindow formWindow) {
         List<Society> societyList = SocietyUtils.getSocietyList(cuurent);
-        String title = (String)societyPlugin.getLangConfig().get("公会列表窗口标题");
         int limit = 10;
         int totalPage = SocietyUtils.getSocietyListTotalPage(cuurent, limit);
         String content = "§a当前第 §b" + cuurent + " §a总页数 §b" + totalPage;
-        SocietyListWindow societyListWindow = new SocietyListWindow(title, content, cuurent, totalPage, societyList);
+        SocietyListWindow societyListWindow = new SocietyListWindow(Lang.societyListWindow_Title, content, cuurent, totalPage, societyList);
         societyListWindow.setBack(true);
         societyListWindow.setParent(formWindow);
         societyListWindow.setLimit(limit);
@@ -131,9 +129,9 @@ public class WindowManager {
         return new RemoveMemberWindow(sid, memberList);
     }
 
-    public static TitleWindow getTitleWindow() {
-        TitleWindow titleWindow = new TitleWindow();
-        return titleWindow;
+    public static TitleManagerWindow getTitleWindow() {
+        TitleManagerWindow titleManagerWindow = new TitleManagerWindow();
+        return titleManagerWindow;
     }
 
     public static SetTitleWindow getSetTitleWindow(FormWindow formWindow) {
@@ -150,8 +148,8 @@ public class WindowManager {
         return removeTitleWindow;
     }
 
-    public static CreateShopWindow getCreateTitleShopWindow() {
-        return new CreateShopWindow();
+    public static CreateTitleShopWindow getCreateTitleShopWindow() {
+        return new CreateTitleShopWindow();
     }
 
     public static MarryWindow getMarryWindow(){

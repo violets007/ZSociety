@@ -26,13 +26,15 @@ public class MarryWindow extends SimpleWindow {
 
     public void init(){
         ElementButtonImageData buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_ProposeButton_ImgPath);
-
-        addButton(new ElementButton("求婚",buttonImageData));
-        addButton(new ElementButton("增加公共资金",buttonImageData));
-        addButton(new ElementButton("传送至情侣身边",buttonImageData));
-        addButton(new ElementButton("离婚",buttonImageData));
-        addButton(new ElementButton("夫妻公共财产排行榜",buttonImageData));
-
+        addButton(new ElementButton(Lang.marryWindow_ProposeButton,buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_AddPublicFundsButton_ImgPath);
+        addButton(new ElementButton(Lang.marryWindow_AddPublicFundsButton,buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_TransferButton_ImgPath);
+        addButton(new ElementButton(Lang.marryWindow_TransferButton,buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_DivorceMarryButton_ImgPath);
+        addButton(new ElementButton(Lang.marryWindow_DivorceMarryButton,buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_MoneyRankWindowButton_ImgPath);
+        addButton(new ElementButton(Lang.marryWindow_MoneyRankWindowButton,buttonImageData));
     }
 
     @Override

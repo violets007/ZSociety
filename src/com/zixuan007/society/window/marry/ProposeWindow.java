@@ -5,6 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.event.marry.PlayerMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
@@ -20,7 +21,7 @@ import java.util.Date;
  */
 public class ProposeWindow extends CustomWindow {
     public ProposeWindow() {
-        super("求婚窗口界面");
+        super(Lang.marryWindow_Propose_Title);
         addElement(new ElementInput("","被求婚者姓名"));
     }
 

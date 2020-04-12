@@ -11,7 +11,7 @@ public class Vip {
     private long vid;
     private String BuyDate;
     private String playerName;
-    private int holdTime;
+    private String holdTime;
 
     public static Vip init(Config config){
         Vip vip = new Vip();
@@ -23,7 +23,7 @@ public class Vip {
         }
         String buyDate = (String) config.get("BuyDate");
         String playerName = (String) config.get("playerName");
-        int holdTime = (int) config.get("holdTime");
+        String holdTime = (String) config.get("holdTime");
         String vip_type = (String) config.get("Vip_Type");
         vip.setVid(vid);
         vip.setBuyDate(buyDate);
@@ -58,11 +58,11 @@ public class Vip {
         this.playerName = playerName;
     }
 
-    public int getHoldTime() {
+    public String getHoldTime() {
         return holdTime;
     }
 
-    public void setHoldTime(int holdTime) {
+    public void setHoldTime(String holdTime) {
         this.holdTime = holdTime;
     }
 

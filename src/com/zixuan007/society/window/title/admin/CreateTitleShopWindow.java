@@ -5,6 +5,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.CustomWindow;
@@ -13,9 +14,9 @@ import com.zixuan007.society.window.WindowManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CreateShopWindow extends CustomWindow {
-    public CreateShopWindow() {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("创建称号商店窗口标题"));
+public class CreateTitleShopWindow extends CustomWindow {
+    public CreateTitleShopWindow() {
+        super(Lang.createTitleShopWindow_title);
         addElement((Element)new ElementInput("", "需要售卖的称号"));
         addElement((Element)new ElementInput("", "金额"));
     }

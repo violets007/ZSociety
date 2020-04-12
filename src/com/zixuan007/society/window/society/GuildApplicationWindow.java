@@ -9,6 +9,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerApplyJoinSocietyEvent;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -19,7 +20,7 @@ public class GuildApplicationWindow extends CustomWindow {
     private static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
 
     public GuildApplicationWindow() {
-        super((String)societyPlugin.getLangConfig().get("玩家申请公会窗口标题"));
+        super(Lang.guildApplication_Title);
         addElement((Element)new ElementLabel("§c建议先查看公会列表"));
         ElementDropdown elementDropdown = new ElementDropdown("§b公会SID");
         SocietyPlugin.getInstance().getSocieties().forEach(society -> elementDropdown.addOption(society.getSid() + ""));

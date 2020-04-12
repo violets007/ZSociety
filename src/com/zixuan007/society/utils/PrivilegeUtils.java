@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class PrivilegeUtils {
     public static ArrayList<Vip> privilegeList =new ArrayList<>();
+    public static ArrayList<String> removePrivilegeName=new ArrayList<String>();//需要移除特权的玩家名称
 
     /**
      * 检查是否为Vip

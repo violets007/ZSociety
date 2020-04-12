@@ -4,6 +4,7 @@ import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
+import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 
 public class ZsocietyAPI {
@@ -59,7 +60,7 @@ public class ZsocietyAPI {
     }
 
     /**
-     * 获取职位标题
+     * 获取指定玩家的称号
      * @param playerName 玩家名字
      * @return
      */
@@ -86,6 +87,26 @@ public class ZsocietyAPI {
         int genderByPlayerName = MarryUtils.getGenderByPlayerName(playerName);
         if (genderByPlayerName < 0) return "未知性别";
         return (genderByPlayerName == 0)? "女" : "男";
+    }
+
+    /**
+     * 是否是VIP
+     * @param playerName
+     * @return
+     */
+    public static boolean isVIP(String playerName){
+        if(PrivilegeUtils.isVIP(playerName)) return true;
+        return false;
+    }
+
+    /**
+     * 是否是SVIP
+     * @param playerName
+     * @return
+     */
+    public static boolean isSVIP(String playerName){
+        if(PrivilegeUtils.isSvip(playerName)) return true;
+        return false;
     }
 
     public static ZsocietyAPI getInstance() {

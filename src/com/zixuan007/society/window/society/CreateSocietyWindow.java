@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerCreateSocietyEvent;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -17,7 +18,7 @@ import me.onebone.economyapi.EconomyAPI;
 public class CreateSocietyWindow extends CustomWindow {
 
     public CreateSocietyWindow() {
-        super("创建公会窗口");
+        super(Lang.createSocietyWindow_Title);
         this.addElement(new ElementInput("", "公会名称"));
     }
 

@@ -1,18 +1,18 @@
 package com.zixuan007.society.window.society;
 
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import java.util.List;
 
-public class MemberListWindow
-        extends SimpleWindow {
+public class MemberListWindow extends SimpleWindow {
     private List<String> memberList;
     private Society society;
 
     public MemberListWindow(Society society, List<String> memberList) {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("成员列表窗口标题"), "");
+        super(Lang.memberListWindow_Title, "");
         this.society = society;
         StringBuilder sb = new StringBuilder();
         sb.append("§l§d公会成员列表\n");

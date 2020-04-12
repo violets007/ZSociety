@@ -25,12 +25,8 @@ public class CustomWindow extends FormWindowCustom implements ResponseListennerC
 
     public static boolean onEvent(FormWindow formWindow, FormResponse response, Player player) {
         if (formWindow instanceof CustomWindow) {
-
             CustomWindow window = (CustomWindow)formWindow;
-
-
             if (window.wasClosed() || response == null) {
-
                 if (window.isBack.booleanValue()) {
                     window.callBack(player);
                 } else {

@@ -26,6 +26,8 @@ public class VipCommand extends Command {
                 }else if(PrivilegeUtils.isSvip(player.getName())){
                     //展示SVIP功能界面
                     player.showFormWindow(WindowManager.getSvipWindow());
+                }else{
+                    player.sendMessage(">> §c你还没有特权,请先联系管理员购买");
                 }
             }else{
                 String string = strings[0];

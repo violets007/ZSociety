@@ -4,20 +4,12 @@ import cn.nukkit.command.Command;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
-import com.zixuan007.society.command.MainCommand;
-import com.zixuan007.society.command.MarryCommand;
-import com.zixuan007.society.command.TitleCommand;
-import com.zixuan007.society.command.VipCommand;
+import com.zixuan007.society.command.*;
 import com.zixuan007.society.domain.Society;
-import com.zixuan007.society.listener.MarryListener;
-import com.zixuan007.society.listener.ResponseLister;
-import com.zixuan007.society.listener.SocietyListener;
-import com.zixuan007.society.listener.TitleListener;
+import com.zixuan007.society.listener.*;
 import com.zixuan007.society.task.BottomTask;
-import com.zixuan007.society.utils.MarryUtils;
-import com.zixuan007.society.utils.PluginUtils;
-import com.zixuan007.society.utils.SocietyUtils;
-import com.zixuan007.society.utils.PrivilegeUtils;
+import com.zixuan007.society.task.CheckPrivilegeTimeTask;
+import com.zixuan007.society.utils.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,6 +41,7 @@ public class SocietyPlugin extends PluginBase {
      * 初始化插件数据
      */
     public void init() {
+        new MetricsLite(this);
         checkPlugin("EconomyAPI");
         checkPlugin("FloatingText");
         if (instance == null) instance = this;
@@ -61,6 +54,7 @@ public class SocietyPlugin extends PluginBase {
         if (this.config.getBoolean("是否开启底部", false)) {
             getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
         }
+        getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20*60);
         resisterListener();
     }
 
@@ -72,6 +66,7 @@ public class SocietyPlugin extends PluginBase {
         getServer().getPluginManager().registerEvents(new SocietyListener(this), this);
         getServer().getPluginManager().registerEvents(new TitleListener(this), this);
         getServer().getPluginManager().registerEvents(new MarryListener(this), this);
+        getServer().getPluginManager().registerEvents(new PrivilegeListener(this), this);
     }
 
     /**
@@ -82,8 +77,8 @@ public class SocietyPlugin extends PluginBase {
         getServer().getCommandMap().register("title", (Command) new TitleCommand(), "称号");
         getServer().getCommandMap().register("marry", (Command) new MarryCommand(), "结婚");
         getServer().getCommandMap().register("privilege", (Command) new VipCommand(), "特权");
+        getServer().getCommandMap().register("admin", (Command) new AdminCommand(), "管理");
     }
-
 
 
     /**
@@ -138,6 +133,7 @@ public class SocietyPlugin extends PluginBase {
         }
         String configPath = PluginUtils.CONFIGFOLDER + "Config.yml";
         this.config = new Config(configPath);
+
     }
 
 

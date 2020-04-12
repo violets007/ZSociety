@@ -1,6 +1,7 @@
 package com.zixuan007.society.window.society;
 
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.window.SimpleWindow;
 import java.util.Collections;
@@ -10,7 +11,7 @@ import java.util.Comparator;
 
 public class LevelRankWindow extends SimpleWindow {
     public LevelRankWindow() {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("公会等级排行榜"), "");
+        super(Lang.levelRankWindow_Title, "");
         StringBuilder sb = new StringBuilder();
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         Collections.sort(societyPlugin.getSocieties(), new Comparator<Society>() {

@@ -6,12 +6,13 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowManager;
 
 public class SetTitleWindow extends CustomWindow {
     public SetTitleWindow() {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("设置称号窗口标题"));
+        super(Lang.setTitleWindow_title);
         addElement((Element)new ElementInput("", "玩家名字"));
         addElement((Element)new ElementInput("", "称号"));
     }

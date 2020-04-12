@@ -1,6 +1,7 @@
 package com.zixuan007.society.window.society;
 
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.window.SimpleWindow;
 import java.util.Collections;
@@ -11,7 +12,7 @@ import java.util.Comparator;
 
 public class ContributionRankingWindow extends SimpleWindow {
     public ContributionRankingWindow() {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("公会经济排行榜"), "");
+        super(Lang.contributionRankingWindow_Title, "");
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         Collections.sort(SocietyPlugin.getInstance().getSocieties(), new Comparator<Society>() {
             public int compare(Society o1, Society o2) {

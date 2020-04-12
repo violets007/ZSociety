@@ -12,6 +12,7 @@ import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.society.president.PresidentWindow;
 import java.util.Arrays;
+import java.util.List;
 
 public class SocietyWindow extends SimpleWindow {
     public SocietyWindow(Player player) {
@@ -112,8 +113,10 @@ public class SocietyWindow extends SimpleWindow {
                     player.showFormWindow(messageWindow);
                     return;
                 }
-                MemberListWindow memberListWindow = WindowManager.getMemberListWindow(society, Arrays.asList(society.getPost().keySet().toArray(new String[society.getPost().keySet().size()])), this);
+                List<String> postList = Arrays.asList(society.getPost().keySet().toArray(new String[society.getPost().keySet().size()]));
+                MemberListWindow memberListWindow = WindowManager.getMemberListWindow(society,postList, this);
                 memberListWindow.setBack(true);
+                memberListWindow.setParent(this);
                 player.showFormWindow(memberListWindow);
                 break;
             case 5:
@@ -131,6 +134,7 @@ public class SocietyWindow extends SimpleWindow {
                     return;
                 }
                 ContributionWindow contributionWindow = WindowManager.getContributionWindow(society.getSid());
+                contributionWindow.setBack(true);
                 contributionWindow.setParent(this);
                 player.showFormWindow(contributionWindow);
         }

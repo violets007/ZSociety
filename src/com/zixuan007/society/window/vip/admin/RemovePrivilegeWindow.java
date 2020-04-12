@@ -1,8 +1,10 @@
 package com.zixuan007.society.window.vip.admin;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowManager;
@@ -21,6 +23,12 @@ public class RemovePrivilegeWindow extends CustomWindow {
             return;
         }
         PrivilegeUtils.removePivilege(playerName);
+        if(PluginUtils.isOnlineByName(playerName)){
+            Server.getInstance().getPlayer(playerName).setAllowInteract(false);
+        }else{
+            PrivilegeUtils.removePrivilegeName.add(playerName);
+        }
+
         player.showFormWindow(WindowManager.getMessageWindow("§a成功移除 §b"+playerName+" §a的特权",this,"返回上级"));
     }
 }

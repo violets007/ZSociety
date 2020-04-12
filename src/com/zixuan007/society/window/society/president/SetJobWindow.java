@@ -8,7 +8,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class SetJobWindow extends CustomWindow {
     public SetJobWindow() {
-        super((String)SocietyPlugin.getInstance().getLangConfig().get("设置玩家职位窗口标题"));
+        super(Lang.setJobWindow_Title);
         addElement((Element)new ElementInput("", "§e玩家名称"));
         ElementDropdown elementDropdown = new ElementDropdown("§e职位列表", SocietyUtils.getAllPost());
         addElement((Element)elementDropdown);

@@ -14,7 +14,7 @@ public class PrivilegeListWindow extends CustomWindow {
             sb.append("§eVid§f: §b"+vip.getVid()+"\n");
             sb.append("§e持有人§f: §b"+vip.getPlayerName()+"\n");
             sb.append("§e特权类型§f: §l§d"+vip.getVip_Type().getTypeName()+"\n");
-            sb.append("§e持有时间§f: §b"+vip.getHoldTime()+" §e天\n");
+            sb.append("§r§e到期时间§f: §b"+vip.getHoldTime()+"\n");
             addElement(new ElementLabel(sb.toString()));
         }
     }
