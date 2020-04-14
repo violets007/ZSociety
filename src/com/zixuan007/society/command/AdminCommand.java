@@ -18,8 +18,10 @@ public class AdminCommand extends Command {
         if(args.length < 1) return false;
         switch (args[0]){
             case "公会":
+
                 break;
             case "称号":
+
                 break;
             case "结婚":
                 break;

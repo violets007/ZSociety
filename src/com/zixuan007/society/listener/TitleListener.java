@@ -59,7 +59,7 @@ public class TitleListener implements Listener {
         if (TitleUtils.onCreateName.containsKey(playerName)) {
             if (id == Block.WALL_SIGN) {
                 if (blockEntity instanceof BlockEntitySign) {
-                    ArrayList<String> titleText = (ArrayList<String>) this.societyPlugin.getConfig().getList("称号商店木牌格式");
+                    ArrayList<String> titleText = (ArrayList<String>) this.societyPlugin.getConfig().getList("titleShopFormat");
                     ArrayList<String> tempList = new ArrayList<>();
                     String title = (String) TitleUtils.onCreateName.get(playerName).get("title");
                     String money = (String) TitleUtils.onCreateName.get(playerName).get("money");
@@ -220,7 +220,7 @@ public class TitleListener implements Listener {
         titleShopConfig.remove(event.getTitle());
         titleShopConfig.save();
         Config config = SocietyPlugin.getInstance().getConfig();
-        ArrayList<String> textList = (ArrayList) config.getList("称号商店木牌格式");
+        ArrayList<String> textList = (ArrayList) config.getList("titleShopFormat");
         String signTitle = textList.get(1);
         signTitle = signTitle.replaceAll("\\$\\{title\\}", event.getTitle());
         FloatingTextAPI.removeFloatingText(player, signTitle);

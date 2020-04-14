@@ -60,6 +60,7 @@ titleManagerWindow_createTitleShopButton_ImgPath: textures/ui/backup_noline
 createTitleShopWindow_title: §e创建称号商店窗口
 removeTitleWindow_title: §e移除称号窗口
 setTitleWindow_title: §e设置称号窗口
+titleWindow_title: §e称号列表
 
 
 

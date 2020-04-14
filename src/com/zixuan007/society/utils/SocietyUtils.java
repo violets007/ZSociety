@@ -294,7 +294,7 @@ public class SocietyUtils {
      */
     public static String formatChat(Player player, String message) {
         Config config = SocietyPlugin.getInstance().getConfig();
-        String chatText = (String)config.get("聊天信息格式");
+        String chatText = (String)config.get("chatFormat");
         chatText = chatText.replaceAll("\\$\\{message\\}", message);
         return formatText(chatText, player);
     }

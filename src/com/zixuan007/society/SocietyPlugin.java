@@ -7,7 +7,7 @@ import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.*;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.listener.*;
-import com.zixuan007.society.task.BottomTask;
+import com.zixuan007.society.task.ShowTask;
 import com.zixuan007.society.task.CheckPrivilegeTimeTask;
 import com.zixuan007.society.utils.*;
 
@@ -51,9 +51,8 @@ public class SocietyPlugin extends PluginBase {
         loadConfig();
         PluginUtils.getLang();
 
-        if (this.config.getBoolean("是否开启底部", false)) {
-            getServer().getScheduler().scheduleRepeatingTask(new BottomTask(this), 10);
-        }
+
+        getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
         getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20*60);
         resisterListener();
     }

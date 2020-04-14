@@ -11,9 +11,9 @@ import java.util.Collection;
 /**
  * 底部Tip显示
  */
-public class BottomTask extends PluginTask<SocietyPlugin> {
+public class ShowTask extends PluginTask<SocietyPlugin> {
 
-    public BottomTask(SocietyPlugin owner) {
+    public ShowTask(SocietyPlugin owner) {
         super(owner);
     }
 
@@ -22,11 +22,16 @@ public class BottomTask extends PluginTask<SocietyPlugin> {
         Config config = SocietyPlugin.getInstance().getConfig();
         String tipText = config.getString("tipText", null);
         String tempText="";
-        String configNameTag = (String) config.get("头部更改");
-        for (Player player : players) {
-            tempText = SocietyUtils.formatButtomText(tipText, player);
-            player.sendTip(tempText);
-            if (config.getBoolean("是否开启更改头部")) {
+        String configNameTag = (String) config.get("nameTagFormat");
+        if (owner.getConfig().getBoolean("isTip")) {
+            for (Player player : players) {
+                tempText = SocietyUtils.formatButtomText(tipText, player);
+                player.sendTip(tempText);
+            }
+        }
+
+        if (config.getBoolean("isSetNameTag")) {
+            for (Player player : players) {
                 String formatNameTag = PluginUtils.formatText(configNameTag, player);
                 player.setNameTag(formatNameTag);
             }

@@ -9,41 +9,45 @@
 ##用于检测配置文件版本
 version: 1.0.5alpha
 
-#公会界面窗口 玩家输入指定命令显示公会功能界面
+#(后面会进行改动)
 comands: 公会
 
-#默认创建公会金额
+#默认创建公会金额(浮点类型必须不能删除.0)
 createSocietyMoney: 100000.0
 
-#每次求婚最低金额
+#每次求婚最低金额(浮点类型必须不能删除.0)
 proposeMoney: 100000.0
 
-##插件默认语言
+##插件默认语言(暂时只支持中文)
 language: cn
 
 #是否开启聊天显示
-是否更改聊天: true
+isChat: true
+
 #称号格式 可以兼容Zsociety ${变量名}（Zsociety变量暂时有限）和Tip的{变量名}
-聊天信息格式: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${zmarry}§7]§b${playerName}§f➣ ${message}"
+chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${zmarry}§7]§b${playerName}§f➣ ${message}"
 
 #是否显示底部信息 （如果有底部显示建议false）
-是否开启底部: true
+isTip: true
+
 #底部显示格式 (新手腐竹勿动) 可以兼容Zsociety ${变量名}和Tip的{变量名}
 tipText: "§c✎手持>${itemID}  §9☣地图>{levelName}  §d♨生命>{h}/{mh}  §f۞在线>{online}/{maxplayer}  §b❉延迟>{ms} \n §2✤职位>${post}
                    §e♈金币>{money}   §7☼公会>${societyName}  §3❤公会等级>${societyGrade}"
 
-是否开启更改头部: true
-##更改头部可以兼容Zsociety ${变量名}和Tip的{变量名}
-头部更改: "${privilege}§r §3❤ §e${title} §a✤ §b${societyName} §a✤ §9{name}"
+##是否开启玩家标签设置
+isSetNameTag: true
 
-##不支持Tip变量
-称号商店木牌格式:
+##玩家标签格式化内容
+nameTagFormat: "${privilege}§r §3❤ §e${title} §a✤ §b${societyName} §a✤ §9{name}"
+
+##称号商店格式内容
+titleShopFormat:
   - "§7[§c称§a号§b商店§7]"
   - "§7[§e称号§b☼§f${title}§7]"
   - "§7[售价§b❤§e${money}§7]"
   - "§c快速抢购"
 
-#此配置信息暂时勿动!
+##此配置信息暂时勿动!
 post:
   - {
     name: 会长, #名称
@@ -71,9 +75,8 @@ post:
     count: -1
   }
 
-#公会等级(人数人数控制后期增加)
-#配置格式如下 公会等级: [最大成员数量,升级所需要的金额]
-#此配置暂时请勿改动,1.0.1没有此功能
+##公会等级(人数人数控制后期增加)
+##配置格式如下 公会等级: [最大成员数量,升级所需要的金额]
 等级1:
   - 10
   - 1000

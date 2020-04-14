@@ -75,7 +75,7 @@ public class SocietyListener implements Listener {
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
-        if (this.societyPlugin.getConfig().getBoolean("是否更改聊天")) {
+        if (this.societyPlugin.getConfig().getBoolean("isChat")) {
             message = SocietyUtils.formatChat(player, message);
             event.setFormat(message);
         }

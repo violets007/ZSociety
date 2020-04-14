@@ -46,7 +46,7 @@ public class WindowManager {
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance(); //公会插件类
     private HashMap<String, HashMap<String, FormWindow>> forms = new HashMap(); //存储玩家打开过的表单
 
-    public WindowManager() {
+    private WindowManager() {
     }
 
     public static SocietyWindow getSocietyWindow(Player player) {

@@ -66,6 +66,7 @@ public class Lang {
     public static String createTitleShopWindow_title;
     public static String removeTitleWindow_title;
     public static String setTitleWindow_title;
+    public static String titleWindow_title;
 
 
 
