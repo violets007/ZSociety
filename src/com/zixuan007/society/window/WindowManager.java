@@ -24,6 +24,7 @@ import com.zixuan007.society.window.society.SocietyWindow;
 import com.zixuan007.society.window.society.president.PresidentWindow;
 import com.zixuan007.society.window.society.president.RemoveMemberWindow;
 import com.zixuan007.society.window.society.president.SetJobWindow;
+import com.zixuan007.society.window.title.TitleWindow;
 import com.zixuan007.society.window.title.admin.CreateTitleShopWindow;
 import com.zixuan007.society.window.title.admin.RemoveTitleWindow;
 import com.zixuan007.society.window.title.admin.SetTitleWindow;
@@ -129,7 +130,11 @@ public class WindowManager {
         return new RemoveMemberWindow(sid, memberList);
     }
 
-    public static TitleManagerWindow getTitleWindow() {
+    public static TitleWindow getTitleWindow(String playerName){
+        return new TitleWindow(playerName);
+    }
+
+    public static TitleManagerWindow getTitleManagerWindow() {
         TitleManagerWindow titleManagerWindow = new TitleManagerWindow();
         return titleManagerWindow;
     }

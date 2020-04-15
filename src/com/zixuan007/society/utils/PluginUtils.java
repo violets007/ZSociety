@@ -115,7 +115,7 @@ public class PluginUtils {
         String societyNam = society != null ? "§9" + society.getSocietyName() : "无公会";
         String societyGrade = society != null ? society.getGrade() + "" : "无等级";
         String postName = SocietyUtils.getPostByName(player.getName(),society);
-        String title = SocietyPlugin.getInstance().getTitleConfig().get(player.getName())==null?"无称号":(String) SocietyPlugin.getInstance().getTitleConfig().get(player.getName());
+        String title = TitleUtils.getTitles(player.getName()).size()<=0?"无称号":TitleUtils.getTitles(player.getName()).get(0);
         String privilege="";
         if(PrivilegeUtils.isVIP(player.getName()) || PrivilegeUtils.isSvip(player.getName())) privilege=PrivilegeUtils.isVIP(player.getName()) ? "§l§eVIP§f+":"§l§cS§aV§l§bIP§f+";
         String marry= MarryUtils.isMarry(player.getName())?"已结婚":"单身";

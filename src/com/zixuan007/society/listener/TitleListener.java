@@ -35,7 +35,7 @@ public class TitleListener implements Listener {
         this.societyPlugin = societyPlugin;
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+   /* @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         Config titleConfig = this.societyPlugin.getTitleConfig();
@@ -46,7 +46,7 @@ public class TitleListener implements Listener {
         }
         Config config = this.societyPlugin.getConfig();
 
-    }
+    }*/
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onSetTitleShop(PlayerInteractEvent event) {
@@ -101,6 +101,10 @@ public class TitleListener implements Listener {
                             player.sendMessage(">> §c余额不足无法购买");
                             return;
                         }
+                        if(TitleUtils.isExistTitle(player.getName(),key)){
+                            player.sendMessage(">> §c你应经存在此称号,请勿重复购买");
+                            return;
+                        }
                         EconomyAPI.getInstance().reduceMoney(player, money);
                         SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new BuyTitleEvent(player, key, money));
                         continue;
@@ -117,7 +121,8 @@ public class TitleListener implements Listener {
         Player player = event.getPlayer();
         String title = event.getTitle();
         Config titleConfig = this.societyPlugin.getTitleConfig();
-        titleConfig.set(player.getName(), title);
+        TitleUtils.addTitle(player.getName(),title);
+        titleConfig.set(player.getName(), TitleUtils.titleList.get(player.getName()));
         titleConfig.save();
         this.affirmBuyTitlePlayer.remove(player.getName());
         player.sendMessage(">> §a成功购买 §b" + title + " §a称号");

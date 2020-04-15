@@ -2,10 +2,7 @@ package com.zixuan007.society.api;
 
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
-import com.zixuan007.society.utils.MarryUtils;
-import com.zixuan007.society.utils.PluginUtils;
-import com.zixuan007.society.utils.PrivilegeUtils;
-import com.zixuan007.society.utils.SocietyUtils;
+import com.zixuan007.society.utils.*;
 
 public class ZsocietyAPI {
     public static ZsocietyAPI instance;
@@ -65,7 +62,7 @@ public class ZsocietyAPI {
      * @return
      */
     public static String getTitle(String playerName) {
-        String title = (String)SocietyPlugin.getInstance().getTitleConfig().get(playerName);
+        String title = TitleUtils.getTitles(playerName).size()<=0 ? null : TitleUtils.getTitles(playerName).get(0);
         return title != null ? title : "无称号";
     }
 

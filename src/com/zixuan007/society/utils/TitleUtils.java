@@ -1,6 +1,8 @@
 package com.zixuan007.society.utils;
 
-import java.lang.reflect.Array;
+import cn.nukkit.utils.Config;
+import com.zixuan007.society.SocietyPlugin;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,7 +40,7 @@ public class TitleUtils {
         if (arrayList == null) {
             arrayList=new ArrayList<>();
         }
-        arrayList.add(title);
+        arrayList.add(0,title);
         titleList.put(playerName,arrayList);
     }
 
@@ -50,5 +52,17 @@ public class TitleUtils {
     public static ArrayList<String> getTitles(String playerName){
         ArrayList<String> arrayList = titleList.get(playerName);
         return arrayList == null?new ArrayList<String>():arrayList;
+    }
+
+    /**
+     * 加载配置文件
+     */
+    public static void loadConfig(){
+        Config titleConfig = SocietyPlugin.getInstance().getTitleConfig();
+        titleConfig.getAll().forEach((key,list)->{
+            ArrayList<String> titles= (ArrayList<String>) list;
+            titleList.put(key,titles);
+        });
+        SocietyPlugin.getInstance().getLogger().debug(titleList.toString());
     }
 }

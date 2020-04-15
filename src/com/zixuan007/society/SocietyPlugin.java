@@ -97,6 +97,7 @@ public class SocietyPlugin extends PluginBase {
         MarryUtils.loadMarryConfig();
         SocietyUtils.loadSocietyConfig();
         PrivilegeUtils.loadVipConfig();
+        TitleUtils.loadConfig();
     }
 
     /**

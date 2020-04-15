@@ -36,8 +36,8 @@ public class CheckPrivilegeTimeTask extends PluginTask<SocietyPlugin> {
                         parse=simpleDateFormat.parse(holdTime);
                         if(System.currentTimeMillis() >= parse.getTime()){
                             String playerName = (String) config.get("playerName");
-                            PrivilegeUtils.removePivilege(playerName);
-
+                            if(!PrivilegeUtils.removePrivilegeName.contains(playerName))
+                            PrivilegeUtils.removePrivilegeName.add(playerName);
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
