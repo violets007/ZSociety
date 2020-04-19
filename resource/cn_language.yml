@@ -19,8 +19,12 @@ societyWindow_LevelRankButton: §e公会等级排行榜
 societyWindow_LevelRankButton_ImgPath: textures/ui/feedIcon
 societyWindow_ContributionButton: §e贡献经济
 societyWindow_ContributionButton_ImgPath: textures/ui/dev_glyph_color
+societyWindow_CreateShopButton: §e创建公会商店
+societyWindow_CreateShopButton_ImgPath: textures/ui/dev_glyph_color
 societyAdminWindow_Title: §e公会管理列表
 societyAdminWindow_Button_ImgPath: textures/ui/dev_glyph_color
+
+
 ##公会管理界面
 presidentWindow_Title: ${societyName}§e管理窗口
 presidentWindow_SetJobWindowButton: §e设置成员职位
@@ -33,6 +37,8 @@ presidentWindow_RemoveMemberButton: §e移除人员
 presidentWindow_RemoveMemberButton_ImgPath: textures/ui/book_trash_default
 presidentWindow_DissolveButton: §e解散公会
 presidentWindow_DissolveButton_ImgPath: textures/ui/cancel
+
+
 
 playerApplyListWindow_Title: §e玩家申请公会窗口
 removeMemberWindow_Title: §e移除人员窗口

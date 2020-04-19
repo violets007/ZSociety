@@ -24,6 +24,7 @@ public class SocietyPlugin extends PluginBase {
     private Config LangConfig;
     private Config marryConfig;
     private Config titleShopConfig;
+    private Config societyShopConfig;
     private static SocietyPlugin instance;
     private ArrayList<Society> societies = new ArrayList<>();
 
@@ -50,8 +51,6 @@ public class SocietyPlugin extends PluginBase {
         registerCommand();
         loadConfig();
         PluginUtils.getLang();
-
-
         getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
         getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20*60);
         resisterListener();
@@ -89,11 +88,13 @@ public class SocietyPlugin extends PluginBase {
         String langPath = PluginUtils.CONFIGFOLDER +language+"_language.yml";
         String titleShopPath = PluginUtils.CONFIGFOLDER + "TitleShopData.yml";
         String marryPath=PluginUtils.CONFIGFOLDER+"Marry.yml";
+        String societyShopConfigPath=PluginUtils.CONFIGFOLDER+"societyShop.yml";
 
         this.titleConfig = new Config(titleConfigPath);
         this.LangConfig = new Config(langPath);
         this.titleShopConfig = new Config(titleShopPath);
         this.marryConfig=new Config(marryPath);
+        this.societyShopConfig=new Config(societyShopConfigPath);
         MarryUtils.loadMarryConfig();
         SocietyUtils.loadSocietyConfig();
         PrivilegeUtils.loadVipConfig();
@@ -201,4 +202,13 @@ public class SocietyPlugin extends PluginBase {
     public void setMarryConfig(Config marryConfig) {
         this.marryConfig = marryConfig;
     }
+
+    public Config getSocietyShopConfig() {
+        return societyShopConfig;
+    }
+
+    public void setSocietyShopConfig(Config societyShopConfig) {
+        this.societyShopConfig = societyShopConfig;
+    }
+
 }

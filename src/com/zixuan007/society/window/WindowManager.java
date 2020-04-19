@@ -24,6 +24,7 @@ import com.zixuan007.society.window.society.SocietyWindow;
 import com.zixuan007.society.window.society.president.PresidentWindow;
 import com.zixuan007.society.window.society.president.RemoveMemberWindow;
 import com.zixuan007.society.window.society.president.SetJobWindow;
+import com.zixuan007.society.window.society.shop.CreateShopWindow;
 import com.zixuan007.society.window.title.TitleWindow;
 import com.zixuan007.society.window.title.admin.CreateTitleShopWindow;
 import com.zixuan007.society.window.title.admin.RemoveTitleWindow;
@@ -195,5 +196,9 @@ public class WindowManager {
 
     public static PrivilegeListWindow getPrivilegeListWindow(){
         return new PrivilegeListWindow();
+    }
+
+    public static CreateShopWindow getCreateShopWindow(Player player){
+        return new CreateShopWindow(player);
     }
 }

@@ -4,6 +4,8 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
+import cn.nukkit.command.data.CommandParamType;
+import cn.nukkit.command.data.CommandParameter;
 import com.zixuan007.society.window.WindowManager;
 
 public class AdminCommand extends Command {
@@ -11,6 +13,7 @@ public class AdminCommand extends Command {
         super("管理");
         setPermission("op");
         getCommandParameters().clear();
+        setParameter();
     }
 
     public boolean execute(CommandSender commandSender, String s, String[] args) {
@@ -26,8 +29,10 @@ public class AdminCommand extends Command {
                 player.showFormWindow(WindowManager.getTitleManagerWindow());
                 break;
             case "结婚":
+
                 break;
             case "特权":
+                player.showFormWindow(WindowManager.getPrivilegeManagerWindow());
                 break;
         }
         return false;
@@ -37,6 +42,16 @@ public class AdminCommand extends Command {
      * 设置参数
      */
     public void setParameter(){
-
+        getCommandParameters().put("称号",new CommandParameter[]{
+           new CommandParameter("称号", CommandParamType.STRING,true)
+        });
+        getCommandParameters().put("公会",new CommandParameter[]{
+                new CommandParameter("公会", CommandParamType.STRING,true)
+        });
+        getCommandParameters().put("结婚",new CommandParameter[]{
+                new CommandParameter("结婚", CommandParamType.STRING,true)
+        });
     }
+
+
 }

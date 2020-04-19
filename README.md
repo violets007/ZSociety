@@ -180,51 +180,121 @@ public class ZsocietyAPI {
 - ### Config.yml
 
   ```yml
-  #公会插件主配置文件
+  #  _____              _      _
+  # |__  /___  ___ ___ (_) ___| |_ _   _
+  #   / // __|/ __/ _ \| |/ _ \ __| | | |
+  #  / /_\__ \ (_| (_) | |  __/ |_| |_| |
+  # /____|___/\___\___/|_|\___|\__|\__, |
+  #                                |___/
   
-  ##用于检测插件配置文件的版本是否和更新插件的版本相同
-  version: 1.0.0
   
-  ##创建公会的金额
-  CreateSocietyMoney: 100000
+  ##用于检测配置文件版本
+  version: 1.0.5alpha
   
-  ##是否开启称号
-  isChat: false
-  ##称号显示的格式
-  ChatFormat: “${SocietyName}${PostName} >> ${message}”
+  #暂时先别进行更改(后面会进行改动)
+  comands: 公会
   
-  ##是否开启底部
-  isTip: false
-  ##底部显示的格式信息
-  TipFormat: "底部显示信息"
+  #默认创建公会金额(浮点类型必须不能删除.0)
+  createSocietyMoney: 100000.0
   
-  #(暂时还没有加入)
-  ##是否开启Boss血条信息显示
-  isBossBar: false
-  ##Boss血条的格式信息
-  BossBarFormat: "此配置是专门用于显示配置文件信息"
+  #每次求婚最低金额(浮点类型必须不能删除.0)
+  proposeMoney: 100000.0
   
-  ##木牌称号商店格式信息
-  SignTitleShopFormat:
-  - "[称号商店]"
-  - "[称号格式]"
-  - "[称号经济]"
-  - "[木牌格式信息]"
+  ##插件默认语言(暂时只支持中文)
+  language: cn
+  
+  #是否开启聊天显示
+  isChat: true
+  
+  #称号格式 可以兼容Zsociety ${变量名}（Zsociety变量暂时有限）和Tip的{变量名}
+  chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${zmarry}§7]§b${playerName}§f➣ ${message}"
+  
+  #是否显示底部信息 （如果有底部显示建议false）
+  isTip: true
+  
+  #底部显示格式 (新手腐竹勿动) 可以兼容Zsociety ${变量名}和Tip的{变量名}
+  tipText: "§c✎手持>${itemID}  §9☣地图>{levelName}  §d♨生命>{h}/{mh}  §f۞在线>{online}/{maxplayer}  §b❉延迟>{ms} \n §2✤职位>${post}
+                     §e♈金币>{money}   §7☼公会>${societyName}  §3❤公会等级>${societyGrade}"
+  
+  ##是否开启玩家标签设置
+  isSetNameTag: true
+  
+  ##玩家标签格式化内容
+  nameTagFormat: "${privilege}§r §3❤ §e${title} §a✤ §b${societyName} §a✤ §9{name}"
+  
+  ##称号商店格式内容
+  titleShopFormat:
+    - "§7[§c称§a号§b商店§7]"
+    - "§7[§e称号§b☼§f${title}§7]"
+    - "§7[售价§b❤§e${money}§7]"
+    - "§c快速抢购"
+  
+  ##此配置信息暂时勿动!
+  post:
+    - {
+      name: 会长, #名称
+      grade: 4, #职位等级
+      count: 1 #可拥有数量 (会长必须唯一) -1代表无限
+    }
+    - {
+      name: 副会长,
+      grade: 3,
+      count: 1
+    }
+    - {
+      name: 元老,
+      grade: 2,
+      count: 2
+    }
+    - {
+      name: 精英,
+      grade: 1,
+      count: 1
+    }
+    - {
+      name: 玩家,
+      grade: 0,
+      count: -1
+    }
+  
+  ##公会等级(人数人数控制后期增加)
+  ##配置格式如下 公会等级: [最大成员数量,升级所需要的金额]
+  等级1:
+    - 10
+    - 1000
+  等级2:
+    - 20
+    - 10000
+  等级3:
+    - 30
+    - 20000
+  等级4:
+    - 40
+    - 40000
+  等级5:
+    - 50
+    - 80000
+  等级6:
+    - 60
+    - 100000
+  等级7:
+    - 70
+    - 1000000
+  
+  
   	
   ```
 
 - ### Title.yml
 
   ```yml
-  ##暂时还没有进行更改
   玩家名字:
-  称号列表:
   -  Title
   -  Title2
   -  Title3
   
   ```
-
+  
 - ### 结婚配置文件
 
   ```yml
@@ -232,7 +302,7 @@ public class ZsocietyAPI {
   结婚日期: 2020-3-23
   求婚者性别: 男
   被求婚者性别: 女
-  公共资金: 200
+  公共资金: 0
   ```
 
 

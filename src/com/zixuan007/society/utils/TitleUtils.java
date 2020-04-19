@@ -5,6 +5,7 @@ import com.zixuan007.society.SocietyPlugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 称号工具类
@@ -59,6 +60,18 @@ public class TitleUtils {
      */
     public static void loadConfig(){
         Config titleConfig = SocietyPlugin.getInstance().getTitleConfig();
+        if(titleConfig.getAll().size() > 0){
+            for (String key : titleConfig.getKeys()) {
+                if (!(titleConfig.get(key) instanceof List)) {
+                    SocietyPlugin.getInstance().saveResource("Title.yml",true);
+                    SocietyPlugin.getInstance().getLogger().info("§c检测到Title版本太低进行覆盖!");
+                    break;
+                }
+            }
+        }
+        String titleConfigPath = PluginUtils.CONFIGFOLDER + "Title.yml";
+        SocietyPlugin.getInstance().setTitleConfig(new Config(titleConfigPath,Config.YAML));
+
         titleConfig.getAll().forEach((key,list)->{
             ArrayList<String> titles= (ArrayList<String>) list;
             titleList.put(key,titles);

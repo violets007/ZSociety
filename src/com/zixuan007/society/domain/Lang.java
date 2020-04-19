@@ -24,6 +24,8 @@ public class Lang {
     public static String societyWindow_ContributionButton_ImgPath;
     public static String societyAdminWindow_Title;
     public static String societyAdminWindow_Button_ImgPath;
+    public static String societyWindow_CreateShopButton;
+    public static String societyWindow_CreateShopButton_ImgPath;
 
 
     //会长管理界面

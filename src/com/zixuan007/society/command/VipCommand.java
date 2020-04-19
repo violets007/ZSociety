@@ -29,11 +29,6 @@ public class VipCommand extends Command {
                 }else{
                     player.sendMessage(">> §c你还没有特权,请先联系管理员购买");
                 }
-            }else{
-                String string = strings[0];
-                if (string.equals("管理") && player.isOp()) {
-                    player.showFormWindow(WindowManager.getPrivilegeManagerWindow());
-                }
             }
         }
         return false;

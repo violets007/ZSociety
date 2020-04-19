@@ -7,9 +7,9 @@
 
 
 ##用于检测配置文件版本
-version: 1.0.5alpha
+version: 1.0.6alpha
 
-#(后面会进行改动)
+#暂时先别进行更改(后面会进行改动)
 comands: 公会
 
 #默认创建公会金额(浮点类型必须不能删除.0)
@@ -46,6 +46,13 @@ titleShopFormat:
   - "§7[§e称号§b☼§f${title}§7]"
   - "§7[售价§b❤§e${money}§7]"
   - "§c快速抢购"
+
+##公会商店格式内容
+societyShopFormat:
+  - "§7[§c公§a会§b商店§7]"
+  - "§7[§b物品->§a${itemName}§e数量§f:§c${count}§7]"
+  - "§7[售价§b❤§e${itemPrice}§7]"
+  - "§c所属公会:§a${societyName}"
 
 ##此配置信息暂时勿动!
 post:

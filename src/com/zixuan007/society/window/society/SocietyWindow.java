@@ -11,6 +11,7 @@ import com.zixuan007.society.window.ModalWindow;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.society.president.PresidentWindow;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,30 +24,33 @@ public class SocietyWindow extends SimpleWindow {
     /**
      * 初始化窗口按钮
      */
-    public void init(){
+    public void init() {
         ElementButtonImageData buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_CreateSocietyButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_CreateSocietyButton,buttonImageData));
-        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_ManagerSocietyButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_ManagerSocietyButton,buttonImageData));
-        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_QuitSocietyButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_QuitSocietyButton,buttonImageData));
-        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_JoinSocietyButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_JoinSocietyButton,buttonImageData));
-        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_MenberListButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_MenberListButton,buttonImageData));
-        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_ContributionRankingButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_ContributionRankingButton,buttonImageData));
-        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_LevelRankButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_LevelRankButton,buttonImageData));
-        buttonImageData=new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.societyWindow_ContributionButton_ImgPath);
-        this.addButton(new ElementButton(Lang.societyWindow_ContributionButton,buttonImageData));
+        this.addButton(new ElementButton(Lang.societyWindow_CreateSocietyButton, buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_ManagerSocietyButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_ManagerSocietyButton, buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_QuitSocietyButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_QuitSocietyButton, buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_JoinSocietyButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_JoinSocietyButton, buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_MenberListButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_MenberListButton, buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_ContributionRankingButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_ContributionRankingButton, buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_LevelRankButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_LevelRankButton, buttonImageData));
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_ContributionButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_ContributionButton, buttonImageData));
+
+        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyWindow_CreateShopButton_ImgPath);
+        this.addButton(new ElementButton(Lang.societyWindow_CreateShopButton, buttonImageData));
     }
 
     public void onClick(int id, Player player) {
         int clickedButtonId = this.getResponse().getClickedButtonId();
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         MessageWindow messageWindow = null;
-        switch(clickedButtonId) {
+        switch (clickedButtonId) {
             case 0:
                 if (society != null) {
                     messageWindow = WindowManager.getMessageWindow("§c你已经存在公会,无法创建请先退出当前公会", this, "确认返回");
@@ -87,7 +91,7 @@ public class SocietyWindow extends SimpleWindow {
                 ModalWindow modalWindow = WindowManager.getAffrimWindow("§c您确认要退出 §b" + society.getSocietyName() + " §c公会吗?", "§a确认退出", "§c取消退出");
                 modalWindow.setButtonClickedListener((affrim, player1) -> {
                     if (affrim) {
-                        SocietyUtils.sendMemberTitle("§a玩家 §b"+player1.getName()+" §a成功退出公会",society);
+                        SocietyUtils.sendMemberTitle("§a玩家 §b" + player1.getName() + " §a成功退出公会", society);
                         Society society1 = SocietyUtils.getSocietyByPlayerName(player1.getName());
                         WindowManager.societyPlugin.getServer().getPluginManager().callEvent(new PlayerQuitSocietyEvent(player1, society1));
                     } else {
@@ -114,7 +118,7 @@ public class SocietyWindow extends SimpleWindow {
                     return;
                 }
                 List<String> postList = Arrays.asList(society.getPost().keySet().toArray(new String[society.getPost().keySet().size()]));
-                MemberListWindow memberListWindow = WindowManager.getMemberListWindow(society,postList, this);
+                MemberListWindow memberListWindow = WindowManager.getMemberListWindow(society, postList, this);
                 memberListWindow.setBack(true);
                 memberListWindow.setParent(this);
                 player.showFormWindow(memberListWindow);
@@ -137,6 +141,12 @@ public class SocietyWindow extends SimpleWindow {
                 contributionWindow.setBack(true);
                 contributionWindow.setParent(this);
                 player.showFormWindow(contributionWindow);
+            case 8:
+                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                    player.showFormWindow(WindowManager.getMessageWindow("§c当前还没加入公会,请先加入公会", this, "确认返回"));
+                    return;
+                }
+                player.showFormWindow(WindowManager.getCreateShopWindow(player));
         }
 
     }

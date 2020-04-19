@@ -93,8 +93,12 @@ public class PresidentWindow extends SimpleWindow {
             case 4:
                 player.showFormWindow((FormWindow)WindowManager.getMessageWindow("§a成功解散 §b" + society.getSocietyName(), (FormWindow)WindowManager.getSocietyWindow(player), "返回主界面"));
                 SocietyUtils.sendMemberTitle("§b"+player.getName()+"§c解散了公会",society);
+                //移除指定的公会商店
+                SocietyUtils.removeSocietyShopBySid(society);
                 societyPlugin.getSocieties().remove(society);
                 SocietyUtils.removeSociety(society.getSocietyName());
+
+
                 break;
         }  }
 

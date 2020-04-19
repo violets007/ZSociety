@@ -20,7 +20,7 @@ public class PrivilegeListener implements Listener {
         Player player = event.getPlayer();
         if(PrivilegeUtils.removePrivilegeName.contains(player.getName())){
             player.setAllowFlight(false);
-            PrivilegeUtils.removePivilege(player.getName());
+            PrivilegeUtils.removePivilegeData(player.getName());
             PrivilegeUtils.removePrivilegeName.remove(player.getName());
         }
     }

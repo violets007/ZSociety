@@ -22,7 +22,7 @@ public class RemovePrivilegeWindow extends CustomWindow {
             player.showFormWindow(WindowManager.getMessageWindow("§c输入的玩家名并没有特权",this,"返回上级"));
             return;
         }
-        PrivilegeUtils.removePivilege(playerName);
+        PrivilegeUtils.removePivilegeData(playerName);
         if(PluginUtils.isOnlineByName(playerName)){
             Server.getInstance().getPlayer(playerName).setAllowInteract(false);
         }else{

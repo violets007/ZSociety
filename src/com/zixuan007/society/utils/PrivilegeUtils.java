@@ -47,7 +47,6 @@ public class PrivilegeUtils {
         for (File vipConfigFile : files) {
             if(vipConfigFile.getName().endsWith(".yml")){
                 Config config = new Config(vipConfigFile);
-                VipType vipType = (VipType) config.get("vipType");
                 Vip vip = Vip.init(config);
                 privilegeList.add(vip);
             }
@@ -79,7 +78,11 @@ public class PrivilegeUtils {
         return null;
     }
 
-    public static void removePivilege(String playerName){
+    /**
+     * 移除指定玩家的特权数据
+     * @param playerName
+     */
+    public static void removePivilegeData(String playerName){
         privilegeList.remove(getPivilegeByPlayerName(playerName));
         String configPath = PluginUtils.PRIVILEGE_FOLDER + playerName + ".yml";
         System.gc();//防止文件无法删除

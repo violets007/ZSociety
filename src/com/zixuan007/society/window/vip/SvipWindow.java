@@ -9,6 +9,7 @@ public class SvipWindow extends SimpleWindow {
     public SvipWindow() {
         super("SVIP特权窗口", "");
         addButton(new ElementButton("VIP功能"));
+        addButton(new ElementButton("创造模式 开启-关闭"));
     }
 
     @Override
@@ -16,6 +17,11 @@ public class SvipWindow extends SimpleWindow {
         switch (id){
             case 0:
                 player.showFormWindow(WindowManager.getVipWindow());
+                break;
+            case 1:
+                boolean creative = player.isCreative();
+                player.setGamemode(!creative?1:0);
+                player.sendMessage(">> §a创造模式 §e"+(!creative?"开启":"关闭"));
                 break;
         }
     }

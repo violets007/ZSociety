@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import cn.nukkit.plugin.Plugin;
+import cn.nukkit.utils.Binary;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
@@ -19,6 +20,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -170,5 +172,15 @@ public class PluginUtils {
         }
     }
 
-
+    public static Item parseItemByList(List<Object> list){
+        if(list == null) return null;
+        String itemIDMetaStr = (String) list.get(0);
+        String[] split = itemIDMetaStr.split("-");
+        int itemID = Integer.parseInt(split[0]);
+        int meta = Integer.parseInt(split[1]);
+        int count = (int) list.get(1);
+        String nbtHexString = (String) list.get(2);
+        byte[] bytes = Binary.hexStringToBytes(nbtHexString);
+        return Item.get(itemID,meta,count,bytes);
+    }
 }

@@ -2,6 +2,12 @@ package com.zixuan007.society.utils;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockWallSign;
+import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.item.Item;
+import cn.nukkit.level.Level;
+import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
@@ -22,7 +28,7 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
  * 公会插件工具类
  */
 public class SocietyUtils {
-
+    public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     /**
      * 指定的公会名称是否存在
      * @param societyName 公会名
@@ -300,8 +306,6 @@ public class SocietyUtils {
     }
 
 
-
-
     /**
      * 获取创建下一个公会的ID
      * @return
@@ -361,6 +365,72 @@ public class SocietyUtils {
             if(!PluginUtils.isOnlineByName(playerName)) continue;
             if(society.getPresidentName().equals(playerName)) continue;
             Server.getInstance().getPlayer(playerName).sendTitle(title);
+        }
+    }
+
+    /**
+     * 检测指定的方块坐标是否已经设置过商店
+     * @param block
+     * @return
+     */
+    public static boolean isSetShop(Block block){
+        for (Map.Entry<String, Object> entry : SocietyPlugin.getInstance().getTitleShopConfig().getAll().entrySet()) {
+            String key = entry.getKey();
+            List<Object> value = (List<Object>) entry.getValue();
+            int titleSignX = (int) value.get(0);
+            int titleSignY = (int) value.get(1);
+            int titleSignZ = (int) value.get(2);
+            if(titleSignX == block.getFloorX() && titleSignY == block.getFloorY() && titleSignZ == block.getFloorZ()) return true;
+        }
+        for (Map.Entry<String, Object> entry : SocietyPlugin.getInstance().getSocietyShopConfig().getAll().entrySet()) {
+            String key = entry.getKey();
+            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            int societySignX= (int) value.get("x");
+            int societySignY= (int) value.get("y");
+            int societySignZ= (int) value.get("x");
+
+        }
+        return false;
+    }
+
+
+    /**
+     * 解散公会移除所有的本公会商店
+     * @param society
+     */
+    public static void removeSocietyShopBySid(Society society){
+        Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
+        for (Map.Entry<String, Object> entry : societyShopConfig.getAll().entrySet()) {
+            String key = entry.getKey();
+            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            int sid = (int) value.get("sid");
+            if(sid == society.getSid()){
+                value.put("dissolve",true);
+                societyShopConfig.set(key,value);
+                societyShopConfig.save();
+                //进行玩家商店内容的返还
+                removeShopSign(key);
+            }
+        }
+    }
+
+    /**
+     * 移除商店木牌
+     * @param key
+     */
+    public static void removeShopSign(String key){
+        Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
+        HashMap<String,Object> societyData = (HashMap<String, Object>) societyShopConfig.get(key);
+        int x = (int) societyData.get("x");
+        int y = (int) societyData.get("y");
+        int z = (int) societyData.get("z");
+        String levelName = (String) societyData.get("levelName");
+        for (Level level : Server.getInstance().getLevels().values()) {
+            Vector3 vector3 = new Vector3(x, y, z);
+            Block block = level.getBlock(vector3);
+            if(block != null && block.getLevel().getName().equals(levelName) && block instanceof BlockWallSign){
+                block.onBreak(Item.get(0));
+            }
         }
     }
 
