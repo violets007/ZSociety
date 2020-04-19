@@ -29,7 +29,6 @@ public class AdminCommand extends Command {
                 player.showFormWindow(WindowManager.getTitleManagerWindow());
                 break;
             case "结婚":
-
                 break;
             case "特权":
                 player.showFormWindow(WindowManager.getPrivilegeManagerWindow());

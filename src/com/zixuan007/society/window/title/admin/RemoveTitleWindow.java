@@ -1,6 +1,7 @@
 package com.zixuan007.society.window.title.admin;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.form.element.Element;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
@@ -16,6 +17,7 @@ import com.zixuan007.society.window.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RemoveTitleWindow extends CustomWindow {
     public RemoveTitleWindow() {
@@ -31,6 +33,10 @@ public class RemoveTitleWindow extends CustomWindow {
         Config titleConfig = SocietyPlugin.getInstance().getTitleConfig();
         // String title = (String)titleConfig.get(playerName);
         ArrayList<String> titleList = TitleUtils.titleList.get(playerName);
+        if(titleList == null || titleList.size() <= 0){
+            player.showFormWindow((FormWindow) WindowManager.getMessageWindow("§c此玩家还没有称号", this, "返回上级"));
+            return;
+        }
         ArrayList<String> removeTitle = new ArrayList<>();
         for (String s : titleList) {
             if (s.contains(title)) {
@@ -45,10 +51,11 @@ public class RemoveTitleWindow extends CustomWindow {
         titleConfig.set(playerName, titleList);
         titleConfig.save();
 
-        player.showFormWindow((FormWindow) WindowManager.getMessageWindow("§a成功移除玩家所匹配的称号!", this, "关闭窗口"));
+        player.showFormWindow((FormWindow) WindowManager.getMessageWindow("§a成功移除玩家所匹配的称号!", this, "返回上级"));
 
         if (PluginUtils.isOnlineByName(playerName)) {
-            player.showFormWindow((FormWindow) WindowManager.getMessageWindow("§c你的部分称号已经被管理员移除", null, "关闭窗口"));
+            Player player1 = Server.getInstance().getPlayer(playerName);
+            player1.showFormWindow((FormWindow) WindowManager.getMessageWindow("§c你的部分称号已经被管理员移除", null, "关闭窗口"), new Random().nextInt(300));
             return;
         }
 

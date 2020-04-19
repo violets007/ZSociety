@@ -22,6 +22,10 @@ public class TitleWindow extends SimpleWindow {
     @Override
     public void onClick(int id, Player player) {
         ArrayList<String> titles = TitleUtils.titleList.get(player.getName());
+        if(titles.size() <= id ){
+            player.showFormWindow(WindowManager.getMessageWindow("§a佩戴的称号已经被管理员移除",null,"关闭窗口"));
+            return;
+        }
         String title = titles.get(id);
         titles.remove(title);
         TitleUtils.addTitle(playerName,title);

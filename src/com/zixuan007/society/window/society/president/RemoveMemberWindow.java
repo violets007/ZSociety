@@ -39,6 +39,8 @@ public class RemoveMemberWindow extends SimpleWindow {
         SocietyUtils.sendMemberTitle("§c成员: §b"+playerName+" 被踢出公会",society);
         if(PluginUtils.isOnlineByName(playerName)) Server.getInstance().getPlayer(playerName).sendTitle("§c你被被踢出公会");
         player.showFormWindow((FormWindow)messageWindow);
+        //移除玩家在此公会创建过的商店
+        SocietyUtils.removeCreateShop(society,playerName);
     }
 }
 

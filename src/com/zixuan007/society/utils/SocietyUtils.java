@@ -435,6 +435,24 @@ public class SocietyUtils {
     }
 
     /**
+     * 移除玩家指定公会创建过的商店
+     * @param society
+     */
+    public static void removeCreateShop(Society society,String playerName){
+        Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
+        for (Map.Entry<String, Object> entry : societyShopConfig.getAll().entrySet()) {
+            String key = entry.getKey();
+            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            int sid = (int) value.get("sid");
+            String creator = (String) value.get("creator");
+            if(society.getSid() == sid && creator.equals(playerName)){
+                value.put("dissolve",true);
+                removeShopSign(key);
+            }
+        }
+    }
+
+    /**
      * 加载公会配置文件
      */
     public static void loadSocietyConfig() {

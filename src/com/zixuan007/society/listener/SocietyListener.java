@@ -90,6 +90,8 @@ public class SocietyListener implements Listener {
             player.getInventory().addItem(item);
             SocietyUtils.onCreatePlayer.remove(player.getName());
         }
+        //移除玩家在此公会创建过的商店
+        SocietyUtils.removeCreateShop(society,player.getName());
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
