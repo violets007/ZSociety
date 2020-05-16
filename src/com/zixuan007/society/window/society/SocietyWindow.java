@@ -57,7 +57,6 @@ public class SocietyWindow extends SimpleWindow {
                     player.showFormWindow(messageWindow);
                     return;
                 }
-
                 CreateSocietyWindow createSocietyWindow = new CreateSocietyWindow();
                 WindowManager.getCreateSocietyWindow(true);
                 createSocietyWindow.setParent(this);
@@ -75,8 +74,7 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(chairmanWindow);
                 break;
             case 2:
-                boolean isJoinSociety = SocietyUtils.isJoinSociety(player.getName());
-                if (!isJoinSociety) {
+                if (society == null) {
                     messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "返回上级");
                     player.showFormWindow(messageWindow);
                     return;
@@ -112,7 +110,7 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(societyListWindow);
                 break;
             case 4:
-                if (WindowManager.societyPlugin.getSocieties().size() == 0) {
+                if (society == null) {
                     messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "确认返回");
                     player.showFormWindow(messageWindow);
                     return;
@@ -132,7 +130,7 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(levelRankWindow);
                 break;
             case 7:
-                if (WindowManager.societyPlugin.getSocieties().size() == 0) {
+                if (society == null) {
                     messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "确认返回");
                     player.showFormWindow(messageWindow);
                     return;
@@ -141,8 +139,9 @@ public class SocietyWindow extends SimpleWindow {
                 contributionWindow.setBack(true);
                 contributionWindow.setParent(this);
                 player.showFormWindow(contributionWindow);
+                break;
             case 8:
-                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                if (society == null) {
                     player.showFormWindow(WindowManager.getMessageWindow("§c当前还没加入公会,请先加入公会", this, "确认返回"));
                     return;
                 }
