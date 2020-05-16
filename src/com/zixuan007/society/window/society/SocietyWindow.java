@@ -141,6 +141,7 @@ public class SocietyWindow extends SimpleWindow {
                 contributionWindow.setBack(true);
                 contributionWindow.setParent(this);
                 player.showFormWindow(contributionWindow);
+                break;
             case 8:
                 if (!SocietyUtils.isJoinSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getMessageWindow("§c当前还没加入公会,请先加入公会", this, "确认返回"));
