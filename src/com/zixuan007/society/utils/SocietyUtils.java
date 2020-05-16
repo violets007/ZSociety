@@ -29,6 +29,7 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
  */
 public class SocietyUtils {
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
+    public static ArrayList<Society> societies = new ArrayList<>();
     /**
      * 指定的公会名称是否存在
      * @param societyName 公会名
@@ -56,7 +57,7 @@ public class SocietyUtils {
      * @return
      */
     public static boolean isJoinSociety(String playerName) {
-        ArrayList<Society> societies = SocietyPlugin.getInstance().getSocieties();
+        ArrayList<Society> societies = SocietyUtils.societies;
         for (Society society : societies) {
             for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>)society.getPost().entrySet()) {
                 String name = entry.getKey();
@@ -74,7 +75,7 @@ public class SocietyUtils {
      * @return
      */
     public static Society getSocietyByPlayerName(String playerName) {
-        ArrayList<Society> societies = SocietyPlugin.getInstance().getSocieties();
+        ArrayList<Society> societies = SocietyUtils.societies;
         for (Society society : societies) {
             for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>)society.getPost().entrySet()) {
                 String name = entry.getKey();
@@ -176,7 +177,7 @@ public class SocietyUtils {
      * @return
      */
     public static List<Society> getSocietyList(int currentPage) {
-        ArrayList<Society> societies = SocietyPlugin.getInstance().getSocieties();
+        ArrayList<Society> societies = SocietyUtils.societies;
         int totalPage = (societies.size() % 10 == 0) ? (societies.size() / 10) : (societies.size() / 10 + 1);
         if (currentPage > totalPage) return null;
         if (currentPage == 1) {
@@ -195,7 +196,7 @@ public class SocietyUtils {
     }
 
     public static int getTotalSocietiesPage() {
-        return (SocietyPlugin.getInstance().getSocieties().size() % 10 == 0) ? (SocietyPlugin.getInstance().getSocieties().size() / 10) : (SocietyPlugin.getInstance().getSocieties().size() / 10 + 1);
+        return (SocietyUtils.societies.size() % 10 == 0) ? (SocietyUtils.societies.size() / 10) : (SocietyUtils.societies.size() / 10 + 1);
     }
 
     /**
@@ -205,7 +206,7 @@ public class SocietyUtils {
      * @return
      */
     public static int getSocietyListTotalPage(int currentPage, int limit) {
-        ArrayList<Society> societies = SocietyPlugin.getInstance().getSocieties();
+        ArrayList<Society> societies = SocietyUtils.societies;
         int totalPage = (societies.size() % limit == 0) ? (societies.size() / limit) : (societies.size() / limit + 1);
         return totalPage;
     }
@@ -216,7 +217,7 @@ public class SocietyUtils {
      * @return
      */
     public static Society getSocietysByID(long sid) {
-        for (Society society : SocietyPlugin.getInstance().getSocieties()) {
+        for (Society society : SocietyUtils.societies) {
             if (society.getSid() == sid) {
                 return society;
             }
@@ -247,7 +248,7 @@ public class SocietyUtils {
      * @return
      */
     public static boolean isChairman(String playerName) {
-        for (Society society : SocietyPlugin.getInstance().getSocieties()) {
+        for (Society society : SocietyUtils.societies) {
             if (society.getPresidentName().equals(playerName)) return true;
         }
         return false;
@@ -311,8 +312,8 @@ public class SocietyUtils {
      * @return
      */
     public static long getNextSid() {
-        ArrayList<Society> societies = SocietyPlugin.getInstance().getSocieties();
-        int size = SocietyPlugin.getInstance().getSocieties().size();
+        ArrayList<Society> societies = SocietyUtils.societies;
+        int size = SocietyUtils.societies.size();
         if (size == 0) return 1L;
         long max = 0L;
         for (Society society : societies) {
@@ -344,7 +345,7 @@ public class SocietyUtils {
      * @param society
      */
     public static void addMember(String playerNmae, Society society) {
-        SocietyPlugin.getInstance().getSocieties().forEach(society1 -> society1.getTempApply().remove(playerNmae));
+        SocietyUtils.societies.forEach(society1 -> society1.getTempApply().remove(playerNmae));
         society.getPost().put(playerNmae, new ArrayList() {
             {
                 add("精英");
@@ -463,9 +464,9 @@ public class SocietyUtils {
         for (File file : files) {
             Config config = new Config(file);
             societyPlugin.getSocietyConfigList().add(config);
-            if (file.getName().endsWith(".yml")) societyPlugin.getSocieties().add(Society.init(config));
+            if (file.getName().endsWith(".yml")) SocietyUtils.societies.add(Society.init(config));
         }
-        SocietyPlugin.getInstance().getLogger().debug(societyPlugin.getSocieties().toString());
+        SocietyPlugin.getInstance().getLogger().debug(SocietyUtils.societies.toString());
     }
 
 }

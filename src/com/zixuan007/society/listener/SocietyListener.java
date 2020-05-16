@@ -56,7 +56,7 @@ public class SocietyListener implements Listener {
             }
         });
         society.saveData();
-        SocietyPlugin.getInstance().getSocieties().add(event.getSociety());
+        SocietyUtils.societies.add(event.getSociety());
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b" + player.getName() + " §a创建公会名称: §e" + society.getSocietyName());
         MessageWindow messageWindow = WindowManager.getMessageWindow("§a创建 §l§b" + society.getSocietyName() + " §a公会成功", new SocietyWindow(player), "返回上级");
         player.showFormWindow(messageWindow);

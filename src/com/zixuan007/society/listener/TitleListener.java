@@ -1,7 +1,6 @@
 package com.zixuan007.society.listener;
 
 import cn.nukkit.Player;
-import cn.nukkit.Server;
 import cn.nukkit.block.Block;
 import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.blockentity.BlockEntitySign;
@@ -17,6 +16,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
+
 import com.zixuan007.api.FloatingTextAPI;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.event.title.BuyTitleEvent;
@@ -35,18 +35,18 @@ public class TitleListener implements Listener {
         this.societyPlugin = societyPlugin;
     }
 
-   /* @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         Config titleConfig = this.societyPlugin.getTitleConfig();
-        String title = (String) titleConfig.get(player.getName());
+        ArrayList<String> title = (ArrayList<String>) titleConfig.get(player.getName());
         if (title == null) {
-            titleConfig.set(player.getName(), "无称号");
+            titleConfig.set(player.getName(), new ArrayList<String>());
             titleConfig.save();
         }
         Config config = this.societyPlugin.getConfig();
 
-    }*/
+    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onSetTitleShop(PlayerInteractEvent event) {
@@ -168,7 +168,8 @@ public class TitleListener implements Listener {
             sb.append(line + "\n");
         }
         String key = wallSign.getText()[1];
-        FloatingTextAPI.addFloatingText(sb.toString(), new Position(x, y, z, player.getLevel()), key, player.getName());
+
+        FloatingTextAPI.addFloatingText(sb.toString(),new Position(x,y,z,player.getLevel()),key,player.getName());
         player.sendMessage(">> §a称号商店创建成功");
         TitleUtils.onCreateName.remove(player.getName());
     }

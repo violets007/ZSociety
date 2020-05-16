@@ -26,10 +26,11 @@ public class SetTitleWindow extends CustomWindow {
             player.showFormWindow(WindowManager.getMessageWindow("§c输入的玩家名字不存在",this, "返回上级"));
             return;
         }
-        if (title.equals("") || title.equals(" ")) {
+        if (title.trim().equals("") || title.equals(" ")) {
             player.showFormWindow(WindowManager.getMessageWindow("§c称号内容不能为空", this, "返回上级"));
             return;
         }
+        title=title.replaceAll(" ","");
         ArrayList<String> arrayList = TitleUtils.titleList.get(playerName);
         if(TitleUtils.isExistTitle(playerName,title)){
             player.showFormWindow(WindowManager.getMessageWindow("§c玩家 §b"+playerName+" 已经拥有此称号,请勿重复设置", this, "返回上级"));

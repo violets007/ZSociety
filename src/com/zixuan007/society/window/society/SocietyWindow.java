@@ -57,6 +57,7 @@ public class SocietyWindow extends SimpleWindow {
                     player.showFormWindow(messageWindow);
                     return;
                 }
+
                 CreateSocietyWindow createSocietyWindow = new CreateSocietyWindow();
                 WindowManager.getCreateSocietyWindow(true);
                 createSocietyWindow.setParent(this);
@@ -74,7 +75,8 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(chairmanWindow);
                 break;
             case 2:
-                if (society == null) {
+                boolean isJoinSociety = SocietyUtils.isJoinSociety(player.getName());
+                if (!isJoinSociety) {
                     messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "返回上级");
                     player.showFormWindow(messageWindow);
                     return;
@@ -100,7 +102,7 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(modalWindow);
                 break;
             case 3:
-                if (WindowManager.societyPlugin.getSocieties().size() == 0) {
+                if (SocietyUtils.societies == null || SocietyUtils.societies.size() <= 0) {
                     messageWindow = WindowManager.getMessageWindow("§c当前还没有公会", this, "确认返回");
                     player.showFormWindow(messageWindow);
                     return;
@@ -110,7 +112,7 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(societyListWindow);
                 break;
             case 4:
-                if (society == null) {
+                if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
                     messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "确认返回");
                     player.showFormWindow(messageWindow);
                     return;
@@ -130,7 +132,7 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(levelRankWindow);
                 break;
             case 7:
-                if (society == null) {
+                if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
                     messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "确认返回");
                     player.showFormWindow(messageWindow);
                     return;
@@ -141,11 +143,12 @@ public class SocietyWindow extends SimpleWindow {
                 player.showFormWindow(contributionWindow);
                 break;
             case 8:
-                if (society == null) {
+                if (!SocietyUtils.isJoinSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getMessageWindow("§c当前还没加入公会,请先加入公会", this, "确认返回"));
                     return;
                 }
                 player.showFormWindow(WindowManager.getCreateShopWindow(player));
+                break;
         }
 
     }

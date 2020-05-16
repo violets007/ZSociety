@@ -32,6 +32,7 @@ public class PluginUtils {
     public static final String CONFIGFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;//公会配置文件夹
     public static final String MARRY_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Marry"+FILE_SEPARATOR;
     public static final String PRIVILEGE_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Vip"+FILE_SEPARATOR;
+
     /**
      * 加载jar包
      * @param jarPath
@@ -172,6 +173,11 @@ public class PluginUtils {
         }
     }
 
+    /**
+     * 解析Item根据List
+     * @param list
+     * @return
+     */
     public static Item parseItemByList(List<Object> list){
         if(list == null) return null;
         String itemIDMetaStr = (String) list.get(0);

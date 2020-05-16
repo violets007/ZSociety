@@ -95,10 +95,8 @@ public class PresidentWindow extends SimpleWindow {
                 SocietyUtils.sendMemberTitle("§b"+player.getName()+"§c解散了公会",society);
                 //移除指定的公会商店
                 SocietyUtils.removeSocietyShopBySid(society);
-                societyPlugin.getSocieties().remove(society);
+                SocietyUtils.societies.remove(society);
                 SocietyUtils.removeSociety(society.getSocietyName());
-
-
                 break;
         }  }
 

@@ -12,6 +12,7 @@ public class VipWindow extends SimpleWindow {
     public VipWindow() {
         super("VIP特权窗口", "");
         addButton(new ElementButton("开启-关闭 生存飞行"));
+        addButton(new ElementButton("查看SVIP信息"));
     }
 
     @Override

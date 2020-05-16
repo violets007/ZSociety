@@ -76,6 +76,8 @@ public class TitleUtils {
             ArrayList<String> titles= (ArrayList<String>) list;
             titleList.put(key,titles);
         });
-        SocietyPlugin.getInstance().getLogger().debug(titleList.toString());
+
+        SocietyPlugin.getInstance().getLogger().debug("称号数据列表: "+titleList.toString());
     }
+
 }

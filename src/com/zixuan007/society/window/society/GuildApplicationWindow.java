@@ -23,7 +23,7 @@ public class GuildApplicationWindow extends CustomWindow {
         super(Lang.guildApplication_Title);
         addElement((Element)new ElementLabel("§c建议先查看公会列表"));
         ElementDropdown elementDropdown = new ElementDropdown("§b公会SID");
-        SocietyPlugin.getInstance().getSocieties().forEach(society -> elementDropdown.addOption(society.getSid() + ""));
+        SocietyUtils.societies.forEach(society -> elementDropdown.addOption(society.getSid() + ""));
         addElement((Element)elementDropdown);
     }
 

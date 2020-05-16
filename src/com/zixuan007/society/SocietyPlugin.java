@@ -1,11 +1,10 @@
 package com.zixuan007.society;
 
-import cn.nukkit.command.Command;
+
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.*;
-import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.listener.*;
 import com.zixuan007.society.task.ShowTask;
 import com.zixuan007.society.task.CheckPrivilegeTimeTask;
@@ -26,7 +25,7 @@ public class SocietyPlugin extends PluginBase {
     private Config titleShopConfig;
     private Config societyShopConfig;
     private static SocietyPlugin instance;
-    private ArrayList<Society> societies = new ArrayList<>();
+
 
     public void onEnable() {
         this.init();
@@ -35,7 +34,7 @@ public class SocietyPlugin extends PluginBase {
 
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
-        this.societies.forEach((society) -> { society.saveData(); });
+        SocietyUtils.societies.forEach((society) -> { society.saveData(); });
     }
 
     /**
@@ -71,11 +70,11 @@ public class SocietyPlugin extends PluginBase {
      * 注册插件命令
      */
     public void registerCommand() {
-        getServer().getCommandMap().register("society", (Command) new MainCommand(), "公会");
-        getServer().getCommandMap().register("title", (Command) new TitleCommand(), "称号");
-        getServer().getCommandMap().register("marry", (Command) new MarryCommand(), "结婚");
-        getServer().getCommandMap().register("privilege", (Command) new VipCommand(), "特权");
-        getServer().getCommandMap().register("admin", (Command) new AdminCommand(), "管理");
+        getServer().getCommandMap().register("society",  new MainCommand(), "公会");
+        getServer().getCommandMap().register("title",  new TitleCommand(), "称号");
+        getServer().getCommandMap().register("marry",  new MarryCommand(), "结婚");
+        getServer().getCommandMap().register("privilege",  new VipCommand(), "特权");
+        getServer().getCommandMap().register("admin",  new AdminCommand(), "管理");
     }
 
 
@@ -95,6 +94,8 @@ public class SocietyPlugin extends PluginBase {
         this.titleShopConfig = new Config(titleShopPath);
         this.marryConfig=new Config(marryPath);
         this.societyShopConfig=new Config(societyShopConfigPath);
+
+        //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
         SocietyUtils.loadSocietyConfig();
         PrivilegeUtils.loadVipConfig();
@@ -153,14 +154,6 @@ public class SocietyPlugin extends PluginBase {
 
     public static void setInstance(SocietyPlugin instance) {
         SocietyPlugin.instance = instance;
-    }
-
-    public ArrayList<Society> getSocieties() {
-        return this.societies;
-    }
-
-    public void setSocieties(ArrayList<Society> societies) {
-        this.societies = societies;
     }
 
     public Config getTitleConfig() {

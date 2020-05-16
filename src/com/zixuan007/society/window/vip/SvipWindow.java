@@ -10,6 +10,7 @@ public class SvipWindow extends SimpleWindow {
         super("SVIP特权窗口", "");
         addButton(new ElementButton("VIP功能"));
         addButton(new ElementButton("创造模式 开启-关闭"));
+        addButton(new ElementButton("查看VIP信息"));
     }
 
     @Override
