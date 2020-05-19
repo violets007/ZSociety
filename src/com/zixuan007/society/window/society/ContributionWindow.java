@@ -29,17 +29,21 @@ public class ContributionWindow extends CustomWindow {
                 player.showFormWindow(messageWindow);
             } else {
                 int money = Integer.parseInt(strMoney);
-                double myMoney = EconomyAPI.getInstance().myMoney(player);
-                if (myMoney < (double)money) {
-                    messageWindow = WindowManager.getMessageWindow("§c当前金币不足", this, "返回上级");
-                } else {
-                    Society society = SocietyUtils.getSocietysByID(this.sid);
-                    society.setSocietyMoney(society.getSocietyMoney() + (double)money);
-                    if (EconomyAPI.getInstance().reduceMoney(player, money) == EconomyAPI.RET_SUCCESS) {
-                        messageWindow = WindowManager.getMessageWindow("§a贡献成功,当前公会经济 §b" + society.getSocietyMoney(), this.getParent(), "返回上级");
-                    }else {
-                        messageWindow = WindowManager.getMessageWindow("§a贡献失败，请检查金币数量是否充足", this.getParent(), "返回上级");
+                if (money > 0) {
+                    double myMoney = EconomyAPI.getInstance().myMoney(player);
+                    if (myMoney < (double)money) {
+                        messageWindow = WindowManager.getMessageWindow("§c当前金币不足", this, "返回上级");
+                    } else {
+                        Society society = SocietyUtils.getSocietysByID(this.sid);
+                        society.setSocietyMoney(society.getSocietyMoney() + (double)money);
+                        if (EconomyAPI.getInstance().reduceMoney(player, money) == EconomyAPI.RET_SUCCESS) {
+                            messageWindow = WindowManager.getMessageWindow("§a贡献成功,当前公会经济 §b" + society.getSocietyMoney(), this.getParent(), "返回上级");
+                        }else {
+                            messageWindow = WindowManager.getMessageWindow("§a贡献失败，请检查金币数量是否充足", this.getParent(), "返回上级");
+                        }
                     }
+                }else {
+                    messageWindow = WindowManager.getMessageWindow("§c请输入大于0的金额", this, "返回上级");
                 }
                 player.showFormWindow(messageWindow);
             }
