@@ -65,7 +65,7 @@ public class CreateShopWindow extends CustomWindow {
             return;
         }
         item.setCount(itemCount);
-        player.getInventory().remove(item);
+        player.getInventory().removeItem(item);
         SocietyUtils.onCreatePlayer.put(player.getName(),new ArrayList<Object>(){
             {
                 add(sellPrice);
