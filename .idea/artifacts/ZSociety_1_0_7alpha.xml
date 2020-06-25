@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="ZSociety-1.0.7alpha">
-    <output-path>$PROJECT_DIR$/../../Nukkit1.0/plugins</output-path>
-    <root id="archive" name="ZSociety-1.0.7alpha.jar">
-      <element id="module-output" name="ZSociety" />
-    </root>
-  </artifact>
-</component>
