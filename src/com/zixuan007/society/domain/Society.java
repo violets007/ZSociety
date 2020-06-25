@@ -131,6 +131,7 @@ public class Society {
         this.grade = grade;
     }
 
+    @Override
     public String toString() {
         return "Society{sid=" + this.sid + ", societyName='" + this.societyName + '\'' + ", presidentName='" + this.presidentName + '\'' + ", createTime='" + this.createTime + '\'' + ", societyMoney=" + this.societyMoney + ", psots=" + this.psots + ", grade=" + this.grade + ", tempApply=" + this.tempApply + '}';
     }

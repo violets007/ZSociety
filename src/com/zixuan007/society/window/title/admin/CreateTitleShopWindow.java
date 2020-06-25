@@ -22,6 +22,7 @@ public class CreateTitleShopWindow extends CustomWindow {
     }
 
 
+    @Override
     public void onClick(FormResponseCustom response, Player player) {
         final String title = response.getInputResponse(0);
         final String money = response.getInputResponse(1);

@@ -43,6 +43,9 @@ public class TitleUtils {
         }
         arrayList.add(0,title);
         titleList.put(playerName,arrayList);
+
+        SocietyPlugin.getInstance().getTitleConfig().set(playerName, TitleUtils.getTitles(playerName));
+        SocietyPlugin.getInstance().getTitleConfig().save();
     }
 
     /**

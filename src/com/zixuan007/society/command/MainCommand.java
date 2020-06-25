@@ -18,6 +18,7 @@ public class MainCommand extends Command {
         this.getCommandParameters().clear();
     }
 
+    @Override
     public boolean execute(CommandSender sender, String commandName, String[] args) {
         if (sender instanceof ConsoleCommandSender) {
             sender.sendMessage("§c禁止控制台输入命令");

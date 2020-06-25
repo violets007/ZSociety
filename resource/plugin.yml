@@ -3,3 +3,10 @@ main: com.zixuan007.society.SocietyPlugin
 version: "1.0.7alpha"
 author: "zixuan007"
 api: ["1.0.0"]
+
+
+permissions:
+  ZSociety.command.user:
+    default: true
+  ZSociety.command.admin:
+    default: op

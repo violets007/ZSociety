@@ -5,6 +5,9 @@ import cn.nukkit.event.player.PlayerEvent;
 
 import java.util.Date;
 
+/**
+ * @author zixuan007
+ */
 public class PlayerMarryEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
     private String propose;

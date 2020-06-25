@@ -7,8 +7,12 @@ import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.window.SimpleWindow;
 
 
+/**
+ * @author zixuan007
+ */
 public class SocietyAdminWindow extends SimpleWindow {
-    public SocietyAdminWindow(String title, String content) {
+
+    public SocietyAdminWindow() {
         super(Lang.societyAdminWindow_Title, "");
         ElementButtonImageData imgData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, Lang.societyAdminWindow_Button_ImgPath);
         addButton(new ElementButton("设置公会等级",imgData));
@@ -18,7 +22,17 @@ public class SocietyAdminWindow extends SimpleWindow {
 
     @Override
     public void onClick(int id, Player player) {
-
+        switch (id){
+            case 0:
+                player.showFormWindow(new SetGradeWindow());
+                break;
+            case 1:
+                player.showFormWindow(new SetContributeWindow());
+                break;
+            case 2:
+                player.showFormWindow(new DissolveWindow());
+                break;
+        }
     }
 }
 

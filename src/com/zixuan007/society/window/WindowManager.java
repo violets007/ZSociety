@@ -42,14 +42,17 @@ import java.util.List;
 
 /**
  * 窗口管理界面
- * (后面会进行优化)
+ * @author zixuan007
  */
 public class WindowManager {
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance(); //公会插件类
     private HashMap<String, HashMap<String, FormWindow>> forms = new HashMap(); //存储玩家打开过的表单
 
     private WindowManager() {
+
     }
+
+
 
     public static SocietyWindow getSocietyWindow(Player player) {
         return new SocietyWindow(player);
@@ -153,6 +156,7 @@ public class WindowManager {
         removeTitleWindow.setParent(formWindow);
         return removeTitleWindow;
     }
+
 
     public static CreateTitleShopWindow getCreateTitleShopWindow() {
         return new CreateTitleShopWindow();

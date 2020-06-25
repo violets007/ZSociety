@@ -23,6 +23,7 @@ public class PlayerApplyListWindow extends SimpleWindow {
         tempApply.forEach(name -> addButton(new ElementButton(name)));
     }
 
+    @Override
     public void onClick(int id, Player player) {
         String playerName = this.tempApply.get(id);
         if (SocietyUtils.isJoinSociety(playerName)) {

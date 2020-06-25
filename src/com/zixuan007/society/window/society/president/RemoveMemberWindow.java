@@ -30,6 +30,7 @@ public class RemoveMemberWindow extends SimpleWindow {
     }
     private long sid;
 
+    @Override
     public void onClick(int id, Player player) {
         String playerName = getResponse().getClickedButton().getText();
         Society society = SocietyUtils.getSocietysByID(this.sid);

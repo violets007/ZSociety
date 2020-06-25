@@ -29,6 +29,9 @@ import me.onebone.economyapi.EconomyAPI;
 
 import java.util.*;
 
+/**
+ * @author zixuan007
+ */
 public class SocietyListener implements Listener {
     private SocietyPlugin societyPlugin;
     private List<String> affrimBuyPlayer = new ArrayList<>();

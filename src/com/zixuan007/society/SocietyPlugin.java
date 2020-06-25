@@ -27,11 +27,13 @@ public class SocietyPlugin extends PluginBase {
     private static SocietyPlugin instance;
 
 
+    @Override
     public void onEnable() {
         this.init();
         this.getLogger().info("§2公会插件开启 §c作者§f:§bzixuan007");
     }
 
+    @Override
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
         SocietyUtils.societies.forEach((society) -> { society.saveData(); });
@@ -44,7 +46,9 @@ public class SocietyPlugin extends PluginBase {
         new MetricsLite(this);
         checkPlugin("EconomyAPI");
         checkPlugin("FloatingText");
-        if (instance == null) instance = this;
+        if (instance == null) {
+            instance = this;
+        }
         checkConfig();
         saveResource("cn_language.yml", true);
         registerCommand();

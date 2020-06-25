@@ -1,6 +1,5 @@
 package com.zixuan007.society.api;
 
-import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.*;
 
@@ -10,6 +9,7 @@ public class ZsocietyAPI {
     private ZsocietyAPI(){
 
     }
+
     static {
         instance=new ZsocietyAPI();
     }
@@ -80,9 +80,13 @@ public class ZsocietyAPI {
      * @return
      */
     public static String getGenderbyPlayerName(String playerName){
-        if(!PluginUtils.isOnlineByName(playerName)) return "未知性别";
+        if(!PluginUtils.isOnlineByName(playerName)) {
+            return "未知性别";
+        }
         int genderByPlayerName = MarryUtils.getGenderByPlayerName(playerName);
-        if (genderByPlayerName < 0) return "未知性别";
+        if (genderByPlayerName < 0) {
+            return "未知性别";
+        }
         return (genderByPlayerName == 0)? "女" : "男";
     }
 
@@ -92,7 +96,9 @@ public class ZsocietyAPI {
      * @return
      */
     public static boolean isVIP(String playerName){
-        if(PrivilegeUtils.isVIP(playerName)) return true;
+        if(PrivilegeUtils.isVIP(playerName)) {
+            return true;
+        }
         return false;
     }
 
@@ -102,7 +108,9 @@ public class ZsocietyAPI {
      * @return
      */
     public static boolean isSVIP(String playerName){
-        if(PrivilegeUtils.isSvip(playerName)) return true;
+        if(PrivilegeUtils.isSvip(playerName)) {
+            return true;
+        }
         return false;
     }
 

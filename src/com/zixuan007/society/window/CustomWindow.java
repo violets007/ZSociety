@@ -46,15 +46,17 @@ public class CustomWindow extends FormWindowCustom implements ResponseListennerC
         Objects.requireNonNull(response);
         Objects.requireNonNull(player);
         onClick(response, player);
-        if (this.buttonClickedListener != null)
+        if (this.buttonClickedListener != null) {
             this.buttonClickedListener.accept(response, player);
+        }
     }
 
     private void callClosed(Player player) {
         Objects.requireNonNull(player);
         onClose(player);
-        if (this.windowClosedListener != null)
+        if (this.windowClosedListener != null) {
             this.windowClosedListener.accept(player);
+        }
     }
 
     public void callBack(Player player) {

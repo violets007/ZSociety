@@ -11,6 +11,9 @@ import java.util.Comparator;
 
 
 
+/**
+ * @author zixuan007
+ */
 public class ContributionRankingWindow extends SimpleWindow {
     public ContributionRankingWindow() {
         super(Lang.contributionRankingWindow_Title, "");
