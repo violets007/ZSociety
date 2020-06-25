@@ -3,6 +3,9 @@ package com.zixuan007.society.api;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.*;
 
+/**
+ * @author zixuan007
+ */
 public class ZsocietyAPI {
     public static ZsocietyAPI instance;
 

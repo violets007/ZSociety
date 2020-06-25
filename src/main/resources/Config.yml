@@ -25,10 +25,10 @@ language: cn
 isChat: true
 
 #称号格式 可以兼容Zsociety ${变量名}（Zsociety变量暂时有限）和Tip的{变量名}
-chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${zmarry}§7]§b${playerName}§f➣ ${message}"
+chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${zmarry}§7]§b${playerName}§f ${message}"
 
 #是否显示底部信息 （如果有底部显示建议false）
-isTip: true
+isTip: false
 
 #底部显示格式 (新手腐竹勿动) 可以兼容Zsociety ${变量名}和Tip的{变量名}
 tipText: "§c✎手持>${itemID}  §9☣地图>{levelName}  §d♨生命>{h}/{mh}  §f۞在线>{online}/{maxplayer}  §b❉延迟>{ms} \n §2✤职位>${post}

@@ -7,9 +7,15 @@ import cn.nukkit.command.ConsoleCommandSender;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.WindowManager;
 
+/**
+ * @author zixuan007
+ */
 public class VipCommand extends Command {
+
+    public final static String COMMAND_NAME= "特权";
+
     public VipCommand() {
-        super("特权");
+        super(COMMAND_NAME,"§e显示特权功能窗口");
         getCommandParameters().clear();
         setPermission("");
     }

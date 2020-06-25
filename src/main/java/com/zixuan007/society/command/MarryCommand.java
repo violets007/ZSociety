@@ -4,14 +4,17 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
+import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.window.WindowManager;
 
 /**
  * 结婚命令
+ * @author zixuan007
  */
 public class MarryCommand extends Command {
+    public final static String COMMAND_NAME= "结婚";
     public MarryCommand() {
-        super("结婚");
+        super(COMMAND_NAME,"§e显示结婚功能窗口");
         getCommandParameters().clear();
     }
 

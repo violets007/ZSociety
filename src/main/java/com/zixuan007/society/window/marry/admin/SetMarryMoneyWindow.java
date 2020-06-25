@@ -35,7 +35,7 @@ public class SetMarryMoneyWindow extends CustomWindow {
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         FormResponseData dropdownResponse = response.getDropdownResponse(0);
-        if(getElements().size() < 1){
+        if(getElements().size() <= 1){
             return;
         }
         String midStr = dropdownResponse.getElementContent().split(" ")[0];

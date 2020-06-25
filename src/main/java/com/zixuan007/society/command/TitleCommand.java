@@ -8,13 +8,20 @@ import com.zixuan007.society.window.WindowManager;
 
 import java.util.ArrayList;
 
+/**
+ * @author zixuan007
+ */
 public class TitleCommand extends Command {
+
+    public final static String COMMAND_NAME= "称号";
+
     public TitleCommand() {
-        super("称号", "管理称号界面");
+        super(COMMAND_NAME, "§e显示称号功能窗口");
         this.getCommandParameters().clear();
         this.setPermission("op");
     }
 
+    @Override
     public boolean execute(CommandSender sender, String name, String[] args) {
         Player player = (Player)sender;
         if (name.equals(this.getName())) {

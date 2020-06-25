@@ -8,13 +8,16 @@ import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.society.SocietyWindow;
 
+/**
+ * 公会命令
+ * @author zixuan007
+ */
 public class MainCommand extends Command {
-    private SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
-
+    public final static String COMMAND_NAME=SocietyPlugin.getInstance().getConfig().getString("comands");
 
     public MainCommand() {
-        super((String)SocietyPlugin.getInstance().getConfig().get("comands"), "公会插件总命令", "/§b公会 §e帮助");
-        this.setPermission("");
+        super(COMMAND_NAME, "§e显示公会功能窗口", "");
+        this.setPermission("ZSociety.command.user");
         this.getCommandParameters().clear();
     }
 

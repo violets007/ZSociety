@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author zixuan007
+ */
 public class SocietyPlugin extends PluginBase {
 
     private Config config;
@@ -144,6 +147,7 @@ public class SocietyPlugin extends PluginBase {
 
 
 
+    @Override
     public Config getConfig() {
         return this.config;
     }
