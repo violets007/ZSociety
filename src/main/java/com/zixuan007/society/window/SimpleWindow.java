@@ -13,6 +13,9 @@ import java.util.function.Consumer;
 
 
 
+/**
+ * @author zixuan007
+ */
 public class SimpleWindow extends FormWindowSimple implements ResponseListenerSimple {
     protected transient BiConsumer<Integer, Player> buttonClickedListener = null;
     protected transient Consumer<Player> windowClosedListener = null;

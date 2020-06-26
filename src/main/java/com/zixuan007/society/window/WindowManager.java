@@ -1,6 +1,7 @@
 
 package com.zixuan007.society.window;
 
+import apple.laf.JRSUIConstants;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
@@ -50,6 +51,13 @@ public class WindowManager {
 
     private WindowManager() {
 
+    }
+
+
+    public FormWindow getFromWindoe(Player player){
+
+
+        return null;
     }
 
 

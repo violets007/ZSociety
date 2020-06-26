@@ -2,7 +2,7 @@
 
 作者: zixuan007
 
-[![License](https://img.shields.io/badge/license-GPL-blue)](LICENSE)[![MCBBS](https://img.shields.io/badge/Link-MCBBS-brightgreen)](https://www.mcbbs.net/thread-970895-1-1.html)![build](https://img.shields.io/badge/build-passing-brightgreen)
+[![License](https://img.shields.io/badge/license-GPL-blue)](LICENSE)   [![MCBBS](https://img.shields.io/badge/Link-MCBBS-brightgreen)](https://www.mcbbs.net/thread-970895-1-1.html)  ![build](https://img.shields.io/badge/build-passing-brightgreen) 
 
 
 
@@ -11,6 +11,8 @@
 一款功能全面基础功能的公会插件。
 
 简单的GUI操作让玩家远离命令操作
+
+当前插件版本: **1.0.7**
 
 **欢迎你贡献代码给这个项目!** 无论 PR 还是 issue.
 

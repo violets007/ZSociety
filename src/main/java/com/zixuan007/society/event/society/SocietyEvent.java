@@ -5,7 +5,10 @@ import cn.nukkit.event.HandlerList;
 import cn.nukkit.event.player.PlayerEvent;
 import com.zixuan007.society.domain.Society;
 
-public class SocietyEvent extends PlayerEvent {
+/**
+ * @author zixuan007
+ */
+public abstract class SocietyEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
     private Society society;
 

@@ -13,7 +13,6 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
 
@@ -23,11 +22,17 @@ import com.zixuan007.society.event.title.BuyTitleEvent;
 import com.zixuan007.society.event.title.CreateTitleShopEvent;
 import com.zixuan007.society.event.title.RemoveTitleShopEvent;
 import com.zixuan007.society.utils.TitleUtils;
+
 import java.util.ArrayList;
 import java.util.Map;
+
 import me.onebone.economyapi.EconomyAPI;
 
+/**
+ * @author zixuan007
+ */
 public class TitleListener implements Listener {
+
     private SocietyPlugin societyPlugin;
     private ArrayList<String> affirmBuyTitlePlayer = new ArrayList<>();
 
@@ -44,8 +49,6 @@ public class TitleListener implements Listener {
             titleConfig.set(player.getName(), new ArrayList<String>());
             titleConfig.save();
         }
-        Config config = this.societyPlugin.getConfig();
-
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -64,8 +67,8 @@ public class TitleListener implements Listener {
                     String title = (String) TitleUtils.onCreateName.get(playerName).get("title");
                     String money = (String) TitleUtils.onCreateName.get(playerName).get("money");
                     tempList.addAll(titleText);
-                    tempList.set(1, ((String) titleText.get(1)).replaceAll("\\$\\{title\\}", title));
-                    tempList.set(2, ((String) titleText.get(2)).replaceAll("\\$\\{money\\}", money));
+                    tempList.set(1, (titleText.get(1)).replaceAll("\\$\\{title\\}", title));
+                    tempList.set(2, (titleText.get(2)).replaceAll("\\$\\{money\\}", money));
                     ((BlockEntitySign) blockEntity).setText(tempList.<String>toArray(new String[tempList.size()]));
                     SocietyPlugin.getInstance().getServer().getPluginManager().callEvent((Event) new CreateTitleShopEvent(player, (BlockEntitySign) blockEntity));
                 }
@@ -85,8 +88,9 @@ public class TitleListener implements Listener {
         int z = block.getFloorZ();
         String levelName = block.getLevel().getName();
         Config titleShopConfig = SocietyPlugin.getInstance().getTitleShopConfig();
-        if (id == 68) {
-            for (Map.Entry<String, Object> map : (Iterable<Map.Entry<String, Object>>) titleShopConfig.getAll().entrySet()) {
+
+        if (id == Block.WALL_SIGN) {
+            for (Map.Entry<String, Object> map : titleShopConfig.getAll().entrySet()) {
                 String key = map.getKey();
                 ArrayList<Object> list = (ArrayList<Object>) map.getValue();
                 int signX = (Integer) list.get(0);
@@ -101,7 +105,7 @@ public class TitleListener implements Listener {
                             player.sendMessage(">> §c余额不足无法购买");
                             return;
                         }
-                        if(TitleUtils.isExistTitle(player.getName(),key)){
+                        if (TitleUtils.isExistTitle(player.getName(), key)) {
                             player.sendMessage(">> §c你应经存在此称号,请勿重复购买");
                             return;
                         }
@@ -121,7 +125,7 @@ public class TitleListener implements Listener {
         Player player = event.getPlayer();
         String title = event.getTitle();
         Config titleConfig = this.societyPlugin.getTitleConfig();
-        TitleUtils.addTitle(player.getName(),title);
+        TitleUtils.addTitle(player.getName(), title);
         titleConfig.set(player.getName(), TitleUtils.titleList.get(player.getName()));
         titleConfig.save();
         this.affirmBuyTitlePlayer.remove(player.getName());
@@ -133,24 +137,7 @@ public class TitleListener implements Listener {
         Player player = event.getPlayer();
         String playerName = player.getName();
         BlockEntitySign wallSign = event.getWallSign();
-        double x = wallSign.getFloorX();
-        double y = wallSign.getY() + 1.0D;
-        double z = wallSign.getFloorZ();
         int damage = wallSign.getBlock().getDamage();
-        if (damage % 5 == 0) {
-            z += 0.5D;
-        } else if (damage % 5 == 1) {
-            z += 0.5D;
-        }
-        if (damage % 5 == 2) {
-            z += 0.6D;
-            x += 0.5D;
-        } else if (damage % 5 == 3) {
-            x += 0.5D;
-        } else if (damage % 5 == 4) {
-            x += 0.6D;
-            z += 0.5D;
-        }
         Config titleShopConfig = this.societyPlugin.getTitleShopConfig();
         String title = (String) TitleUtils.onCreateName.get(playerName).get("title");
         String money = (String) TitleUtils.onCreateName.get(playerName).get("money");
@@ -160,22 +147,21 @@ public class TitleListener implements Listener {
         list.add(wallSign.getFloorZ());
         list.add(wallSign.getLevel().getName());
         list.add(money);
-        SocietyPlugin.getInstance().getLogger().debug("创建称号商店的内容: "+list);
+        SocietyPlugin.getInstance().getLogger().debug("创建称号商店的内容: " + list);
         titleShopConfig.set(title, list);
         titleShopConfig.save();
         StringBuilder sb = new StringBuilder();
         for (String line : wallSign.getText()) {
             sb.append(line + "\n");
         }
-        String key = wallSign.getText()[1];
 
-        FloatingTextAPI.addFloatingText(sb.toString(),new Position(x,y,z,player.getLevel()),key,player.getName());
         player.sendMessage(">> §a称号商店创建成功");
         TitleUtils.onCreateName.remove(player.getName());
     }
 
     /**
      * 玩家退出游戏
+     *
      * @param event
      */
     @EventHandler(priority = EventPriority.MONITOR)
@@ -187,6 +173,7 @@ public class TitleListener implements Listener {
 
     /**
      * 移除称号商店方块
+     *
      * @param event
      */
     @EventHandler(priority = EventPriority.MONITOR)

@@ -4,6 +4,9 @@ import cn.nukkit.Player;
 import cn.nukkit.event.HandlerList;
 import com.zixuan007.society.domain.Society;
 
+/**
+ * @author zixuan007
+ */
 public class PlayerApplyJoinSocietyEvent extends SocietyEvent {
     private static final HandlerList handlers = new HandlerList();
 

@@ -19,7 +19,7 @@ createSocietyMoney: 100000.0
 proposeMoney: 100000.0
 
 ##插件默认语言(暂时只支持中文)
-language: cn
+language: zh-CN.yml
 
 #是否开启聊天显示
 isChat: true

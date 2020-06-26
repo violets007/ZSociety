@@ -5,6 +5,9 @@ import cn.nukkit.block.Block;
 import cn.nukkit.event.HandlerList;
 import cn.nukkit.event.player.PlayerEvent;
 
+/**
+ * @author zixuan007
+ */
 public class RemoveTitleShopEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
     private Block block;
@@ -24,15 +27,8 @@ public class RemoveTitleShopEvent extends PlayerEvent {
         return this.block;
     }
 
-    public void setBlock(Block block) {
-        this.block = block;
-    }
-
     public String getTitle() {
         return this.title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

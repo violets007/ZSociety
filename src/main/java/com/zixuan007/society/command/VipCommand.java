@@ -17,12 +17,14 @@ public class VipCommand extends Command {
     public VipCommand() {
         super(COMMAND_NAME,"§e显示特权功能窗口");
         getCommandParameters().clear();
-        setPermission("");
+        setPermission("ZSociety.command.user");
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandName, String[] strings) {
-        if(commandSender instanceof ConsoleCommandSender) return false;
+        if(commandSender instanceof ConsoleCommandSender) {
+            return false;
+        }
         Player player= (Player) commandSender;
         if(commandName.equals(getName())){
             if(strings.length <1){

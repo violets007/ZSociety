@@ -24,6 +24,7 @@ public class SocietyPlugin extends PluginBase {
     private List<Config> societyConfigList = new ArrayList<>();
     private Config titleConfig;
     private Config LangConfig;
+    private Config languageConfig;
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
@@ -40,6 +41,10 @@ public class SocietyPlugin extends PluginBase {
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
         SocietyUtils.societies.forEach((society) -> { society.saveData(); });
+        config.save();
+        marryConfig.save();
+        titleShopConfig.save();
+        societyShopConfig.save();
     }
 
     /**
@@ -91,10 +96,11 @@ public class SocietyPlugin extends PluginBase {
     public void loadConfig() {
         String titleConfigPath = PluginUtils.CONFIGFOLDER + "Title.yml";
         String language = (String) config.get("language");
-        String langPath = PluginUtils.CONFIGFOLDER +language+"_language.yml";
+        String langPath = PluginUtils.CONFIGFOLDER +"cn_language.yml";
         String titleShopPath = PluginUtils.CONFIGFOLDER + "TitleShopData.yml";
         String marryPath=PluginUtils.CONFIGFOLDER+"Marry.yml";
         String societyShopConfigPath=PluginUtils.CONFIGFOLDER+"societyShop.yml";
+
 
         this.titleConfig = new Config(titleConfigPath);
         this.LangConfig = new Config(langPath);
@@ -107,6 +113,7 @@ public class SocietyPlugin extends PluginBase {
         SocietyUtils.loadSocietyConfig();
         PrivilegeUtils.loadVipConfig();
         TitleUtils.loadConfig();
+
     }
 
     /**
@@ -212,4 +219,11 @@ public class SocietyPlugin extends PluginBase {
         this.societyShopConfig = societyShopConfig;
     }
 
+    public Config getLanguageConfig() {
+        return languageConfig;
+    }
+
+    public void setLanguageConfig(Config languageConfig) {
+        this.languageConfig = languageConfig;
+    }
 }

@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 /**
  * 结婚功能窗口
+ * @author zixuan007
  */
 public class MarryWindow extends SimpleWindow {
     public MarryWindow() {
@@ -84,9 +85,10 @@ public class MarryWindow extends SimpleWindow {
                     player.showFormWindow(WindowManager.getMessageWindow("§c您当前还没有伴侣,请先求婚",this,"返回上级"));
                     return;
                 }
+                marry=MarryUtils.getMarryByName(player.getName());
                 player.showFormWindow(WindowManager.getMessageWindow("§c离婚成功",this,"返回上级"));
 
-                Server.getInstance().getPluginManager().callEvent(new DivorceMarryEvent(player));
+                Server.getInstance().getPluginManager().callEvent(new DivorceMarryEvent(player,marry));
                 break;
             case 4:
                 if(MarryUtils.marrys.size() <1){

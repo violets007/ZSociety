@@ -200,6 +200,7 @@ public class SocietyListener implements Listener {
                     boolean flag=(blockX == shopX && blockY == shopY && blockZ == shopZ);
 
                     if(flag){
+                        event.setCancelled();
                         double myMoney = EconomyAPI.getInstance().myMoney(player);
                         if(myMoney < price){
                             player.sendMessage(">> §a当前余额不足无法进行购买");

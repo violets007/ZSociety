@@ -28,23 +28,12 @@ public class PlayerMarryEvent extends PlayerEvent {
         return propose;
     }
 
-    public void setPropose(String propose) {
-        this.propose = propose;
-    }
-
     public String getRecipient() {
         return recipient;
-    }
-
-    public void setRecipient(String recipient) {
-        this.recipient = recipient;
     }
 
     public Date getMarryDate() {
         return marryDate;
     }
 
-    public void setMarryDate(Date marryDate) {
-        this.marryDate = marryDate;
-    }
 }

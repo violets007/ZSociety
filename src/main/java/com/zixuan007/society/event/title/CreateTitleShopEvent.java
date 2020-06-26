@@ -5,6 +5,9 @@ import cn.nukkit.blockentity.BlockEntitySign;
 import cn.nukkit.event.HandlerList;
 import cn.nukkit.event.player.PlayerEvent;
 
+/**
+ * @author zixuan007
+ */
 public class CreateTitleShopEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
     private BlockEntitySign wallSign;
@@ -22,7 +25,4 @@ public class CreateTitleShopEvent extends PlayerEvent {
         return this.wallSign;
     }
 
-    public void setWallSign(BlockEntitySign wallSign) {
-        this.wallSign = wallSign;
-    }
 }

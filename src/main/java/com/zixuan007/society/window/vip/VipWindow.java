@@ -3,16 +3,18 @@ package com.zixuan007.society.window.vip;
 import cn.nukkit.AdventureSettings;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.window.SimpleWindow;
+import com.zixuan007.society.window.WindowLoader;
 
 /**
  * VIP功能界面
+ * @author zixuan007
  */
-public class VipWindow extends SimpleWindow {
+public class VipWindow extends SimpleWindow implements WindowLoader {
     public VipWindow() {
         super("VIP特权窗口", "");
-        addButton(new ElementButton("开启-关闭 生存飞行"));
-        addButton(new ElementButton("查看SVIP信息"));
+        init();
     }
 
     @Override
@@ -25,5 +27,12 @@ public class VipWindow extends SimpleWindow {
                 player.sendMessage(">> §a生存飞行 §b"+(!allowFlight?"开启":"关闭"));
                 break;
         }
+    }
+
+    @Override
+    public FormWindow init(Object[]... objects) {
+        addButton(new ElementButton("开启-关闭 生存飞行"));
+        addButton(new ElementButton("查看SVIP信息"));
+        return this;
     }
 }

@@ -14,6 +14,7 @@ import com.zixuan007.society.window.SimpleWindow;
 
 /**
  * 窗口事件响应
+ * @author zixuan007
  */
 public class ResponseLister implements Listener {
 

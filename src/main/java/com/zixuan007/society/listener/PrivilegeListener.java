@@ -8,6 +8,9 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.utils.PrivilegeUtils;
 
+/**
+ * @author zixuan007
+ */
 public class PrivilegeListener implements Listener {
     private SocietyPlugin societyPlugin;
 

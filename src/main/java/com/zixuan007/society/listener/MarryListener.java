@@ -19,6 +19,9 @@ import com.zixuan007.society.window.WindowManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author zixuan007
+ */
 public class MarryListener implements Listener {
 
     private SocietyPlugin societyPlugin;

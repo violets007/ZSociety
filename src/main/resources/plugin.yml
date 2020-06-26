@@ -5,6 +5,7 @@ author: "zixuan007"
 api: ["1.0.0"]
 
 
+
 permissions:
   ZSociety.command.user:
     default: true

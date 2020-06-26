@@ -17,6 +17,7 @@ public class ShowTask extends PluginTask<SocietyPlugin> {
         super(owner);
     }
 
+    @Override
     public void onRun(int i) {
         Collection<Player> players = owner.getServer().getOnlinePlayers().values();
         Config config = SocietyPlugin.getInstance().getConfig();

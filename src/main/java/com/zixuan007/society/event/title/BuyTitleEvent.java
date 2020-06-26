@@ -4,8 +4,12 @@ import cn.nukkit.Player;
 import cn.nukkit.event.HandlerList;
 import cn.nukkit.event.player.PlayerEvent;
 
+/**
+ * @author zixuan007
+ */
 public class BuyTitleEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
+
     private String title;
     private double money;
 
@@ -23,15 +27,9 @@ public class BuyTitleEvent extends PlayerEvent {
         return this.title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public double getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
-    }
 }

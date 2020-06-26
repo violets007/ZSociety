@@ -13,6 +13,7 @@ import java.util.Date;
 
 /**
  * 校验玩家特权到期时间任务
+ * @author zixuan007
  */
 public class CheckPrivilegeTimeTask extends PluginTask<SocietyPlugin> {
 
@@ -36,8 +37,9 @@ public class CheckPrivilegeTimeTask extends PluginTask<SocietyPlugin> {
                         parse=simpleDateFormat.parse(holdTime);
                         if(System.currentTimeMillis() >= parse.getTime()){
                             String playerName = (String) config.get("playerName");
-                            if(!PrivilegeUtils.removePrivilegeName.contains(playerName))
-                            PrivilegeUtils.removePrivilegeName.add(playerName);
+                            if(!PrivilegeUtils.removePrivilegeName.contains(playerName)) {
+                                PrivilegeUtils.removePrivilegeName.add(playerName);
+                            }
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
