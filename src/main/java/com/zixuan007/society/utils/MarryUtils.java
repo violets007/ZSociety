@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 /**
  * 结婚工具类
+ * @author zixuan007
  */
 public class MarryUtils{
     public static ArrayList<Marry> marrys=new ArrayList<Marry>();

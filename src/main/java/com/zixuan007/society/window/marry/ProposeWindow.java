@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
-import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.event.marry.PlayerMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
@@ -36,7 +35,7 @@ public class ProposeWindow extends CustomWindow {
             player.showFormWindow(WindowManager.getMessageWindow("§c求婚的人不能是自己",this,"返回上级"));
             return;
         }
-        double proposeMoney = PluginUtils.getproposeMoney();
+        double proposeMoney = PluginUtils.getProposeMoney();
         double myMoney = EconomyAPI.getInstance().myMoney(player);
         if(myMoney < proposeMoney){
             player.showFormWindow(WindowManager.getMessageWindow("§c求婚资金不足,求婚需要: "+proposeMoney,this,"返回上级"));
@@ -53,7 +52,7 @@ public class ProposeWindow extends CustomWindow {
             }else{
                 MarryUtils.proposeFailName.put(player.getName(),clickPlayer.getName());
             }
-            EconomyAPI.getInstance().reduceMoney(player.getPlayer(),PluginUtils.getproposeMoney());
+            EconomyAPI.getInstance().reduceMoney(player.getPlayer(),PluginUtils.getProposeMoney());
         });
         player1.showFormWindow(affrimWindow);
     }

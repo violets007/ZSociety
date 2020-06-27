@@ -11,7 +11,7 @@ public interface WindowLoader {
      * 窗口初始化
      * @return
      */
-    FormWindow init(Object[] ...objects);
+    FormWindow init(Object ...objects);
 
 
 }

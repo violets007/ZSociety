@@ -1,7 +1,5 @@
-
 package com.zixuan007.society.window;
 
-import apple.laf.JRSUIConstants;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
@@ -46,17 +44,48 @@ import java.util.List;
  * @author zixuan007
  */
 public class WindowManager {
-    public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance(); //公会插件类
-    private HashMap<String, HashMap<String, FormWindow>> forms = new HashMap(); //存储玩家打开过的表单
+
+    /**
+     * 公会插件基类
+     */
+    public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
+
+    private static HashMap<WindowType,Class> registerWindow=new HashMap<>();
+    //储存玩家已经打开过的GUI
+    private static HashMap<String, FormWindow> alreadyOpenForms = new HashMap();
 
     private WindowManager() {
 
     }
 
-
-    public FormWindow getFromWindoe(Player player){
-
-
+    /**
+     * 获取到指定类型的表单窗口
+     * @param windowType
+     * @param parameter
+     * @return
+     */
+    public static FormWindow getFromWindow(WindowType windowType, Object ...parameter){
+        Class clazz = registerWindow.get(windowType);
+        if(clazz != null){
+            try {
+                if(alreadyOpenForms.containsKey(windowType.windowName)){
+                    FormWindow formWindow = alreadyOpenForms.get(windowType.windowName);
+                    if(formWindow instanceof WindowLoader){
+                        return ((WindowLoader) formWindow).init(parameter);
+                    }
+                }else{
+                    FormWindow formWindow = (FormWindow) clazz.newInstance();
+                    if(formWindow instanceof WindowLoader){
+                        alreadyOpenForms.put(windowType.windowName,formWindow);
+                        return  ((WindowLoader) formWindow).init(parameter);
+                    }
+                }
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
@@ -212,5 +241,13 @@ public class WindowManager {
 
     public static CreateShopWindow getCreateShopWindow(Player player){
         return new CreateShopWindow(player);
+    }
+
+    public static HashMap<WindowType, Class> getRegisterWindow() {
+        return registerWindow;
+    }
+
+    public static void setRegisterWindow(HashMap<WindowType, Class> registerWindow) {
+        WindowManager.registerWindow = registerWindow;
     }
 }

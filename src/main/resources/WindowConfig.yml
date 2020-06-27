@@ -1,0 +1,75 @@
+##表单数据展示配置文件
+
+#########公会窗口配置#########
+#公会功能窗口标题
+societywindow.title: §e公会功能列表
+
+#创建公会按钮内容
+societywindow.createsociety.button: §e创建公会
+#管理公会按钮内容
+societywindow.managersociety.button: §e管理公会
+#退出公会按钮内容
+societywindow.quitsociety.button: §e退出公会
+#加入公会按钮内容
+societywindow.joinsociety.button: §e加入公会
+#公会成员列表按钮内容
+societywindow.menberlist.button: §e公会成员列表
+#公会经济贡献排行榜按钮内容
+societywindow.contributionranking.button: §e公会经济贡献排行榜
+#公会等级排行榜按钮内容
+societywindow.levelrank.button: §e公会等级排行榜
+#贡献经济按钮内容
+societywindow.contribution.button: §e贡献经济
+
+
+
+#创建公会按钮图片路径
+societywindow.createsociety.button.imgpath: textures/ui/book.edit.default
+#管理公会按钮图片路径
+societywindow.managersociety.button.imgpath: textures/ui/code.tynker.default
+#退出公会按钮图片路径
+societywindow.quitsociety.button.imgpath: textures/ui/cancel
+#加入公会按钮图片路径
+societywindow.joinsociety.button.imgpath: textures/ui/controller.glyph.color
+#公会成员列表按钮图片路径
+societywindow.menberlist.button.imgpath: textures/ui/copy
+#公会经济贡献排行榜按钮图片路径
+societywindow.contributionranking.button.imgpath: textures/ui/recipe.book.icon
+#公会等级排行榜按钮图片
+societywindow.levelrank.button.imgpath: textures/ui/feedIcon
+#贡献经济按钮内容图片
+societywindow.contribution.button.imgpath: textures/ui/dev.glyph.color
+
+
+#########特权窗口配置#########
+#VIP窗口标题
+vipwindow.title: §eVIP特权窗口
+#SVIP窗口标题
+svipwindow.title: §eSVIP特权窗口
+#VIP信息窗口
+privilegeInfoWindow.title: §l§b${playername} §r§e的特权信息
+
+#VIP窗口生存飞行按钮
+vipwindow.survivalflight.button: ${flight} §e生存飞行
+#VIP窗口查看VIP信息按钮
+vipwindow.viewvip.button: §e我的VIP信息
+#SVIP窗口打开VIP功能窗口按钮
+svipwindow.openvip.button: §e打开VIP功能
+#SVIP窗口开关创造模式按钮
+svipwindow.switchcreate.button: ${create} §e创造模式
+#SVIP窗口SVIP信息按钮
+svipwindow.opensvip.button: §e我的SVIP信息
+
+#VIP窗口生存生存飞行图片路径
+vipwindow.survivalflight.button.imgpath: textures/ui/code_makecode_default.png
+#VIP窗口查看VIP信息按钮图片
+vipwindow.viewvip.button.imgpath: textures/ui/Friend1.png
+#SVIP窗口VIP功能图片路径
+svipwindow.openvip.button.imgpath: textures/ui/heart_flash.png
+#SVIP窗口开启创造模式图片路径
+svipwindow.switchcreate.button.imgpath: textures/ui/icon_armor.png
+#SVIP窗口SVIP信息按钮图片路径
+svipwindow.opensvip.button.imgpath: textures/ui/Friend1.png
+
+
+

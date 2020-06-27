@@ -9,6 +9,10 @@ import com.zixuan007.society.listener.*;
 import com.zixuan007.society.task.ShowTask;
 import com.zixuan007.society.task.CheckPrivilegeTimeTask;
 import com.zixuan007.society.utils.*;
+import com.zixuan007.society.window.WindowType;
+import com.zixuan007.society.window.vip.PrivilegeInfoWindow;
+import com.zixuan007.society.window.vip.SvipWindow;
+import com.zixuan007.society.window.vip.VipWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ public class SocietyPlugin extends PluginBase {
     private Config titleConfig;
     private Config LangConfig;
     private Config languageConfig;
+    private Config windowConfig;
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
@@ -53,13 +58,14 @@ public class SocietyPlugin extends PluginBase {
     public void init() {
         new MetricsLite(this);
         checkPlugin("EconomyAPI");
-        checkPlugin("FloatingText");
         if (instance == null) {
             instance = this;
         }
         checkConfig();
         saveResource("cn_language.yml", true);
+        saveResource("WindowConfig.yml",true);
         registerCommand();
+        registerWindow();
         loadConfig();
         PluginUtils.getLang();
         getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
@@ -94,19 +100,22 @@ public class SocietyPlugin extends PluginBase {
      * 加载配置文件
      */
     public void loadConfig() {
-        String titleConfigPath = PluginUtils.CONFIGFOLDER + "Title.yml";
+        String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
         String language = (String) config.get("language");
-        String langPath = PluginUtils.CONFIGFOLDER +"cn_language.yml";
-        String titleShopPath = PluginUtils.CONFIGFOLDER + "TitleShopData.yml";
-        String marryPath=PluginUtils.CONFIGFOLDER+"Marry.yml";
-        String societyShopConfigPath=PluginUtils.CONFIGFOLDER+"societyShop.yml";
-
+        String languagePath = PluginUtils.CONFIG_FOLDER + language;
+        String langPath = PluginUtils.CONFIG_FOLDER +"cn_language.yml";
+        String titleShopPath = PluginUtils.CONFIG_FOLDER + "TitleShopData.yml";
+        String marryPath=PluginUtils.CONFIG_FOLDER +"Marry.yml";
+        String societyShopConfigPath=PluginUtils.CONFIG_FOLDER +"societyShop.yml";
+        String windowConfig=PluginUtils.CONFIG_FOLDER+"WindowConfig.yml";
 
         this.titleConfig = new Config(titleConfigPath);
         this.LangConfig = new Config(langPath);
         this.titleShopConfig = new Config(titleShopPath);
         this.marryConfig=new Config(marryPath);
         this.societyShopConfig=new Config(societyShopConfigPath);
+        this.languageConfig=new Config(languagePath);
+        this.windowConfig=new Config(windowConfig);
 
         //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
@@ -132,7 +141,7 @@ public class SocietyPlugin extends PluginBase {
      * 检测主配置文件的版本是否相同
      */
     public void checkConfig() {
-        String path = PluginUtils.CONFIGFOLDER + "Config.yml";
+        String path = PluginUtils.CONFIG_FOLDER + "Config.yml";
         File file = new File(path);
         if (!file.exists()) {
             saveResource("Config.yml");
@@ -147,9 +156,15 @@ public class SocietyPlugin extends PluginBase {
                 saveResource("Config.yml");
             }
         }
-        String configPath = PluginUtils.CONFIGFOLDER + "Config.yml";
+        String configPath = PluginUtils.CONFIG_FOLDER + "Config.yml";
         this.config = new Config(configPath);
 
+    }
+
+    public void registerWindow(){
+        PluginUtils.addWindowClass(WindowType.VIPWINDOW, VipWindow.class);
+        PluginUtils.addWindowClass(WindowType.SVIPWINDOW, SvipWindow.class);
+        PluginUtils.addWindowClass(WindowType.PRIVILEGEWINDOW, PrivilegeInfoWindow.class);
     }
 
 
@@ -225,5 +240,13 @@ public class SocietyPlugin extends PluginBase {
 
     public void setLanguageConfig(Config languageConfig) {
         this.languageConfig = languageConfig;
+    }
+
+    public Config getWindowConfig() {
+        return windowConfig;
+    }
+
+    public void setWindowConfig(Config windowConfig) {
+        this.windowConfig = windowConfig;
     }
 }

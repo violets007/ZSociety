@@ -6,6 +6,7 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 /**
  * @author zixuan007
@@ -30,10 +31,11 @@ public class VipCommand extends Command {
             if(strings.length <1){
                 if(PrivilegeUtils.isVIP(player.getName())){
                     //展示VIP功能界面
-                    player.showFormWindow(WindowManager.getVipWindow());
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.VIPWINDOW,player));
+
                 }else if(PrivilegeUtils.isSvip(player.getName())){
                     //展示SVIP功能界面
-                    player.showFormWindow(WindowManager.getSvipWindow());
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.SVIPWINDOW,player));
                 }else{
                     player.sendMessage(">> §c你还没有特权,请先联系管理员购买");
                 }

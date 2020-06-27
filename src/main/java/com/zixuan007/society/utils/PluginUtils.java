@@ -3,12 +3,13 @@ package com.zixuan007.society.utils;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;
-import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.Binary;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 import me.onebone.economyapi.EconomyAPI;
 
 
@@ -18,21 +19,31 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * 插件工具类
+ * @author zixuan007
  */
 public class PluginUtils {
-    public static final String FILE_SEPARATOR = System.getProperty("file.separator");//系统分隔符 Linux \  Window /
-    public static final String SOCIETYFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR; //公会数据文件路径
-    public static final String CONFIGFOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;//公会配置文件夹
+    /**
+     * 系统文件分隔符
+     */
+    public static final String FILE_SEPARATOR = System.getProperty("file.separator");
+
+    /**
+     * 公会数据文件路径
+     */
+    public static final String SOCIETY_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR;
+
+    /**
+     * 公会配置文件夹
+     */
+    public static final String CONFIG_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;
     public static final String MARRY_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Marry"+FILE_SEPARATOR;
     public static final String PRIVILEGE_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Vip"+FILE_SEPARATOR;
 
+    public static SocietyPlugin society=SocietyPlugin.getInstance();
     /**
      * 加载jar包
      * @param jarPath
@@ -72,7 +83,9 @@ public class PluginUtils {
      */
     public static boolean isOnlineByName(String playerName) {
         for (Player player : Server.getInstance().getOnlinePlayers().values()) {
-            if (player.getName().equals(playerName)) return true;
+            if (player.getName().equals(playerName)) {
+                return true;
+            }
         }
         return false;
     }
@@ -97,7 +110,7 @@ public class PluginUtils {
             }else{
                 SocietyPlugin.getInstance().getLogger().info("语言配置文件信息更改有误");
                 String language = (String) SocietyPlugin.getInstance().getConfig().get("language");
-                String langPath = PluginUtils.CONFIGFOLDER +language+"_language.yml";
+                String langPath = PluginUtils.CONFIG_FOLDER +language+"_language.yml";
                 SocietyPlugin.getInstance().saveResource(langPath);
             }
         }
@@ -120,7 +133,9 @@ public class PluginUtils {
         String postName = SocietyUtils.getPostByName(player.getName(),society);
         String title = TitleUtils.getTitles(player.getName()).size()<=0?"无称号":TitleUtils.getTitles(player.getName()).get(0);
         String privilege="";
-        if(PrivilegeUtils.isVIP(player.getName()) || PrivilegeUtils.isSvip(player.getName())) privilege=PrivilegeUtils.isVIP(player.getName()) ? "§l§eVIP§f+":"§l§cS§aV§l§bIP§f+";
+        if(PrivilegeUtils.isVIP(player.getName()) || PrivilegeUtils.isSvip(player.getName())) {
+            privilege=PrivilegeUtils.isVIP(player.getName()) ? "§l§eVIP§f+":"§l§cS§aV§l§bIP§f+";
+        }
         String marry= MarryUtils.isMarry(player.getName())?"已结婚":"单身";
         String name = player.getLevel().getName();
         float ticksPerSecond = SocietyPlugin.getInstance().getServer().getTicksPerSecond();
@@ -135,6 +150,11 @@ public class PluginUtils {
                 .replaceAll("\\$\\{title\\}", title)
                 .replaceAll("\\$\\{zmarry\\}", marry)
                 .replaceAll("\\$\\{privilege\\}", privilege);
+        boolean allowFlight = player.getAllowFlight();
+        text=text.replace("${flight}",allowFlight?"§c关闭":"§a开启§r")
+                .replace("${create}",player.isCreative()?"§c关闭":"§a开启")
+                .replace("${playername}",player.getName());
+
         Calendar now = Calendar.getInstance();
         TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
         now.setTimeZone(timeZone);
@@ -164,7 +184,7 @@ public class PluginUtils {
      * 获取求婚所需要的金额
      * @return
      */
-    public static Double getproposeMoney(){
+    public static Double getProposeMoney(){
         Object proposeMoneyOBJ = SocietyPlugin.getInstance().getConfig().get("proposeMoney");
         if(proposeMoneyOBJ instanceof Integer){
             return ((Integer) proposeMoneyOBJ).doubleValue();
@@ -179,7 +199,9 @@ public class PluginUtils {
      * @return
      */
     public static Item parseItemByList(List<Object> list){
-        if(list == null) return null;
+        if(list == null) {
+            return null;
+        }
         String itemIDMetaStr = (String) list.get(0);
         String[] split = itemIDMetaStr.split("-");
         int itemID = Integer.parseInt(split[0]);
@@ -188,5 +210,42 @@ public class PluginUtils {
         String nbtHexString = (String) list.get(2);
         byte[] bytes = Binary.hexStringToBytes(nbtHexString);
         return Item.get(itemID,meta,count,bytes);
+    }
+
+    /**
+     * 注册表单类型
+     * @param windowType
+     * @param clazz
+     */
+    public static void addWindowClass(WindowType windowType,Class clazz){
+        HashMap<WindowType, Class> registerWindow = WindowManager.getRegisterWindow();
+        if(!registerWindow.containsKey(windowType)){
+            registerWindow.put(windowType,clazz);
+            SocietyPlugin.getInstance().getLogger().debug("成功注册窗口 "+windowType.windowName+" 绑定的Class "+clazz.getPackage().getName()+"."+clazz.getSimpleName());
+        }
+    }
+
+    public static String getLanguageInfo(String key){
+       return getLanguageInfo(null,key);
+    }
+
+    public static String getLanguageInfo(Player player,String key){
+        if(player != null){
+            String languageInfo = society.getLanguageConfig().getString(key, key);
+            return formatText(languageInfo, player);
+        }
+        return society.getLanguageConfig().getString(key,key);
+    }
+
+    public static String getWindowConfigInfo(String key){
+        return getWindowConfigInfo(null,key);
+    }
+
+    public static String getWindowConfigInfo(Player player,String key){
+        if(player != null){
+            String windowInfo = society.getWindowConfig().getString(key, key);
+            return formatText(windowInfo,player);
+        }
+        return society.getWindowConfig().getString(key,key);
     }
 }

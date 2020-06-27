@@ -72,7 +72,7 @@ public class TitleUtils {
                 }
             }
         }
-        String titleConfigPath = PluginUtils.CONFIGFOLDER + "Title.yml";
+        String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
         SocietyPlugin.getInstance().setTitleConfig(new Config(titleConfigPath,Config.YAML));
 
         titleConfig.getAll().forEach((key,list)->{

@@ -4,10 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockWallSign;
-import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.form.element.ElementDropdown;
-import cn.nukkit.form.element.ElementInput;
-import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
@@ -24,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 
-import static com.zixuan007.society.utils.PluginUtils.SOCIETYFOLDER;
+import static com.zixuan007.society.utils.PluginUtils.SOCIETY_FOLDER;
 import static com.zixuan007.society.utils.PluginUtils.formatText;
 
 /**
@@ -33,13 +29,14 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
 public class SocietyUtils {
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     public static ArrayList<Society> societies = new ArrayList<>();
+
     /**
      * 指定的公会名称是否存在
      * @param societyName 公会名
      * @return
      */
     public static Boolean isSocietyNameExist(String societyName) {
-        String filePath = SOCIETYFOLDER + societyName + ".yml";
+        String filePath = SOCIETY_FOLDER + societyName + ".yml";
         File societyFile = new File(filePath);
         return Boolean.valueOf(societyFile.exists());
     }
@@ -263,7 +260,7 @@ public class SocietyUtils {
      * @param societyName 公会名称
      */
     public static void removeSociety(String societyName) {
-        String path = SOCIETYFOLDER + societyName + ".yml";
+        String path = SOCIETY_FOLDER + societyName + ".yml";
         File file = new File(path);
         System.gc();
         boolean isdelete = file.delete();
@@ -461,7 +458,7 @@ public class SocietyUtils {
      * 加载公会配置文件
      */
     public static void loadSocietyConfig() {
-        File societyFolder = new File(PluginUtils.SOCIETYFOLDER);
+        File societyFolder = new File(PluginUtils.SOCIETY_FOLDER);
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         if (!societyFolder.exists()) societyFolder.mkdirs();
         File[] files = societyFolder.listFiles();
