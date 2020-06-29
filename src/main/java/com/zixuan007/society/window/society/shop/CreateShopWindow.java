@@ -5,22 +5,35 @@ import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
+import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.item.Item;
 import com.zixuan007.society.domain.ItemIDSunName;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.society.MessageWindow;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class CreateShopWindow extends CustomWindow {
+/**
+ * @author zixuan007
+ */
+public class CreateShopWindow extends CustomWindow implements WindowLoader {
     private transient Player player;
 
     public CreateShopWindow(Player player) {
-        super("公会商店");
+        super(PluginUtils.getWindowConfigInfo("createShopWindow.title"));
+
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
         addElement(new ElementInput("","售卖物品的价格"));
+        Player player= (Player) objects[0];
         this.player=player;
         ArrayList<String> itemName = new ArrayList<>();
         for (Map.Entry<Integer, Item> entry : player.getInventory().getContents().entrySet()) {
@@ -34,6 +47,7 @@ public class CreateShopWindow extends CustomWindow {
         }
         addElement(new ElementDropdown("背包物品",itemName));
         addElement(new ElementInput("","请写入物品数量"));
+        return this;
     }
 
     @Override
@@ -82,4 +96,6 @@ public class CreateShopWindow extends CustomWindow {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+
 }

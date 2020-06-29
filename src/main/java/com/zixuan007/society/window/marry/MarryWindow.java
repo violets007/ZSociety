@@ -23,23 +23,24 @@ import java.util.Comparator;
  */
 public class MarryWindow extends SimpleWindow implements WindowLoader {
     public MarryWindow() {
-        super( PluginUtils.getWindowConfigInfo("marryWindow.title"), "");
+        super(PluginUtils.getWindowConfigInfo("marryWindow.title"), "");
     }
 
 
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        ElementButtonImageData buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_ProposeButton_ImgPath);
-        addButton(new ElementButton(Lang.marryWindow_ProposeButton,buttonImageData));
-        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_AddPublicFundsButton_ImgPath);
-        addButton(new ElementButton(Lang.marryWindow_AddPublicFundsButton,buttonImageData));
-        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_TransferButton_ImgPath);
-        addButton(new ElementButton(Lang.marryWindow_TransferButton,buttonImageData));
-        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_DivorceMarryButton_ImgPath);
-        addButton(new ElementButton(Lang.marryWindow_DivorceMarryButton,buttonImageData));
-        buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_MoneyRankWindowButton_ImgPath);
-        addButton(new ElementButton(Lang.marryWindow_MoneyRankWindowButton,buttonImageData));
+        ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("marryWindow.propose.button.imgPath"));
+        ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("marryWindow.addPublicFunds.button.imgPath"));
+        ElementButtonImageData img3 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("marryWindow.transfer.button.imgPath"));
+        ElementButtonImageData img4 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("marryWindow.divorceMarry.button.imgPath"));
+        ElementButtonImageData img5 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("marryWindow.moneyRankWindow.button.imgPath"));
+
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryWindow.propose.button"),img1));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryWindow.addPublicFunds.button"),img2));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryWindow.transfer.button"),img3));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryWindow.divorceMarry.button"),img4));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryWindow.moneyRankWindow.button"),img5));
         return this;
     }
 
@@ -64,12 +65,12 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getAddPublicFunds());
                 break;
             case 2:
-                if(!MarryUtils.isMarry(player.getName())){
+                Marry marry;
+                if(!MarryUtils.isMarry(player.getName()) ){
                     player.showFormWindow(WindowManager.getMessageWindow("§c您当前还没有伴侣,请先求婚",this,"返回上级"));
                     return;
                 }
-                Marry marry = MarryUtils.getMarryByName(player.getName());
-
+                marry= MarryUtils.getMarryByName(player.getName());
                 String recipientName = marry.getRecipient();
                 String proposeName = marry.getPropose();
                 if(PluginUtils.isOnlineByName(recipientName) && PluginUtils.isOnlineByName(proposeName)){
@@ -101,15 +102,11 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                     player.showFormWindow(WindowManager.getMessageWindow("§c当前还没有一对夫妻",this,"返回上级"));
                     return;
                 }
-                Collections.sort(MarryUtils.marrys, new Comparator<Marry>() {
-                    @Override
-                    public int compare(Marry marry1, Marry marry2) {
-                        return (marry1.getMoney() > marry2.getMoney()) ? -1:(marry2.getMoney()<marry1.getMoney())?1:0;
-                    }
-                });
+                MarryUtils.marrys.sort((marry1, marry2) -> (marry1.getMoney() > marry2.getMoney()) ? -1 : (marry2.getMoney() < marry1.getMoney()) ? 1 : 0);
                 StringBuilder sb = new StringBuilder();
                 sb.append("§l§d夫妻公共资产排名§f(§c前五§f)\n");
-                for (int i = 0; i < MarryUtils.marrys.size() && i <= 4; i++) {
+                int rankNumber=4;
+                for (int i = 0; i < MarryUtils.marrys.size() && i <= rankNumber; i++) {
                     Marry marry1 = MarryUtils.marrys.get(i);
                     sb.append("§f丈夫 "+marry1.getPropose()+" §f妻子 §a" + marry1.getRecipient() + " §f公会经济 §b" + marry1.getMoney() + "\n");
                 }

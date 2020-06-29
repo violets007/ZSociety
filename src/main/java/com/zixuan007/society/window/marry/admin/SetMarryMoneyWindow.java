@@ -6,10 +6,13 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Marry;
 import com.zixuan007.society.utils.MarryUtils;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 
 import java.util.ArrayList;
@@ -17,9 +20,16 @@ import java.util.ArrayList;
 /**
  * @author zixuan007
  */
-public class SetMarryMoneyWindow extends CustomWindow {
+public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
+
     public SetMarryMoneyWindow() {
-        super("设置夫妻资产窗口");
+        super(PluginUtils.getWindowConfigInfo("setMarryMoneyWindow.title"));
+
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
         if (MarryUtils.marrys.size() > 0) {
             ArrayList<String> midList = new ArrayList<>();
             for (Marry marry : MarryUtils.marrys) {
@@ -30,6 +40,7 @@ public class SetMarryMoneyWindow extends CustomWindow {
         }else{
             addElement(new ElementLabel("当前还没有一对夫妻"));
         }
+        return this;
     }
 
     @Override
@@ -48,7 +59,7 @@ public class SetMarryMoneyWindow extends CustomWindow {
         int mid = Integer.parseInt(midStr);
         Integer money = Integer.parseInt(moneyStr);
 
-        Marry marry = MarryUtils.getMarryByID(mid);
+        Marry marry = MarryUtils.getMarryById(mid);
         if(marry == null){
             player.showFormWindow(WindowManager.getMessageWindow("§c当前夫妻已经离婚,请设置其他的情侣",null,"关闭"));
             return;
@@ -61,4 +72,6 @@ public class SetMarryMoneyWindow extends CustomWindow {
 
         player.showFormWindow(WindowManager.getMessageWindow("§a成功设置指定夫妻资产为 §e"+marry.getMoney(),null,"关闭"));
     }
+
+
 }

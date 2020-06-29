@@ -4,12 +4,14 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.event.marry.PlayerMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.ModalWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import me.onebone.economyapi.EconomyAPI;
 
@@ -17,11 +19,19 @@ import java.util.Date;
 
 /**
  * 结婚功能界面
+ * @author zixuan007
  */
-public class ProposeWindow extends CustomWindow {
+public class ProposeWindow extends CustomWindow implements WindowLoader {
     public ProposeWindow() {
-        super(Lang.marryWindow_Propose_Title);
+        super(PluginUtils.getWindowConfigInfo("proposeWindow.title"));
+
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
         addElement(new ElementInput("","被求婚者姓名"));
+        return this;
     }
 
     @Override
@@ -56,4 +66,6 @@ public class ProposeWindow extends CustomWindow {
         });
         player1.showFormWindow(affrimWindow);
     }
+
+
 }

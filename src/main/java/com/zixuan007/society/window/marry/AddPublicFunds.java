@@ -3,21 +3,29 @@ package com.zixuan007.society.window.marry;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
-import com.zixuan007.society.domain.Lang;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Marry;
 import com.zixuan007.society.utils.MarryUtils;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.CustomWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import me.onebone.economyapi.EconomyAPI;
 
 /**
  * @author zixuan007
  */
-public class AddPublicFunds extends CustomWindow {
+public class AddPublicFunds extends CustomWindow implements WindowLoader {
     public AddPublicFunds() {
-        super(Lang.AddPublicFundsWindow_Title);
-        addElement(new ElementInput("","请输入增加的金额"));
+        super(PluginUtils.getWindowConfigInfo("addPublicFunds.title"));
 
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
+        addElement(new ElementInput("","请输入增加的金额"));
+        return this;
     }
 
     @Override
@@ -35,4 +43,6 @@ public class AddPublicFunds extends CustomWindow {
         MarryUtils.saveMarry(marry);
         player.showFormWindow(WindowManager.getMessageWindow("§a贡献 §b"+money+" §a成功",this,"返回上级"));
     }
+
+
 }

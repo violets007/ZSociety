@@ -33,7 +33,7 @@ public class SocietyPlugin extends PluginBase {
     private Config config;
     private final List<Config> societyConfigList = new ArrayList<>();
     private Config titleConfig;
-    private Config LangConfig;
+    private Config langConfig;
     private Config languageConfig;
     private Config windowConfig;
     private Config marryConfig;
@@ -94,7 +94,7 @@ public class SocietyPlugin extends PluginBase {
      * 注册插件命令
      */
     public void registerCommand() {
-        getServer().getCommandMap().register("society",  new MainCommand(), "公会");
+        getServer().getCommandMap().register("society",  new SocietyCommand(), "公会");
         getServer().getCommandMap().register("title",  new TitleCommand(), "称号");
         getServer().getCommandMap().register("marry",  new MarryCommand(), "结婚");
         getServer().getCommandMap().register("privilege",  new VipCommand(), "特权");
@@ -116,7 +116,7 @@ public class SocietyPlugin extends PluginBase {
         String windowConfig=PluginUtils.CONFIG_FOLDER+"WindowConfig.yml";
 
         this.titleConfig = new Config(titleConfigPath);
-        this.LangConfig = new Config(langPath);
+        this.langConfig = new Config(langPath);
         this.titleShopConfig = new Config(titleShopPath);
         this.marryConfig=new Config(marryPath);
         this.societyShopConfig=new Config(societyShopConfigPath);
@@ -167,6 +167,9 @@ public class SocietyPlugin extends PluginBase {
 
     }
 
+    /**
+     * 注册指定的窗口
+     */
     public void registerWindow(){
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeWindow.class);
         PluginUtils.addWindowClass(WindowType.ADVANCED_PRIVILEGE_WINDOW, AdvancedPrivilegeWindow.class);
@@ -203,7 +206,7 @@ public class SocietyPlugin extends PluginBase {
     }
 
     public Config getLangConfig() {
-        return this.LangConfig;
+        return this.langConfig;
     }
 
     public List<Config> getSocietyConfigList() {

@@ -3,23 +3,38 @@ package com.zixuan007.society.window.society;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import me.onebone.economyapi.EconomyAPI;
 
-public class ContributionWindow extends CustomWindow {
+/**
+ * @author zixuan007
+ */
+public class ContributionWindow extends CustomWindow implements WindowLoader {
     private long sid;
 
-    public ContributionWindow(long sid) {
-        super(Lang.contributionWindow_Title);
-        this.sid = sid;
-        this.addElement(new ElementInput("", "贡献金额"));
+    public ContributionWindow() {
+        super(PluginUtils.getWindowConfigInfo("contributionWindow.title"));
+
     }
 
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
+        Player player= (Player) objects[0];
+        this.sid = SocietyUtils.getSocietyByPlayerName(player.getName()).getSid();
+        this.addElement(new ElementInput("", "贡献金额"));
+        return this;
+    }
+
+    @Override
     public void onClick(FormResponseCustom response, Player player) {
         String strMoney = response.getInputResponse(0);
         MessageWindow messageWindow = null;
@@ -52,4 +67,6 @@ public class ContributionWindow extends CustomWindow {
             player.showFormWindow(messageWindow);
         }
     }
+
+
 }

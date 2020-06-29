@@ -12,10 +12,14 @@ import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.ModalWindow;
 import com.zixuan007.society.window.SimpleWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import java.util.List;
 
-public class SocietyListWindow extends SimpleWindow {
+/**
+ * @author zixuan007
+ */
+public class SocietyListWindow extends SimpleWindow implements WindowLoader {
     private List<Society> societyList;
     private int cuurentPage;
     private int limit = 10;
@@ -23,27 +27,44 @@ public class SocietyListWindow extends SimpleWindow {
 
     public SocietyListWindow(String title, String content, int cuurentPage, int totalPage, List<Society> societyList) {
         super(title, content);
-        this.cuurentPage = cuurentPage;
-        this.totalPage = totalPage;
-        if (cuurentPage != 1) addButton(new ElementButton("上一页"));
-        this.societyList = societyList;
-        for (Society society : societyList) {
-            addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName()));
-        }
-        if (cuurentPage < totalPage) addButton(new ElementButton("下一页"));
+
 
     }
 
+    @Override
+    public FormWindow init(Object... objects) {
+        getButtons().clear();
+        int currentPage = (int) objects[0];
+        int totalPage = (int) objects[0];
+        this.cuurentPage = currentPage;
+        this.totalPage = totalPage;
+        if (currentPage != 1) {
+            addButton(new ElementButton("上一页"));
+        }
+        this.societyList = SocietyUtils.societies;
+        for (Society society : societyList) {
+            addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName()));
+        }
+        if (currentPage < totalPage) {
+            addButton(new ElementButton("下一页"));
+        }
+        return this;
+    }
+
+
     public void nextPage(int cuurentPage, Player player) {
         SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(++cuurentPage, getParent());
-        player.showFormWindow((FormWindow)societyListWindow);
+        player.showFormWindow(societyListWindow);
     }
 
     public void upPage(int cuurentPage, Player player) {
         SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(--cuurentPage, getParent());
-        player.showFormWindow((FormWindow)societyListWindow);
+        player.showFormWindow(societyListWindow);
     }
 
+
+
+    @Override
     public void onClick(int id, Player player) {
         Society society;
         if (id == 0 && this.cuurentPage != 1) {
@@ -70,7 +91,9 @@ public class SocietyListWindow extends SimpleWindow {
         }
         affirmWindow.setButtonClickedListener((affirm, player1) -> {
             if (affirm.booleanValue()) {
-                if (PluginUtils.isOnlineByName(society.getPresidentName())) Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(">> §a玩家 §b"+player1.getName()+" §a正在申请进入公会,§c请审核");
+                if (PluginUtils.isOnlineByName(society.getPresidentName())) {
+                    Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(">> §a玩家 §b"+player1.getName()+" §a正在申请进入公会,§c请审核");
+                }
                 SocietyPlugin.getInstance().getServer().getPluginManager().callEvent((Event)new PlayerApplyJoinSocietyEvent(player1, society));
             } else {
                 player1.showFormWindow(getParent());
@@ -96,6 +119,8 @@ public class SocietyListWindow extends SimpleWindow {
     public void setTotalPage(int totalPage) {
         this.totalPage = totalPage;
     }
+
+
 }
 
 

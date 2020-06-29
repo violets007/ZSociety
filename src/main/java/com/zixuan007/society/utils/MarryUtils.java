@@ -7,14 +7,22 @@ import com.zixuan007.society.domain.Marry;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * 结婚工具类
  * @author zixuan007
  */
 public class MarryUtils{
-    public static ArrayList<Marry> marrys=new ArrayList<Marry>();
-    public static HashMap<String,String> proposeFailName = new HashMap<String, String>(); //求婚失败玩家
+
+    public static ArrayList<Marry> marrys= new ArrayList<>();
+    public static LinkedHashMap<String,Config> marrysConfig = new LinkedHashMap<>();
+
+    /**
+     * 求婚失败玩家
+     */
+    public static HashMap<String,String> proposeFailName = new HashMap<>();
+
     /**
      * 检测指定玩家是否结婚
      * @param playerName
@@ -34,7 +42,7 @@ public class MarryUtils{
      * @param mid
      * @return
      */
-    public static Marry getMarryByID(long mid){
+    public static Marry getMarryById(long mid){
         for(Marry marry:marrys){
             if(marry.getMid() == mid){
                 return marry;
@@ -63,8 +71,9 @@ public class MarryUtils{
      */
     public static Config getMarryConfigByName(String playerName){
         Marry marry=getMarryByName(playerName);
-        if(marry != null)
-            return getMarryConfigByMID(marry.getMid());
+        if(marry != null) {
+            return getMarryConfigByMid(marry.getMid());
+        }
         return null;
     }
 
@@ -73,12 +82,13 @@ public class MarryUtils{
      * @param mid 结婚ID
      * @return
      */
-    public static Config getMarryConfigByMID(long mid){
-        Marry marry= getMarryByID(mid);
-        if(marry == null) return null;
+    public static Config getMarryConfigByMid(long mid){
+        Marry marry= getMarryById(mid);
+        if(marry == null) {
+            return null;
+        }
         String configName=marry.getPropose()+"_"+marry.getRecipient()+".yml";
-        Config config=new Config(configName);
-        return config;
+        return  marrysConfig.get(configName);
     }
 
     /**
@@ -87,11 +97,14 @@ public class MarryUtils{
     public static void loadMarryConfig(){
         String marryFolder = PluginUtils.MARRY_FOLDER;
         File file = new File(marryFolder);
-        if(!file.exists()) file.mkdirs();
+        if(!file.exists()) {
+            file.mkdirs();
+        }
         File[] files = file.listFiles();
         for (File marryFile : files) {
             if(marryFile.getName().endsWith(".yml")) {
                 Config config = new Config(marryFile);
+                marrysConfig.put(marryFile.getName(),config);
                 Marry marry = Marry.init(config);
                 marrys.add(marry);
             }
@@ -118,7 +131,7 @@ public class MarryUtils{
 
     /**
      * 保存指定的公会数据
-     * @param marry
+     * @param marry 结婚实体对象
      */
     public static void saveMarry(Marry marry){
         String propose = marry.getPropose();
@@ -138,26 +151,29 @@ public class MarryUtils{
 
     /**
      * 获取下一级MID
-     * @return
+     * @return nextMidNumber
      */
-    public static long nextMID(){
+    public static long nextMid(){
         long id=0;
         for (Marry marry : marrys) {
-            if(marry.getMid() > id) id=marry.getMid();
+            if(marry.getMid() > id) {
+                id=marry.getMid();
+            }
         }
         return ++id;
     }
 
     /**
      * 获取指定玩家的性别
-     * @param playerName
-     * @return
+     * @param playerName 玩家名称
+     * @return -1 未知  0 女 1男
      */
     public static int getGenderByPlayerName(String playerName){
         Config marryConfig = SocietyPlugin.getInstance().getMarryConfig();
-        if(marryConfig.get(playerName) == null) return -1;
-        int gender = (int) marryConfig.get(playerName);
-        return gender;
+        if(marryConfig.get(playerName) == null) {
+            return -1;
+        }
+        return marryConfig.getInt(playerName);
     }
 
     /**

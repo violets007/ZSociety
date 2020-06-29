@@ -21,20 +21,9 @@ import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.SocietyListWindow;
 import com.zixuan007.society.window.society.SocietyWindow;
 import com.zixuan007.society.window.society.president.PresidentWindow;
-import com.zixuan007.society.window.society.president.RemoveMemberWindow;
 import com.zixuan007.society.window.society.president.SetJobWindow;
 import com.zixuan007.society.window.society.shop.CreateShopWindow;
-import com.zixuan007.society.window.title.TitleWindow;
-import com.zixuan007.society.window.title.admin.CreateTitleShopWindow;
-import com.zixuan007.society.window.title.admin.RemoveTitleWindow;
-import com.zixuan007.society.window.title.admin.SetTitleWindow;
-import com.zixuan007.society.window.title.admin.TitleManagerWindow;
-import com.zixuan007.society.window.vip.AdvancedPrivilegeWindow;
-import com.zixuan007.society.window.vip.PrivilegeWindow;
-import com.zixuan007.society.window.vip.admin.PrivilegeListWindow;
 import com.zixuan007.society.window.vip.admin.PrivilegeManagerWindow;
-import com.zixuan007.society.window.vip.admin.RemovePrivilegeWindow;
-import com.zixuan007.society.window.vip.admin.SetPrivilegeWindow;
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,7 +79,7 @@ public class WindowManager {
 
 
     public static SocietyWindow getSocietyWindow(Player player) {
-        return new SocietyWindow(player);
+        return new SocietyWindow();
     }
 
     public static MessageWindow getMessageWindow(String content, FormWindow formWindow, String buttonName) {
@@ -124,7 +113,7 @@ public class WindowManager {
     }
 
     public static MemberListWindow getMemberListWindow(Society society, List<String> memberList, FormWindow formWindow) {
-        MemberListWindow memberListWindow = new MemberListWindow(society, memberList);
+        MemberListWindow memberListWindow = new MemberListWindow();
         memberListWindow.setBack(true);
         memberListWindow.setParent(formWindow);
         return memberListWindow;
@@ -145,7 +134,7 @@ public class WindowManager {
     }
 
     public static PresidentWindow getChairmanWindow(long sid) {
-        PresidentWindow chairmanWindow = new PresidentWindow(sid);
+        PresidentWindow chairmanWindow = new PresidentWindow();
         return chairmanWindow;
     }
 
@@ -165,37 +154,9 @@ public class WindowManager {
         return new ContributionWindow(sid);
     }
 
-    public static RemoveMemberWindow getRemoveMemberWindow(long sid, List<String> memberList) {
-        return new RemoveMemberWindow(sid, memberList);
-    }
-
-    public static TitleWindow getTitleWindow(String playerName){
-        return new TitleWindow(playerName);
-    }
-
-    public static TitleManagerWindow getTitleManagerWindow() {
-        TitleManagerWindow titleManagerWindow = new TitleManagerWindow();
-        return titleManagerWindow;
-    }
-
-    public static SetTitleWindow getSetTitleWindow(FormWindow formWindow) {
-        SetTitleWindow setTitleWindow = new SetTitleWindow();
-        setTitleWindow.setBack(true);
-        setTitleWindow.setParent(formWindow);
-        return setTitleWindow;
-    }
-
-    public static RemoveTitleWindow getRemoveTitleWindow(FormWindow formWindow) {
-        RemoveTitleWindow removeTitleWindow = new RemoveTitleWindow();
-        removeTitleWindow.setBack(true);
-        removeTitleWindow.setParent(formWindow);
-        return removeTitleWindow;
-    }
 
 
-    public static CreateTitleShopWindow getCreateTitleShopWindow() {
-        return new CreateTitleShopWindow();
-    }
+
 
     public static MarryWindow getMarryWindow(){
         return new MarryWindow();
@@ -213,29 +174,11 @@ public class WindowManager {
         return new MoneyRankWindow();
     }
 
-    public static SetPrivilegeWindow getSetPrivilegeWindow(){
-        return new SetPrivilegeWindow();
-    }
 
     public static PrivilegeManagerWindow getPrivilegeManagerWindow(){
         return new PrivilegeManagerWindow();
     }
 
-    public static RemovePrivilegeWindow getRemovePrivilegeWindow(){
-        return new RemovePrivilegeWindow();
-    }
-
-    public static PrivilegeWindow getVipWindow(){
-        return new PrivilegeWindow();
-    }
-
-    public static AdvancedPrivilegeWindow getSvipWindow(){
-        return new AdvancedPrivilegeWindow();
-    }
-
-    public static PrivilegeListWindow getPrivilegeListWindow(){
-        return new PrivilegeListWindow();
-    }
 
     public static CreateShopWindow getCreateShopWindow(Player player){
         return new CreateShopWindow(player);
@@ -245,7 +188,5 @@ public class WindowManager {
         return registerWindow;
     }
 
-    public static void setRegisterWindow(HashMap<WindowType, Class> registerWindow) {
-        WindowManager.registerWindow = registerWindow;
-    }
+
 }

@@ -10,25 +10,43 @@ import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.society.MessageWindow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class RemoveMemberWindow extends SimpleWindow {
-    public RemoveMemberWindow(long sid, List<String> memberList) {
-        super(Lang.removeMemberWindow_Title, "");
-        this.sid = sid;
-        Society society = SocietyUtils.getSocietysByID(sid);
-        for (String name : memberList) {
-            if (name.equals(society.getPresidentName()))
-                continue;
-            addButton(new ElementButton(name));
-        }
-    }
+/**
+ * @author zixuan007
+ */
+public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
     private long sid;
+
+    public RemoveMemberWindow() {
+        super(PluginUtils.getWindowConfigInfo("removeMemberWindow.title"), "");
+    }
+
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getButtons().clear();
+        Player player= (Player) objects[0];
+        Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
+        this.sid=society.getSid();
+        if(society.getPost() != null){
+            String[] memberList= society.getPost().entrySet().toArray(new String[0]);
+            for (String name : memberList) {
+                if (name.equals(society.getPresidentName())) {
+                    continue;
+                }
+                addButton(new ElementButton(name));
+            }
+        }
+        return this;
+    }
 
     @Override
     public void onClick(int id, Player player) {
@@ -38,11 +56,15 @@ public class RemoveMemberWindow extends SimpleWindow {
         society.saveData();
         MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功移除成员 §b" + playerName, getParent(), "返回上级");
         SocietyUtils.sendMemberTitle("§c成员: §b"+playerName+" 被踢出公会",society);
-        if(PluginUtils.isOnlineByName(playerName)) Server.getInstance().getPlayer(playerName).sendTitle("§c你被被踢出公会");
+        if(PluginUtils.isOnlineByName(playerName)) {
+            Server.getInstance().getPlayer(playerName).sendTitle("§c你被被踢出公会");
+        }
         player.showFormWindow((FormWindow)messageWindow);
         //移除玩家在此公会创建过的商店
         SocietyUtils.removeCreateShop(society,playerName);
     }
+
+
 }
 
 

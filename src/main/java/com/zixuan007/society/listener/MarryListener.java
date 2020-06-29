@@ -72,7 +72,7 @@ public class MarryListener implements Listener {
         String marryConfigPath = PluginUtils.MARRY_FOLDER + propose + "_" + recipient + ".yml";
         Config config = new Config(marryConfigPath, Config.YAML);
         Marry marry = new Marry();
-        marry.setMid(MarryUtils.nextMID());
+        marry.setMid(MarryUtils.nextMid());
         marry.setPropose(propose);
         marry.setRecipient(recipient);
         marry.setMoney(0D);
