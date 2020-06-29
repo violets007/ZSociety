@@ -4,15 +4,26 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.CustomWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 
-public class RemovePrivilegeWindow extends CustomWindow {
+/**
+ * @author zixuan007
+ */
+public class RemovePrivilegeWindow extends CustomWindow implements WindowLoader {
     public RemovePrivilegeWindow() {
-        super("移除玩家特权窗口");
+        super(PluginUtils.getWindowConfigInfo("removePrivilegeWindow.title"));
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
         addElement(new ElementInput("","玩家名称"));
+        return this;
     }
 
     @Override
@@ -31,4 +42,6 @@ public class RemovePrivilegeWindow extends CustomWindow {
 
         player.showFormWindow(WindowManager.getMessageWindow("§a成功移除 §b"+playerName+" §a的特权",this,"返回上级"));
     }
+
+
 }

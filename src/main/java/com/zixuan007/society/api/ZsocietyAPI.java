@@ -16,6 +16,7 @@ public class ZsocietyAPI {
     static {
         instance=new ZsocietyAPI();
     }
+
     /**
      * 获取公会名称
      * @param playerNmae 玩家名字
@@ -121,7 +122,5 @@ public class ZsocietyAPI {
         return instance;
     }
 
-    public static void setInstance(ZsocietyAPI instance) {
-        ZsocietyAPI.instance = instance;
-    }
+
 }

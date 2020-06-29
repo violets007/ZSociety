@@ -12,7 +12,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 
-
 public class CustomWindow extends FormWindowCustom implements ResponseListennerCustom {
     protected transient BiConsumer<FormResponseCustom, Player> buttonClickedListener = null;
     protected transient Consumer<Player> windowClosedListener = null;

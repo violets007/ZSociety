@@ -1,7 +1,17 @@
 package com.zixuan007.society.domain;
 
+/**
+ * @author zixuan007
+ */
+
 public enum VipType {
+    /**
+     * 普通特权
+     */
     VIP("VIP"),
+    /**
+     * 高级特权
+     */
     SVIP("SVIP");
 
     private String typeName;

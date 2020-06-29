@@ -5,6 +5,7 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,6 @@ public class TitleCommand extends Command {
     public TitleCommand() {
         super(COMMAND_NAME, "§e显示称号功能窗口");
         this.getCommandParameters().clear();
-        this.setPermission("op");
     }
 
     @Override
@@ -27,10 +27,10 @@ public class TitleCommand extends Command {
         if (name.equals(this.getName())) {
             ArrayList<String> titles = TitleUtils.titleList.get(player.getName());
             if(titles == null || titles.size() <= 0){
-                player.sendMessage(">> §c当前还没有称号,请先购买");
+                player.sendMessage(">> §c当前还没有称号,请先前往称号商店购买");
                 return true;
             }
-            player.showFormWindow(WindowManager.getTitleWindow(player.getName()));
+            player.showFormWindow(WindowManager.getFromWindow(WindowType.TITLE_WINDOW,player));
             return true;
         }
         return false;

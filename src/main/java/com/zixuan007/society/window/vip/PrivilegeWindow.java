@@ -6,6 +6,7 @@ import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Vip;
+import com.zixuan007.society.domain.VipType;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.SimpleWindow;
@@ -17,19 +18,19 @@ import com.zixuan007.society.window.WindowType;
  * VIP功能界面
  * @author zixuan007
  */
-public class VipWindow extends SimpleWindow implements WindowLoader {
-    public VipWindow() {
-        super(PluginUtils.getWindowConfigInfo("vipwindow.title"), "");
+public class PrivilegeWindow extends SimpleWindow implements WindowLoader {
+    public PrivilegeWindow() {
+        super(PluginUtils.getWindowConfigInfo("privilegeWindow.title"), "");
     }
 
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
         Player player = (Player) objects[0];
-        ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("vipwindow.survivalflight.button.imgpath"));
-        ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("vipwindow.viewvip.button.imgpath"));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo(player,"vipwindow.survivalflight.button"),img1));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo(player,"vipwindow.viewvip.button"),img2));
+        ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("privilegeWindow.survivalFlight.button.imgPath"));
+        ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("privilegeWindow.viewVip.button.imgPath"));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo(player,"privilegeWindow.survivalFlight.button"),img1));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo(player,"privilegeWindow.openInfo.button"),img2));
         return this;
     }
 
@@ -44,11 +45,13 @@ public class VipWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 1:
                 Vip privilege = PrivilegeUtils.getPivilegeByPlayerName(player.getName());
-                if (privilege.getVip_Type().equals("VIP")) {
-                   player.showFormWindow(WindowManager.getFromWindow(WindowType.PRIVILEGEWINDOW,player,privilege));
+                if (privilege != null &&privilege.getVip_Type().equals(VipType.VIP)) {
+                   player.showFormWindow(WindowManager.getFromWindow(WindowType.PRIVILEGE_WINDOW,player,privilege));
                 }else{
                     player.sendMessage(">> §c你不是VIP无法进行查看");
                 }
+                break;
+            default:
                 break;
         }
     }

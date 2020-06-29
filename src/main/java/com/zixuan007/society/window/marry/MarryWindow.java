@@ -4,12 +4,14 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Marry;
 import com.zixuan007.society.event.marry.DivorceMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 
 import java.util.Collections;
@@ -19,13 +21,15 @@ import java.util.Comparator;
  * 结婚功能窗口
  * @author zixuan007
  */
-public class MarryWindow extends SimpleWindow {
+public class MarryWindow extends SimpleWindow implements WindowLoader {
     public MarryWindow() {
-        super(Lang.marryWindow_Title, "");
-        init();
+        super( PluginUtils.getWindowConfigInfo("marryWindow.title"), "");
     }
 
-    public void init(){
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getButtons().clear();
         ElementButtonImageData buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_ProposeButton_ImgPath);
         addButton(new ElementButton(Lang.marryWindow_ProposeButton,buttonImageData));
         buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_AddPublicFundsButton_ImgPath);
@@ -36,6 +40,7 @@ public class MarryWindow extends SimpleWindow {
         addButton(new ElementButton(Lang.marryWindow_DivorceMarryButton,buttonImageData));
         buttonImageData = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,Lang.marryWindow_MoneyRankWindowButton_ImgPath);
         addButton(new ElementButton(Lang.marryWindow_MoneyRankWindowButton,buttonImageData));
+        return this;
     }
 
     @Override
@@ -64,6 +69,7 @@ public class MarryWindow extends SimpleWindow {
                     return;
                 }
                 Marry marry = MarryUtils.getMarryByName(player.getName());
+
                 String recipientName = marry.getRecipient();
                 String proposeName = marry.getPropose();
                 if(PluginUtils.isOnlineByName(recipientName) && PluginUtils.isOnlineByName(proposeName)){
@@ -113,6 +119,10 @@ public class MarryWindow extends SimpleWindow {
                 moneyRankWindow.setParent(this);
                 player.showFormWindow(moneyRankWindow);
                 break;
+            default:
+                break;
         }
     }
+
+
 }

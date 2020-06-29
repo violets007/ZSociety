@@ -16,7 +16,6 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
 
-import com.zixuan007.api.FloatingTextAPI;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.event.title.BuyTitleEvent;
 import com.zixuan007.society.event.title.CreateTitleShopEvent;
@@ -33,8 +32,8 @@ import me.onebone.economyapi.EconomyAPI;
  */
 public class TitleListener implements Listener {
 
-    private SocietyPlugin societyPlugin;
-    private ArrayList<String> affirmBuyTitlePlayer = new ArrayList<>();
+    private final SocietyPlugin societyPlugin;
+    private final ArrayList<String> affirmBuyTitlePlayer = new ArrayList<>();
 
     public TitleListener(SocietyPlugin societyPlugin) {
         this.societyPlugin = societyPlugin;
@@ -44,7 +43,7 @@ public class TitleListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         Config titleConfig = this.societyPlugin.getTitleConfig();
-        ArrayList<String> title = (ArrayList<String>) titleConfig.get(player.getName());
+        ArrayList<String> title = (ArrayList<String>) titleConfig.getStringList(player.getName());
         if (title == null) {
             titleConfig.set(player.getName(), new ArrayList<String>());
             titleConfig.save();
@@ -216,7 +215,6 @@ public class TitleListener implements Listener {
         ArrayList<String> textList = (ArrayList) config.getList("titleShopFormat");
         String signTitle = textList.get(1);
         signTitle = signTitle.replaceAll("\\$\\{title\\}", event.getTitle());
-        FloatingTextAPI.removeFloatingText(player, signTitle);
         player.sendMessage(">> §a移除商店成功");
     }
 

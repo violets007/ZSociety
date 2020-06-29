@@ -12,7 +12,6 @@ import com.zixuan007.society.window.WindowLoader;
  * @author zixuan007
  */
 public class PrivilegeInfoWindow extends SimpleWindow implements WindowLoader {
-    private Vip vip;
 
     public PrivilegeInfoWindow() {
         super("", "");
@@ -23,13 +22,12 @@ public class PrivilegeInfoWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         Player player = (Player) objects[0];
-        this.vip= (Vip) objects[1];
+        Vip vip = (Vip) objects[1];
         setTitle(PluginUtils.getWindowConfigInfo(player,"privilegeInfoWindow.title"));
-        StringBuilder sb=new StringBuilder();
-        sb.append("§6VID §b"+vip.getVid()+"\n");
-        sb.append("§6持有时间 §b"+vip.getHoldTime()+"\n");
-        sb.append("§6特权类型 §b"+vip.getVip_Type().getTypeName()+"\n");
-        setContent(sb.toString());
+        String sb = "§6VID §b" + vip.getVid() + "\n" +
+                "§6持有时间 §b" + vip.getHoldTime() + "\n" +
+                "§6特权类型 §b" + vip.getVip_Type().getTypeName() + "\n";
+        setContent(sb);
         return this;
     }
 }

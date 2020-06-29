@@ -2,74 +2,122 @@
 
 #########公会窗口配置#########
 #公会功能窗口标题
-societywindow.title: §e公会功能列表
+societyWindow.title: §e公会功能列表
 
-#创建公会按钮内容
-societywindow.createsociety.button: §e创建公会
-#管理公会按钮内容
-societywindow.managersociety.button: §e管理公会
-#退出公会按钮内容
-societywindow.quitsociety.button: §e退出公会
-#加入公会按钮内容
-societywindow.joinsociety.button: §e加入公会
-#公会成员列表按钮内容
-societywindow.menberlist.button: §e公会成员列表
-#公会经济贡献排行榜按钮内容
-societywindow.contributionranking.button: §e公会经济贡献排行榜
-#公会等级排行榜按钮内容
-societywindow.levelrank.button: §e公会等级排行榜
-#贡献经济按钮内容
-societywindow.contribution.button: §e贡献经济
+#公会功能窗口按钮1
+societyWindow.createSociety.button: §e创建公会
+#公会功能窗口按钮2
+societyWindow.managerSociety.button: §e管理公会
+#公会功能窗口按钮3
+societyWindow.quitSociety.button: §e退出公会
+#公会功能窗口按钮4
+societyWindow.joinSociety.button: §e加入公会
+#公会功能窗口按钮5
+societyWindow.menberList.button: §e公会成员列表
+#公会功能窗口按钮6
+societyWindow.contributionRanking.button: §e公会经济贡献排行榜
+#公会功能窗口按钮7
+societyWindow.levelRank.button: §e公会等级排行榜
+#公会功能窗口按钮8
+societyWindow.contribution.button: §e贡献经济
 
 
-
-#创建公会按钮图片路径
-societywindow.createsociety.button.imgpath: textures/ui/book.edit.default
+#创建公会按钮1图片路径
+societyWindow.createSociety.button.imgPath: textures/ui/book.edit.default
 #管理公会按钮图片路径
-societywindow.managersociety.button.imgpath: textures/ui/code.tynker.default
+societyWindow.managerSociety.button.imgPath: textures/ui/code.tynker.default
 #退出公会按钮图片路径
-societywindow.quitsociety.button.imgpath: textures/ui/cancel
+societyWindow.quitSociety.button.imgPath: textures/ui/cancel
 #加入公会按钮图片路径
-societywindow.joinsociety.button.imgpath: textures/ui/controller.glyph.color
+societyWindow.joinSociety.button.imgPath: textures/ui/controller.glyph.color
 #公会成员列表按钮图片路径
-societywindow.menberlist.button.imgpath: textures/ui/copy
+societyWindow.memberList.button.imgPath: textures/ui/copy
 #公会经济贡献排行榜按钮图片路径
-societywindow.contributionranking.button.imgpath: textures/ui/recipe.book.icon
+societyWindow.contributionRanking.button.imgPath: textures/ui/recipe.book.icon
 #公会等级排行榜按钮图片
-societywindow.levelrank.button.imgpath: textures/ui/feedIcon
+societyWindow.levelRank.button.imgPath: textures/ui/feedIcon
 #贡献经济按钮内容图片
-societywindow.contribution.button.imgpath: textures/ui/dev.glyph.color
+societyWindow.contribution.button.imgPath: textures/ui/dev.glyph.color
 
 
 #########特权窗口配置#########
 #VIP窗口标题
-vipwindow.title: §eVIP特权窗口
+privilegeWindow.title: §eVIP特权
 #SVIP窗口标题
-svipwindow.title: §eSVIP特权窗口
+advancedPrivilegeWindow.title: §eSVIP特权
 #VIP信息窗口
 privilegeInfoWindow.title: §l§b${playername} §r§e的特权信息
+#特权管理窗口标题
+privilegeManagerWindow.title: §e特权管理
+#特权信息列表窗口标题
+privilegeListWindow.title: §e特权信息列表
+#移除玩家特权窗口标题
+removePrivilegeWindow.title: §e移除玩家特权
+#设置玩家特权窗口标题
+setPrivilegeWindow.title: §e设置玩家特权
 
 #VIP窗口生存飞行按钮
-vipwindow.survivalflight.button: ${flight} §e生存飞行
+privilegeWindow.survivalFlight.button: ${flight} §e生存飞行
 #VIP窗口查看VIP信息按钮
-vipwindow.viewvip.button: §e我的VIP信息
+privilegeWindow.openInfo.button: §e我的VIP信息
 #SVIP窗口打开VIP功能窗口按钮
-svipwindow.openvip.button: §e打开VIP功能
+advancedPrivilegeWindow.openVip.button: §e打开VIP功能
 #SVIP窗口开关创造模式按钮
-svipwindow.switchcreate.button: ${create} §e创造模式
+advancedPrivilegeWindow.switchCreate.button: ${create} §e创造模式
 #SVIP窗口SVIP信息按钮
-svipwindow.opensvip.button: §e我的SVIP信息
+advancedPrivilegeWindow.openInfo.button: §e我的SVIP信息
+#特权管理窗口设置设置特权按钮
+privilegeManagerWindow.setPrivilege.button: §e设置特权
+#特权管理窗口移除特权按钮
+privilegeManagerWindow.removePrivilege.button: §e移除特权
+#特权管理窗口查看拥有特权玩家
+privilegeManagerWindow.viewPrivilegePlayer.button: §e查看拥有特权玩家
+
 
 #VIP窗口生存生存飞行图片路径
-vipwindow.survivalflight.button.imgpath: textures/ui/code_makecode_default.png
+privilegeWindow.survivalFlight.button.imgPath: textures/ui/code_makecode_default.png
 #VIP窗口查看VIP信息按钮图片
-vipwindow.viewvip.button.imgpath: textures/ui/Friend1.png
+privilegeWindow.viewVip.button.imgPath: textures/ui/Friend1.png
 #SVIP窗口VIP功能图片路径
-svipwindow.openvip.button.imgpath: textures/ui/heart_flash.png
+advancedPrivilegeWindow.openVip.button.imgPath: textures/ui/heart_flash.png
 #SVIP窗口开启创造模式图片路径
-svipwindow.switchcreate.button.imgpath: textures/ui/icon_armor.png
+advancedPrivilegeWindow.switchCreate.button.imgPath: textures/ui/icon_armor.png
 #SVIP窗口SVIP信息按钮图片路径
-svipwindow.opensvip.button.imgpath: textures/ui/Friend1.png
+advancedPrivilegeWindow.openInfo.button.imgPath: textures/ui/Friend1.png
+#特权管理窗口按钮1图片路径
+privilegeManagerWindow.setPrivilege.button.imgPath: textures/ui/Friend1.png
+#特权管理窗口按钮2图片路径
+privilegeManagerWindow.removePrivilege.button.imgPath: textures/ui/Friend1.png
+#特权管理窗口按钮3图片路径
+privilegeManagerWindow.viewPrivilegePlayer.button.imgPath: textures/ui/Friend1.png
 
 
+#########称号窗口配置#########
+#称号列表窗口标题
+titleWindow.title: §e称号列表
+#称号管理窗口标题
+titleManagerWindow.title: §e称号管理
+#设置称号窗口标题
+setTitleWindow.title: §e设置称号
+#移除称号窗口标题
+removeTitleWindow.title: §e移除称号
+#创建称号商店窗口标题
+createTitleShopWindow.title: §e创建称号商店
 
+#称号管理窗口按钮1
+titleManagerWindow.setTitle.button: §e设置称号
+#称号管理窗口按钮2
+titleManagerWindow.removeTitle.button: §e移除称号
+#称号管理窗口按钮3
+titleManagerWindow.createTitleShop.button: §e创建称号商店
+
+#称号管理窗口按钮1图片路径
+titleManagerWindow.setTitle.button.imgPath: textures/ui/Friend1.png
+#称号管理窗口按钮2图片路径
+titleManagerWindow.removeTitle.button.imgPath: textures/ui/Friend1.png
+#称号管理窗口按钮3图片路径
+titleManagerWindow.createTitleShop.button.imgPath: textures/ui/Friend1.png
+
+
+#########结婚窗口配置#########
+marryWindow.title: §e结婚窗口

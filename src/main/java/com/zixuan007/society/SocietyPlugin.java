@@ -5,14 +5,20 @@ import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.*;
+import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.listener.*;
 import com.zixuan007.society.task.ShowTask;
 import com.zixuan007.society.task.CheckPrivilegeTimeTask;
 import com.zixuan007.society.utils.*;
 import com.zixuan007.society.window.WindowType;
+import com.zixuan007.society.window.title.TitleWindow;
 import com.zixuan007.society.window.vip.PrivilegeInfoWindow;
-import com.zixuan007.society.window.vip.SvipWindow;
-import com.zixuan007.society.window.vip.VipWindow;
+import com.zixuan007.society.window.vip.AdvancedPrivilegeWindow;
+import com.zixuan007.society.window.vip.PrivilegeWindow;
+import com.zixuan007.society.window.vip.admin.PrivilegeListWindow;
+import com.zixuan007.society.window.vip.admin.PrivilegeManagerWindow;
+import com.zixuan007.society.window.vip.admin.RemovePrivilegeWindow;
+import com.zixuan007.society.window.vip.admin.SetPrivilegeWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,7 +31,7 @@ import java.util.List;
 public class SocietyPlugin extends PluginBase {
 
     private Config config;
-    private List<Config> societyConfigList = new ArrayList<>();
+    private final List<Config> societyConfigList = new ArrayList<>();
     private Config titleConfig;
     private Config LangConfig;
     private Config languageConfig;
@@ -45,7 +51,7 @@ public class SocietyPlugin extends PluginBase {
     @Override
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
-        SocietyUtils.societies.forEach((society) -> { society.saveData(); });
+        SocietyUtils.societies.forEach(Society::saveData);
         config.save();
         marryConfig.save();
         titleShopConfig.save();
@@ -162,9 +168,15 @@ public class SocietyPlugin extends PluginBase {
     }
 
     public void registerWindow(){
-        PluginUtils.addWindowClass(WindowType.VIPWINDOW, VipWindow.class);
-        PluginUtils.addWindowClass(WindowType.SVIPWINDOW, SvipWindow.class);
-        PluginUtils.addWindowClass(WindowType.PRIVILEGEWINDOW, PrivilegeInfoWindow.class);
+        PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeWindow.class);
+        PluginUtils.addWindowClass(WindowType.ADVANCED_PRIVILEGE_WINDOW, AdvancedPrivilegeWindow.class);
+        PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeInfoWindow.class);
+        PluginUtils.addWindowClass(WindowType.PRIVILEGE_MANAGER_WINDOW, PrivilegeManagerWindow.class);
+        PluginUtils.addWindowClass(WindowType.PRIVILEGE_LIST_WINDOW, PrivilegeListWindow.class);
+        PluginUtils.addWindowClass(WindowType.REMOVE_PRIVILEGE_WINDOW, RemovePrivilegeWindow.class);
+        PluginUtils.addWindowClass(WindowType.SET_PRIVILEGE_WINDOW, SetPrivilegeWindow.class);
+        PluginUtils.addWindowClass(WindowType.TITLE_WINDOW, TitleWindow.class);
+
     }
 
 
@@ -182,10 +194,6 @@ public class SocietyPlugin extends PluginBase {
         return instance;
     }
 
-    public static void setInstance(SocietyPlugin instance) {
-        SocietyPlugin.instance = instance;
-    }
-
     public Config getTitleConfig() {
         return this.titleConfig;
     }
@@ -198,55 +206,28 @@ public class SocietyPlugin extends PluginBase {
         return this.LangConfig;
     }
 
-    public void setLangConfig(Config langConfig) {
-        this.LangConfig = langConfig;
-    }
-
     public List<Config> getSocietyConfigList() {
         return this.societyConfigList;
-    }
-
-    public void setSocietyConfigList(List<Config> societyConfigList) {
-        this.societyConfigList = societyConfigList;
     }
 
     public Config getTitleShopConfig() {
         return this.titleShopConfig;
     }
 
-    public void setTitleShopConfig(Config titleShopConfig) {
-        this.titleShopConfig = titleShopConfig;
-    }
-
     public Config getMarryConfig() {
         return marryConfig;
-    }
-
-    public void setMarryConfig(Config marryConfig) {
-        this.marryConfig = marryConfig;
     }
 
     public Config getSocietyShopConfig() {
         return societyShopConfig;
     }
 
-    public void setSocietyShopConfig(Config societyShopConfig) {
-        this.societyShopConfig = societyShopConfig;
-    }
-
     public Config getLanguageConfig() {
         return languageConfig;
-    }
-
-    public void setLanguageConfig(Config languageConfig) {
-        this.languageConfig = languageConfig;
     }
 
     public Config getWindowConfig() {
         return windowConfig;
     }
 
-    public void setWindowConfig(Config windowConfig) {
-        this.windowConfig = windowConfig;
-    }
 }

@@ -31,11 +31,11 @@ public class VipCommand extends Command {
             if(strings.length <1){
                 if(PrivilegeUtils.isVIP(player.getName())){
                     //展示VIP功能界面
-                    player.showFormWindow(WindowManager.getFromWindow(WindowType.VIPWINDOW,player));
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.PRIVILEGE_WINDOW,player));
 
                 }else if(PrivilegeUtils.isSvip(player.getName())){
                     //展示SVIP功能界面
-                    player.showFormWindow(WindowManager.getFromWindow(WindowType.SVIPWINDOW,player));
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.ADVANCED_PRIVILEGE_WINDOW,player));
                 }else{
                     player.sendMessage(">> §c你还没有特权,请先联系管理员购买");
                 }

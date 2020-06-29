@@ -11,6 +11,7 @@ import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.marry.admin.MarryAdminWindow;
 import com.zixuan007.society.window.society.admin.SocietyAdminWindow;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
  * @author zixuan007
  */
 public class AdminCommand extends Command {
+
     public final static int ONE_ARGS_LENGTH=1;
     public final static int TWO_ARGS_LENGTH=2;
     public final static int THREE_ARGS_LENGTH=3;
@@ -31,6 +33,7 @@ public class AdminCommand extends Command {
     public final static String MARRY_ARGS="结婚";
     public final static String PRIVILEGE_ARGS="特权";
     public final static String GIVE_TITLE_ARGS="给予";
+    public final static String RELOAD_ARGS="reload";
 
     public final static String COMMAND_NAME="管理";
 
@@ -59,7 +62,7 @@ public class AdminCommand extends Command {
                 player.showFormWindow(new SocietyAdminWindow());
                 return true;
             case TITLE_ARGS:
-                player.showFormWindow(WindowManager.getTitleManagerWindow());
+                player.showFormWindow( WindowManager.getFromWindow(WindowType.TITLE_WINDOW,player));
                 return true;
             case MARRY_ARGS:
                 player.showFormWindow(new MarryAdminWindow());
@@ -92,7 +95,10 @@ public class AdminCommand extends Command {
                     Server.getInstance().getPlayer(args[TWO_ARGS_LENGTH]).sendMessage(">> §a成功被给予称号 §e"+args[THREE_ARGS_LENGTH]);
                 }
                 return true;
-
+            case RELOAD_ARGS:
+                SocietyPlugin.getInstance().getLanguageConfig().reload();
+                player.sendMessage(">> §aConfig重新加载成功,请重新打开窗口");
+                return true;
             default:
                 return sendHelp(player);
         }

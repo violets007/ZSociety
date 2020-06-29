@@ -29,8 +29,8 @@ import com.zixuan007.society.window.title.admin.CreateTitleShopWindow;
 import com.zixuan007.society.window.title.admin.RemoveTitleWindow;
 import com.zixuan007.society.window.title.admin.SetTitleWindow;
 import com.zixuan007.society.window.title.admin.TitleManagerWindow;
-import com.zixuan007.society.window.vip.SvipWindow;
-import com.zixuan007.society.window.vip.VipWindow;
+import com.zixuan007.society.window.vip.AdvancedPrivilegeWindow;
+import com.zixuan007.society.window.vip.PrivilegeWindow;
 import com.zixuan007.society.window.vip.admin.PrivilegeListWindow;
 import com.zixuan007.society.window.vip.admin.PrivilegeManagerWindow;
 import com.zixuan007.society.window.vip.admin.RemovePrivilegeWindow;
@@ -52,7 +52,7 @@ public class WindowManager {
 
     private static HashMap<WindowType,Class> registerWindow=new HashMap<>();
     //储存玩家已经打开过的GUI
-    private static HashMap<String, FormWindow> alreadyOpenForms = new HashMap();
+    private static final HashMap<String, FormWindow> alreadyOpenForms = new HashMap();
 
     private WindowManager() {
 
@@ -80,9 +80,7 @@ public class WindowManager {
                         return  ((WindowLoader) formWindow).init(parameter);
                     }
                 }
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
@@ -227,12 +225,12 @@ public class WindowManager {
         return new RemovePrivilegeWindow();
     }
 
-    public static VipWindow getVipWindow(){
-        return new VipWindow();
+    public static PrivilegeWindow getVipWindow(){
+        return new PrivilegeWindow();
     }
 
-    public static SvipWindow getSvipWindow(){
-        return new SvipWindow();
+    public static AdvancedPrivilegeWindow getSvipWindow(){
+        return new AdvancedPrivilegeWindow();
     }
 
     public static PrivilegeListWindow getPrivilegeListWindow(){

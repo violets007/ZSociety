@@ -10,6 +10,9 @@ import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowManager;
 import me.onebone.economyapi.EconomyAPI;
 
+/**
+ * @author zixuan007
+ */
 public class AddPublicFunds extends CustomWindow {
     public AddPublicFunds() {
         super(Lang.AddPublicFundsWindow_Title);
