@@ -57,6 +57,111 @@ public enum  WindowType {
      * 创建称号商店窗口
      */
     CREATE_TITLE_SHOP_WINDOW("CreateTitleShopWindow"),
+
+    /**
+     * 结婚功能窗口
+     */
+    MARRY_WINDOW("MarryWindow"),
+    /**
+     * 添加夫妻之间公共资产
+     */
+    ADD_PUBLIC_FUNDS("AddPublicFunds"),
+
+    /**
+     * 夫妻公共资产排行榜
+     */
+    MONEY_RANK_WINDOW("MoneyRankWindow"),
+
+    /**
+     * 求婚窗口
+     */
+    PROPOSE_WINDOW("ProposeWindow"),
+
+    /**
+     * 结婚管理窗口
+     */
+    MARRY_ADMIN_WINDOW("MarryAdminWindow"),
+
+    /**
+     * 移除夫妻窗口
+     */
+    REMOVE_MARRY_WINDOW("RemoveMarryWindow"),
+
+    /**
+     * 设置公共资产窗口
+     */
+    SetMarryMoneyWindow("SetMarryMoneyWindow"),
+
+    /**
+     * 公会功能列表
+     */
+    SOCIETY_WINDOW("SocietyWindow"),
+
+    /**
+     * 创建公会窗口
+     */
+    CREATE_SOCIETY_WINDOW("CreateSocietyWindow"),
+
+    /**
+     * 成员列表窗口
+     */
+    Member_List_Window("MemberListWindow"),
+
+
+    /**
+     * 贡献排行榜
+     */
+    CONTRIBUTION_RANKING_WINDOW("ContributionRankingWindow"),
+
+    /**
+     * 等级排行榜
+     */
+    LEVEL_RANK_WINDOW("LevelRankWindow"),
+
+    /**
+     * 公会列表
+     */
+    SOCIETY_LIST_WINDOW("SocietyListWindow"),
+
+    /**
+     * 贡献窗口
+     */
+    CONTRIBUTION_WINDOW("ContributionWindow"),
+
+    /**
+     * 创建公会商店
+     */
+    CREATE_SOCIETY_SHOP_WINDOW("CreateSocietyShopWindow"),
+
+    /**
+     * 会长管理界面
+     */
+    PRESIDENT_WINDOW("PresidentWindow"),
+
+    /**
+     * 玩家申请列表窗口
+     */
+    PLAYER_APPLY_LIST_WINDOW("PlayerApplyListWindow"),
+
+    /**
+     * 移除成员窗口
+     */
+    REMOVE_MEMBER_WINDOW("RemoveMemberWindow"),
+
+    /**
+     * 设置职位窗口
+     */
+    SET_JOB_WINDOW("SetJobWindow"),
+
+    /**
+     * 消息窗口
+     */
+    MESSAGE_WINDOW("MessageWindow"),
+
+    /**
+     * 确认窗口
+     */
+    MODAL_WINDOW("ModalWindow"),
     ;
 
 

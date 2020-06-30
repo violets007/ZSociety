@@ -30,6 +30,10 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
     public FormWindow init(Object... objects) {
         getButtons().clear();
         Player player= (Player) objects[0];
+        if(objects.length >= 2 && objects[1] != null){
+            setParent((FormWindow) objects[1]);
+            setBack(true);
+        }
         this.society = SocietyUtils.getSocietyByPlayerName(player.getName());
         this.memberList= new ArrayList(society.getPost().entrySet());
         StringBuilder sb = new StringBuilder();

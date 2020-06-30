@@ -6,20 +6,24 @@ import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowModal;
 import com.sun.istack.internal.NotNull;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.response.ResponseListenerModal;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 
-public class ModalWindow extends FormWindowModal implements ResponseListenerModal {
+/**
+ * @author zixuan007
+ */
+public class ModalWindow extends FormWindowModal implements ResponseListenerModal,WindowLoader {
     protected transient BiConsumer<Boolean, Player> buttonClickedListener = null;
     protected transient Consumer<Player> windowClosedListener = null;
     private transient FormWindow parent;
-    private Boolean isBack = Boolean.valueOf(false);
+    private Boolean isBack = false;
 
-    public ModalWindow(String title, String content, String trueButtonText, String falseButtonText) {
-        super(title, content, trueButtonText, falseButtonText);
+    public ModalWindow( String content, String trueButtonText, String falseButtonText) {
+        super(PluginUtils.getWindowConfigInfo("modalWindow.title"),"","","");
     }
 
     public static boolean onEvent(FormWindow formWindow, FormResponse response, Player player) {
@@ -27,7 +31,7 @@ public class ModalWindow extends FormWindowModal implements ResponseListenerModa
             ModalWindow window = (ModalWindow)formWindow;
 
             if (window.wasClosed() || response == null) {
-                if (window.isBack.booleanValue()) {
+                if (window.isBack) {
                     window.callBack(player);
                 } else {
                     window.callClosed(player);
@@ -46,11 +50,11 @@ public class ModalWindow extends FormWindowModal implements ResponseListenerModa
     }
 
     private void callClicked(boolean b, Player player) {
-        Objects.requireNonNull(Boolean.valueOf(b));
         Objects.requireNonNull(player);
         onClick(b, player);
-        if (this.buttonClickedListener != null)
-            this.buttonClickedListener.accept(Boolean.valueOf(b), player);
+        if (this.buttonClickedListener != null) {
+            this.buttonClickedListener.accept(b, player);
+        }
     }
 
     private void callClosed(Player player) {
@@ -61,9 +65,16 @@ public class ModalWindow extends FormWindowModal implements ResponseListenerModa
         }
     }
 
-
-
-
+    @Override
+    public FormWindow init(Object... objects) {
+        String content= (String) objects[0];
+        String trueButton= (String) objects[1];
+        String falseButton= (String) objects[2];
+        setContent(content);
+        setButton1(trueButton);
+        setButton2(falseButton);
+        return this;
+    }
 
 
     public final ModalWindow onClick(@NotNull BiConsumer<Boolean, Player> listener) {
@@ -71,10 +82,6 @@ public class ModalWindow extends FormWindowModal implements ResponseListenerModa
         this.buttonClickedListener = listener;
         return this;
     }
-
-
-
-
 
 
 
@@ -114,5 +121,7 @@ public class ModalWindow extends FormWindowModal implements ResponseListenerModa
     public void setBack(Boolean back) {
         /* 118 */     this.isBack = back;
     }
+
+
 }
 

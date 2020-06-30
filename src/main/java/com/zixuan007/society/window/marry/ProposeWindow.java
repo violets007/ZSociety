@@ -9,10 +9,7 @@ import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.event.marry.PlayerMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
-import com.zixuan007.society.window.CustomWindow;
-import com.zixuan007.society.window.ModalWindow;
-import com.zixuan007.society.window.WindowLoader;
-import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.*;
 import me.onebone.economyapi.EconomyAPI;
 
 import java.util.Date;
@@ -37,23 +34,27 @@ public class ProposeWindow extends CustomWindow implements WindowLoader {
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         String playerName = response.getInputResponse(0);
+        FormWindow proposeWindow = WindowManager.getFromWindow(WindowType.PROPOSE_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (!PluginUtils.isOnlineByName(playerName)) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c当前玩家不在线,请上线在进行求婚",this,"返回上级"));
+            player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c你已经存在公会,无法创建请先退出当前公会", proposeWindow, backButtonName, backButtonImage));
             return;
         }
         if(playerName.equals(player.getName())){
-            player.showFormWindow(WindowManager.getMessageWindow("§c求婚的人不能是自己",this,"返回上级"));
+            player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c求婚的人不能是自己", proposeWindow, backButtonName, backButtonImage));
             return;
         }
         double proposeMoney = PluginUtils.getProposeMoney();
         double myMoney = EconomyAPI.getInstance().myMoney(player);
         if(myMoney < proposeMoney){
-            player.showFormWindow(WindowManager.getMessageWindow("§c求婚资金不足,求婚需要: "+proposeMoney,this,"返回上级"));
+            player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c求婚资金不足,求婚需要: "+proposeMoney, proposeWindow, backButtonName, backButtonImage));
             return;
         }
 
         Player player1 = Server.getInstance().getPlayer(playerName);
-        ModalWindow affrimWindow = WindowManager.getAffrimWindow("§b"+player.getName()+" §c求婚请求", "§a接受求婚", "§c拒绝求婚");
+        
+        ModalWindow affrimWindow = (ModalWindow) WindowManager.getFromWindow(WindowType.MODAL_WINDOW,"§b"+player.getName()+" §c求婚请求","§a接受求婚","§c拒绝求婚");
 
         affrimWindow.setButtonClickedListener((affrim,clickPlayer)->{
             if(affrim){

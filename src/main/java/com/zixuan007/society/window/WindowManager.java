@@ -1,28 +1,19 @@
 package com.zixuan007.society.window;
 
-import cn.nukkit.Player;
-import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.marry.AddPublicFunds;
-import com.zixuan007.society.window.marry.MarryWindow;
 import com.zixuan007.society.window.marry.MoneyRankWindow;
 import com.zixuan007.society.window.marry.ProposeWindow;
 import com.zixuan007.society.window.society.ContributionRankingWindow;
-import com.zixuan007.society.window.society.ContributionWindow;
 import com.zixuan007.society.window.society.CreateSocietyWindow;
 import com.zixuan007.society.window.society.LevelRankWindow;
 import com.zixuan007.society.window.society.MemberListWindow;
-import com.zixuan007.society.window.society.MessageWindow;
 import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.SocietyListWindow;
-import com.zixuan007.society.window.society.SocietyWindow;
-import com.zixuan007.society.window.society.president.PresidentWindow;
 import com.zixuan007.society.window.society.president.SetJobWindow;
-import com.zixuan007.society.window.society.shop.CreateShopWindow;
 import com.zixuan007.society.window.vip.admin.PrivilegeManagerWindow;
 
 import java.util.HashMap;
@@ -39,9 +30,9 @@ public class WindowManager {
      */
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
 
-    private static HashMap<WindowType,Class> registerWindow=new HashMap<>();
+    private final static HashMap<WindowType,Class> registerWindow=new HashMap<>();
     //储存玩家已经打开过的GUI
-    private static final HashMap<String, FormWindow> alreadyOpenForms = new HashMap();
+    private static HashMap<String, FormWindow> alreadyOpenForms = new HashMap();
 
     private WindowManager() {
 
@@ -77,66 +68,23 @@ public class WindowManager {
     }
 
 
-
-    public static SocietyWindow getSocietyWindow(Player player) {
-        return new SocietyWindow();
-    }
-
-    public static MessageWindow getMessageWindow(String content, FormWindow formWindow, String buttonName) {
-        MessageWindow messageWindow = new MessageWindow(Lang.messageWindow_Title, content);
-        messageWindow.setParent(formWindow);
-        messageWindow.addButton(new ElementButton(buttonName));
-        return messageWindow;
-    }
-
     public static CreateSocietyWindow getCreateSocietyWindow(boolean isBack) {
         CreateSocietyWindow createSocietyWindow = new CreateSocietyWindow();
         createSocietyWindow.setBack(isBack);
         return createSocietyWindow;
     }
 
-    public static ModalWindow getAffrimWindow(String content, String trueButtonName, String falseButtoName) {
-        ModalWindow modalWindow = new ModalWindow(Lang.affrimWindow_Title, content, trueButtonName, falseButtoName);
-        return modalWindow;
-    }
 
-    public static SocietyListWindow getSocietyListWindow(int cuurent, FormWindow formWindow) {
+
+    public static SocietyListWindow getSocietyListWindow(int cuurent, WindowType windowType) {
         List<Society> societyList = SocietyUtils.getSocietyList(cuurent);
         int limit = 10;
         int totalPage = SocietyUtils.getSocietyListTotalPage(cuurent, limit);
         String content = "§a当前第 §b" + cuurent + " §a总页数 §b" + totalPage;
-        SocietyListWindow societyListWindow = new SocietyListWindow(Lang.societyListWindow_Title, content, cuurent, totalPage, societyList);
-        societyListWindow.setBack(true);
-        societyListWindow.setParent(formWindow);
-        societyListWindow.setLimit(limit);
+        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFromWindow(WindowType.SOCIETY_LIST_WINDOW,content,cuurent,totalPage,societyList,windowType);
         return societyListWindow;
     }
 
-    public static MemberListWindow getMemberListWindow(Society society, List<String> memberList, FormWindow formWindow) {
-        MemberListWindow memberListWindow = new MemberListWindow();
-        memberListWindow.setBack(true);
-        memberListWindow.setParent(formWindow);
-        return memberListWindow;
-    }
-
-    public static ContributionRankingWindow getContributionRankingWindow(FormWindow formWindow) {
-        ContributionRankingWindow contributionRankingWindow = new ContributionRankingWindow();
-        contributionRankingWindow.setBack(true);
-        contributionRankingWindow.setParent(formWindow);
-        return contributionRankingWindow;
-    }
-
-    public static LevelRankWindow getLevelRankWindow(FormWindow formWindow) {
-        LevelRankWindow levelRankWindow = new LevelRankWindow();
-        levelRankWindow.setBack(true);
-        levelRankWindow.setParent(formWindow);
-        return levelRankWindow;
-    }
-
-    public static PresidentWindow getChairmanWindow(long sid) {
-        PresidentWindow chairmanWindow = new PresidentWindow();
-        return chairmanWindow;
-    }
 
     public static SetJobWindow getSetJobWindow(FormWindow formWindow) {
         SetJobWindow setJobWindow = new SetJobWindow();
@@ -150,17 +98,6 @@ public class WindowManager {
         return playerApplyListWindow;
     }
 
-    public static ContributionWindow getContributionWindow(long sid) {
-        return new ContributionWindow(sid);
-    }
-
-
-
-
-
-    public static MarryWindow getMarryWindow(){
-        return new MarryWindow();
-    }
 
     public static ProposeWindow getProposeWindow(){
         return new ProposeWindow();
@@ -174,15 +111,10 @@ public class WindowManager {
         return new MoneyRankWindow();
     }
 
-
     public static PrivilegeManagerWindow getPrivilegeManagerWindow(){
         return new PrivilegeManagerWindow();
     }
 
-
-    public static CreateShopWindow getCreateShopWindow(Player player){
-        return new CreateShopWindow(player);
-    }
 
     public static HashMap<WindowType, Class> getRegisterWindow() {
         return registerWindow;

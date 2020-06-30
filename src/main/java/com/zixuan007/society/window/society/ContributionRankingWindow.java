@@ -1,8 +1,6 @@
 package com.zixuan007.society.window.society;
 
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -10,7 +8,6 @@ import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 
 import java.util.Collections;
-import java.util.Comparator;
 
 
 /**
@@ -25,7 +22,11 @@ public class ContributionRankingWindow extends SimpleWindow implements WindowLoa
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        Collections.sort(SocietyUtils.societies, (o1, o2) -> (o1.getSocietyMoney().doubleValue() < o2.getSocietyMoney().doubleValue()) ? 1 : ((o1.getSocietyMoney().doubleValue() > o2.getSocietyMoney().doubleValue()) ? -1 : 0));
+        if(objects != null && objects.length >= 1 && objects[0] != null){
+            setBack((Boolean) objects[0]);
+            setBack(true);
+        }
+        Collections.sort(SocietyUtils.societies, (o1, o2) -> Double.compare(o2.getSocietyMoney().doubleValue(), o1.getSocietyMoney().doubleValue()));
         StringBuilder sb = new StringBuilder();
         sb.append("§l§d公会经济排名§f(§c前五§f)\n");
         for (int i = 0; i < SocietyUtils.societies.size() && i <= 4; i++) {

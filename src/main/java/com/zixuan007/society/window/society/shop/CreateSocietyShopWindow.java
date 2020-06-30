@@ -21,11 +21,11 @@ import java.util.Map;
 /**
  * @author zixuan007
  */
-public class CreateShopWindow extends CustomWindow implements WindowLoader {
+public class CreateSocietyShopWindow extends CustomWindow implements WindowLoader {
     private transient Player player;
 
-    public CreateShopWindow(Player player) {
-        super(PluginUtils.getWindowConfigInfo("createShopWindow.title"));
+    public CreateSocietyShopWindow() {
+        super(PluginUtils.getWindowConfigInfo("createSocietyShopWindow.title"));
 
     }
 

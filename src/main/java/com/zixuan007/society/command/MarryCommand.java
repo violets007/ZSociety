@@ -6,6 +6,7 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 /**
  * 结婚命令
@@ -25,7 +26,7 @@ public class MarryCommand extends Command {
             return false;
         }
         Player player = (Player) commandSender;
-        player.showFormWindow(WindowManager.getMarryWindow());
+        player.showFormWindow(WindowManager.getFromWindow(WindowType.MARRY_WINDOW));
         return false;
     }
 }

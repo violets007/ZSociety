@@ -12,6 +12,7 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.society.MessageWindow;
 
 import java.util.ArrayList;
@@ -85,14 +86,14 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
                 societyMoney = society.getSocietyMoney();
-                updateMoney = ((Integer) list.get(1)).intValue();
-                if (societyMoney.doubleValue() < updateMoney) {
+                updateMoney = (Integer) list.get(1);
+                if (societyMoney < updateMoney) {
                     MessageWindow messageWindow = WindowManager.getMessageWindow("§c公会升级需要 §b" + updateMoney + "§c,公会当前资金 §b" + societyMoney,  this, "返回上级");
                     player.showFormWindow(messageWindow);
 
                     return;
                 }
-                society.setSocietyMoney(Double.valueOf(societyMoney.doubleValue() - updateMoney));
+                society.setSocietyMoney(societyMoney - updateMoney);
                 society.setGrade(society.getGrade() + 1);
                 society.saveData();
                 player.showFormWindow(WindowManager.getMessageWindow("§a公会升级成功", this, "返回上级"));
@@ -104,13 +105,15 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     player.showFormWindow( messageWindow);
                     return;
                 }
-                memberList = Arrays.asList((String[]) society.getPost().keySet().toArray(new String[0]));
-                removeMemberWindow = WindowManager.getRemoveMemberWindow(society.getSid(), memberList);
+
+                Arrays.asList(society.getPost().keySet().toArray(new String[0]));
+                removeMemberWindow = (RemoveMemberWindow) WindowManager.getFromWindow(WindowType.Member_List_Window,player);
                 removeMemberWindow.setParent(this);
                 player.showFormWindow( removeMemberWindow);
                 break;
             case 4:
-                player.showFormWindow(WindowManager.getMessageWindow("§a成功解散 §b" + society.getSocietyName(),  WindowManager.getSocietyWindow(player), "返回主界面"));
+                FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW, player);
+                player.showFormWindow(WindowManager.getMessageWindow("§a成功解散 §b" + society.getSocietyName(), societyWindow, "返回主界面"));
                 SocietyUtils.sendMemberTitle("§b" + player.getName() + "§c解散了公会", society);
                 //移除指定的公会商店
                 SocietyUtils.removeSocietyShopBySid(society);

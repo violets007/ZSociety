@@ -7,9 +7,12 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 
 import java.util.ArrayList;
@@ -18,11 +21,16 @@ import java.util.ArrayList;
  * 设置公会等级窗口
  * @author zixuan007
  */
-public class SetGradeWindow extends CustomWindow {
+public class SetGradeWindow extends CustomWindow implements WindowLoader {
 
 
     public SetGradeWindow() {
-        super("设置公会等级窗口");
+        super(PluginUtils.getWindowConfigInfo("setGradeWindow.title"));
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
         ArrayList<Society> societies = SocietyUtils.societies;
         if (societies.size() > 0) {
             ArrayList<String> sidList = new ArrayList<>();
@@ -34,6 +42,7 @@ public class SetGradeWindow extends CustomWindow {
         } else {
             addElement(new ElementLabel("没有可以设置的公会"));
         }
+        return this;
     }
 
     @Override
@@ -67,4 +76,6 @@ public class SetGradeWindow extends CustomWindow {
 
         player.showFormWindow(WindowManager.getMessageWindow("§a成功设置 §b"+society.getSocietyName()+" §a等级为 §e"+society.getGrade(),null,"关闭"));
     }
+
+
 }

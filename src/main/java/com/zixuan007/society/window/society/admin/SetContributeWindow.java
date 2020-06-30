@@ -6,9 +6,11 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 
 import java.util.ArrayList;
@@ -16,10 +18,16 @@ import java.util.ArrayList;
 /**
  * @author zixuan007
  */
-public class SetContributeWindow extends CustomWindow {
+public class SetContributeWindow extends CustomWindow implements WindowLoader {
 
     public SetContributeWindow() {
         super("设置公会贡献窗口");
+
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getElements().clear();
         ArrayList<Society> societies = SocietyUtils.societies;
         if (societies.size() > 0) {
             ArrayList<String> sidList = new ArrayList<>();
@@ -31,6 +39,7 @@ public class SetContributeWindow extends CustomWindow {
         } else {
             addElement(new ElementLabel("没有可以设置的公会"));
         }
+        return this;
     }
 
     @Override
@@ -64,4 +73,6 @@ public class SetContributeWindow extends CustomWindow {
 
         player.showFormWindow(WindowManager.getMessageWindow("§a成功设置 §b"+society.getSocietyName()+" §a贡献值为 §e"+society.getSocietyMoney(),null,"关闭"));
     }
+
+
 }

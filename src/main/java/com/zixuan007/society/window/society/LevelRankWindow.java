@@ -26,6 +26,10 @@ public class LevelRankWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
+        if(objects != null && objects.length >= 1 && objects[0] != null){
+            setParent((FormWindow) objects[0]);
+            setBack(true);
+        }
         StringBuilder sb = new StringBuilder();
         Collections.sort(SocietyUtils.societies, (o1, o2) -> Integer.compare(o2.getGrade(), o1.getGrade()));
         sb.append("§l§d公会等级排名§f(§c前五§f)\n");

@@ -2,9 +2,12 @@ package com.zixuan007.society.window.society.admin;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
+import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 
 import java.util.ArrayList;
@@ -12,10 +15,16 @@ import java.util.ArrayList;
 /**
  * @author zixuan007
  */
-public class DissolveWindow extends SimpleWindow {
+public class DissolveWindow extends SimpleWindow implements WindowLoader {
 
     public DissolveWindow() {
-        super("解散公会窗口", "");
+        super(PluginUtils.getWindowConfigInfo("dissolveWindow.title"), "");
+
+    }
+
+    @Override
+    public FormWindow init(Object... objects) {
+        getButtons().clear();
         ArrayList<Society> societies = SocietyUtils.societies;
         if (societies.size() > 0) {
             for (Society society : societies) {
@@ -25,6 +34,7 @@ public class DissolveWindow extends SimpleWindow {
         } else {
             setContent("没有可以设置的公会");
         }
+        return this;
     }
 
     @Override
@@ -46,4 +56,6 @@ public class DissolveWindow extends SimpleWindow {
         player.showFormWindow(WindowManager.getMessageWindow("§a成功解散 §b"+society.getSocietyName()+" §a公会",null,"关闭"));
 
     }
+
+
 }

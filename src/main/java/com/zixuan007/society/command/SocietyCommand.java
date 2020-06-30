@@ -6,6 +6,7 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.society.SocietyWindow;
 
 /**
@@ -28,9 +29,7 @@ public class SocietyCommand extends Command {
         } else {
             Player player = (Player)sender;
             if (commandName.equals(this.getName())) {
-
-                SocietyWindow societyWindow = WindowManager.getSocietyWindow(player);
-                player.showFormWindow(societyWindow);
+                player.showFormWindow(WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW));
             }
 
         }

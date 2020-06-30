@@ -10,6 +10,7 @@ import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockBreakEvent;
 import cn.nukkit.event.player.*;
+import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
@@ -23,6 +24,7 @@ import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.society.MessageWindow;
 import com.zixuan007.society.window.society.SocietyWindow;
 import me.onebone.economyapi.EconomyAPI;
@@ -61,7 +63,8 @@ public class SocietyListener implements Listener {
         society.saveData();
         SocietyUtils.societies.add(event.getSociety());
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b" + player.getName() + " §a创建公会名称: §e" + society.getSocietyName());
-        MessageWindow messageWindow = WindowManager.getMessageWindow("§a创建 §l§b" + society.getSocietyName() + " §a公会成功", new SocietyWindow(player), "返回上级");
+        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
+        MessageWindow messageWindow = WindowManager.getMessageWindow("§a创建 §l§b" + society.getSocietyName() + " §a公会成功", societyWindow, "返回上级");
         player.showFormWindow(messageWindow);
     }
 
@@ -73,7 +76,8 @@ public class SocietyListener implements Listener {
         society.getTempApply().remove(player.getName());
         society.getTempApply().add(player.getName());
         society.saveData();
-        MessageWindow messageWindow = WindowManager.getMessageWindow(" §a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理", new SocietyWindow(player), "返回上级");
+        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
+        MessageWindow messageWindow = WindowManager.getMessageWindow(" §a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理", societyWindow, "返回上级");
         player.showFormWindow(messageWindow);
     }
 
@@ -83,7 +87,8 @@ public class SocietyListener implements Listener {
         Society society = event.getSociety();
         society.getPost().remove(player.getName());
         society.saveData();
-        MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功退出 §l§c" + society.getSocietyName() + " §a公会", new SocietyWindow(player), "返回上级");
+        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
+        MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功退出 §l§c" + society.getSocietyName() + " §a公会", societyWindow, "返回上级");
         player.showFormWindow(messageWindow);
 
         //检测到玩家正在创建公会商店
@@ -112,7 +117,7 @@ public class SocietyListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (SocietyUtils.onCreatePlayer.keySet().contains(player.getName())) {
+        if (SocietyUtils.onCreatePlayer.containsKey(player.getName())) {
             if (block instanceof BlockWallSign) {
                 if (!SocietyUtils.isJoinSociety(player.getName())) {
                     player.sendMessage(">> §c检测到你当前还没有加入公会");
@@ -152,7 +157,6 @@ public class SocietyListener implements Listener {
                 });
                 societyShopConfig.save();
                 //进行木牌内容设置
-                BlockWallSign signWall = (BlockWallSign) block;
                 BlockEntity blockEntity = block.getLevel().getBlockEntity(new Vector3(block.getFloorX(), block.getFloorY(), block.getFloorZ()));
                 if (blockEntity instanceof BlockEntitySign) {
                     Config config = societyPlugin.getConfig();

@@ -1,4 +1,4 @@
-##表单数据展示配置文件
+##窗口配置文件
 
 #########公会窗口配置#########
 #公会功能窗口标题
@@ -22,7 +22,15 @@ contributionRankingWindow.title: §e公会贡献排行榜
 #公会贡献窗口标题
 contributionWindow.title: §e公会贡献
 #创建公会商店窗口标题
-createShopWindow.title: §e创建公会商店
+createSocietyShopWindow.title: §e创建公会商店
+#管理公会窗口标题
+societyAdminWindow.title: §e管理公会
+#设置公会等级窗口标题
+setGradeWindow.title: §e设置公会等级
+#解散公会窗口标题
+dissolveWindow.title: §e解散玩家公会
+#公会列表标题
+societyListWindow.title: §e公会列表
 
 #公会功能窗口按钮1
 societyWindow.createSociety.button: §e创建公会
@@ -54,6 +62,12 @@ presidentWindow.removeMember.button: §e移除公会成员
 #会长管理窗口按钮5
 presidentWindow.dissolve.button: §e解散公会
 
+#管理公会窗口按钮1
+societyAdminWindow.setSocietyGrade.button: §e设置公会等级
+#管理公会窗口按钮2
+societyAdminWindow.setSocietyContribution.button: §e设置公会贡献值
+#管理公会窗口按钮3
+societyAdminWindow.dissolve.button: §e解散玩家公会
 
 #创建公会按钮1图片路径
 societyWindow.createSociety.button.imgPath: textures/ui/book.edit.default
@@ -84,6 +98,13 @@ presidentWindow.upGrade.button.imgPath: textures/ui/book.edit.default
 presidentWindow.removeMember.button.imgPath: textures/ui/book.edit.default
 #会长管理窗口按钮5图片
 presidentWindow.dissolve.button.imgPath: textures/ui/book.edit.default
+
+#管理公会窗口按钮1图片
+societyAdminWindow.setSocietyGrade.button.imgPath: textures/ui/book.edit.default
+#管理公会窗口按钮2图片
+societyAdminWindow.setSocietyContribution.button.imgPath: textures/ui/book.edit.default
+#管理公会窗口按钮3图片
+societyAdminWindow.dissolve.button.imgPath: textures/ui/book.edit.default
 
 #########特权窗口配置#########
 #VIP窗口标题
@@ -202,3 +223,18 @@ marryWindow.transfer.button.imgPath: textures/ui/Friend1.png
 marryWindow.divorceMarry.button.imgPath: textures/ui/Friend1.png
 #结婚窗口按钮5图片路径
 marryWindow.moneyRankWindow.button.imgPath: textures/ui/Friend1.png
+
+#消息窗口标题
+messageWindow.title: §e消息提示
+#确认窗口标题
+modalWindow.title: §e确认提示
+
+#消息窗口按钮1
+messageWindow.close.button: §e关闭窗口
+#消息窗口按钮1.1
+messageWindow.back.button: §e返回上级
+
+#消息窗口按钮1图片路径
+messageWindow.close.button.imgPath: textures/ui/Friend1.png
+#消息窗口按钮1.1图片路径
+messageWindow.back.button.imgPath: textures/ui/Friend1.png

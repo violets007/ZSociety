@@ -8,19 +8,13 @@ import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
-import com.zixuan007.society.window.ModalWindow;
-import com.zixuan007.society.window.SimpleWindow;
-import com.zixuan007.society.window.WindowLoader;
-import com.zixuan007.society.window.WindowManager;
-import com.zixuan007.society.window.society.president.PresidentWindow;
-
-import java.util.Arrays;
-import java.util.List;
+import com.zixuan007.society.window.*;
 
 /**
  * @author zixuan007
  */
 public class SocietyWindow extends SimpleWindow implements WindowLoader {
+
     public SocietyWindow() {
         super(PluginUtils.getWindowConfigInfo("societyWindow.title"), "");
     }
@@ -55,54 +49,42 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
     public void onClick(int id, Player player) {
         int clickedButtonId = this.getResponse().getClickedButtonId();
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
-        MessageWindow messageWindow ;
+        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         switch (clickedButtonId) {
             case 0:
                 if (society != null) {
-                    messageWindow = WindowManager.getMessageWindow("§c你已经存在公会,无法创建请先退出当前公会", this, "确认返回");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c你已经存在公会,无法创建请先退出当前公会", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-
-                CreateSocietyWindow createSocietyWindow = new CreateSocietyWindow();
-                WindowManager.getCreateSocietyWindow(true);
-                createSocietyWindow.setParent(this);
-                createSocietyWindow.setBack(true);
-                player.showFormWindow(createSocietyWindow);
+                player.showFormWindow(WindowManager.getFromWindow(WindowType.CREATE_SOCIETY_WINDOW, societyWindow));
                 break;
             case 1:
                 if (!SocietyUtils.isChairman(player.getName())) {
-                    messageWindow = WindowManager.getMessageWindow("§c您没有权限管理公会", this, "确认返回");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c您没有权限管理公会", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-
-
-                PresidentWindow chairmanWindow = WindowManager.getChairmanWindow(society.getSid());
-                player.showFormWindow(chairmanWindow);
+                player.showFormWindow(WindowManager.getFromWindow(WindowType.PRESIDENT_WINDOW));
                 break;
             case 2:
                 boolean isJoinSociety = SocietyUtils.isJoinSociety(player.getName());
                 if (!isJoinSociety) {
-                    messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "返回上级");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c当前还没加入公会请先加入公会", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-
                 if (society == null || society.getPresidentName().equals(player.getName())) {
-                    messageWindow = WindowManager.getMessageWindow("§c你是会长无法退出公会,请解散公会!", this, "返回上级");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c你是会长无法退出公会,请解散公会!", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-
-                ModalWindow modalWindow = WindowManager.getAffrimWindow("§c您确认要退出 §b" + society.getSocietyName() + " §c公会吗?", "§a确认退出", "§c取消退出");
+                ModalWindow modalWindow = (ModalWindow) WindowManager.getFromWindow(WindowType.MODAL_WINDOW, "§c您确认要退出 §b" + society.getSocietyName() + " §c公会吗?", "§a确认退出", "§c取消退出");
                 modalWindow.setButtonClickedListener((affrim, player1) -> {
                     if (affrim) {
                         SocietyUtils.sendMemberTitle("§a玩家 §b" + player1.getName() + " §a成功退出公会", society);
                         Society society1 = SocietyUtils.getSocietyByPlayerName(player1.getName());
                         WindowManager.societyPlugin.getServer().getPluginManager().callEvent(new PlayerQuitSocietyEvent(player1, society1));
                     } else {
-                        player.showFormWindow(this);
+                        player.showFormWindow(societyWindow);
                     }
 
                 });
@@ -110,51 +92,42 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 3:
                 if (SocietyUtils.societies == null || SocietyUtils.societies.size() <= 0) {
-                    messageWindow = WindowManager.getMessageWindow("§c当前还没有公会", this, "确认返回");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c当前还没有公会", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
 
-                SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(1, this);
+                SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(1, WindowType.SOCIETY_WINDOW);
                 player.showFormWindow(societyListWindow);
                 break;
             case 4:
                 if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
-                    messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "确认返回");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c当前还没加入公会请先加入公会", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-                List<String> postList = Arrays.asList(society.getPost().keySet().toArray(new String[0]));
-                MemberListWindow memberListWindow = WindowManager.getMemberListWindow(society, postList, this);
-                memberListWindow.setBack(true);
-                memberListWindow.setParent(this);
+
+                MemberListWindow memberListWindow = (MemberListWindow) WindowManager.getFromWindow(WindowType.Member_List_Window, player, societyWindow);
                 player.showFormWindow(memberListWindow);
                 break;
             case 5:
-                ContributionRankingWindow contributionRankingWindow = WindowManager.getContributionRankingWindow(this);
-                player.showFormWindow(contributionRankingWindow);
+                player.showFormWindow(WindowManager.getFromWindow(WindowType.CONTRIBUTION_RANKING_WINDOW, societyWindow));
                 break;
             case 6:
-                LevelRankWindow levelRankWindow = WindowManager.getLevelRankWindow(this);
-                player.showFormWindow(levelRankWindow);
+                player.showFormWindow(WindowManager.getFromWindow(WindowType.LEVEL_RANK_WINDOW, societyWindow));
                 break;
             case 7:
                 if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
-                    messageWindow = WindowManager.getMessageWindow("§c当前还没加入公会请先加入公会", this, "确认返回");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c当前还没加入公会请先加入公会", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-                ContributionWindow contributionWindow = WindowManager.getContributionWindow(society.getSid());
-                contributionWindow.setBack(true);
-                contributionWindow.setParent(this);
-                player.showFormWindow(contributionWindow);
+                player.showFormWindow( WindowManager.getFromWindow(WindowType.CONTRIBUTION_WINDOW,player,societyWindow));
                 break;
             case 8:
                 if (!SocietyUtils.isJoinSociety(player.getName())) {
-                    player.showFormWindow(WindowManager.getMessageWindow("§c当前还没加入公会,请先加入公会", this, "确认返回"));
+                    player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW,"§c当前还没加入公会,请先加入公会",societyWindow,backButtonName,backButtonImage));
                     return;
                 }
-                player.showFormWindow(WindowManager.getCreateShopWindow(player));
+
+                player.showFormWindow(WindowManager.getFromWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, player));
                 break;
             default:
                 break;
