@@ -19,11 +19,11 @@ public class ZsocietyAPI {
 
     /**
      * 获取公会名称
-     * @param playerNmae 玩家名字
+     * @param playerName 玩家名字
      * @return
      */
-    public static String getSocietyName(String playerNmae) {
-        Society society = SocietyUtils.getSocietyByPlayerName(playerNmae);
+    public static String getSocietyName(String playerName) {
+        Society society = SocietyUtils.getSocietyByPlayerName(playerName);
         return society != null ? society.getSocietyName() : "无公会";
     }
 

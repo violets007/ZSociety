@@ -5,6 +5,7 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
 
@@ -13,10 +14,9 @@ import com.zixuan007.society.window.WindowType;
  * @author zixuan007
  */
 public class SocietyCommand extends Command {
-    public final static String COMMAND_NAME=SocietyPlugin.getInstance().getLanguageConfig().getString("command.society");
 
     public SocietyCommand() {
-        super(COMMAND_NAME, "§e显示公会功能窗口", "");
+        super(PluginUtils.getLanguageInfo("command.society"), "§e显示公会功能窗口", "");
         this.setPermission("ZSociety.command.user");
         this.getCommandParameters().clear();
     }

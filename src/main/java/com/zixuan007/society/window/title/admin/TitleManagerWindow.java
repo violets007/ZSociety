@@ -34,7 +34,6 @@ public class TitleManagerWindow extends SimpleWindow implements WindowLoader {
     public void onClick(int id, Player player) {
         switch (id) {
             case 0:
-
                 player.showFormWindow( WindowManager.getFormWindow(WindowType.SET_TITLE_WINDOW));
                 break;
             case 1:

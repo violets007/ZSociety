@@ -27,9 +27,11 @@
             <id>onebone</id>
             <url>http://jenkins.onebone.me/plugin/repository/everything/</url>
         </repository>
+
     </repositories>
 
     <dependencies>
+
         <dependency>
             <groupId>cn.nukkit</groupId>
             <artifactId>nukkit</artifactId>

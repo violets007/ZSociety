@@ -72,7 +72,8 @@ public class WindowManager {
         int limit = 10;
         int totalPage = SocietyUtils.getSocietyListTotalPage(cuurent, limit);
         String content = "§a当前第 §b" + cuurent + " §a总页数 §b" + totalPage;
-        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW,content,cuurent,totalPage,societyList,windowType);
+        FormWindow formWindow = WindowManager.getFormWindow(windowType);
+        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW,content,cuurent,totalPage,societyList,formWindow);
         return societyListWindow;
     }
 

@@ -24,12 +24,11 @@ public class ShowTask extends PluginTask<SocietyPlugin> {
     public void onRun(int i) {
         Collection<Player> players = owner.getServer().getOnlinePlayers().values();
         Config config = SocietyPlugin.getInstance().getConfig();
-        String tipText = config.getString(IS_TIP, null);
-        String tempText="";
-        String configNameTag = (String) config.get(IS_SET_NAME_TAG);
-        if (owner.getConfig().getBoolean(IS_TIP)) {
+        String tempText=config.getString("tipText");
+        String configNameTag = (String) config.get("nameTagFormat");
+        if (config.getBoolean(IS_TIP)) {
             for (Player player : players) {
-                tempText = SocietyUtils.formatButtomText(tipText, player);
+                tempText = SocietyUtils.formatButtomText(tempText, player);
                 player.sendTip(tempText);
             }
         }

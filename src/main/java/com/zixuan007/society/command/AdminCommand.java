@@ -62,7 +62,7 @@ public class AdminCommand extends Command {
                 player.showFormWindow(new SocietyAdminWindow());
                 return true;
             case TITLE_ARGS:
-                player.showFormWindow( WindowManager.getFormWindow(WindowType.TITLE_WINDOW,player));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.TITLE_WINDOW,player));
                 return true;
             case MARRY_ARGS:
                 player.showFormWindow(new MarryAdminWindow());

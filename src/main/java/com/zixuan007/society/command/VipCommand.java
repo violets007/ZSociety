@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
-import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
@@ -14,7 +14,7 @@ import com.zixuan007.society.window.WindowType;
  */
 public class VipCommand extends Command {
 
-    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage.privilege");
+    public final static String COMMAND_NAME= PluginUtils.getLanguageInfo("command.privilege");
 
     public VipCommand() {
         super(COMMAND_NAME,"§e显示特权功能窗口");

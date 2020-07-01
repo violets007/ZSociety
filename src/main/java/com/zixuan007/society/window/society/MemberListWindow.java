@@ -35,7 +35,7 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
             setBack(true);
         }
         this.society = SocietyUtils.getSocietyByPlayerName(player.getName());
-        this.memberList= new ArrayList(society.getPost().entrySet());
+        this.memberList= new ArrayList(society.getPost().keySet());
         StringBuilder sb = new StringBuilder();
         sb.append("§l§d公会成员列表\n");
         memberList.forEach(name -> {

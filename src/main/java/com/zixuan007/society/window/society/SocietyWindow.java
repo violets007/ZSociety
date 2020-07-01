@@ -65,7 +65,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c您没有权限管理公会", societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW,player));
                 break;
             case 2:
                 boolean isJoinSociety = SocietyUtils.isJoinSociety(player.getName());
@@ -127,7 +127,8 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
 
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, player));
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, societyWindow));
                 break;
             default:
                 break;

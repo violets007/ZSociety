@@ -86,9 +86,9 @@ public class SocietyPlugin extends PluginBase {
         saveResource("cn_language.yml", true);
         saveResource("lang/zh-CN.yml");
         saveResource("WindowConfig.yml",true);
+        loadConfig();
         registerCommand();
         registerWindow();
-        loadConfig();
         PluginUtils.getLang();
         getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
         getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20*60);
@@ -124,7 +124,7 @@ public class SocietyPlugin extends PluginBase {
     public void loadConfig() {
         String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
         String language = (String) config.get("language");
-        String languagePath = PluginUtils.CONFIG_FOLDER + language;
+        String languagePath = PluginUtils.CONFIG_FOLDER +"lang"+PluginUtils.FILE_SEPARATOR+language;
         String langPath = PluginUtils.CONFIG_FOLDER +"cn_language.yml";
         String titleShopPath = PluginUtils.CONFIG_FOLDER + "TitleShopData.yml";
         String marryPath=PluginUtils.CONFIG_FOLDER +"Marry.yml";

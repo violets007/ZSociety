@@ -59,9 +59,12 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         int clickedButtonId = getResponse().getClickedButtonId();
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         Society society = SocietyUtils.getSocietysByID(this.sid);
-        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW);
+        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW,player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
+        String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
+        String closeButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         switch (clickedButtonId) {
             case 0:
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_JOB_WINDOW,player));
@@ -109,7 +112,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 4:
                 FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功解散 §b" + society.getSocietyName(),null,"返回主界面",backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功解散 §b" + society.getSocietyName(),null,closeButtonName,closeButtonImage));
                 SocietyUtils.sendMemberTitle("§b" + player.getName() + "§c解散了公会", society);
                 //移除指定的公会商店
                 SocietyUtils.removeSocietyShopBySid(society);

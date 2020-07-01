@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class TitleWindow extends SimpleWindow implements WindowLoader {
     private String playerName;
 
-    public TitleWindow(String playerName) {
+    public TitleWindow() {
         super(PluginUtils.getWindowConfigInfo("titleWindow.title"), "");
     }
 

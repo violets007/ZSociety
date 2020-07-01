@@ -23,7 +23,7 @@ public class ContributionRankingWindow extends SimpleWindow implements WindowLoa
     public FormWindow init(Object... objects) {
         getButtons().clear();
         if(objects != null && objects.length >= 1 && objects[0] != null){
-            setBack((Boolean) objects[0]);
+            setParent((FormWindow) objects[0]);
             setBack(true);
         }
         Collections.sort(SocietyUtils.societies, (o1, o2) -> Double.compare(o2.getSocietyMoney().doubleValue(), o1.getSocietyMoney().doubleValue()));
