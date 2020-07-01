@@ -13,6 +13,7 @@ import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,10 +47,13 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
 
     @Override
     public void onClick(int id, Player player) {
+        FormWindow marryWindow = WindowManager.getFormWindow(WindowType.MARRY_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         switch (id){
             case 0:
                 if(MarryUtils.isMarry(player.getName())){
-                    player.showFormWindow(WindowManager.getMessageWindow("§c您当前已经结婚,请勿重复",this,"返回上级"));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前已经结婚,请勿重复",marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 ProposeWindow proposeWindow = WindowManager.getProposeWindow();
@@ -59,7 +63,7 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 1:
                 if(!MarryUtils.isMarry(player.getName())){
-                    player.showFormWindow(WindowManager.getMessageWindow("§c您当前还没有伴侣,请先求婚",this,"返回上级"));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前还没有伴侣,请先求婚",marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 player.showFormWindow(WindowManager.getAddPublicFunds());
@@ -67,7 +71,7 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
             case 2:
                 Marry marry;
                 if(!MarryUtils.isMarry(player.getName()) ){
-                    player.showFormWindow(WindowManager.getMessageWindow("§c您当前还没有伴侣,请先求婚",this,"返回上级"));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前还没有伴侣,请先求婚",marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 marry= MarryUtils.getMarryByName(player.getName());
@@ -84,22 +88,22 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                     player.sendMessage("§a传送成功");
                     return;
                 }else{
-                    player.showFormWindow(WindowManager.getMessageWindow("§c当前伴侣不在线",this,"返回上级"));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前伴侣不在线",marryWindow,backButtonName,backButtonImage));
                 }
                 break;
             case 3:
                 if(!MarryUtils.isMarry(player.getName())){
-                    player.showFormWindow(WindowManager.getMessageWindow("§c您当前还没有伴侣,请先求婚",this,"返回上级"));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前还没有伴侣,请先求婚",marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 marry=MarryUtils.getMarryByName(player.getName());
-                player.showFormWindow(WindowManager.getMessageWindow("§c离婚成功",this,"返回上级"));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c离婚成功",marryWindow,backButtonName,backButtonImage));
 
                 Server.getInstance().getPluginManager().callEvent(new DivorceMarryEvent(player,marry));
                 break;
             case 4:
                 if(MarryUtils.marrys.size() <1){
-                    player.showFormWindow(WindowManager.getMessageWindow("§c当前还没有一对夫妻",this,"返回上级"));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前还没有一对夫妻",marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 MarryUtils.marrys.sort((marry1, marry2) -> (marry1.getMoney() > marry2.getMoney()) ? -1 : (marry2.getMoney() < marry1.getMoney()) ? 1 : 0);

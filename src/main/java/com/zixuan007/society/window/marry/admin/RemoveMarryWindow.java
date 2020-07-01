@@ -9,6 +9,7 @@ import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,8 @@ public class RemoveMarryWindow extends SimpleWindow implements WindowLoader {
 
     @Override
     public void onClick(int id, Player player) {
+        String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
+        String closeButtonImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         if(getButtons().size() < 1) {
             return;
         }
@@ -43,8 +46,7 @@ public class RemoveMarryWindow extends SimpleWindow implements WindowLoader {
         int mid = Integer.parseInt(midStr);
         Marry marry = MarryUtils.getMarryById(mid);
         MarryUtils.removeMarry(marry);
-
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功移除mid为 §e"+marry.getMid()+" §a的夫妻",null,"关闭"));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除mid为 §e"+marry.getMid()+" §a的夫妻",null,closeButtonName,closeButtonImagePath));
     }
 
 

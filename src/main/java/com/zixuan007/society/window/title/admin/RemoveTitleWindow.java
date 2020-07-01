@@ -15,6 +15,7 @@ import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +45,12 @@ public class RemoveTitleWindow extends CustomWindow implements WindowLoader {
         String title = response.getInputResponse(1);
         Config titleConfig = SocietyPlugin.getInstance().getTitleConfig();
         ArrayList<String> titleList = TitleUtils.titleList.get(playerName);
+        FormWindow removeTitleWindow = WindowManager.getFormWindow(WindowType.REMOVE_TITLE_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
         if (titleList == null || titleList.size() <= 0) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c此玩家还没有称号", this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此玩家还没有称号",removeTitleWindow,backButtonName,backButtonImage));
             return;
         }
         ArrayList<String> removeTitle = new ArrayList<>();
@@ -55,19 +60,18 @@ public class RemoveTitleWindow extends CustomWindow implements WindowLoader {
             }
         }
         if (removeTitle.size() <= 0) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c此玩家称号不存在", this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此玩家称号不存在",removeTitleWindow,backButtonName,backButtonImage));
             return;
         }
         titleList.removeAll(removeTitle);
         titleConfig.set(playerName, titleList);
         titleConfig.save();
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除玩家所匹配的称号!",removeTitleWindow,backButtonName,backButtonImage));
 
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功移除玩家所匹配的称号!", this, "返回上级"));
 
         if (PluginUtils.isOnlineByName(playerName)) {
             Player player1 = Server.getInstance().getPlayer(playerName);
-            player1.showFormWindow(WindowManager.getMessageWindow("§c你的部分称号已经被管理员移除", null, "关闭窗口"), new Random().nextInt(300));
-
+            player1.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c你的部分称号已经被管理员移除",removeTitleWindow,backButtonName,backButtonImage));
         }
 
 

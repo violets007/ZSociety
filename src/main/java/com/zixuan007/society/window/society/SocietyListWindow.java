@@ -2,7 +2,6 @@ package com.zixuan007.society.window.society;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.event.Event;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
@@ -74,7 +73,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
     @Override
     public void onClick(int id, Player player) {
         Society society;
-        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (id == 0 && this.currentPage != 1) {
@@ -86,17 +85,17 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
             return;
         }
         if (SocietyUtils.isJoinSociety(player.getName())) {
-            player.showFormWindow(WindowManager.getFromWindow(WindowType.MESSAGE_WINDOW, "§c您当前已经加入过公会,请勿二次点击加入", societyWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c您当前已经加入过公会,请勿二次点击加入", societyWindow, backButtonName, backButtonImage));
             return;
         }
         ModalWindow affirmWindow;
 
         if (this.currentPage == 1) {
             society = this.societyList.get(id);
-            affirmWindow = (ModalWindow) WindowManager.getFromWindow(WindowType.MODAL_WINDOW,"§e您确定要加入 §b" + (this.societyList.get(id)).getSocietyName() + " §e公会吗?","§a确认加入","§c取消加入");
+            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW,"§e您确定要加入 §b" + (this.societyList.get(id)).getSocietyName() + " §e公会吗?","§a确认加入","§c取消加入");
         } else {
             society = this.societyList.get(id - 1);
-            affirmWindow = (ModalWindow) WindowManager.getFromWindow(WindowType.MODAL_WINDOW,"§e您确定要加入 §b" + (this.societyList.get(id - 1)).getSocietyName() + " §e公会吗?","§a确认加入","§c取消加入");
+            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW,"§e您确定要加入 §b" + (this.societyList.get(id - 1)).getSocietyName() + " §e公会吗?","§a确认加入","§c取消加入");
         }
         affirmWindow.setButtonClickedListener((affirm, player1) -> {
             if (affirm) {

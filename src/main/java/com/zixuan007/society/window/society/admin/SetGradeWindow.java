@@ -14,6 +14,7 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 
@@ -49,12 +50,18 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
     public void onClick(FormResponseCustom response, Player player) {
         FormResponseData dropdown = response.getDropdownResponse(0);
         String gradeStr = response.getInputResponse(1);
+        FormWindow setGradeWindow = WindowManager.getFormWindow(WindowType.SET_GRADE_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
+        String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
+        String closeButtonImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         if(getElements().size() <= 1){
             return;
         }
 
         if(!SocietyUtils.isNumeric(gradeStr)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c设置的等级不是数字请重新输入",this,"返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的等级不是数字请重新输入",setGradeWindow,backButtonName,backButtonImage));
             return;
         }
 
@@ -65,7 +72,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietysByID(sid);
 
         if(!SocietyUtils.societies.contains(society)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c此公会已经被解散,请设置其他公会",null,"关闭"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此公会已经被解散,请设置其他公会",null,closeButtonName,closeButtonImagePath));
             return;
         }
 
@@ -73,8 +80,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         society.setGrade(grade);
         SocietyUtils.societies.add(society);
         society.saveData();
-
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功设置 §b"+society.getSocietyName()+" §a等级为 §e"+society.getGrade(),null,"关闭"));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置 §b"+society.getSocietyName()+" §a等级为 §e"+society.getGrade(),null,closeButtonName,closeButtonImagePath));
     }
 
 

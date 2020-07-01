@@ -13,7 +13,7 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
-import com.zixuan007.society.window.society.MessageWindow;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -53,9 +53,12 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         String sellPriceStr = response.getInputResponse(0);
+        FormWindow createSocietyShopForm = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
         if(!SocietyUtils.isNumeric(sellPriceStr) || sellPriceStr.equals("")){
-            MessageWindow messageWindow = WindowManager.getMessageWindow("§c输入的价格不是数字" ,this, "返回上级");
-            player.showFormWindow(messageWindow);
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c输入的价格不是数字", createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
 
@@ -68,14 +71,12 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
         String itemCustomName = split[1];
         Item item = player.getInventory().getItem(Integer.parseInt(index));
         if(!SocietyUtils.isNumeric(itemCountStr) || itemCountStr.equals("")){
-            MessageWindow messageWindow = WindowManager.getMessageWindow("§c输入的数量不是数字" ,this, "返回上级");
-            player.showFormWindow(messageWindow);
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c输入的数量不是数字", createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
         int itemCount = Integer.parseInt(itemCountStr);
         if(item.count < itemCount){
-            MessageWindow messageWindow = WindowManager.getMessageWindow("§c此物品数量不足" ,this, "返回上级");
-            player.showFormWindow(messageWindow);
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c此物品数量不足", createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
         item.setCount(itemCount);

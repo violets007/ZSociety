@@ -5,7 +5,6 @@ import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -56,24 +55,25 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         ArrayList<Object> list;
         Double societyMoney;
         int updateMoney;
-        List<String> memberList;
         RemoveMemberWindow removeMemberWindow;
         int clickedButtonId = getResponse().getClickedButtonId();
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         Society society = SocietyUtils.getSocietysByID(this.sid);
+        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         switch (clickedButtonId) {
             case 0:
-                setJobWindow = WindowManager.getSetJobWindow( this);
-                player.showFormWindow(setJobWindow);
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_JOB_WINDOW,player));
                 break;
             case 1:
                 tempApply = society.getTempApply();
                 if (tempApply == null || tempApply.size() <= 0) {
-                    MessageWindow messageWindow = WindowManager.getMessageWindow("§c当前还没有玩家申请加入公会", this, "返回上级");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前还没有玩家申请加入公会",presidentWindow,backButtonName,backButtonImage));
                     return;
                 }
-                playerApplyListWindow = WindowManager.getPlayerApplyListWindow(tempApply, society.getSid());
+
+                playerApplyListWindow = (PlayerApplyListWindow) WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW,player);
                 playerApplyListWindow.setBack(true);
                 playerApplyListWindow.setParent(this);
                 player.showFormWindow(playerApplyListWindow);
@@ -81,39 +81,35 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
             case 2:
                 list = (ArrayList<Object>) societyPlugin.getConfig().get("等级" + society.getGrade());
                 if (list == null || list.size() <= 0) {
-                    MessageWindow messageWindow = WindowManager.getMessageWindow("§c当前公会已经是最顶级", this, "返回上级");
-                    player.showFormWindow(messageWindow);
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前公会已经是最顶级",presidentWindow,backButtonName,backButtonImage));
                     return;
                 }
                 societyMoney = society.getSocietyMoney();
                 updateMoney = (Integer) list.get(1);
                 if (societyMoney < updateMoney) {
-                    MessageWindow messageWindow = WindowManager.getMessageWindow("§c公会升级需要 §b" + updateMoney + "§c,公会当前资金 §b" + societyMoney,  this, "返回上级");
-                    player.showFormWindow(messageWindow);
-
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c公会升级需要 §b" + updateMoney + "§c,公会当前资金 §b" + societyMoney,presidentWindow,backButtonName,backButtonImage));
                     return;
                 }
                 society.setSocietyMoney(societyMoney - updateMoney);
                 society.setGrade(society.getGrade() + 1);
                 society.saveData();
-                player.showFormWindow(WindowManager.getMessageWindow("§a公会升级成功", this, "返回上级"));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a公会升级成功",presidentWindow,backButtonName,backButtonImage));
                 break;
 
             case 3:
                 if (society.getPost().size() == 1) {
-                    MessageWindow messageWindow = WindowManager.getMessageWindow("§c当前没有可以移除的人员", this, "返回上级");
-                    player.showFormWindow( messageWindow);
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前没有可以移除的人员",presidentWindow,backButtonName,backButtonImage));
                     return;
                 }
 
                 Arrays.asList(society.getPost().keySet().toArray(new String[0]));
-                removeMemberWindow = (RemoveMemberWindow) WindowManager.getFromWindow(WindowType.Member_List_Window,player);
+                removeMemberWindow = (RemoveMemberWindow) WindowManager.getFormWindow(WindowType.Member_List_Window,player);
                 removeMemberWindow.setParent(this);
                 player.showFormWindow( removeMemberWindow);
                 break;
             case 4:
-                FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW, player);
-                player.showFormWindow(WindowManager.getMessageWindow("§a成功解散 §b" + society.getSocietyName(), societyWindow, "返回主界面"));
+                FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功解散 §b" + society.getSocietyName(),null,"返回主界面",backButtonImage));
                 SocietyUtils.sendMemberTitle("§b" + player.getName() + "§c解散了公会", society);
                 //移除指定的公会商店
                 SocietyUtils.removeSocietyShopBySid(society);

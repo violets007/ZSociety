@@ -32,7 +32,7 @@ public class CheckPrivilegeTimeTask extends PluginTask<SocietyPlugin> {
                     Config config = new Config(dataFile, Config.YAML);
                     String holdTime = (String) config.get("holdTime");
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
-                    Date parse =null;
+                    Date parse;
                     try {
                         parse=simpleDateFormat.parse(holdTime);
                         if(System.currentTimeMillis() >= parse.getTime()){

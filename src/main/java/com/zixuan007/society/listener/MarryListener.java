@@ -15,6 +15,7 @@ import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.ModalWindow;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,8 +38,11 @@ public class MarryListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onMove(PlayerMoveEvent event){
         Player player = event.getPlayer();
+        String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
+        String closeButtonImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         if(SocietyPlugin.getInstance().getMarryConfig().get(player.getName()) == null){
-            ModalWindow affrimWindow = WindowManager.getAffrimWindow("§e请选择当前的性别", "男", "女");
+
+            ModalWindow affrimWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW,"§e请选择当前的性别","男","女");
             Config marryConfig = SocietyPlugin.getInstance().getMarryConfig();
             affrimWindow.setButtonClickedListener((affrim,player1)->{
                 String gender="";
@@ -49,7 +53,7 @@ public class MarryListener implements Listener {
                     marryConfig.set(player1.getName(),0);
                     gender="§c女";
                 }
-                player.showFormWindow(WindowManager.getMessageWindow("§a成功选择为 "+gender,null,"关闭窗口"));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功选择为 "+gender,null,closeButtonName,closeButtonImagePath));
                 marryConfig.save();
             });
             affrimWindow.setBack(true);
@@ -58,7 +62,7 @@ public class MarryListener implements Listener {
         }
         String name = MarryUtils.proposeFailName.get(player.getName());
         if(name != null){
-            player.showFormWindow(WindowManager.getMessageWindow("§b"+name+"§c拒绝了你的求婚",null,"关闭窗口"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§b"+name+"§c拒绝了你的求婚",null,closeButtonName,closeButtonImagePath));
             MarryUtils.proposeFailName.remove(player.getName());
         }
     }

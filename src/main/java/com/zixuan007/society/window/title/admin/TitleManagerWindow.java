@@ -35,15 +35,15 @@ public class TitleManagerWindow extends SimpleWindow implements WindowLoader {
         switch (id) {
             case 0:
 
-                player.showFormWindow( WindowManager.getFromWindow(WindowType.SET_TITLE_WINDOW));
+                player.showFormWindow( WindowManager.getFormWindow(WindowType.SET_TITLE_WINDOW));
                 break;
             case 1:
 
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.REMOVE_TITLE_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.REMOVE_TITLE_WINDOW));
                 break;
             case 2:
 
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.CREATE_TITLE_SHOP_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_TITLE_SHOP_WINDOW));
                 break;
             default:
                 break;

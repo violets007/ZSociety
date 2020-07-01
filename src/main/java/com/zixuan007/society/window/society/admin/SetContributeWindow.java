@@ -8,10 +8,12 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 
@@ -46,12 +48,18 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
     public void onClick(FormResponseCustom response, Player player) {
         FormResponseData dropdown = response.getDropdownResponse(0);
         String contributeStr = response.getInputResponse(1);
+        FormWindow setContributeWindow = WindowManager.getFormWindow(WindowType.SET_CONTRIBUTE_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
+        String closeButtonName=PluginUtils.getWindowConfigInfo("messageWindow.close.button");
+        String closeImagePath=PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         if(getElements().size() <= 1){
             return;
         }
 
         if(!SocietyUtils.isNumeric(contributeStr)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c设置的贡献值不是数字",this,"返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的贡献值不是数字",setContributeWindow,backButtonName,backButtonImage));
             return;
         }
 
@@ -62,7 +70,7 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietysByID(sid);
 
         if(!SocietyUtils.societies.contains(society)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c此公会已经被解散,请设置其他公会",null,"关闭"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此公会已经被解散,请设置其他公会",null,closeButtonName,closeImagePath));
             return;
         }
 
@@ -70,8 +78,7 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
         society.setSocietyMoney(contribute.doubleValue());
         SocietyUtils.societies.add(society);
         society.saveData();
-
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功设置 §b"+society.getSocietyName()+" §a贡献值为 §e"+society.getSocietyMoney(),null,"关闭"));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置 §b"+society.getSocietyName()+" §a贡献值为 §e"+society.getSocietyMoney(),null,closeButtonName,closeImagePath));
     }
 
 

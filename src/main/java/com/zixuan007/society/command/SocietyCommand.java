@@ -7,14 +7,13 @@ import cn.nukkit.command.ConsoleCommandSender;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
-import com.zixuan007.society.window.society.SocietyWindow;
 
 /**
  * 公会命令
  * @author zixuan007
  */
 public class SocietyCommand extends Command {
-    public final static String COMMAND_NAME=SocietyPlugin.getInstance().getConfig().getString("comands");
+    public final static String COMMAND_NAME=SocietyPlugin.getInstance().getLanguageConfig().getString("command.society");
 
     public SocietyCommand() {
         super(COMMAND_NAME, "§e显示公会功能窗口", "");
@@ -29,9 +28,8 @@ public class SocietyCommand extends Command {
         } else {
             Player player = (Player)sender;
             if (commandName.equals(this.getName())) {
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW));
             }
-
         }
         return false;
     }

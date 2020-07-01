@@ -1,78 +1,22 @@
 ##中文语言包
 
-#消息提示部分
+#指令部分
 
+#管理命令
+command.manage: 管理
+#展示公会功能窗命令
+command.society: 公会
+#展示称号功能窗口命令
+command.title: 称号
+#展示结婚功能窗口命令
+command.marry: 结婚
+#展示特权功能窗口命令
+command.privilege: 特权
 
-##公会窗口部分
-societywindow.title: §e公会功能列表
-societywindow.createsociety.button: §e创建公会
-societywindow.createsociety.button.imgpath: textures/ui/book.edit.default
-societywindow.managersociety.button: §e管理公会
-societywindow.managersociety.button.imgpath: textures/ui/code.tynker.default
-societywindow.quitsociety.button: §e退出公会
-societywindow.quitsociety.button.imgpath: textures/ui/cancel
-societywindow.joinsociety.button: §e加入公会
-societywindow.joinsociety.button.imgpath: textures/ui/controller.glyph.color
-societywindow.menberlist.button: §e公会成员列表
-societywindow.menberlist.button.imgpath: textures/ui/copy
-societywindow.contributionranking.button: §e公会经济贡献排行榜
-societywindow.contributionranking.button.imgpath: textures/ui/recipe.book.icon
-societywindow.levelrank.button: §e公会等级排行榜
-societywindow.levelrank.button.imgpath: textures/ui/feedIcon
-societywindow.contribution.button: §e贡献经济
-societywindow.contribution.button.imgpath: textures/ui/dev.glyph.color
-societywindow.createshop.button: §e创建公会商店
-societywindow.createshop.button.imgpath: textures/ui/dev.glyph.color
-societyadminwindow.title: §e公会管理列表
-societyadminwindow.button.imgpath: textures/ui/dev.glyph.color
-presidentwindow.title: ${societyName}§e管理窗口
-presidentwindow.setjobwindow.button: §e设置成员职位
-presidentwindow.setjobwindow.button.imgpath: textures/ui/dev.glyph.color
-presidentwindow.playerapplylist.button: §e查看玩家申请
-presidentwindow.playerapplylist.button.imgpath: textures/ui/recipe.book.icon
-presidentwindow.upgrade.button: §e升级公会
-presidentwindow.upgrade.button.imgpath: textures/ui/backup.replace
-presidentwindow.removemember.button: §e移除人员
-presidentwindow.removemember.button.imgpath: textures/ui/book.trash.default
-presidentwindow.dissolve.button: §e解散公会
-presidentwindow.dissolve.button.imgpath: textures/ui/cancel
-playerapplylistwindow.title: §e玩家申请公会窗口
-removememberwindow.title: §e移除人员窗口
-setjobwindow.title: §e设置成员职位窗口
-contributionrankingwindow.title: §e贡献窗口
-createsocietywindow.title: §e创建公会窗口
-contributionwindow.title: §e贡献窗口
-guildapplication.title: §e公会功能列表
-societylistwindow.title: §e公会列表
-memberlistwindow.title: §e成员列表
-levelrankwindow.title: §e公会等级排行榜
-messagewindow.title: §e消息提示
-affrimwindow.title: §e确认提示
-titlemanagerwindow.title: §e称号管理界面
-titlemanagerwindow.settitle.button: §e设置玩家称号
-titlemanagerwindow.settitle.button.imgpath: textures/ui/dev.glyph.color
-titlemanagerwindow.removetitle.button: §e移除玩家称号
-titlemanagerwindow.removetitle.button.imgpath: textures/ui/book.trash.default
-titlemanagerwindow.createtitleshop.button: §e创建称号商店
-titlemanagerwindow.createtitleshop.button.imgpath: textures/ui/backup.noline
-createtitleshopwindow.title: §e创建称号商店窗口
-removetitlewindow.title: §e移除称号窗口
-settitlewindow.title: §e设置称号窗口
-titlewindow.title: §e称号列表
-marrywindow.title: §e结婚功能窗口
-marrywindow.propose.button: §e求婚
-marrywindow.propose.button.imgpath: textures/ui/water.breathing.effect
-marrywindow.addpublicfunds.button: §e增加公共资金
-marrywindow.addpublicfunds.button.imgpath: textures/ui/water.breathing.effect
-marrywindow.transfer.button: §e传送至情侣身边
-marrywindow.transfer.button.imgpath: textures/ui/water.breathing.effect
-marrywindow.divorcemarry.button: §e离婚
-marrywindow.divorcemarry.button.imgpath: textures/ui/water.breathing.effect
-marrywindow.moneyrankwindow.button: §e夫妻公共财产排行榜
-marrywindow.moneyrankwindow.button.imgpath: textures/ui/water.breathing.effect
-marrywindow.propose.title: §e求婚窗口
-addpublicfundswindow.title: §e增加公共资金窗口
-moneyrankwindow.title: §e公共资产排行榜
+#消息提示
+
+message.giveTitle: §4>> /§b管理 §a给予 §e称号 §6[玩家名字] §6[称号]
+message.giveTitle.notPlayer: §4>> §c此玩家不存在!
 
 
 

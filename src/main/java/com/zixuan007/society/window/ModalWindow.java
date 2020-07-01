@@ -22,7 +22,7 @@ public class ModalWindow extends FormWindowModal implements ResponseListenerModa
     private transient FormWindow parent;
     private Boolean isBack = false;
 
-    public ModalWindow( String content, String trueButtonText, String falseButtonText) {
+    public ModalWindow() {
         super(PluginUtils.getWindowConfigInfo("modalWindow.title"),"","","");
     }
 

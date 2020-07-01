@@ -13,7 +13,7 @@ import com.zixuan007.society.window.WindowType;
  * @author zixuan007
  */
 public class MarryCommand extends Command {
-    public final static String COMMAND_NAME= "结婚";
+    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage.marry");
     public MarryCommand() {
         super(COMMAND_NAME,"§e显示结婚功能窗口");
         getCommandParameters().clear();
@@ -26,7 +26,7 @@ public class MarryCommand extends Command {
             return false;
         }
         Player player = (Player) commandSender;
-        player.showFormWindow(WindowManager.getFromWindow(WindowType.MARRY_WINDOW));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MARRY_WINDOW));
         return false;
     }
 }

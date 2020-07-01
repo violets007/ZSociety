@@ -11,6 +11,7 @@ import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -41,25 +42,28 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
         String playerName = response.getDropdownResponse(0).getElementContent();
         String title = response.getInputResponse(1);
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
+        FormWindow setTitleWindow = WindowManager.getFormWindow(WindowType.SET_TITLE_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (societyPlugin.getTitleConfig().get(playerName) == null) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c输入的玩家名字不存在",this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的玩家名字不存在",setTitleWindow,backButtonName,backButtonImage));
             return;
         }
         if (title.trim().equals("") || title.equals(" ")) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c称号内容不能为空", this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c称号内容不能为空",setTitleWindow,backButtonName,backButtonImage));
             return;
         }
         title=title.replaceAll(" ","");
         ArrayList<String> arrayList = TitleUtils.titleList.get(playerName);
         if(TitleUtils.isExistTitle(playerName,title)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c玩家 §b"+playerName+" 已经拥有此称号,请勿重复设置", this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c玩家 §b"+playerName+" 已经拥有此称号,请勿重复设置",setTitleWindow,backButtonName,backButtonImage));
             return;
         }
         Config titleConfig = societyPlugin.getTitleConfig();
         TitleUtils.addTitle(playerName,title);
         titleConfig.set(playerName, TitleUtils.getTitles(playerName));
         titleConfig.save();
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功设置 §b" + playerName + " §a的称号为 §e" + title, this, "返回上级"));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置 §b" + playerName + " §a的称号为 §e" + title,setTitleWindow,backButtonName,backButtonImage));
     }
 
 

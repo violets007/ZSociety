@@ -26,7 +26,6 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.society.MessageWindow;
-import com.zixuan007.society.window.society.SocietyWindow;
 import me.onebone.economyapi.EconomyAPI;
 
 import java.util.*;
@@ -52,6 +51,8 @@ public class SocietyListener implements Listener {
         Player player = event.getPlayer();
         Society society = event.getSociety();
         final Config config = this.societyPlugin.getConfig();
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         society.getPost().put(player.getName(), new ArrayList<Object>() {
             {
                 ArrayList<Object> post = (ArrayList) config.get("post");
@@ -63,9 +64,8 @@ public class SocietyListener implements Listener {
         society.saveData();
         SocietyUtils.societies.add(event.getSociety());
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b" + player.getName() + " §a创建公会名称: §e" + society.getSocietyName());
-        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
-        MessageWindow messageWindow = WindowManager.getMessageWindow("§a创建 §l§b" + society.getSocietyName() + " §a公会成功", societyWindow, "返回上级");
-        player.showFormWindow(messageWindow);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+        player.showFormWindow( WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a创建 §l§b" + society.getSocietyName() + " §a公会成功",societyWindow,backButtonName,backButtonImage));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -75,21 +75,25 @@ public class SocietyListener implements Listener {
         Config config = this.societyPlugin.getConfig();
         society.getTempApply().remove(player.getName());
         society.getTempApply().add(player.getName());
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         society.saveData();
-        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
-        MessageWindow messageWindow = WindowManager.getMessageWindow(" §a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理", societyWindow, "返回上级");
-        player.showFormWindow(messageWindow);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理",societyWindow,backButtonName,backButtonImage));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onQuic(PlayerQuitSocietyEvent event) {
         Player player = event.getPlayer();
         Society society = event.getSociety();
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         society.getPost().remove(player.getName());
         society.saveData();
-        FormWindow societyWindow = WindowManager.getFromWindow(WindowType.SOCIETY_WINDOW);
-        MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功退出 §l§c" + society.getSocietyName() + " §a公会", societyWindow, "返回上级");
-        player.showFormWindow(messageWindow);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功退出 §l§c" + society.getSocietyName() + " §a公会",societyWindow,backButtonName,backButtonImage));
 
         //检测到玩家正在创建公会商店
         if(SocietyUtils.onCreatePlayer.containsKey(player.getName())){

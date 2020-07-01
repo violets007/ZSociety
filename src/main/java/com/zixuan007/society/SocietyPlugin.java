@@ -20,6 +20,7 @@ import com.zixuan007.society.window.marry.admin.MarryAdminWindow;
 import com.zixuan007.society.window.marry.admin.RemoveMarryWindow;
 import com.zixuan007.society.window.marry.admin.SetMarryMoneyWindow;
 import com.zixuan007.society.window.society.*;
+import com.zixuan007.society.window.society.admin.SetContributeWindow;
 import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.president.PresidentWindow;
 import com.zixuan007.society.window.society.president.RemoveMemberWindow;
@@ -52,6 +53,7 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
+
     private static SocietyPlugin instance;
 
 
@@ -82,6 +84,7 @@ public class SocietyPlugin extends PluginBase {
         }
         checkConfig();
         saveResource("cn_language.yml", true);
+        saveResource("lang/zh-CN.yml");
         saveResource("WindowConfig.yml",true);
         registerCommand();
         registerWindow();
@@ -141,7 +144,6 @@ public class SocietyPlugin extends PluginBase {
         SocietyUtils.loadSocietyConfig();
         PrivilegeUtils.loadVipConfig();
         TitleUtils.loadConfig();
-
     }
 
     /**
@@ -199,7 +201,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.PROPOSE_WINDOW, ProposeWindow.class);
         PluginUtils.addWindowClass(WindowType.MARRY_ADMIN_WINDOW, MarryAdminWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MARRY_WINDOW, RemoveMarryWindow.class);
-        PluginUtils.addWindowClass(WindowType.SetMarryMoneyWindow, SetMarryMoneyWindow.class);
+        PluginUtils.addWindowClass(WindowType.SET_MARRY_MONEY_WINDOW, SetMarryMoneyWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_WINDOW, SocietyWindow.class);
         PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_WINDOW, CreateSocietyWindow.class);
         PluginUtils.addWindowClass(WindowType.Member_List_Window, MemberListWindow.class);
@@ -211,6 +213,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.PRESIDENT_WINDOW, PresidentWindow.class);
         PluginUtils.addWindowClass(WindowType.PLAYER_APPLY_LIST_WINDOW, PlayerApplyListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MEMBER_WINDOW, RemoveMemberWindow.class);
+        PluginUtils.addWindowClass(WindowType.SET_CONTRIBUTE_WINDOW, SetContributeWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_JOB_WINDOW, SetJobWindow.class);
         PluginUtils.addWindowClass(WindowType.MESSAGE_WINDOW,MessageWindow.class);
         PluginUtils.addWindowClass(WindowType.MODAL_WINDOW, ModalWindow.class);

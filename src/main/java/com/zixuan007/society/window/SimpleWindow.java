@@ -38,7 +38,7 @@ public class SimpleWindow extends FormWindowSimple implements ResponseListenerSi
             SimpleWindow window = (SimpleWindow)formWindow;
 
             if (window.wasClosed() || response == null) {
-                if (window.isBack.booleanValue()) {
+                if (window.isBack) {
                     window.callBack(player);
                 } else {
                     window.callClosed(player);
@@ -58,7 +58,7 @@ public class SimpleWindow extends FormWindowSimple implements ResponseListenerSi
     private void callClicked(int clickedButtonId, Player player) {
         onClick(clickedButtonId, player);
         if (this.buttonClickedListener != null) {
-            this.buttonClickedListener.accept(Integer.valueOf(clickedButtonId), player);
+            this.buttonClickedListener.accept(clickedButtonId, player);
         }
     }
 

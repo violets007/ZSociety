@@ -3,6 +3,7 @@ package com.zixuan007.society.command;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class TitleCommand extends Command {
 
-    public final static String COMMAND_NAME= "称号";
+    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage.title");
 
     public TitleCommand() {
         super(COMMAND_NAME, "§e显示称号功能窗口");
@@ -30,7 +31,7 @@ public class TitleCommand extends Command {
                 player.sendMessage(">> §c当前还没有称号,请先前往称号商店购买");
                 return true;
             }
-            player.showFormWindow(WindowManager.getFromWindow(WindowType.TITLE_WINDOW,player));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.TITLE_WINDOW,player));
             return true;
         }
         return false;

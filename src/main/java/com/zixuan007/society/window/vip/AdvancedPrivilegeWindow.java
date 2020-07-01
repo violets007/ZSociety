@@ -37,7 +37,7 @@ public class AdvancedPrivilegeWindow extends SimpleWindow implements WindowLoade
     public void onClick(int id, Player player) {
         switch (id) {
             case 0:
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.PRIVILEGE_WINDOW, player));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW, player));
                 break;
             case 1:
                 boolean creative = player.isCreative();
@@ -46,7 +46,7 @@ public class AdvancedPrivilegeWindow extends SimpleWindow implements WindowLoade
                 break;
             case 2:
                 Vip advancedPrivilege = PrivilegeUtils.getPivilegeByPlayerName(player.getName());
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.PRIVILEGE_WINDOW,player, advancedPrivilege));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW,player, advancedPrivilege));
                 break;
             default:
                 break;

@@ -7,10 +7,6 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.marry.AddPublicFunds;
 import com.zixuan007.society.window.marry.MoneyRankWindow;
 import com.zixuan007.society.window.marry.ProposeWindow;
-import com.zixuan007.society.window.society.ContributionRankingWindow;
-import com.zixuan007.society.window.society.CreateSocietyWindow;
-import com.zixuan007.society.window.society.LevelRankWindow;
-import com.zixuan007.society.window.society.MemberListWindow;
 import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.SocietyListWindow;
 import com.zixuan007.society.window.society.president.SetJobWindow;
@@ -31,7 +27,9 @@ public class WindowManager {
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
 
     private final static HashMap<WindowType,Class> registerWindow=new HashMap<>();
-    //储存玩家已经打开过的GUI
+    /**
+     * 储存玩家已经打开过的GUI
+     */
     private static HashMap<String, FormWindow> alreadyOpenForms = new HashMap();
 
     private WindowManager() {
@@ -40,11 +38,11 @@ public class WindowManager {
 
     /**
      * 获取到指定类型的表单窗口
-     * @param windowType
-     * @param parameter
+     * @param windowType 窗口类型
+     * @param parameter 窗口初始化数据
      * @return
      */
-    public static FormWindow getFromWindow(WindowType windowType, Object ...parameter){
+    public static FormWindow getFormWindow(WindowType windowType, Object ...parameter){
         Class clazz = registerWindow.get(windowType);
         if(clazz != null){
             try {
@@ -68,20 +66,13 @@ public class WindowManager {
     }
 
 
-    public static CreateSocietyWindow getCreateSocietyWindow(boolean isBack) {
-        CreateSocietyWindow createSocietyWindow = new CreateSocietyWindow();
-        createSocietyWindow.setBack(isBack);
-        return createSocietyWindow;
-    }
-
-
 
     public static SocietyListWindow getSocietyListWindow(int cuurent, WindowType windowType) {
         List<Society> societyList = SocietyUtils.getSocietyList(cuurent);
         int limit = 10;
         int totalPage = SocietyUtils.getSocietyListTotalPage(cuurent, limit);
         String content = "§a当前第 §b" + cuurent + " §a总页数 §b" + totalPage;
-        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFromWindow(WindowType.SOCIETY_LIST_WINDOW,content,cuurent,totalPage,societyList,windowType);
+        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW,content,cuurent,totalPage,societyList,windowType);
         return societyListWindow;
     }
 
@@ -93,10 +84,6 @@ public class WindowManager {
         return setJobWindow;
     }
 
-    public static PlayerApplyListWindow getPlayerApplyListWindow(List<String> tempApply, long sid) {
-        PlayerApplyListWindow playerApplyListWindow = new PlayerApplyListWindow(tempApply, sid);
-        return playerApplyListWindow;
-    }
 
 
     public static ProposeWindow getProposeWindow(){
@@ -114,7 +101,6 @@ public class WindowManager {
     public static PrivilegeManagerWindow getPrivilegeManagerWindow(){
         return new PrivilegeManagerWindow();
     }
-
 
     public static HashMap<WindowType, Class> getRegisterWindow() {
         return registerWindow;

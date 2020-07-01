@@ -14,6 +14,7 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,11 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         FormResponseData dropdownResponse = response.getDropdownResponse(0);
+        FormWindow setMarryMoneyWindow = WindowManager.getFormWindow(WindowType.SET_MARRY_MONEY_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+        String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
+        String closeButtonImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         if(getElements().size() <= 1){
             return;
         }
@@ -53,7 +59,7 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
         String moneyStr = response.getInputResponse(1);
 
         if(!SocietyUtils.isNumeric(moneyStr)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c设置的金额不是数字",this,"返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的金额不是数字",setMarryMoneyWindow,backButtonName,backButtonImage));
             return;
         }
         int mid = Integer.parseInt(midStr);
@@ -61,7 +67,7 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
 
         Marry marry = MarryUtils.getMarryById(mid);
         if(marry == null){
-            player.showFormWindow(WindowManager.getMessageWindow("§c当前夫妻已经离婚,请设置其他的情侣",null,"关闭"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的金额不是数字",null,closeButtonName,closeButtonImagePath));
             return;
         }
 
@@ -70,7 +76,7 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
         MarryUtils.marrys.add(marry);
         MarryUtils.saveMarry(marry);
 
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功设置指定夫妻资产为 §e"+marry.getMoney(),null,"关闭"));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置指定夫妻资产为 §e"+marry.getMoney(),null,closeButtonName,closeButtonImagePath));
     }
 
 

@@ -10,6 +10,7 @@ import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 import java.util.HashMap;
 
@@ -36,17 +37,20 @@ public class CreateTitleShopWindow extends CustomWindow implements WindowLoader 
     public void onClick(FormResponseCustom response, Player player) {
         final String title = response.getInputResponse(0);
         final String money = response.getInputResponse(1);
+        FormWindow createTitleShopWindow = WindowManager.getFormWindow(WindowType.CREATE_TITLE_SHOP_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if (title.isEmpty() || title.equals(" ")) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c售卖的称号不能为空", (FormWindow)this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c售卖的称号不能为空",createTitleShopWindow,backButtonName,backButtonImage));
             return;
         }
         if ("".equals(money) || !SocietyUtils.isNumeric(money)) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c输入的金额不是数字", (FormWindow)this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的金额不是数字",createTitleShopWindow,backButtonName,backButtonImage));
             return;
         }
         if (SocietyPlugin.getInstance().getTitleShopConfig().get(title) != null) {
-            player.showFormWindow(WindowManager.getMessageWindow("§c此称号已经存在", (FormWindow)this, "返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此称号已经存在",createTitleShopWindow,backButtonName,backButtonImage));
             return;
         }
         TitleUtils.onCreateName.put(player.getName(),new HashMap<String,Object>(){

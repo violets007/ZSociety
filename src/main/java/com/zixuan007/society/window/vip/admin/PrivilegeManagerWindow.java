@@ -34,13 +34,13 @@ public class PrivilegeManagerWindow extends SimpleWindow implements WindowLoader
     public void onClick(int id, Player player) {
         switch (id){
             case 0:
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.SET_PRIVILEGE_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_PRIVILEGE_WINDOW));
                 break;
             case 1:
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.REMOVE_PRIVILEGE_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.REMOVE_PRIVILEGE_WINDOW));
                 break;
             case 2:
-                player.showFormWindow(WindowManager.getFromWindow(WindowType.PRIVILEGE_LIST_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_LIST_WINDOW));
                 break;
             default:
                 break;

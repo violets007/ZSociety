@@ -10,6 +10,7 @@ import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 /**
  * @author zixuan007
@@ -29,8 +30,12 @@ public class RemovePrivilegeWindow extends CustomWindow implements WindowLoader 
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         String playerName = response.getInputResponse(0);
+        FormWindow removePrivilegeWindow = WindowManager.getFormWindow(WindowType.REMOVE_PRIVILEGE_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
         if(!PrivilegeUtils.isVIP(playerName) && !PrivilegeUtils.isSvip(playerName)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c输入的玩家名并没有特权",this,"返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的玩家名并没有特权",removePrivilegeWindow,backButtonName,backButtonImage));
             return;
         }
         PrivilegeUtils.removePivilegeData(playerName);
@@ -39,8 +44,7 @@ public class RemovePrivilegeWindow extends CustomWindow implements WindowLoader 
         }else{
             PrivilegeUtils.removePrivilegeName.add(playerName);
         }
-
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功移除 §b"+playerName+" §a的特权",this,"返回上级"));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除 §b"+playerName+" §a的特权",removePrivilegeWindow,backButtonName,backButtonImage));
     }
 
 

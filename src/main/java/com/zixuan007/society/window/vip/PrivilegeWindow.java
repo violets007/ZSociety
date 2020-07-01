@@ -46,7 +46,7 @@ public class PrivilegeWindow extends SimpleWindow implements WindowLoader {
             case 1:
                 Vip privilege = PrivilegeUtils.getPivilegeByPlayerName(player.getName());
                 if (privilege != null &&privilege.getVip_Type().equals(VipType.VIP)) {
-                   player.showFormWindow(WindowManager.getFromWindow(WindowType.PRIVILEGE_WINDOW,player,privilege));
+                   player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW,player,privilege));
                 }else{
                     player.sendMessage(">> §c你不是VIP无法进行查看");
                 }

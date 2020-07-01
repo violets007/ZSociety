@@ -14,6 +14,7 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 
 import java.text.SimpleDateFormat;
@@ -45,8 +46,11 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
     public void onClick(FormResponseCustom response, Player player) {
         String setPrivilegePlayerName = response.getInputResponse(0);
         String timeStr = response.getInputResponse(1);
+        FormWindow setPrivilegeWindow = WindowManager.getFormWindow(WindowType.SET_PRIVILEGE_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if(!SocietyUtils.isNumeric(timeStr) || "".equals(timeStr)){
-            player.showFormWindow(WindowManager.getMessageWindow("§c输入的不是数字",this,"返回上级"));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的不是数字",setPrivilegeWindow,backButtonName,backButtonImage));
             return;
         }
 
@@ -67,7 +71,7 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
         if(!PrivilegeUtils.isSvip(setPrivilegePlayerName) && !PrivilegeUtils.isVIP(setPrivilegePlayerName)) {
             PrivilegeUtils.privilegeList.add(vip);
         }
-        player.showFormWindow(WindowManager.getMessageWindow("§a成功设置玩家 §b"+setPrivilegePlayerName+" §a的 §c"+elementContent+" §a天数为 §e"+time+" §a天",this,"返回上级"));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置玩家 §b"+setPrivilegePlayerName+" §a的 §c"+elementContent+" §a天数为 §e"+time+" §a天",setPrivilegeWindow,backButtonName,backButtonImage));
     }
 
 

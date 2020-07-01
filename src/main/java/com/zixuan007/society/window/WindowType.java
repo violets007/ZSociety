@@ -90,7 +90,7 @@ public enum  WindowType {
     /**
      * 设置公共资产窗口
      */
-    SetMarryMoneyWindow("SetMarryMoneyWindow"),
+    SET_MARRY_MONEY_WINDOW("SetMarryMoneyWindow"),
 
     /**
      * 公会功能列表
@@ -152,6 +152,16 @@ public enum  WindowType {
      * 设置职位窗口
      */
     SET_JOB_WINDOW("SetJobWindow"),
+
+    /**
+     * 设置贡献窗口
+     */
+    SET_CONTRIBUTE_WINDOW("SetContributeWindow"),
+
+    /**
+     * 设置公会等级窗口
+     */
+    SET_GRADE_WINDOW("SetGradeWindow"),
 
     /**
      * 消息窗口

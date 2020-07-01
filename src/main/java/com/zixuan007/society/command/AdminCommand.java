@@ -35,7 +35,7 @@ public class AdminCommand extends Command {
     public final static String GIVE_TITLE_ARGS="给予";
     public final static String RELOAD_ARGS="reload";
 
-    public final static String COMMAND_NAME="管理";
+    public final static String COMMAND_NAME=SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage");
 
     public AdminCommand() {
         super(COMMAND_NAME);
@@ -62,7 +62,7 @@ public class AdminCommand extends Command {
                 player.showFormWindow(new SocietyAdminWindow());
                 return true;
             case TITLE_ARGS:
-                player.showFormWindow( WindowManager.getFromWindow(WindowType.TITLE_WINDOW,player));
+                player.showFormWindow( WindowManager.getFormWindow(WindowType.TITLE_WINDOW,player));
                 return true;
             case MARRY_ARGS:
                 player.showFormWindow(new MarryAdminWindow());
@@ -72,16 +72,16 @@ public class AdminCommand extends Command {
                 return true;
             case GIVE_TITLE_ARGS:
                 if (args.length < FOUR_ARGS_LENGTH){
-                    player.sendMessage("§4>> /§b管理 §a给予 §e称号 §6[玩家名字] §6[称号]");
+                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle"));
                     return false;
                 }
 
                 if(!TITLE_ARGS.equals(args[ONE_ARGS_LENGTH])){
-                    player.sendMessage("§4>> /§b管理 §a给予 §e称号 §6[玩家名字] §6[称号]");
+                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle"));
                     return false;
                 }
                 if(SocietyPlugin.getInstance().getTitleConfig().get(args[TWO_ARGS_LENGTH]) == null){
-                    player.sendMessage("§4>> §c此玩家不存在!");
+                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.notPlayer"));
                     return false;
                 }
                 ArrayList<String> titles = TitleUtils.getTitles(args[TWO_ARGS_LENGTH]);

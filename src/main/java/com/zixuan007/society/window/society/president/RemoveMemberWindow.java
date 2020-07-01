@@ -12,6 +12,7 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.society.MessageWindow;
 
 import java.util.ArrayList;
@@ -54,7 +55,11 @@ public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietysByID(this.sid);
         society.getPost().remove(playerName);
         society.saveData();
-        MessageWindow messageWindow = WindowManager.getMessageWindow("§a成功移除成员 §b" + playerName, getParent(), "返回上级");
+        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW);
+        String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
+        String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
+        MessageWindow messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除成员 §b" + playerName, presidentWindow,backButtonName,backButtonImage);
         SocietyUtils.sendMemberTitle("§c成员: §b"+playerName+" 被踢出公会",society);
         if(PluginUtils.isOnlineByName(playerName)) {
             Server.getInstance().getPlayer(playerName).sendTitle("§c你被被踢出公会");
