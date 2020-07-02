@@ -72,32 +72,32 @@ public class AdminCommand extends Command {
                 return true;
             case GIVE_TITLE_ARGS:
                 if (args.length < FOUR_ARGS_LENGTH){
-                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle"));
+                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
                     return false;
                 }
 
                 if(!TITLE_ARGS.equals(args[ONE_ARGS_LENGTH])){
-                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle"));
+                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
                     return false;
                 }
                 if(SocietyPlugin.getInstance().getTitleConfig().get(args[TWO_ARGS_LENGTH]) == null){
                     player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.notPlayer"));
                     return false;
                 }
-                ArrayList<String> titles = TitleUtils.getTitles(args[TWO_ARGS_LENGTH]);
                 String title=args[THREE_ARGS_LENGTH];
                 if(TitleUtils.isExistTitle(args[TWO_ARGS_LENGTH],title)){
-                    player.sendMessage(">> §c玩家 §b"+args[TWO_ARGS_LENGTH]+" §c已拥有此称号,请勿重复给予");
+                    player.sendMessage( PluginUtils.getLanguageInfo("message.existTitle",new String[]{"${playerName}"},new String[]{args[TWO_ARGS_LENGTH]}));
                     return false;
                 }
                 TitleUtils.addTitle(args[TWO_ARGS_LENGTH],title);
                 if (PluginUtils.isOnlineByName(args[TWO_ARGS_LENGTH])) {
-                    Server.getInstance().getPlayer(args[TWO_ARGS_LENGTH]).sendMessage(">> §a成功被给予称号 §e"+args[THREE_ARGS_LENGTH]);
+                    Server.getInstance().getPlayer( PluginUtils.getLanguageInfo("message.giveTitle",new String[]{"${playerName}"},new String[]{args[THREE_ARGS_LENGTH]}));
                 }
                 return true;
             case RELOAD_ARGS:
+                SocietyPlugin.getInstance().getWindowConfig().reload();
                 SocietyPlugin.getInstance().getLanguageConfig().reload();
-                player.sendMessage(">> §aConfig重新加载成功,请重新打开窗口");
+                player.sendMessage(PluginUtils.getLanguageInfo("message.reload"));
                 return true;
             default:
                 return sendHelp(player);

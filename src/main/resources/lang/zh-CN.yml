@@ -14,13 +14,36 @@ command.marry: 结婚
 command.privilege: 特权
 
 #消息提示
+#管理命令消息提示
+message.giveTitle.help: §f>> §4/§b管理 §a给予 §e称号 §6[玩家名字] §6[称号]
+message.giveTitle.notPlayer: §f>> §c此玩家不存在!
+message.existTitle: §f>> §c玩家 §b${playerName} §c已拥有此称号,请勿重复给予
+message.giveTitle: §f>> §a成功被给予称号 §e ${playerName}
+message.reload: §f>> §aConfig重新加载成功,请重新打开窗口
 
-message.giveTitle: §4>> /§b管理 §a给予 §e称号 §6[玩家名字] §6[称号]
-message.giveTitle.notPlayer: §4>> §c此玩家不存在!
+message.isConsole: §4禁止在控制台输入命令
+message.notExistTitle: §f>> §c当前还没有称号,请先前往称号商店购买
 
+message.notExistPrivilege: §f>> §c你还没有特权,请先联系管理员购买
 
+#公会功能窗口
+message.societyWindow.existSociety: §c你已经存在公会,无法创建请先退出当前公会
+message.societyWindow.notPresident: §c您没有权限管理公会
+message.societyWindow.isJoin: §c当前还没加入公会请先加入公会
+message.societyWindow.unableQuitSociety: §c你是会长无法退出公会,请解散公会!
+message.societyWindow.isQuitSociety: §c您确认要退出 §b ${societyName} §c公会吗?
+message.societyWindow.quitSociety: §a玩家 §b ${playerName} §a成功退出公会.
 
+#创建公会窗口
+message.createSocietyWindow.existSociety: §c此公会名称已经存在
+message.createSocietyWindow.InsufficientBalance: §c当前余额不足,创建公会需要 §l§a ${createSocietyMoney}
+message.createSocietyWindow.societyNameisNull: §c公会名称不能为空
 
-
-
-
+#管理会长窗口
+message.presidentWindow.isApplyPlayer: §c当前还没有玩家申请加入公会
+message.presidentWindow.maxGrade: §c当前公会已经是最顶级
+message.presidentWindow.upGradeUnableMoney: §c公会升级需要 §b${updateMoney} §c,公会当前资金 §b ${societyMoney}
+message.presidentWindow.upGrade: §a公会升级成功
+message.presidentWindow.notMember: §c当前没有可以移除的人员
+message.presidentWindow.dissolveSociety: §a成功解散 §b ${societyName}
+message.presidentWindow.presidentDissolveSociety: §b ${playerName} §c解散了公会

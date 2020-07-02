@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
@@ -28,7 +29,7 @@ public class TitleCommand extends Command {
         if (name.equals(this.getName())) {
             ArrayList<String> titles = TitleUtils.titleList.get(player.getName());
             if(titles == null || titles.size() <= 0){
-                player.sendMessage(">> §c当前还没有称号,请先前往称号商店购买");
+                player.sendMessage( PluginUtils.getLanguageInfo("message.notExistTitle"));
                 return true;
             }
             player.showFormWindow(WindowManager.getFormWindow(WindowType.TITLE_WINDOW,player));

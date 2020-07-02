@@ -66,7 +66,6 @@ public class WindowManager {
     }
 
 
-
     public static SocietyListWindow getSocietyListWindow(int cuurent, WindowType windowType) {
         List<Society> societyList = SocietyUtils.getSocietyList(cuurent);
         int limit = 10;
@@ -76,15 +75,6 @@ public class WindowManager {
         SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW,content,cuurent,totalPage,societyList,formWindow);
         return societyListWindow;
     }
-
-
-    public static SetJobWindow getSetJobWindow(FormWindow formWindow) {
-        SetJobWindow setJobWindow = new SetJobWindow();
-        setJobWindow.setBack(true);
-        setJobWindow.setParent(formWindow);
-        return setJobWindow;
-    }
-
 
 
     public static ProposeWindow getProposeWindow(){

@@ -84,12 +84,11 @@ public class SocietyPlugin extends PluginBase {
         }
         checkConfig();
         saveResource("cn_language.yml", true);
-        saveResource("lang/zh-CN.yml");
+        saveResource("lang/zh-CN.yml",true);
         saveResource("WindowConfig.yml",true);
         loadConfig();
         registerCommand();
         registerWindow();
-        PluginUtils.getLang();
         getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
         getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20*60);
         resisterListener();
@@ -172,7 +171,7 @@ public class SocietyPlugin extends PluginBase {
             String pluginVersion = getDescription().getVersion();
             if (version == null || !version.equals(pluginVersion)) {
                 saveResource("Config.yml", true);
-                getLogger().info("§c检测到配置文件版本太低,自动进行覆盖");
+                getLogger().info("§c检测到Config.yml文件版本太低,自动进行覆盖");
             } else {
                 saveResource("Config.yml");
             }
@@ -217,7 +216,6 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.SET_JOB_WINDOW, SetJobWindow.class);
         PluginUtils.addWindowClass(WindowType.MESSAGE_WINDOW,MessageWindow.class);
         PluginUtils.addWindowClass(WindowType.MODAL_WINDOW, ModalWindow.class);
-
     }
 
 

@@ -37,7 +37,7 @@ public class VipCommand extends Command {
                     //展示SVIP功能界面
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.ADVANCED_PRIVILEGE_WINDOW,player));
                 }else{
-                    player.sendMessage(">> §c你还没有特权,请先联系管理员购买");
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.notExistPrivilege"));
                 }
             }
         }

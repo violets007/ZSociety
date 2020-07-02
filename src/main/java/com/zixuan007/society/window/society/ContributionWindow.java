@@ -61,12 +61,10 @@ public class ContributionWindow extends CustomWindow implements WindowLoader {
                             WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a贡献成功,当前公会经济 §b" + society.getSocietyMoney(), contributionForm, backButtonName, backButtonImage);
                             messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a贡献成功,当前公会经济 §b" + society.getSocietyMoney(), contributionForm, backButtonName, backButtonImage);
                         }else {
-
                             messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a贡献失败，请检查金币数量是否充足", contributionForm, backButtonName, backButtonImage);
                         }
                     }
                 }else {
-
                     messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c请输入大于0的金额", contributionForm, backButtonName, backButtonImage);
                 }
                 player.showFormWindow(messageWindow);

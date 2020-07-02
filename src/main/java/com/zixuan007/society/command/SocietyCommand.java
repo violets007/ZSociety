@@ -14,9 +14,10 @@ import com.zixuan007.society.window.WindowType;
  * @author zixuan007
  */
 public class SocietyCommand extends Command {
+    private static String COMMAND_NAME=PluginUtils.getLanguageInfo("command.society");
 
     public SocietyCommand() {
-        super(PluginUtils.getLanguageInfo("command.society"), "§e显示公会功能窗口", "");
+        super(COMMAND_NAME, "§e显示公会功能窗口", "");
         this.setPermission("ZSociety.command.user");
         this.getCommandParameters().clear();
     }

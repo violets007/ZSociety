@@ -44,12 +44,11 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         String societyName = response.getInputResponse(0);
         Boolean societyNameExist = SocietyUtils.isSocietyNameExist(societyName);
-        MessageWindow messageWindow;
         FormWindow createSociety = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_WINDOW);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (societyNameExist) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此公会名称已经存在",createSociety,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.existSociety"),createSociety,backButtonName,backButtonImage));
         } else {
             Double createSocietyMoney;
             if(societyPlugin.getConfig().get("createSocietyMoney") instanceof Integer){
@@ -59,14 +58,15 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
             }
             double myMoney = EconomyAPI.getInstance().myMoney(player);
             if (myMoney < createSocietyMoney) {
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前余额不足,创建公会需要: §l§a" + createSocietyMoney,createSociety,backButtonName,backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.InsufficientBalance",new String[]{"createSocietyMoney"},new String[]{createSocietyMoney+""}),createSociety,backButtonName,backButtonImage));
             } else if (societyName != null && !"".equals(societyName)) {
                 EconomyAPI.getInstance().reduceMoney(player, createSocietyMoney, true);
                 long count = SocietyUtils.getNextSid();
                 Society society = new Society(count, societyName, player.getName(), SocietyUtils.getFormatDateTime(), 0.0D, new HashMap<>());
                 societyPlugin.getServer().getPluginManager().callEvent(new PlayerCreateSocietyEvent(player, society));
             } else {
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c公会名称不能为空",createSociety,backButtonName,backButtonImage));
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.societyNameisNull"),createSociety,backButtonName,backButtonImage));
             }
         }
     }

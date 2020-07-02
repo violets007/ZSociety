@@ -55,14 +55,15 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         switch (clickedButtonId) {
             case 0:
                 if (society != null) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c你已经存在公会,无法创建请先退出当前公会", societyWindow, backButtonName, backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.societyWindow.existSociety"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_WINDOW, societyWindow));
                 break;
             case 1:
                 if (!SocietyUtils.isChairman(player.getName())) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c您没有权限管理公会", societyWindow, backButtonName, backButtonImage));
+
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.notPresident"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW,player));
@@ -70,17 +71,18 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
             case 2:
                 boolean isJoinSociety = SocietyUtils.isJoinSociety(player.getName());
                 if (!isJoinSociety) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c当前还没加入公会请先加入公会", societyWindow, backButtonName, backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
                 if (society == null || society.getPresidentName().equals(player.getName())) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c你是会长无法退出公会,请解散公会!", societyWindow, backButtonName, backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.societyWindow.unableQuitSociety"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-                ModalWindow modalWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "§c您确认要退出 §b" + society.getSocietyName() + " §c公会吗?", "§a确认退出", "§c取消退出");
+
+                ModalWindow modalWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isQuitSociety",new String[]{"${societyName}"},new String[]{society.getSocietyName()}), "§a确认退出", "§c取消退出");
                 modalWindow.setButtonClickedListener((affrim, player1) -> {
                     if (affrim) {
-                        SocietyUtils.sendMemberTitle("§a玩家 §b" + player1.getName() + " §a成功退出公会", society);
+                        SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.societyWindow.quitSociety",new String[]{"${playerName}"},new String[]{player1.getName()}), society);
                         Society society1 = SocietyUtils.getSocietyByPlayerName(player1.getName());
                         WindowManager.societyPlugin.getServer().getPluginManager().callEvent(new PlayerQuitSocietyEvent(player1, society1));
                     } else {
@@ -92,7 +94,8 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 3:
                 if (SocietyUtils.societies == null || SocietyUtils.societies.size() <= 0) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c当前还没有公会", societyWindow, backButtonName, backButtonImage));
+
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
 
@@ -101,7 +104,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 4:
                 if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c当前还没加入公会请先加入公会", societyWindow, backButtonName, backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
 
@@ -116,18 +119,16 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 7:
                 if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c当前还没加入公会请先加入公会", societyWindow, backButtonName, backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
                 player.showFormWindow( WindowManager.getFormWindow(WindowType.CONTRIBUTION_WINDOW,player,societyWindow));
                 break;
             case 8:
                 if (!SocietyUtils.isJoinSociety(player.getName())) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前还没加入公会,请先加入公会",societyWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.societyWindow.isJoin"),societyWindow,backButtonName,backButtonImage));
                     return;
                 }
-
-
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, societyWindow));
                 break;
             default:

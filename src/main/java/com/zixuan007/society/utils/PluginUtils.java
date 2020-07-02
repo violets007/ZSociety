@@ -4,17 +4,13 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.Binary;
-import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
 import me.onebone.economyapi.EconomyAPI;
 
-
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -93,7 +89,7 @@ public class PluginUtils {
     /**
      * 通过反射加载配置文件
      */
-    public static Lang getLang(){
+    /*public static Lang getLang(){
         Lang lang = new Lang();//方便植入静态字段
         Field[] declaredFields = Lang.class.getDeclaredFields();
         Config langConfig = SocietyPlugin.getInstance().getLangConfig();
@@ -115,7 +111,7 @@ public class PluginUtils {
             }
         }
         return null;
-    }
+    }*/
 
     /**
      * 格式化传入的文本,通过玩家
@@ -227,6 +223,16 @@ public class PluginUtils {
 
     public static String getLanguageInfo(String key){
        return getLanguageInfo(null,key);
+    }
+
+    public static String getLanguageInfo(String key,String[] parameterName,String[] parameterVal){
+        String languageInfo = getWindowConfigInfo(key);
+        if(parameterName != null && parameterName.length > 1 ){
+            for (int i = 0; i < parameterName.length; i++) {
+                languageInfo.replace(parameterName[i],parameterVal[i]);
+            }
+        }
+        return languageInfo;
     }
 
     public static String getLanguageInfo(Player player,String key){
