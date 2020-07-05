@@ -40,37 +40,8 @@ public class PluginUtils {
     public static final String PRIVILEGE_FOLDER =SocietyPlugin.getInstance().getDataFolder().getAbsolutePath()+FILE_SEPARATOR+"Vip"+FILE_SEPARATOR;
 
     public static SocietyPlugin society=SocietyPlugin.getInstance();
-    /**
-     * 加载jar包
-     * @param jarPath
-     * @throws MalformedURLException
-     */
-    public static void loadJar(String jarPath) throws MalformedURLException {
-        File jarFile = new File(jarPath);
-        if (!jarFile.exists()) {
-            System.out.println("jar file not found.");
-            return;
-        }
-        Method method = null;
-        try {
-            method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-        } catch (NoSuchMethodException | SecurityException e1) {
-            e1.printStackTrace();
-        }
-        boolean accessible = method.isAccessible();
-        try {
-            if (!accessible) {
-                method.setAccessible(true);
-            }
-            URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-            URL url = jarFile.toURI().toURL();
-            method.invoke(classLoader, url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            method.setAccessible(accessible);
-        }
-    }
+
+
 
     /**
      * 检测玩家名字是否在线
@@ -86,32 +57,6 @@ public class PluginUtils {
         return false;
     }
 
-    /**
-     * 通过反射加载配置文件
-     */
-    /*public static Lang getLang(){
-        Lang lang = new Lang();//方便植入静态字段
-        Field[] declaredFields = Lang.class.getDeclaredFields();
-        Config langConfig = SocietyPlugin.getInstance().getLangConfig();
-        for (Field declaredField : declaredFields) {
-            String fieldName = declaredField.getName();
-            String hintMessage = (String) langConfig.get(fieldName);
-            if(hintMessage != null){
-                try {
-                    declaredField.set(lang,hintMessage);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                    SocietyPlugin.getInstance().getLogger().info("植入语言文件提示信息出错");
-                }
-            }else{
-                SocietyPlugin.getInstance().getLogger().info("语言配置文件信息更改有误");
-                String language = (String) SocietyPlugin.getInstance().getConfig().get("language");
-                String langPath = PluginUtils.CONFIG_FOLDER +language+"_language.yml";
-                SocietyPlugin.getInstance().saveResource(langPath);
-            }
-        }
-        return null;
-    }*/
 
     /**
      * 格式化传入的文本,通过玩家

@@ -47,3 +47,36 @@ message.presidentWindow.upGrade: §a公会升级成功
 message.presidentWindow.notMember: §c当前没有可以移除的人员
 message.presidentWindow.dissolveSociety: §a成功解散 §b ${societyName}
 message.presidentWindow.presidentDissolveSociety: §b ${playerName} §c解散了公会
+
+#玩家申请加入公会窗口
+message.playerApplyList.isJoinSociety: §c玩家 §b${playerName} §c已经加入公会
+message.playerApplyList.joinSociety: §a恭喜玩家 §b${playerName} §a成功加入公会
+message.playerApplyList.acceptJoinSociety: §a成功同意 §b${playerName} §a加入公会
+
+#设置公会职位窗口
+message.setJobWindow.isMe: §c设置职位的玩家不能是自己
+message.setJobWindow.isJoinSociety: §c设置的成员还没有加入公会
+message.setJobWindow.notSocietyMember: §c设置的成员还没有加入公会
+message.setJobWindow.upJob: §a职位成功升级为 §e${jobName}
+message.setJobWindow.setJob: §a成功设置 §b${playerName} §a职位为 §e${jobName}
+
+#移除成员窗口
+message.removeMemberWindow.removeMember: §c成员 §b${playerName} 被踢出公会
+message.removeMemberWindow.kickPlayer: §c你被被踢出公会
+
+#创建公会商店窗口
+message.createSocietyShopWindow.isNumber: §c输入的价格不是数字
+message.createSocietyShopWindow.rarelyItemCount: §c此物品数量不足
+message.createSocietyShopWindow.clickWallSign: §e请点击墙上的木牌
+
+#公会贡献窗口
+message.contributionWindow.isJoinSociety: §c您当前还没有加入公会,请先加入公会
+message.contributionWindow.rarelyCoin: §c当前金币不足
+message.contributionWindow.isNumber: §c输入的不是数字
+message.contributionWindow.contributionCoinNumber: §c请输入大于0的金额
+message.contributionWindow.contributionCoin: §a贡献成功,当前公会经济 §b${contributionCoin}
+
+#公会列表窗口
+message.societyListWindow.isJoinSociety: §c您当前已经加入过公会,请勿二次点击加入
+message.societyListWindow.playerApplyJoinSociety: §f>> §a玩家 §b${playerName} §a正在申请进入公会,§c请审核
+

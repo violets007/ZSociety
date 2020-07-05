@@ -58,7 +58,7 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if(!SocietyUtils.isNumeric(sellPriceStr) || sellPriceStr.equals("")){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c输入的价格不是数字", createSocietyShopForm, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isNumber"), createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
 
@@ -71,12 +71,13 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
         String itemCustomName = split[1];
         Item item = player.getInventory().getItem(Integer.parseInt(index));
         if(!SocietyUtils.isNumeric(itemCountStr) || itemCountStr.equals("")){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c输入的数量不是数字", createSocietyShopForm, backButtonName, backButtonImage));
+
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isNumber"), createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
         int itemCount = Integer.parseInt(itemCountStr);
         if(item.count < itemCount){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c此物品数量不足", createSocietyShopForm, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyShopWindow.rarelyItemCount"), createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
         item.setCount(itemCount);
@@ -87,7 +88,7 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
                 add(item);
             }
         });
-        player.sendMessage(">> §e请点击墙上的木牌");
+        player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.clickWallSign"));
     }
 
     public Player getPlayer() {

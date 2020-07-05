@@ -46,31 +46,32 @@ public class ContributionWindow extends CustomWindow implements WindowLoader {
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (!strMoney.equals("") && SocietyUtils.isNumeric(strMoney)) {
             if (!SocietyUtils.isJoinSociety(player.getName())) {
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c您当前还没有加入公会,请先加入公会", contributionForm, backButtonName, backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.contributionWindow.isJoinSociety"), contributionForm, backButtonName, backButtonImage));
             } else {
                 int money = Integer.parseInt(strMoney);
                 if (money > 0) {
                     double myMoney = EconomyAPI.getInstance().myMoney(player);
                     if (myMoney < (double)money) {
-                        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c当前金币不足", contributionForm, backButtonName, backButtonImage));
-                        messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c当前金币不足", contributionForm, backButtonName, backButtonImage);
+                        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.rarelyCoin"), contributionForm, backButtonName, backButtonImage));
                     } else {
                         Society society = SocietyUtils.getSocietysByID(this.sid);
                         society.setSocietyMoney(society.getSocietyMoney() + (double)money);
                         if (EconomyAPI.getInstance().reduceMoney(player, money) == EconomyAPI.RET_SUCCESS) {
-                            WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a贡献成功,当前公会经济 §b" + society.getSocietyMoney(), contributionForm, backButtonName, backButtonImage);
+                            Double contributionCoin = society.getSocietyMoney();
+                            WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.contributionCoin",new String[]{"${contributionCoin}"},new String[]{contributionCoin+""}), contributionForm, backButtonName, backButtonImage);
                             messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a贡献成功,当前公会经济 §b" + society.getSocietyMoney(), contributionForm, backButtonName, backButtonImage);
                         }else {
-                            messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a贡献失败，请检查金币数量是否充足", contributionForm, backButtonName, backButtonImage);
+
+                            messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.rarelyCoin"), contributionForm, backButtonName, backButtonImage);
                         }
                     }
                 }else {
-                    messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c请输入大于0的金额", contributionForm, backButtonName, backButtonImage);
+                    messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.contributionCoinNumber"), contributionForm, backButtonName, backButtonImage);
                 }
                 player.showFormWindow(messageWindow);
             }
         } else {
-            messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c输入的不是数字", contributionForm, backButtonName, backButtonImage);
+            messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.isNumber"), contributionForm, backButtonName, backButtonImage);
             player.showFormWindow(messageWindow);
         }
     }

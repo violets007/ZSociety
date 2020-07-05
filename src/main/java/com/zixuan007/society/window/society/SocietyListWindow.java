@@ -85,7 +85,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
             return;
         }
         if (SocietyUtils.isJoinSociety(player.getName())) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c您当前已经加入过公会,请勿二次点击加入", societyWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyListWindow.isJoinSociety"), societyWindow, backButtonName, backButtonImage));
             return;
         }
         ModalWindow affirmWindow;
@@ -100,7 +100,8 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
         affirmWindow.setButtonClickedListener((affirm, player1) -> {
             if (affirm) {
                 if (PluginUtils.isOnlineByName(society.getPresidentName())) {
-                    Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(">> §a玩家 §b"+player1.getName()+" §a正在申请进入公会,§c请审核");
+                    String playerName = player1.getName();
+                    Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(PluginUtils.getLanguageInfo("message.societyListWindow.playerApplyJoinSociety",new String[]{"${playerName}"},new String[]{playerName}));
                 }
                 SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new PlayerApplyJoinSocietyEvent(player1, society));
             } else {

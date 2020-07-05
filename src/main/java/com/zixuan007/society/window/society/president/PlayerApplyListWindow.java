@@ -43,14 +43,15 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if (SocietyUtils.isJoinSociety(playerName)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c玩家 " + playerName + " 已经加入公会", societyWindow, backButtonName, backButtonImage));
+
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.isJoinSociety",new String[]{"${playerName}"},new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
             return;
         }
 
         Society society = SocietyUtils.getSocietysByID(this.sid);
         SocietyUtils.addMember(playerName, society);
-        SocietyUtils.sendMemberTitle("§a恭喜玩家 §b"+playerName+" §a成功加入公会",society);
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功同意 §b" + playerName + " §a加入公会", societyWindow, backButtonName, backButtonImage));
+        SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.playerApplyList.joinSociety",new String[]{"${playerName}"},new String[]{playerName}),society);
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.acceptJoinSociety",new String[]{"${playerName}"},new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
     }
 
 

@@ -60,11 +60,11 @@ public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         MessageWindow messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除成员 §b" + playerName, presidentWindow,backButtonName,backButtonImage);
-        SocietyUtils.sendMemberTitle("§c成员: §b"+playerName+" 被踢出公会",society);
+        SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.removeMemberWindow.removeMember",new String[]{"${playerName}"},new String[]{playerName}),society);
         if(PluginUtils.isOnlineByName(playerName)) {
-            Server.getInstance().getPlayer(playerName).sendTitle("§c你被被踢出公会");
+            Server.getInstance().getPlayer(playerName).sendTitle(PluginUtils.getLanguageInfo("message.removeMemberWindow.kickPlayer"));
         }
-        player.showFormWindow((FormWindow)messageWindow);
+        player.showFormWindow(messageWindow);
         //移除玩家在此公会创建过的商店
         SocietyUtils.removeCreateShop(society,playerName);
     }

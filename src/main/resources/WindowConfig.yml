@@ -70,9 +70,9 @@ societyAdminWindow.setSocietyContribution.button: §e设置公会贡献值
 societyAdminWindow.dissolve.button: §e解散玩家公会
 
 #创建公会按钮1图片路径
-societyWindow.createSociety.button.imgPath: textures/ui/book.edit.default
+societyWindow.createSociety.button.imgPath: textures/ui/anvil_icon.png
 #管理公会按钮图片路径
-societyWindow.managerSociety.button.imgPath: textures/ui/code.tynker.default
+societyWindow.managerSociety.button.imgPath: textures/ui/MashupIcon.png
 #退出公会按钮图片路径
 societyWindow.quitSociety.button.imgPath: textures/ui/cancel
 #加入公会按钮图片路径

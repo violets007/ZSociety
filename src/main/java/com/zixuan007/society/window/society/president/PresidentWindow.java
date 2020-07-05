@@ -12,11 +12,9 @@ import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
-import com.zixuan007.society.window.society.MessageWindow;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author zixuan007

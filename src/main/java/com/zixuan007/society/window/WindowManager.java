@@ -44,19 +44,16 @@ public class WindowManager {
      */
     public static FormWindow getFormWindow(WindowType windowType, Object ...parameter){
         Class clazz = registerWindow.get(windowType);
+        FormWindow formWindow;
         if(clazz != null){
             try {
                 if(alreadyOpenForms.containsKey(windowType.windowName)){
-                    FormWindow formWindow = alreadyOpenForms.get(windowType.windowName);
-                    if(formWindow instanceof WindowLoader){
-                        return ((WindowLoader) formWindow).init(parameter);
-                    }
+                    formWindow = alreadyOpenForms.get(windowType.windowName);
                 }else{
-                    FormWindow formWindow = (FormWindow) clazz.newInstance();
-                    if(formWindow instanceof WindowLoader){
-                        alreadyOpenForms.put(windowType.windowName,formWindow);
-                        return  ((WindowLoader) formWindow).init(parameter);
-                    }
+                    formWindow = (FormWindow) clazz.newInstance();
+                }
+                if(formWindow instanceof WindowLoader){
+                    return ((WindowLoader) formWindow).init(parameter);
                 }
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();

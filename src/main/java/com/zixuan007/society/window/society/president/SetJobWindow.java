@@ -46,16 +46,16 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if (player.getName().equals(playerName)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c设置职位的玩家不能是自己", setJobWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.isMe"), setJobWindow, backButtonName, backButtonImage));
             return;
         }
         if (!SocietyUtils.isJoinSociety(playerName)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c设置的成员还没有加入公会", setJobWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.setJobWindow.isJoinSociety"), setJobWindow, backButtonName, backButtonImage));
             return;
         }
         Society society = SocietyUtils.getSocietyByPlayerName(playerName);
         if (society == null || society.getPost() == null || !society.getPost().containsKey(playerName)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c此玩家不是本公会成员,无法设置职位", setJobWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.notSocietyMember"), setJobWindow, backButtonName, backButtonImage));
             return;
         }
         society.getPost().put(playerName, new ArrayList() {
@@ -67,9 +67,9 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
         society.saveData();
 
         if(PluginUtils.isOnlineByName(playerName)){
-            Server.getInstance().getPlayer(playerName).sendTitle("§a职位成功升级为 §e"+jobName);
+            Server.getInstance().getPlayer(playerName).sendTitle(PluginUtils.getLanguageInfo("message.setJobWindow.upJob",new String[]{"${jobName}"},new String[]{jobName}));
         }
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功设置 §b" + playerName + " §a职位为 §e" + jobName, setJobWindow, backButtonName, backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.setJob",new String[]{"${playerName}","${jobName}"},new String[]{playerName,jobName}), setJobWindow, backButtonName, backButtonImage));
     }
 
 
