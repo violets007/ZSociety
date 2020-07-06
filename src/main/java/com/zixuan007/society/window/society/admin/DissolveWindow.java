@@ -48,14 +48,15 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
         String closeImagePath=PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
 
         if(!SocietyUtils.societies.contains(society)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此公会已经被解散,请设置其他公会",null,closeButtonName,closeImagePath));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.dissolveWindow.notSociety"),null,closeButtonName,closeImagePath));
             return;
         }
 
         SocietyUtils.removeSocietyShopBySid(society);
         SocietyUtils.societies.remove(society);
         SocietyUtils.removeSociety(society.getSocietyName());
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功解散 §b"+society.getSocietyName()+" §a公会",null,closeButtonName,closeImagePath));
+        String societyName = society.getSocietyName();
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.dissolveWindow.dissolveSociety",new String[]{"${societyName}"},new String[]{societyName}),null,closeButtonName,closeImagePath));
 
     }
 

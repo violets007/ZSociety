@@ -71,7 +71,8 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
         if(!PrivilegeUtils.isSvip(setPrivilegePlayerName) && !PrivilegeUtils.isVIP(setPrivilegePlayerName)) {
             PrivilegeUtils.privilegeList.add(vip);
         }
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置玩家 §b"+setPrivilegePlayerName+" §a的 §c"+elementContent+" §a天数为 §e"+time+" §a天",setPrivilegeWindow,backButtonName,backButtonImage));
+
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setPrivilegeWindow.set",new String[]{"${setPrivilegePlayerName}","${elementContent}","${time}"},new String[]{setPrivilegePlayerName,elementContent,time+""}),setPrivilegeWindow,backButtonName,backButtonImage));
     }
 
 

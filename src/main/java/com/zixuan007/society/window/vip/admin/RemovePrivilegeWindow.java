@@ -35,7 +35,7 @@ public class RemovePrivilegeWindow extends CustomWindow implements WindowLoader 
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if(!PrivilegeUtils.isVIP(playerName) && !PrivilegeUtils.isSvip(playerName)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的玩家名并没有特权",removePrivilegeWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removePrivilegeWindow.notPrivilege"),removePrivilegeWindow,backButtonName,backButtonImage));
             return;
         }
         PrivilegeUtils.removePivilegeData(playerName);
@@ -44,7 +44,7 @@ public class RemovePrivilegeWindow extends CustomWindow implements WindowLoader 
         }else{
             PrivilegeUtils.removePrivilegeName.add(playerName);
         }
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除 §b"+playerName+" §a的特权",removePrivilegeWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removePrivilegeWindow.removePrivilege",new String[]{"${playerName}"},new String[]{playerName}),removePrivilegeWindow,backButtonName,backButtonImage));
     }
 
 

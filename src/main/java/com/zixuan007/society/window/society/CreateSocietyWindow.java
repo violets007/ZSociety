@@ -66,7 +66,7 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
                 societyPlugin.getServer().getPluginManager().callEvent(new PlayerCreateSocietyEvent(player, society));
             } else {
 
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.societyNameisNull"),createSociety,backButtonName,backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.societyNameIsNull"),createSociety,backButtonName,backButtonImage));
             }
         }
     }

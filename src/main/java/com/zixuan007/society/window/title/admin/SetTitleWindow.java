@@ -46,24 +46,26 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (societyPlugin.getTitleConfig().get(playerName) == null) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的玩家名字不存在",setTitleWindow,backButtonName,backButtonImage));
+
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.isPlayerName"),setTitleWindow,backButtonName,backButtonImage));
             return;
         }
         if (title.trim().equals("") || title.equals(" ")) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c称号内容不能为空",setTitleWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.isTitle"),setTitleWindow,backButtonName,backButtonImage));
             return;
         }
         title=title.replaceAll(" ","");
         ArrayList<String> arrayList = TitleUtils.titleList.get(playerName);
         if(TitleUtils.isExistTitle(playerName,title)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c玩家 §b"+playerName+" 已经拥有此称号,请勿重复设置",setTitleWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.existTitle"),setTitleWindow,backButtonName,backButtonImage));
             return;
         }
         Config titleConfig = societyPlugin.getTitleConfig();
         TitleUtils.addTitle(playerName,title);
         titleConfig.set(playerName, TitleUtils.getTitles(playerName));
         titleConfig.save();
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置 §b" + playerName + " §a的称号为 §e" + title,setTitleWindow,backButtonName,backButtonImage));
+
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.setTitle",new String[]{"${playerName}","${title}"},new String[]{playerName,title}),setTitleWindow,backButtonName,backButtonImage));
     }
 
 

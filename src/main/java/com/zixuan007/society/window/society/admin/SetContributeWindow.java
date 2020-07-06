@@ -59,7 +59,7 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
         }
 
         if(!SocietyUtils.isNumeric(contributeStr)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的贡献值不是数字",setContributeWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setContributeWindow.isNumber"),setContributeWindow,backButtonName,backButtonImage));
             return;
         }
 
@@ -70,7 +70,7 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietysByID(sid);
 
         if(!SocietyUtils.societies.contains(society)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此公会已经被解散,请设置其他公会",null,closeButtonName,closeImagePath));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setContributeWindow.notSociety"),null,closeButtonName,closeImagePath));
             return;
         }
 
@@ -78,7 +78,9 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
         society.setSocietyMoney(contribute.doubleValue());
         SocietyUtils.societies.add(society);
         society.saveData();
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置 §b"+society.getSocietyName()+" §a贡献值为 §e"+society.getSocietyMoney(),null,closeButtonName,closeImagePath));
+        String societyName = society.getSocietyName();
+        Double societyMoney = society.getSocietyMoney();
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setContributeWindow.setContribute",new String[]{"${societyName}","${societyMoney}"},new String[]{societyName,societyMoney+""}),null,closeButtonName,closeImagePath));
     }
 
 

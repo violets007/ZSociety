@@ -42,7 +42,8 @@ public class AdvancedPrivilegeWindow extends SimpleWindow implements WindowLoade
             case 1:
                 boolean creative = player.isCreative();
                 player.setGamemode(!creative ? 1 : 0);
-                player.sendMessage(">> §a创造模式 §e" + (!creative ? "开启" : "关闭"));
+                String creativeStatus=creative?"开启":"关闭";
+                player.sendMessage( PluginUtils.getLanguageInfo("message.advancedPrivilegeWindow.setCreative",new String[]{"${creative}"},new String[]{creativeStatus}));
                 break;
             case 2:
                 Vip advancedPrivilege = PrivilegeUtils.getPivilegeByPlayerName(player.getName());

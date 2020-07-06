@@ -53,7 +53,7 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
         switch (id){
             case 0:
                 if(MarryUtils.isMarry(player.getName())){
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前已经结婚,请勿重复",marryWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.marryWindow.isMarry"),marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 ProposeWindow proposeWindow = WindowManager.getProposeWindow();
@@ -63,7 +63,7 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 1:
                 if(!MarryUtils.isMarry(player.getName())){
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前还没有伴侣,请先求婚",marryWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.marryWindow.notMarry"),marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 player.showFormWindow(WindowManager.getAddPublicFunds());
@@ -71,7 +71,7 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
             case 2:
                 Marry marry;
                 if(!MarryUtils.isMarry(player.getName()) ){
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前还没有伴侣,请先求婚",marryWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.marryWindow.notMarry"),marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 marry= MarryUtils.getMarryByName(player.getName());
@@ -85,25 +85,27 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                     }else{
                        recipientPlayer.teleport(proposePlayer);
                     }
-                    player.sendMessage("§a传送成功");
+
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.marryWindow.tp"));
                     return;
                 }else{
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前伴侣不在线",marryWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.marryWindow.recipientNotOnline"),marryWindow,backButtonName,backButtonImage));
                 }
                 break;
             case 3:
                 if(!MarryUtils.isMarry(player.getName())){
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c您当前还没有伴侣,请先求婚",marryWindow,backButtonName,backButtonImage));
+
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.marryWindow.notMarry"),marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 marry=MarryUtils.getMarryByName(player.getName());
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c离婚成功",marryWindow,backButtonName,backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.marryWindow.divorceMarry"),marryWindow,backButtonName,backButtonImage));
 
                 Server.getInstance().getPluginManager().callEvent(new DivorceMarryEvent(player,marry));
                 break;
             case 4:
                 if(MarryUtils.marrys.size() <1){
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c当前还没有一对夫妻",marryWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.marryWindow.notLovers"),marryWindow,backButtonName,backButtonImage));
                     return;
                 }
                 MarryUtils.marrys.sort((marry1, marry2) -> (marry1.getMoney() > marry2.getMoney()) ? -1 : (marry2.getMoney() < marry1.getMoney()) ? 1 : 0);

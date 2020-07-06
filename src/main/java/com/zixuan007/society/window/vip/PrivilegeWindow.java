@@ -41,14 +41,15 @@ public class PrivilegeWindow extends SimpleWindow implements WindowLoader {
                 boolean allowFlight = player.getAllowFlight();
                 player.getAdventureSettings().set(AdventureSettings.Type.ALLOW_FLIGHT,!allowFlight);
                 player.getAdventureSettings().update();
-                player.sendMessage(">> §a生存飞行 §b"+(!allowFlight?"开启":"关闭"));
+                String flightStats=allowFlight? "关闭": "开启";
+                player.sendMessage( PluginUtils.getLanguageInfo("message.privilegeWindow.setFlight",new String[]{"${allowFlight}"},new String[]{flightStats}));
                 break;
             case 1:
                 Vip privilege = PrivilegeUtils.getPivilegeByPlayerName(player.getName());
                 if (privilege != null &&privilege.getVip_Type().equals(VipType.VIP)) {
                    player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW,player,privilege));
                 }else{
-                    player.sendMessage(">> §c你不是VIP无法进行查看");
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.PrivilegeWindow.isVip"));
                 }
                 break;
             default:

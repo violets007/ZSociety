@@ -42,15 +42,15 @@ public class CreateTitleShopWindow extends CustomWindow implements WindowLoader 
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if (title.isEmpty() || title.equals(" ")) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c售卖的称号不能为空",createTitleShopWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createTitleShopWindow.isTitle"),createTitleShopWindow,backButtonName,backButtonImage));
             return;
         }
         if ("".equals(money) || !SocietyUtils.isNumeric(money)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的金额不是数字",createTitleShopWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createTitleShopWindow.isNumber"),createTitleShopWindow,backButtonName,backButtonImage));
             return;
         }
         if (SocietyPlugin.getInstance().getTitleShopConfig().get(title) != null) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此称号已经存在",createTitleShopWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createTitleShopWindow.titleExist"),createTitleShopWindow,backButtonName,backButtonImage));
             return;
         }
         TitleUtils.onCreateName.put(player.getName(),new HashMap<String,Object>(){
@@ -60,7 +60,7 @@ public class CreateTitleShopWindow extends CustomWindow implements WindowLoader 
             }
         });
 
-        player.sendMessage("§e请点击贴在墙上的木牌");
+        player.sendMessage(PluginUtils.getLanguageInfo("message.createTitleShopWindow.clickWallSign"));
     }
 
 

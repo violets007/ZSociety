@@ -61,7 +61,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         }
 
         if(!SocietyUtils.isNumeric(gradeStr)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的等级不是数字请重新输入",setGradeWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setSocietyGrade.isNumber"),setGradeWindow,backButtonName,backButtonImage));
             return;
         }
 
@@ -72,7 +72,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietysByID(sid);
 
         if(!SocietyUtils.societies.contains(society)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c此公会已经被解散,请设置其他公会",null,closeButtonName,closeButtonImagePath));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setSocietyGrade.notSociety"),null,closeButtonName,closeButtonImagePath));
             return;
         }
 
@@ -80,7 +80,9 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         society.setGrade(grade);
         SocietyUtils.societies.add(society);
         society.saveData();
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置 §b"+society.getSocietyName()+" §a等级为 §e"+society.getGrade(),null,closeButtonName,closeButtonImagePath));
+        String societyName = society.getSocietyName();
+        int societyGrade = society.getGrade();
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.setSocietyGrade",new String[]{"${societyName}","${societyGrade}"},new String[]{societyName,societyGrade+""}),null,closeButtonName,closeButtonImagePath));
     }
 
 

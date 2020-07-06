@@ -37,17 +37,17 @@ public class ProposeWindow extends CustomWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (!PluginUtils.isOnlineByName(playerName)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c你已经存在公会,无法创建请先退出当前公会", proposeWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.proposeWindow.isOnline"), proposeWindow, backButtonName, backButtonImage));
             return;
         }
         if(playerName.equals(player.getName())){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c求婚的人不能是自己", proposeWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.proposeWindow.isMe"), proposeWindow, backButtonName, backButtonImage));
             return;
         }
         double proposeMoney = PluginUtils.getProposeMoney();
         double myMoney = EconomyAPI.getInstance().myMoney(player);
         if(myMoney < proposeMoney){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c求婚资金不足,求婚需要: "+proposeMoney, proposeWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.proposeWindow.rarelyCoin",new String[]{"${proposeMoney}"},new String[]{proposeMoney+""}), proposeWindow, backButtonName, backButtonImage));
             return;
         }
 
@@ -57,7 +57,9 @@ public class ProposeWindow extends CustomWindow implements WindowLoader {
 
         affrimWindow.setButtonClickedListener((affrim,clickPlayer)->{
             if(affrim){
-                Server.getInstance().broadcastMessage("§b"+player.getName()+" §a向§c "+clickPlayer.getName()+" §a求婚成功");
+                String proposeName = player.getName();
+                String recipientName = clickPlayer.getName();
+                Server.getInstance().broadcastMessage(PluginUtils.getLanguageInfo("message.proposeWindow.propose",new String[]{"${proposeName}","${recipientName}"},new String[]{proposeName,recipientName}));
                 Server.getInstance().getPluginManager().callEvent(new PlayerMarryEvent(player.getName(),clickPlayer.getName(),new Date()));
             }else{
                 MarryUtils.proposeFailName.put(player.getName(),clickPlayer.getName());

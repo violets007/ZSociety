@@ -37,7 +37,7 @@ message.societyWindow.quitSociety: §a玩家 §b ${playerName} §a成功退出�
 #创建公会窗口
 message.createSocietyWindow.existSociety: §c此公会名称已经存在
 message.createSocietyWindow.InsufficientBalance: §c当前余额不足,创建公会需要 §l§a ${createSocietyMoney}
-message.createSocietyWindow.societyNameisNull: §c公会名称不能为空
+message.createSocietyWindow.societyNameIsNull: §c公会名称不能为空
 
 #管理会长窗口
 message.presidentWindow.isApplyPlayer: §c当前还没有玩家申请加入公会
@@ -47,6 +47,7 @@ message.presidentWindow.upGrade: §a公会升级成功
 message.presidentWindow.notMember: §c当前没有可以移除的人员
 message.presidentWindow.dissolveSociety: §a成功解散 §b ${societyName}
 message.presidentWindow.presidentDissolveSociety: §b ${playerName} §c解散了公会
+
 
 #玩家申请加入公会窗口
 message.playerApplyList.isJoinSociety: §c玩家 §b${playerName} §c已经加入公会
@@ -80,3 +81,77 @@ message.contributionWindow.contributionCoin: §a贡献成功,当前公会经济 
 message.societyListWindow.isJoinSociety: §c您当前已经加入过公会,请勿二次点击加入
 message.societyListWindow.playerApplyJoinSociety: §f>> §a玩家 §b${playerName} §a正在申请进入公会,§c请审核
 
+#解散公会窗口
+message.dissolveWindow.notSociety: §c此公会已经被解散,请设置其他公会
+message.dissolveWindow.dissolveSociety: §a成功解散 §b${societyName} §a公会
+
+#设置贡献窗口
+message.setContributeWindow.isNumber: §c设置的贡献值不是数字
+message.setContributeWindow.notSociety: §c此公会已经被解散,请设置其他公会
+message.setContributeWindow.setContribute: §a成功设置 §b${societyName} §a贡献值为 §e${societyMoney}
+
+#设置公会等级窗口
+message.setSocietyGrade.isNumber: §c设置的等级不是数字请重新输入
+message.setSocietyGrade.notSociety: §c此公会已经被解散,请设置其他公会
+message.setSocietyGrade.setSocietyGrade: §a成功设置 §b${societyName} §a等级为 §e${societyGrade}
+
+#结婚窗口
+message.marryWindow.isMarry: §c您当前已经结婚,请勿重复
+message.marryWindow.notMarry: §c您当前还没有伴侣,请先求婚
+message.marryWindow.tp: §f>>§a传送成功
+message.marryWindow.recipientNotOnline: §c当前伴侣不在线
+message.marryWindow.divorceMarry: §c离婚成功
+message.marryWindow.notLovers: §c当前还没有一对情侣
+
+#贡献资产窗口
+message.addPublicFunds.rarelyCoin: §c当前资金不足
+message.addPublicFunds.contribute: §a贡献 §b${money} §a成功
+
+#求婚窗口
+message.proposeWindow.isOnline: §c当前求婚的玩家不在线
+message.proposeWindow.isMe: §c求婚的人不能是自己
+message.proposeWindow.rarelyCoin: §c求婚资金不足,求婚需要 ${proposeMoney}
+message.proposeWindow.propose: §b${proposeName} §a向§c ${recipientName} §a求婚成功
+
+#移除情侣窗口
+message.removeMarryWindow.remove: §a成功移除Mid为 §e${mid} §a的夫妻
+
+#设置夫妻公共资产窗口
+message.setMarryMoneyWindow.isNumber: §c设置的金额不是数字
+message.setMarryMoneyWindow.set: §a成功设置指定夫妻资产为 §e${marryMoney}
+
+#称号窗口
+message.titleWindow.remove: §a佩戴的称号已经被管理员移除
+message.titleWindow.wearTitle: §a成功佩戴§r§l ${title} §r§a称号
+
+#设置称号窗口
+message.setTitleWindow.isPlayerName: §c输入的玩家名字不存在
+message.setTitleWindow.isTitle: §c称号内容不能为空
+message.setTitleWindow.existTitle: §c玩家 §b${playerName} 已经拥有此称号,请勿重复设置
+message.setTitleWindow.setTitle: §a成功设置 §b${playerName} §a的称号为 §e${title}
+
+#移除称号窗口
+message.removeTitleWindow.notTitle: §c此玩家还没有称号
+message.removeTitleWindow.titleNotExist: §c此玩家称号不存在
+message.removeTitleWindow.remove: §a成功移除玩家所匹配的称号!
+message.removeTitleWindow.removeTitle: §c你的部分称号已经被管理员移除
+
+#创建称号商店窗口
+message.createTitleShopWindow.isTitle: §c售卖的称号不能为空
+message.createTitleShopWindow.isNumber: §c输入的金额不是数字
+message.createTitleShopWindow.titleExist: §c此称号已经存在
+message.createTitleShopWindow.clickWallSign: §e请点击贴在墙上的木牌
+
+#特权窗口
+message.privilegeWindow.setFlight: §f>> §a生存飞行 §b${allowFlight}
+message.PrivilegeWindow.isVip: §f>> §c你不是VIP无法进行查看
+
+#高级特权窗口
+message.advancedPrivilegeWindow.setCreative: §f>> §a创造模式 §e${creative}
+
+#移除特权窗口
+message.removePrivilegeWindow.notPrivilege: §c输入的玩家名并没有特权
+message.removePrivilegeWindow.removePrivilege: §a成功移除 §b${playerName} §a的特权
+
+#设置玩家特权窗口
+message.setPrivilegeWindow.set: §a成功设置玩家 §b${setPrivilegePlayerName} §a的 §c${elementContent} §a天数为 §e${time} §a天

@@ -38,7 +38,7 @@ public class AddPublicFunds extends CustomWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if(myMoney < money){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c当前资金不足", addPublicFunds, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.addPublicFunds.rarelyCoin"), addPublicFunds, backButtonName, backButtonImage));
             return;
         }
 
@@ -46,7 +46,7 @@ public class AddPublicFunds extends CustomWindow implements WindowLoader {
         Marry marry = MarryUtils.getMarryByName(player.getName());
         marry.setMoney(marry.getMoney()+money);
         MarryUtils.saveMarry(marry);
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a贡献 §b"+money+" §a成功", addPublicFunds, backButtonName, backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.addPublicFunds.contribute",new String[]{"${money}"},new String[]{money+""}), addPublicFunds, backButtonName, backButtonImage));
     }
 
 

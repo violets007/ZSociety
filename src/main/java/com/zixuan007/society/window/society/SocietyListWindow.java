@@ -92,6 +92,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
 
         if (this.currentPage == 1) {
             society = this.societyList.get(id);
+
             affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW,"§e您确定要加入 §b" + (this.societyList.get(id)).getSocietyName() + " §e公会吗?","§a确认加入","§c取消加入");
         } else {
             society = this.societyList.get(id - 1);

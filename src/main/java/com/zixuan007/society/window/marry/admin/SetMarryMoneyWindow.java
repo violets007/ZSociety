@@ -59,7 +59,7 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
         String moneyStr = response.getInputResponse(1);
 
         if(!SocietyUtils.isNumeric(moneyStr)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的金额不是数字",setMarryMoneyWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setMarryMoneyWindow.isNumber"),setMarryMoneyWindow,backButtonName,backButtonImage));
             return;
         }
         int mid = Integer.parseInt(midStr);
@@ -67,7 +67,7 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
 
         Marry marry = MarryUtils.getMarryById(mid);
         if(marry == null){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c设置的金额不是数字",null,closeButtonName,closeButtonImagePath));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setMarryMoneyWindow.isNumber"),null,closeButtonName,closeButtonImagePath));
             return;
         }
 
@@ -75,8 +75,8 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
         marry.setMoney(money.doubleValue());
         MarryUtils.marrys.add(marry);
         MarryUtils.saveMarry(marry);
-
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功设置指定夫妻资产为 §e"+marry.getMoney(),null,closeButtonName,closeButtonImagePath));
+        Double marryMoney = marry.getMoney();
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setMarryMoneyWindow.set",new String[]{"${marryMoney}"},new String[]{marryMoney+""}),null,closeButtonName,closeButtonImagePath));
     }
 
 

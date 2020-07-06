@@ -39,14 +39,14 @@ public class TitleWindow extends SimpleWindow implements WindowLoader {
         String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
         String closeButtonImagePath=PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         if (titles.get(id) == null || titles.size() <= 0) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a佩戴的称号已经被管理员移除",null,closeButtonName,closeButtonImagePath));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.titleWindow.remove"),null,closeButtonName,closeButtonImagePath));
             return;
         }
         String title = titles.get(id);
         titles.set(0,title);
         TitleUtils.addTitle(playerName, title);
         TitleUtils.titleList.put(playerName, titles);
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功佩戴 §r§l" + title + " §r§a称号",null,closeButtonName,closeButtonImagePath));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.titleWindow.wearTitle",new String[]{"${title}"},new String[]{title}),null,closeButtonName,closeButtonImagePath));
     }
 
 

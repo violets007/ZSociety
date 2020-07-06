@@ -46,7 +46,7 @@ public class RemoveMarryWindow extends SimpleWindow implements WindowLoader {
         int mid = Integer.parseInt(midStr);
         Marry marry = MarryUtils.getMarryById(mid);
         MarryUtils.removeMarry(marry);
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除mid为 §e"+marry.getMid()+" §a的夫妻",null,closeButtonName,closeButtonImagePath));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.removeMarryWindow.remove",new String[]{"${mid}"},new String[]{mid+""}),null,closeButtonName,closeButtonImagePath));
     }
 
 

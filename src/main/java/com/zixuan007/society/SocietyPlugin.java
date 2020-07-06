@@ -47,7 +47,6 @@ public class SocietyPlugin extends PluginBase {
     private Config config;
     private final List<Config> societyConfigList = new ArrayList<>();
     private Config titleConfig;
-    private Config langConfig;
     private Config languageConfig;
     private Config windowConfig;
     private Config marryConfig;
@@ -83,7 +82,6 @@ public class SocietyPlugin extends PluginBase {
             instance = this;
         }
         checkConfig();
-        saveResource("cn_language.yml", true);
         saveResource("lang/zh-CN.yml",true);
         saveResource("WindowConfig.yml",true);
         loadConfig();
@@ -124,14 +122,12 @@ public class SocietyPlugin extends PluginBase {
         String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
         String language = (String) config.get("language");
         String languagePath = PluginUtils.CONFIG_FOLDER +"lang"+PluginUtils.FILE_SEPARATOR+language;
-        String langPath = PluginUtils.CONFIG_FOLDER +"cn_language.yml";
         String titleShopPath = PluginUtils.CONFIG_FOLDER + "TitleShopData.yml";
         String marryPath=PluginUtils.CONFIG_FOLDER +"Marry.yml";
         String societyShopConfigPath=PluginUtils.CONFIG_FOLDER +"societyShop.yml";
         String windowConfig=PluginUtils.CONFIG_FOLDER+"WindowConfig.yml";
 
         this.titleConfig = new Config(titleConfigPath);
-        this.langConfig = new Config(langPath);
         this.titleShopConfig = new Config(titleShopPath);
         this.marryConfig=new Config(marryPath);
         this.societyShopConfig=new Config(societyShopConfigPath);
@@ -241,9 +237,6 @@ public class SocietyPlugin extends PluginBase {
         this.titleConfig = titleConfig;
     }
 
-    public Config getLangConfig() {
-        return this.langConfig;
-    }
 
     public List<Config> getSocietyConfigList() {
         return this.societyConfigList;
