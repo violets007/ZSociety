@@ -171,10 +171,10 @@ public class PluginUtils {
     }
 
     public static String getLanguageInfo(String key,String[] parameterName,String[] parameterVal){
-        String languageInfo = getWindowConfigInfo(key);
-        if(parameterName != null && parameterName.length > 1 ){
+        String languageInfo = getLanguageInfo(key);
+        if(parameterName != null && parameterName.length >= 1 ){
             for (int i = 0; i < parameterName.length; i++) {
-                languageInfo.replace(parameterName[i],parameterVal[i]);
+                languageInfo=languageInfo.replace(parameterName[i],parameterVal[i]);
             }
         }
         return languageInfo;

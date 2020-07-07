@@ -38,6 +38,7 @@ public enum  WindowType {
      */
     SET_PRIVILEGE_WINDOW("SetPrivilegeWindow"),
 
+    TITLE_MANAGER_WINDOW("TitleManagerWindow"),
     /**
      * 称号列表窗口
      */

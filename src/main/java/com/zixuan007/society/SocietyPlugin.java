@@ -25,7 +25,9 @@ import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.president.PresidentWindow;
 import com.zixuan007.society.window.society.president.RemoveMemberWindow;
 import com.zixuan007.society.window.society.president.SetJobWindow;
+import com.zixuan007.society.window.society.shop.CreateSocietyShopWindow;
 import com.zixuan007.society.window.title.TitleWindow;
+import com.zixuan007.society.window.title.admin.TitleManagerWindow;
 import com.zixuan007.society.window.vip.PrivilegeInfoWindow;
 import com.zixuan007.society.window.vip.AdvancedPrivilegeWindow;
 import com.zixuan007.society.window.vip.PrivilegeWindow;
@@ -189,6 +191,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_LIST_WINDOW, PrivilegeListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_PRIVILEGE_WINDOW, RemovePrivilegeWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_PRIVILEGE_WINDOW, SetPrivilegeWindow.class);
+        PluginUtils.addWindowClass(WindowType.TITLE_MANAGER_WINDOW, TitleManagerWindow.class);
         PluginUtils.addWindowClass(WindowType.TITLE_WINDOW, TitleWindow.class);
         PluginUtils.addWindowClass(WindowType.MARRY_WINDOW, MarryWindow.class);
         PluginUtils.addWindowClass(WindowType.ADD_PUBLIC_FUNDS, AddPublicFunds.class);
@@ -204,7 +207,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.LEVEL_RANK_WINDOW, LevelRankWindow.class);
         PluginUtils.addWindowClass(WindowType.CONTRIBUTION_WINDOW,ContributionWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_LIST_WINDOW,SocietyListWindow.class);
-        PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_SHOP_WINDOW,CreateSocietyWindow.class);
+        PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_SHOP_WINDOW, CreateSocietyShopWindow.class);
         PluginUtils.addWindowClass(WindowType.PRESIDENT_WINDOW, PresidentWindow.class);
         PluginUtils.addWindowClass(WindowType.PLAYER_APPLY_LIST_WINDOW, PlayerApplyListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MEMBER_WINDOW, RemoveMemberWindow.class);

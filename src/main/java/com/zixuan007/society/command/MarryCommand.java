@@ -14,7 +14,7 @@ import com.zixuan007.society.window.WindowType;
  * @author zixuan007
  */
 public class MarryCommand extends Command {
-    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage.marry");
+    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.marry");
 
     public MarryCommand() {
         super(COMMAND_NAME,"§e显示结婚功能窗口");

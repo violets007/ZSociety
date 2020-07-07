@@ -23,14 +23,16 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
     private long sid;
 
     public PresidentWindow() {
-        super(PluginUtils.getWindowConfigInfo("presidentWindow.title"), "");
+        super("", "");
     }
 
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        Player player= (Player) objects[0];
+        Player player = (Player) objects[0];
         this.sid = SocietyUtils.getSocietyByPlayerName(player.getName()).getSid();
+        String societyName = SocietyUtils.getSocietysByID(sid).getSocietyName();
+        setTitle(PluginUtils.getWindowConfigInfo("presidentWindow.title").replace("${societyName}", societyName));
         ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.setJobWindow.button.imgPath"));
         ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.playerApplyList.button.imgPath"));
         ElementButtonImageData img3 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.upGrade.button.imgPath"));
@@ -56,7 +58,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         int clickedButtonId = getResponse().getClickedButtonId();
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         Society society = SocietyUtils.getSocietysByID(this.sid);
-        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW,player);
+        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
@@ -64,50 +66,50 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         String closeButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         switch (clickedButtonId) {
             case 0:
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_JOB_WINDOW,player));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_JOB_WINDOW, player));
                 break;
             case 1:
                 tempApply = society.getTempApply();
                 if (tempApply == null || tempApply.size() <= 0) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.isApplyPlayer"),presidentWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.isApplyPlayer"), presidentWindow, backButtonName, backButtonImage));
                     return;
                 }
 
-                playerApplyListWindow = (PlayerApplyListWindow) WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW,player);
+                playerApplyListWindow = (PlayerApplyListWindow) WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW, player);
                 player.showFormWindow(playerApplyListWindow);
                 break;
             case 2:
                 list = (ArrayList<Object>) societyPlugin.getConfig().get("等级" + society.getGrade());
                 if (list == null || list.size() <= 0) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.presidentWindow.maxGrade"),presidentWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.maxGrade"), presidentWindow, backButtonName, backButtonImage));
                     return;
                 }
                 societyMoney = society.getSocietyMoney();
                 updateMoney = (Integer) list.get(1);
                 if (societyMoney < updateMoney) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.presidentWindow.upGradeUnableMoney",new String[]{"${updateMoney}","${societyMoney}"},new String[]{updateMoney+"",societyMoney+""}),presidentWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.upGradeUnableMoney", new String[]{"${updateMoney}", "${societyMoney}"}, new String[]{updateMoney + "", societyMoney + ""}), presidentWindow, backButtonName, backButtonImage));
                     return;
                 }
                 society.setSocietyMoney(societyMoney - updateMoney);
                 society.setGrade(society.getGrade() + 1);
                 society.saveData();
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.upGrade"),presidentWindow,backButtonName,backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.upGrade"), presidentWindow, backButtonName, backButtonImage));
                 break;
 
             case 3:
                 if (society.getPost().size() == 1) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.presidentWindow.notMember"),presidentWindow,backButtonName,backButtonImage));
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.notMember"), presidentWindow, backButtonName, backButtonImage));
                     return;
                 }
 
                 Arrays.asList(society.getPost().keySet().toArray(new String[0]));
-                removeMemberWindow = (RemoveMemberWindow) WindowManager.getFormWindow(WindowType.Member_List_Window,player);
+                removeMemberWindow = (RemoveMemberWindow) WindowManager.getFormWindow(WindowType.Member_List_Window, player);
                 removeMemberWindow.setParent(this);
-                player.showFormWindow( removeMemberWindow);
+                player.showFormWindow(removeMemberWindow);
                 break;
             case 4:
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.presidentWindow.dissolveSociety",new String[]{"${societyName}"},new String[]{society.getSocietyName()}),null,closeButtonName,closeButtonImage));
-                SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.presidentWindow.presidentDissolveSociety",new String[]{"${playerName}"},new String[]{player.getName()}), society);
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.dissolveSociety", new String[]{"${societyName}"}, new String[]{society.getSocietyName()}), null, closeButtonName, closeButtonImage));
+                SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.presidentWindow.presidentDissolveSociety", new String[]{"${playerName}"}, new String[]{player.getName()}), society);
                 //移除指定的公会商店
                 SocietyUtils.removeSocietyShopBySid(society);
                 SocietyUtils.societies.remove(society);

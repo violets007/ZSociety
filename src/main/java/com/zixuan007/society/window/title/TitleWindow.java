@@ -19,7 +19,7 @@ public class TitleWindow extends SimpleWindow implements WindowLoader {
     private String playerName;
 
     public TitleWindow() {
-        super(PluginUtils.getWindowConfigInfo("titleWindow.title"), "");
+        super(PluginUtils.getLanguageInfo("titleWindow.title"), "");
     }
 
     @Override

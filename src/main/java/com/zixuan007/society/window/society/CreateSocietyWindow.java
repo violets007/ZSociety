@@ -58,14 +58,13 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
             }
             double myMoney = EconomyAPI.getInstance().myMoney(player);
             if (myMoney < createSocietyMoney) {
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.InsufficientBalance",new String[]{"createSocietyMoney"},new String[]{createSocietyMoney+""}),createSociety,backButtonName,backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.InsufficientBalance",new String[]{"${createSocietyMoney}"},new String[]{createSocietyMoney+""}),createSociety,backButtonName,backButtonImage));
             } else if (societyName != null && !"".equals(societyName)) {
                 EconomyAPI.getInstance().reduceMoney(player, createSocietyMoney, true);
                 long count = SocietyUtils.getNextSid();
                 Society society = new Society(count, societyName, player.getName(), SocietyUtils.getFormatDateTime(), 0.0D, new HashMap<>());
                 societyPlugin.getServer().getPluginManager().callEvent(new PlayerCreateSocietyEvent(player, society));
             } else {
-
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.societyNameIsNull"),createSociety,backButtonName,backButtonImage));
             }
         }

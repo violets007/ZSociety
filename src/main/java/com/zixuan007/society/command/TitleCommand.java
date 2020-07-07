@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TitleCommand extends Command {
 
-    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage.title");
+    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.title");
 
     public TitleCommand() {
         super(COMMAND_NAME, "§e显示称号功能窗口");

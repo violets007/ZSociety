@@ -76,17 +76,17 @@ societyWindow.managerSociety.button.imgPath: textures/ui/MashupIcon.png
 #退出公会按钮图片路径
 societyWindow.quitSociety.button.imgPath: textures/ui/cancel
 #加入公会按钮图片路径
-societyWindow.joinSociety.button.imgPath: textures/ui/controller.glyph.color
+societyWindow.joinSociety.button.imgPath: textures/ui/recipe_book_expand_icon.png
 #公会成员列表按钮图片路径
 societyWindow.memberList.button.imgPath: textures/ui/copy
 #公会经济贡献排行榜按钮图片路径
-societyWindow.contributionRanking.button.imgPath: textures/ui/recipe.book.icon
+societyWindow.contributionRanking.button.imgPath: textures/ui/wither_effect.png
 #公会等级排行榜按钮图片
 societyWindow.levelRank.button.imgPath: textures/ui/feedIcon
 #贡献经济按钮内容图片
-societyWindow.contribution.button.imgPath: textures/ui/dev.glyph.color
+societyWindow.contribution.button.imgPath: textures/ui/wither_heart_flash.png
 #创建公会商店按钮图片
-societyWindow.createShopWindow.button.imgPath: textures/ui/dev.glyph.color
+societyWindow.createShopWindow.button.imgPath: textures/ui/conduit_power_effect.png
 
 #会长管理窗口按钮1图片
 presidentWindow.setJobWindow.button.imgPath: textures/ui/book.edit.default
