@@ -178,11 +178,11 @@ titleManagerWindow.removeTitle.button: §e移除称号
 titleManagerWindow.createTitleShop.button: §e创建称号商店
 
 #称号管理窗口按钮1图片路径
-titleManagerWindow.setTitle.button.imgPath: textures/ui/Friend1.png
+titleManagerWindow.setTitle.button.imgPath: textures/ui/dev_glyph_color.png
 #称号管理窗口按钮2图片路径
-titleManagerWindow.removeTitle.button.imgPath: textures/ui/Friend1.png
+titleManagerWindow.removeTitle.button.imgPath: textures/ui/redX1.png
 #称号管理窗口按钮3图片路径
-titleManagerWindow.createTitleShop.button.imgPath: textures/ui/Friend1.png
+titleManagerWindow.createTitleShop.button.imgPath: textures/ui/anvil_icon.png
 
 
 #########结婚窗口配置#########

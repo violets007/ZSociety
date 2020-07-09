@@ -15,6 +15,7 @@ import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.marry.admin.MarryAdminWindow;
 import com.zixuan007.society.window.society.admin.SocietyAdminWindow;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -65,7 +66,7 @@ public class AdminCommand extends Command {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.TITLE_MANAGER_WINDOW));
                 return true;
             case MARRY_ARGS:
-                player.showFormWindow(new MarryAdminWindow());
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MARRY_ADMIN_WINDOW));
                 return true;
             case PRIVILEGE_ARGS:
                 player.showFormWindow(WindowManager.getPrivilegeManagerWindow());

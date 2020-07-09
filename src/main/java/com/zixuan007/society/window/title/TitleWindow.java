@@ -19,7 +19,7 @@ public class TitleWindow extends SimpleWindow implements WindowLoader {
     private String playerName;
 
     public TitleWindow() {
-        super(PluginUtils.getLanguageInfo("titleWindow.title"), "");
+        super(PluginUtils.getWindowConfigInfo("titleWindow.title"), "");
     }
 
     @Override
@@ -43,8 +43,10 @@ public class TitleWindow extends SimpleWindow implements WindowLoader {
             return;
         }
         String title = titles.get(id);
-        titles.set(0,title);
-        TitleUtils.addTitle(playerName, title);
+        titles.remove(title);
+        titles.add(0,title);
+//        titles.set(0,title);
+//        TitleUtils.addTitle(playerName, title);
         TitleUtils.titleList.put(playerName, titles);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.titleWindow.wearTitle",new String[]{"${title}"},new String[]{title}),null,closeButtonName,closeButtonImagePath));
     }
