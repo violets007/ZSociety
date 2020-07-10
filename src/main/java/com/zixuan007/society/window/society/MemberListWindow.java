@@ -2,8 +2,6 @@ package com.zixuan007.society.window.society;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -11,7 +9,6 @@ import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,6 +35,11 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
         this.memberList= new ArrayList(society.getPost().keySet());
         StringBuilder sb = new StringBuilder();
         sb.append("§l§d公会成员列表\n");
+        /*for (int i = memberList.size()-1; i >= 0; i--) {
+            String name = memberList.get(i);
+            String postByName = SocietyUtils.getPostByName(name, society);
+            sb.append("职位>> §c" + postByName + " §f名称>> §b§l" + name + "\n");
+        }*/
         memberList.forEach(name -> {
             String postByName = SocietyUtils.getPostByName(name, society);
             sb.append("职位>> §c" + postByName + " §f名称>> §b§l" + name + "\n");

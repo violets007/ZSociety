@@ -6,19 +6,19 @@ import cn.nukkit.utils.Config;
  * Vip数据模板
  */
 public class Vip {
-    private  VipType vip_Type =VipType.VIP;
+    private VipType vip_Type = VipType.VIP;
 
     private long vid;
     private String BuyDate;
     private String playerName;
     private String holdTime;
 
-    public static Vip init(Config config){
+    public static Vip init(Config config) {
         Vip vip = new Vip();
-        long vid=0;
-        if(config.get("vid") instanceof Integer){
-            vid=((Integer) config.get("vid")).longValue();
-        }else {
+        long vid = 0;
+        if (config.get("vid") instanceof Integer) {
+            vid = ((Integer) config.get("vid")).longValue();
+        } else {
             vid = (long) config.get("vid");
         }
         String buyDate = (String) config.get("BuyDate");
@@ -66,11 +66,11 @@ public class Vip {
         this.holdTime = holdTime;
     }
 
-    public  VipType getVip_Type() {
+    public VipType getVip_Type() {
         return vip_Type;
     }
 
-    public  void setVip_Type(VipType vip_Type) {
+    public void setVip_Type(VipType vip_Type) {
         this.vip_Type = vip_Type;
     }
 

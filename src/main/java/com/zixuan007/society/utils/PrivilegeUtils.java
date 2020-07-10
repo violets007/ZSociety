@@ -98,7 +98,7 @@ public class PrivilegeUtils {
      * 保存Vip数据
      * @param vip
      */
-    public static void saveData(Vip vip){
+    public static void savePrivilege(Vip vip){
         String configPath = PluginUtils.PRIVILEGE_FOLDER + vip.getPlayerName() + ".yml";
         Config config = new Config(configPath, Config.YAML);
         config.set("vid",vip.getVid());

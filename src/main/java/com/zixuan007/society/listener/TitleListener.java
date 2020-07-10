@@ -14,12 +14,14 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.event.title.BuyTitleEvent;
 import com.zixuan007.society.event.title.CreateTitleShopEvent;
 import com.zixuan007.society.event.title.RemoveTitleShopEvent;
+import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.TitleUtils;
 
 import java.util.ArrayList;
@@ -70,9 +72,11 @@ public class TitleListener implements Listener {
                     tempList.set(2, (titleText.get(2)).replaceAll("\\$\\{money\\}", money));
                     ((BlockEntitySign) blockEntity).setText(tempList.<String>toArray(new String[tempList.size()]));
                     SocietyPlugin.getInstance().getServer().getPluginManager().callEvent((Event) new CreateTitleShopEvent(player, (BlockEntitySign) blockEntity));
+                    event.setCancelled(true);
                 }
             } else {
-                player.sendMessage(">> §c请点击贴在墙上的木牌");
+
+                player.sendMessage( PluginUtils.getLanguageInfo("message.clickWallSign"));
             }
         }
     }
@@ -101,19 +105,21 @@ public class TitleListener implements Listener {
                 if (x == signX && y == signY && z == signZ && levelName.equals(signLevelName)) {
                     if (this.affirmBuyTitlePlayer.contains(player.getName())) {
                         if (EconomyAPI.getInstance().myMoney(player) < money) {
-                            player.sendMessage(">> §c余额不足无法购买");
+                            player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.rarelyCoin"));
                             return;
                         }
                         if (TitleUtils.isExistTitle(player.getName(), key)) {
-                            player.sendMessage(">> §c你应经存在此称号,请勿重复购买");
+                            player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.existTitle"));
                             return;
                         }
                         EconomyAPI.getInstance().reduceMoney(player, money);
                         SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new BuyTitleEvent(player, key, money));
                         continue;
                     }
-                    this.affirmBuyTitlePlayer.add(player.getName());
-                    player.sendMessage(">> §c请再次点击一次木牌");
+                    if(!TitleUtils.onCreateName.containsKey(player.getName())){
+                        this.affirmBuyTitlePlayer.add(player.getName());
+                        player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.affrimBuy"));
+                    }
                 }
             }
         }
@@ -128,7 +134,7 @@ public class TitleListener implements Listener {
         titleConfig.set(player.getName(), TitleUtils.titleList.get(player.getName()));
         titleConfig.save();
         this.affirmBuyTitlePlayer.remove(player.getName());
-        player.sendMessage(">> §a成功购买 §b" + title + " §a称号");
+        player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.success",new String[]{"${title}"},new String[]{title}));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -136,7 +142,6 @@ public class TitleListener implements Listener {
         Player player = event.getPlayer();
         String playerName = player.getName();
         BlockEntitySign wallSign = event.getWallSign();
-        int damage = wallSign.getBlock().getDamage();
         Config titleShopConfig = this.societyPlugin.getTitleShopConfig();
         String title = (String) TitleUtils.onCreateName.get(playerName).get("title");
         String money = (String) TitleUtils.onCreateName.get(playerName).get("money");
@@ -154,7 +159,7 @@ public class TitleListener implements Listener {
             sb.append(line + "\n");
         }
 
-        player.sendMessage(">> §a称号商店创建成功");
+        player.sendMessage(PluginUtils.getLanguageInfo("message.createTitleShop.success"));
         TitleUtils.onCreateName.remove(player.getName());
     }
 
@@ -195,7 +200,7 @@ public class TitleListener implements Listener {
             boolean isZ = (z + 1 == titleShopZ || z - 1 == titleShopZ || z == titleShopZ);
             if (isX && isZ && levelName.equals(titleShopLevelName)) {
                 if (!player.isOp()) {
-                    player.sendMessage(">> §c你没有权限移除称号商店");
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.createTitleShop.permissions"));
                     event.setCancelled();
                 } else {
                     SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new RemoveTitleShopEvent(player, block, title));
@@ -215,7 +220,7 @@ public class TitleListener implements Listener {
         ArrayList<String> textList = (ArrayList) config.getList("titleShopFormat");
         String signTitle = textList.get(1);
         signTitle = signTitle.replaceAll("\\$\\{title\\}", event.getTitle());
-        player.sendMessage(">> §a移除商店成功");
+        player.sendMessage(PluginUtils.getLanguageInfo("message.createTitleShop.remove"));
     }
 
 }

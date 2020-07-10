@@ -1,10 +1,7 @@
 package com.zixuan007.society.domain;
 
 import cn.nukkit.utils.Config;
-import com.zixuan007.society.utils.PluginUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,19 +13,19 @@ public class Society {
     private String presidentName;
     private String createTime;
     private Double societyMoney;
-    private HashMap<String, ArrayList<Object>> psots=new HashMap<String, ArrayList<Object>>();
+    private HashMap<String, ArrayList<Object>> members =new HashMap<String, ArrayList<Object>>();
     private int grade = 1;
     private ArrayList<String> tempApply = new ArrayList<>();
 
     public Society() {}
 
-    public Society(long sid, String societyName, String presidentName, String createTime, Double societyMoney, HashMap<String, ArrayList<Object>> psots) {
+    public Society(long sid, String societyName, String presidentName, String createTime, Double societyMoney, HashMap<String, ArrayList<Object>> members) {
         this.sid = sid;
         this.societyName = societyName;
         this.presidentName = presidentName;
         this.createTime = createTime;
         this.societyMoney = societyMoney;
-        this.psots = psots;
+        this.members = members;
     }
 
     public static Society init(Config config) {
@@ -46,34 +43,13 @@ public class Society {
             society.presidentName = config.getString("presidentName");
             society.createTime = config.getString("createTime");
             society.societyMoney = config.getDouble("societyMoney");
-            society.psots = (HashMap<String, ArrayList<Object>>)config.get("psots");
+            society.members = (HashMap<String, ArrayList<Object>>)config.get("psots");
             society.grade = config.getInt("grade");
             society.tempApply = (ArrayList)config.getList("tempApply");
             return society;
         }
     }
 
-    public void saveData() {
-        String societyFilePath = PluginUtils.SOCIETY_FOLDER + this.societyName + ".yml";
-        File file = new File(societyFilePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Config config = new Config(file);
-        config.set("sid", this.sid);
-        config.set("societyName", this.societyName);
-        config.set("presidentName", this.presidentName);
-        config.set("createTime", this.createTime);
-        config.set("societyMoney", this.societyMoney);
-        config.set("psots", this.psots);
-        config.set("grade", this.grade);
-        config.set("tempApply", this.tempApply);
-        config.save();
-    }
 
     public String getSocietyName() {
         return this.societyName;
@@ -108,11 +84,11 @@ public class Society {
     }
 
     public HashMap<String, ArrayList<Object>> getPost() {
-        return this.psots;
+        return this.members;
     }
 
-    public void setPsots(HashMap<String, ArrayList<Object>> psots) {
-        this.psots = psots;
+    public void setMembers(HashMap<String, ArrayList<Object>> members) {
+        this.members = members;
     }
 
     public ArrayList<String> getTempApply() {
@@ -131,9 +107,21 @@ public class Society {
         this.grade = grade;
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public HashMap<String, ArrayList<Object>> getMembers() {
+        return members;
+    }
+
     @Override
     public String toString() {
-        return "Society{sid=" + this.sid + ", societyName='" + this.societyName + '\'' + ", presidentName='" + this.presidentName + '\'' + ", createTime='" + this.createTime + '\'' + ", societyMoney=" + this.societyMoney + ", psots=" + this.psots + ", grade=" + this.grade + ", tempApply=" + this.tempApply + '}';
+        return "Society{sid=" + this.sid + ", societyName='" + this.societyName + '\'' + ", presidentName='" + this.presidentName + '\'' + ", createTime='" + this.createTime + '\'' + ", societyMoney=" + this.societyMoney + ", psots=" + this.members + ", grade=" + this.grade + ", tempApply=" + this.tempApply + '}';
     }
 
 }

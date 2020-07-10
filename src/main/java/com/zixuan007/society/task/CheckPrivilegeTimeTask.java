@@ -3,6 +3,7 @@ package com.zixuan007.society.task;
 import cn.nukkit.scheduler.PluginTask;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.Vip;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 
@@ -38,7 +39,9 @@ public class CheckPrivilegeTimeTask extends PluginTask<SocietyPlugin> {
                         if(System.currentTimeMillis() >= parse.getTime()){
                             String playerName = (String) config.get("playerName");
                             if(!PrivilegeUtils.removePrivilegeName.contains(playerName)) {
+                                Vip privilege = PrivilegeUtils.getPivilegeByPlayerName(playerName);
                                 PrivilegeUtils.removePrivilegeName.add(playerName);
+                                SocietyPlugin.getInstance().getLogger().debug("玩家 "+playerName+" 权限类型: "+privilege.getVip_Type()+" 到期时间: "+privilege.getHoldTime()+" 已经到期");
                             }
                         }
                     } catch (ParseException e) {

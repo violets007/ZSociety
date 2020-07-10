@@ -70,7 +70,7 @@ public class SocietyPlugin extends PluginBase {
     @Override
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
-        SocietyUtils.societies.forEach(Society::saveData);
+        SocietyUtils.societies.forEach(SocietyUtils::saveSociety);
         config.save();
         marryConfig.save();
         titleShopConfig.save();
@@ -87,20 +87,20 @@ public class SocietyPlugin extends PluginBase {
             instance = this;
         }
         checkConfig();
-        saveResource("lang/zh-CN.yml",true);
-        saveResource("WindowConfig.yml",true);
+        saveResource("lang/zh-CN.yml", true);
+        saveResource("WindowConfig.yml", true);
         loadConfig();
         registerCommand();
         registerWindow();
         getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
-        getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20*60);
+        getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20 * 60);
         resisterListener();
     }
 
     /**
      * 注册事件监听器
      */
-    public void resisterListener(){
+    public void resisterListener() {
         getServer().getPluginManager().registerEvents(new ResponseLister(), this);
         getServer().getPluginManager().registerEvents(new SocietyListener(this), this);
         getServer().getPluginManager().registerEvents(new TitleListener(this), this);
@@ -112,11 +112,11 @@ public class SocietyPlugin extends PluginBase {
      * 注册插件命令
      */
     public void registerCommand() {
-        getServer().getCommandMap().register("society",  new SocietyCommand(), "公会");
-        getServer().getCommandMap().register("title",  new TitleCommand(), "称号");
-        getServer().getCommandMap().register("marry",  new MarryCommand(), "结婚");
-        getServer().getCommandMap().register("privilege",  new VipCommand(), "特权");
-        getServer().getCommandMap().register("admin",  new AdminCommand(), "管理");
+        getServer().getCommandMap().register("society", new SocietyCommand(), "公会");
+        getServer().getCommandMap().register("title", new TitleCommand(), "称号");
+        getServer().getCommandMap().register("marry", new MarryCommand(), "结婚");
+        getServer().getCommandMap().register("privilege", new VipCommand(), "特权");
+        getServer().getCommandMap().register("admin", new AdminCommand(), "管理");
     }
 
 
@@ -126,18 +126,18 @@ public class SocietyPlugin extends PluginBase {
     public void loadConfig() {
         String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
         String language = (String) config.get("language");
-        String languagePath = PluginUtils.CONFIG_FOLDER +"lang"+PluginUtils.FILE_SEPARATOR+language;
+        String languagePath = PluginUtils.CONFIG_FOLDER + "lang" + PluginUtils.FILE_SEPARATOR + language;
         String titleShopPath = PluginUtils.CONFIG_FOLDER + "TitleShopData.yml";
-        String marryPath=PluginUtils.CONFIG_FOLDER +"Marry.yml";
-        String societyShopConfigPath=PluginUtils.CONFIG_FOLDER +"societyShop.yml";
-        String windowConfig=PluginUtils.CONFIG_FOLDER+"WindowConfig.yml";
+        String marryPath = PluginUtils.CONFIG_FOLDER + "Marry.yml";
+        String societyShopConfigPath = PluginUtils.CONFIG_FOLDER + "societyShop.yml";
+        String windowConfig = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
 
         this.titleConfig = new Config(titleConfigPath);
         this.titleShopConfig = new Config(titleShopPath);
-        this.marryConfig=new Config(marryPath);
-        this.societyShopConfig=new Config(societyShopConfigPath);
-        this.languageConfig=new Config(languagePath);
-        this.windowConfig=new Config(windowConfig);
+        this.marryConfig = new Config(marryPath);
+        this.societyShopConfig = new Config(societyShopConfigPath);
+        this.languageConfig = new Config(languagePath);
+        this.windowConfig = new Config(windowConfig);
 
         //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
@@ -148,6 +148,7 @@ public class SocietyPlugin extends PluginBase {
 
     /**
      * 检测插件
+     *
      * @param pluginName 插件名称
      */
     public void checkPlugin(String pluginName) {
@@ -179,17 +180,16 @@ public class SocietyPlugin extends PluginBase {
         }
         String configPath = PluginUtils.CONFIG_FOLDER + "Config.yml";
         this.config = new Config(configPath);
-
     }
 
     /**
      * 注册指定的窗口
      */
-    public void registerWindow(){
+    public void registerWindow() {
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeWindow.class);
         PluginUtils.addWindowClass(WindowType.ADVANCED_PRIVILEGE_WINDOW, AdvancedPrivilegeWindow.class);
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeInfoWindow.class);
-        PluginUtils.addWindowClass(WindowType.PRIVILEGE_INFO_WINDOW,PrivilegeInfoWindow.class);
+        PluginUtils.addWindowClass(WindowType.PRIVILEGE_INFO_WINDOW, PrivilegeInfoWindow.class);
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_MANAGER_WINDOW, PrivilegeManagerWindow.class);
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_LIST_WINDOW, PrivilegeListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_PRIVILEGE_WINDOW, RemovePrivilegeWindow.class);
@@ -211,18 +211,17 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.Member_List_Window, MemberListWindow.class);
         PluginUtils.addWindowClass(WindowType.CONTRIBUTION_RANKING_WINDOW, ContributionRankingWindow.class);
         PluginUtils.addWindowClass(WindowType.LEVEL_RANK_WINDOW, LevelRankWindow.class);
-        PluginUtils.addWindowClass(WindowType.CONTRIBUTION_WINDOW,ContributionWindow.class);
-        PluginUtils.addWindowClass(WindowType.SOCIETY_LIST_WINDOW,SocietyListWindow.class);
+        PluginUtils.addWindowClass(WindowType.CONTRIBUTION_WINDOW, ContributionWindow.class);
+        PluginUtils.addWindowClass(WindowType.SOCIETY_LIST_WINDOW, SocietyListWindow.class);
         PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_SHOP_WINDOW, CreateSocietyShopWindow.class);
         PluginUtils.addWindowClass(WindowType.PRESIDENT_WINDOW, PresidentWindow.class);
         PluginUtils.addWindowClass(WindowType.PLAYER_APPLY_LIST_WINDOW, PlayerApplyListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MEMBER_WINDOW, RemoveMemberWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_CONTRIBUTE_WINDOW, SetContributeWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_JOB_WINDOW, SetJobWindow.class);
-        PluginUtils.addWindowClass(WindowType.MESSAGE_WINDOW,MessageWindow.class);
+        PluginUtils.addWindowClass(WindowType.MESSAGE_WINDOW, MessageWindow.class);
         PluginUtils.addWindowClass(WindowType.MODAL_WINDOW, ModalWindow.class);
     }
-
 
 
     @Override
@@ -245,7 +244,6 @@ public class SocietyPlugin extends PluginBase {
     public void setTitleConfig(Config titleConfig) {
         this.titleConfig = titleConfig;
     }
-
 
     public List<Config> getSocietyConfigList() {
         return this.societyConfigList;

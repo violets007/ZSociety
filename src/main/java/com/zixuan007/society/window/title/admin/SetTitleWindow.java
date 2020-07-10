@@ -60,10 +60,12 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.existTitle"),setTitleWindow,backButtonName,backButtonImage));
             return;
         }
-        Config titleConfig = societyPlugin.getTitleConfig();
+        /*Config titleConfig = societyPlugin.getTitleConfig();
         TitleUtils.addTitle(playerName,title);
         titleConfig.set(playerName, TitleUtils.getTitles(playerName));
-        titleConfig.save();
+        titleConfig.save();*/
+
+        TitleUtils.addTitle(playerName,title);
 
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.setTitle",new String[]{"${playerName}","${title}"},new String[]{playerName,title}),setTitleWindow,backButtonName,backButtonImage));
     }

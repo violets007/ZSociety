@@ -67,7 +67,7 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
         vip.setBuyDate("");
         vip.setPlayerName(setPrivilegePlayerName);
         vip.setVip_Type(elementContent.equals(VipType.VIP.getTypeName())?VipType.VIP:VipType.SVIP);
-        PrivilegeUtils.saveData(vip);
+        PrivilegeUtils.savePrivilege(vip);
         if(!PrivilegeUtils.isSvip(setPrivilegePlayerName) && !PrivilegeUtils.isVIP(setPrivilegePlayerName)) {
             PrivilegeUtils.privilegeList.add(vip);
         }

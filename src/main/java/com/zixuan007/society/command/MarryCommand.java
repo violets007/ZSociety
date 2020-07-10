@@ -11,19 +11,20 @@ import com.zixuan007.society.window.WindowType;
 
 /**
  * 结婚命令
+ *
  * @author zixuan007
  */
 public class MarryCommand extends Command {
-    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.marry");
+    public final static String COMMAND_NAME = SocietyPlugin.getInstance().getLanguageConfig().getString("command.marry");
 
     public MarryCommand() {
-        super(COMMAND_NAME,"§e显示结婚功能窗口");
+        super(COMMAND_NAME, "§e显示结婚功能窗口");
         getCommandParameters().clear();
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        if(commandSender instanceof ConsoleCommandSender){
+        if (commandSender instanceof ConsoleCommandSender) {
             commandSender.sendMessage(PluginUtils.getLanguageInfo("message.isConsole"));
             return false;
         }

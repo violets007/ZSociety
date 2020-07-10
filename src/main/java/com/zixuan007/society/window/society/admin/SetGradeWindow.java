@@ -79,7 +79,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         SocietyUtils.societies.remove(society);
         society.setGrade(grade);
         SocietyUtils.societies.add(society);
-        society.saveData();
+        SocietyUtils.saveSociety(society);
         String societyName = society.getSocietyName();
         int societyGrade = society.getGrade();
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.setSocietyGrade",new String[]{"${societyName}","${societyGrade}"},new String[]{societyName,societyGrade+""}),null,closeButtonName,closeButtonImagePath));

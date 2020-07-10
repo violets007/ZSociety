@@ -20,23 +20,24 @@ import java.util.ArrayList;
 
 /**
  * 管理命令
+ *
  * @author zixuan007
  */
 public class AdminCommand extends Command {
 
-    public final static int ONE_ARGS_LENGTH=1;
-    public final static int TWO_ARGS_LENGTH=2;
-    public final static int THREE_ARGS_LENGTH=3;
-    public final static int FOUR_ARGS_LENGTH=4;
+    public final static int ONE_ARGS_LENGTH = 1;
+    public final static int TWO_ARGS_LENGTH = 2;
+    public final static int THREE_ARGS_LENGTH = 3;
+    public final static int FOUR_ARGS_LENGTH = 4;
 
-    public final static String SOCIETY_ARGS="公会";
-    public final static String TITLE_ARGS="称号";
-    public final static String MARRY_ARGS="结婚";
-    public final static String PRIVILEGE_ARGS="特权";
-    public final static String GIVE_TITLE_ARGS="给予";
-    public final static String RELOAD_ARGS="reload";
+    public final static String SOCIETY_ARGS = "公会";
+    public final static String TITLE_ARGS = "称号";
+    public final static String MARRY_ARGS = "结婚";
+    public final static String PRIVILEGE_ARGS = "特权";
+    public final static String GIVE_TITLE_ARGS = "给予";
+    public final static String RELOAD_ARGS = "reload";
 
-    public final static String COMMAND_NAME=SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage");
+    public final static String COMMAND_NAME = SocietyPlugin.getInstance().getLanguageConfig().getString("command.manage");
 
     public AdminCommand() {
         super(COMMAND_NAME);
@@ -47,18 +48,18 @@ public class AdminCommand extends Command {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] args) {
-        if(commandSender instanceof ConsoleCommandSender) {
+        if (commandSender instanceof ConsoleCommandSender) {
             return false;
         }
-        if(!commandSender.isOp()) {
+        if (!commandSender.isOp()) {
             return false;
         }
 
-        Player player= (Player) commandSender;
-        if(args.length < ONE_ARGS_LENGTH) {
+        Player player = (Player) commandSender;
+        if (args.length < ONE_ARGS_LENGTH) {
             return sendHelp(player);
         }
-        switch (args[0]){
+        switch (args[0]) {
             case SOCIETY_ARGS:
                 player.showFormWindow(new SocietyAdminWindow());
                 return true;
@@ -72,32 +73,33 @@ public class AdminCommand extends Command {
                 player.showFormWindow(WindowManager.getPrivilegeManagerWindow());
                 return true;
             case GIVE_TITLE_ARGS:
-                if (args.length < FOUR_ARGS_LENGTH){
+                if (args.length < FOUR_ARGS_LENGTH) {
                     player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
                     return false;
                 }
 
-                if(!TITLE_ARGS.equals(args[ONE_ARGS_LENGTH])){
+                if (!TITLE_ARGS.equals(args[ONE_ARGS_LENGTH])) {
                     player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
                     return false;
                 }
-                if(SocietyPlugin.getInstance().getTitleConfig().get(args[TWO_ARGS_LENGTH]) == null){
+                if (SocietyPlugin.getInstance().getTitleConfig().get(args[TWO_ARGS_LENGTH]) == null) {
                     player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.notPlayer"));
                     return false;
                 }
-                String title=args[THREE_ARGS_LENGTH];
-                if(TitleUtils.isExistTitle(args[TWO_ARGS_LENGTH],title)){
-                    player.sendMessage( PluginUtils.getLanguageInfo("message.existTitle",new String[]{"${playerName}"},new String[]{args[TWO_ARGS_LENGTH]}));
+                String title = args[THREE_ARGS_LENGTH];
+                if (TitleUtils.isExistTitle(args[TWO_ARGS_LENGTH], title)) {
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.existTitle", new String[]{"${playerName}"}, new String[]{args[TWO_ARGS_LENGTH]}));
                     return false;
                 }
-                TitleUtils.addTitle(args[TWO_ARGS_LENGTH],title);
+                TitleUtils.addTitle(args[TWO_ARGS_LENGTH], title);
                 if (PluginUtils.isOnlineByName(args[TWO_ARGS_LENGTH])) {
-                    Server.getInstance().getPlayer( PluginUtils.getLanguageInfo("message.giveTitle",new String[]{"${playerName}"},new String[]{args[THREE_ARGS_LENGTH]}));
+                    Server.getInstance().getPlayer(PluginUtils.getLanguageInfo("message.giveTitle", new String[]{"${playerName}"}, new String[]{args[THREE_ARGS_LENGTH]}));
                 }
                 return true;
             case RELOAD_ARGS:
                 SocietyPlugin.getInstance().getWindowConfig().reload();
                 SocietyPlugin.getInstance().getLanguageConfig().reload();
+
                 player.sendMessage(PluginUtils.getLanguageInfo("message.reload"));
                 return true;
             default:
@@ -109,33 +111,33 @@ public class AdminCommand extends Command {
     /**
      * 设置参数
      */
-    public void setParameter(){
-        getCommandParameters().put(SOCIETY_ARGS,new CommandParameter[]{
-                new CommandParameter(SOCIETY_ARGS,new String[]{SOCIETY_ARGS})
+    public void setParameter() {
+        getCommandParameters().put(SOCIETY_ARGS, new CommandParameter[]{
+                new CommandParameter(SOCIETY_ARGS, new String[]{SOCIETY_ARGS})
         });
 
-        getCommandParameters().put(TITLE_ARGS,new CommandParameter[]{
-                new CommandParameter(TITLE_ARGS,new String[]{TITLE_ARGS})
+        getCommandParameters().put(TITLE_ARGS, new CommandParameter[]{
+                new CommandParameter(TITLE_ARGS, new String[]{TITLE_ARGS})
         });
 
-        getCommandParameters().put(MARRY_ARGS,new CommandParameter[]{
-                new CommandParameter(MARRY_ARGS,new String[]{MARRY_ARGS})
+        getCommandParameters().put(MARRY_ARGS, new CommandParameter[]{
+                new CommandParameter(MARRY_ARGS, new String[]{MARRY_ARGS})
         });
 
-        getCommandParameters().put(PRIVILEGE_ARGS,new CommandParameter[]{
-                new CommandParameter(PRIVILEGE_ARGS,new String[]{PRIVILEGE_ARGS})
+        getCommandParameters().put(PRIVILEGE_ARGS, new CommandParameter[]{
+                new CommandParameter(PRIVILEGE_ARGS, new String[]{PRIVILEGE_ARGS})
         });
 
-        getCommandParameters().put(GIVE_TITLE_ARGS,new CommandParameter[]{
-                new CommandParameter(GIVE_TITLE_ARGS,new String[]{GIVE_TITLE_ARGS}),
-                new CommandParameter(TITLE_ARGS,new String[]{TITLE_ARGS}),
-                new CommandParameter("§e玩家名§r", CommandParamType.STRING,false),
-                new CommandParameter("§6设置的称号§r", CommandParamType.STRING,true)
+        getCommandParameters().put(GIVE_TITLE_ARGS, new CommandParameter[]{
+                new CommandParameter(GIVE_TITLE_ARGS, new String[]{GIVE_TITLE_ARGS}),
+                new CommandParameter(TITLE_ARGS, new String[]{TITLE_ARGS}),
+                new CommandParameter("§e玩家名§r", CommandParamType.STRING, false),
+                new CommandParameter("§6设置的称号§r", CommandParamType.STRING, true)
         });
     }
 
 
-    public boolean sendHelp(Player player){
+    public boolean sendHelp(Player player) {
         player.sendMessage("§f==========§bZsociety§4管理命令§f==========");
         player.sendMessage(">> §b/管理 §a称号");
         player.sendMessage(">> §b/管理 §a公会");

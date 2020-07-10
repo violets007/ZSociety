@@ -15,29 +15,29 @@ import com.zixuan007.society.window.WindowType;
  */
 public class VipCommand extends Command {
 
-    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.privilege");
+    public final static String COMMAND_NAME = SocietyPlugin.getInstance().getLanguageConfig().getString("command.privilege");
 
     public VipCommand() {
-        super(COMMAND_NAME,"§e显示特权功能窗口");
+        super(COMMAND_NAME, "§e显示特权功能窗口");
         getCommandParameters().clear();
         setPermission("ZSociety.command.user");
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandName, String[] strings) {
-        if(commandSender instanceof ConsoleCommandSender) {
+        if (commandSender instanceof ConsoleCommandSender) {
             return false;
         }
-        Player player= (Player) commandSender;
-        if(commandName.equals(getName())){
-            if(strings.length <1){
-                if(PrivilegeUtils.isVIP(player.getName())){
+        Player player = (Player) commandSender;
+        if (commandName.equals(getName())) {
+            if (strings.length < 1) {
+                if (PrivilegeUtils.isVIP(player.getName())) {
                     //展示VIP功能界面
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW,player));
-                }else if(PrivilegeUtils.isSvip(player.getName())){
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW, player));
+                } else if (PrivilegeUtils.isSvip(player.getName())) {
                     //展示SVIP功能界面
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.ADVANCED_PRIVILEGE_WINDOW,player));
-                }else{
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.ADVANCED_PRIVILEGE_WINDOW, player));
+                } else {
                     player.sendMessage(PluginUtils.getLanguageInfo("message.notExistPrivilege"));
                 }
             }

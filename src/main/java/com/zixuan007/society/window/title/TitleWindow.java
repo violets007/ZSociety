@@ -45,9 +45,7 @@ public class TitleWindow extends SimpleWindow implements WindowLoader {
         String title = titles.get(id);
         titles.remove(title);
         titles.add(0,title);
-//        titles.set(0,title);
-//        TitleUtils.addTitle(playerName, title);
-        TitleUtils.titleList.put(playerName, titles);
+        TitleUtils.saveTitle(playerName,titles);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.titleWindow.wearTitle",new String[]{"${title}"},new String[]{title}),null,closeButtonName,closeButtonImagePath));
     }
 

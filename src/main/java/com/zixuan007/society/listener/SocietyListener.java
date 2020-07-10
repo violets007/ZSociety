@@ -23,6 +23,7 @@ import com.zixuan007.society.event.society.PlayerCreateSocietyEvent;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
+import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
 import com.zixuan007.society.window.society.MessageWindow;
@@ -61,11 +62,11 @@ public class SocietyListener implements Listener {
                 this.add(map.get("grade"));
             }
         });
-        society.saveData();
+        SocietyUtils.saveSociety(society);
         SocietyUtils.societies.add(event.getSociety());
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b" + player.getName() + " §a创建公会名称: §e" + society.getSocietyName());
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
-        player.showFormWindow( WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a创建 §l§b" + society.getSocietyName() + " §a公会成功",societyWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a创建 §l§b" + society.getSocietyName() + " §a公会成功", societyWindow, backButtonName, backButtonImage));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -77,10 +78,10 @@ public class SocietyListener implements Listener {
         society.getTempApply().add(player.getName());
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
-        society.saveData();
+        SocietyUtils.saveSociety(society);
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
 
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理",societyWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理", societyWindow, backButtonName, backButtonImage));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -90,20 +91,21 @@ public class SocietyListener implements Listener {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         society.getPost().remove(player.getName());
-        society.saveData();
+        SocietyUtils.saveSociety(society);
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
 
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功退出 §l§c" + society.getSocietyName() + " §a公会",societyWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功退出 §l§c" + society.getSocietyName() + " §a公会", societyWindow, backButtonName, backButtonImage));
 
         //检测到玩家正在创建公会商店
-        if(SocietyUtils.onCreatePlayer.containsKey(player.getName())){
+        if (SocietyUtils.onCreatePlayer.containsKey(player.getName())) {
             ArrayList<Object> list = SocietyUtils.onCreatePlayer.get(player);
             Item item = (Item) list.get(1);
             player.getInventory().addItem(item);
             SocietyUtils.onCreatePlayer.remove(player.getName());
         }
+
         //移除玩家在此公会创建过的商店
-        SocietyUtils.removeCreateShop(society,player.getName());
+        SocietyUtils.removeCreateShop(society, player.getName());
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -124,13 +126,13 @@ public class SocietyListener implements Listener {
         if (SocietyUtils.onCreatePlayer.containsKey(player.getName())) {
             if (block instanceof BlockWallSign) {
                 if (!SocietyUtils.isJoinSociety(player.getName())) {
-                    player.sendMessage(">> §c检测到你当前还没有加入公会");
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isJoin"));
                     SocietyUtils.onCreatePlayer.remove(player.getName());
                     return;
                 }
 
-                if(SocietyUtils.isSetShop(block)){
-                    player.sendMessage(">> §c此木牌已经设置了商店,请勿重复设置");
+                if (SocietyUtils.isSetShop(block)) {
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.alreadSetShop"));
                     return;
                 }
 
@@ -140,7 +142,7 @@ public class SocietyListener implements Listener {
                 String levelName = block.getLevel().getName();
                 int blockX = block.getFloorX();
                 int blockZ = block.getFloorZ();
-                String key = player.getName() + "-" + levelName +"-"+ blockX + "-" + blockZ;
+                String key = player.getName() + "-" + levelName + "-" + blockX + "-" + blockZ;
                 ArrayList<Object> list = SocietyUtils.onCreatePlayer.get(player.getName());
                 int price = (int) list.get(0);
                 Item item = (Item) list.get(1);
@@ -151,10 +153,10 @@ public class SocietyListener implements Listener {
                         put("z", block.getFloorZ());
                         put("levelName", levelName);
                         put("creator", player.getName());
-                        put("sid", (int)society.getSid());
+                        put("sid", (int) society.getSid());
                         put("price", price);
                         put("itemName", item.getCustomName());
-                        put("itemID-Meta", item.getId()+"-"+item.getDamage());
+                        put("itemID-Meta", item.getId() + "-" + item.getDamage());
                         put("count", item.getCount());
                         put("nbt", Binary.bytesToHexString(item.getCompoundTag()));
                     }
@@ -170,14 +172,15 @@ public class SocietyListener implements Listener {
                     for (int i = 0; i < societyShopFormat.size(); i++) {
                         String text = societyShopFormat.get(i);
                         text = PluginUtils.formatText(text, player);
-                        text=text.replaceAll("\\$\\{itemName\\}", item.getCustomName());
-                        text=text.replaceAll("\\$\\{itemPrice\\}", price+"");
-                        text=text.replaceAll("\\$\\{count\\}", item.getCount()+"");
+                        text = text.replaceAll("\\$\\{itemName\\}", item.getCustomName());
+                        text = text.replaceAll("\\$\\{itemPrice\\}", price + "");
+                        text = text.replaceAll("\\$\\{count\\}", item.getCount() + "");
                         lineText.add(text);
                     }
                     ((BlockEntitySign) blockEntity).setText(lineText.toArray(new String[lineText.size()]));
                     SocietyUtils.onCreatePlayer.remove(player.getName());
-                    player.sendMessage(">> §a商店创建成功");
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.success"));
+                    event.setCancelled(true);
                     return;
                 }
             }
@@ -205,37 +208,39 @@ public class SocietyListener implements Listener {
                     int blockZ = block.getFloorZ();
                     String blockLevelName = block.getLevel().getName();
 
-                    boolean flag=(blockX == shopX && blockY == shopY && blockZ == shopZ);
+                    boolean flag = (blockX == shopX && blockY == shopY && blockZ == shopZ);
 
-                    if(flag){
+                    if (flag) {
                         event.setCancelled();
                         double myMoney = EconomyAPI.getInstance().myMoney(player);
-                        if(myMoney < price){
-                            player.sendMessage(">> §a当前余额不足无法进行购买");
+                        if (myMoney < price) {
+                            player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.rarelyCoin"));
                             return;
                         }
-                        if(!SocietyUtils.isJoinSociety(player.getName())){
-                            player.sendMessage(">> §c你还没有加入公会无法进行购买");
+                        if (!SocietyUtils.isJoinSociety(player.getName())) {
+                            player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.unableBuy"));
                             return;
                         }
                         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
-                        if(!(society.getSid() == sid)){
-                            player.sendMessage(">> §c你不是本公会成员无法进行购买");
+                        if (!(society.getSid() == sid)) {
+                            player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.unableBuy1"));
                             return;
                         }
 
-                        if(dissolve != null){
-                            player.sendMessage(">> §c此木牌商店功能或者公会已解散,等待人员销毁!");
+                        if (dissolve != null) {
+                            player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.alreadDestroy"));
                             return;
                         }
 
-                        if(!affrimBuyPlayer.contains(player.getName())){
-                            player.sendMessage(">> §c请再点击一次购买");
+
+                        if (!affrimBuyPlayer.contains(player.getName()) && !TitleUtils.onCreateName.containsKey(player.getName())) {
+                            player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.affrimBuy"));
                             affrimBuyPlayer.add(player.getName());
                             return;
                         }
-                        EconomyAPI.getInstance().reduceMoney(player,price);
-                        EconomyAPI.getInstance().addMoney(creator,price);
+
+                        EconomyAPI.getInstance().reduceMoney(player, price);
+                        EconomyAPI.getInstance().addMoney(creator, price);
                         String nbtDataStr = (String) value.get("nbt");
                         byte[] bytes = Binary.hexStringToBytes(nbtDataStr);
                         int count = (int) value.get("count");
@@ -243,11 +248,11 @@ public class SocietyListener implements Listener {
                         String[] split = itemIDStr.split("-");
                         String itemID = split[0];
                         String meta = split[1];
-                        player.getInventory().addItem(Item.get(Integer.parseInt(itemID),Integer.parseInt(meta),count,bytes));
+                        player.getInventory().addItem(Item.get(Integer.parseInt(itemID), Integer.parseInt(meta), count, bytes));
                         block.onBreak(Item.get(0));
                         societyShopConfig.remove(key);
                         societyShopConfig.save();
-                        player.sendMessage(">> §a购买成功,进行木牌的销毁");
+                        player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.buySuccess"));
                     }
                 }
             }
@@ -256,17 +261,17 @@ public class SocietyListener implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event){
+    public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
         for (Map.Entry<String, Object> entry : societyShopConfig.getAll().entrySet()) {
             String key = entry.getKey();
-            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            HashMap<String, Object> value = (HashMap<String, Object>) entry.getValue();
             Object dissolve = value.get("dissolve");
             ArrayList<Object> itemData = new ArrayList<>();
-            if(dissolve != null){
+            if (dissolve != null) {
                 String creator = (String) value.get("creator");
-                if(player.getName().equals(creator)){
+                if (player.getName().equals(creator)) {
                     itemData.add(value.get("itemID-Meta"));
                     itemData.add(value.get("count"));
                     itemData.add(value.get("nbt"));
@@ -280,30 +285,30 @@ public class SocietyListener implements Listener {
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent event){
+    public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         //检测到玩家已经创建过公会商店
         Config societyShopConfig = societyPlugin.getSocietyShopConfig();
         for (Map.Entry<String, Object> entry : societyShopConfig.getAll().entrySet()) {
             String key = entry.getKey();
-            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            HashMap<String, Object> value = (HashMap<String, Object>) entry.getValue();
             String creator = (String) value.get("creator");
             Object dissolve = value.get("dissolve");
             ArrayList<Object> itemData = new ArrayList<>();
-            if(player.getName().equals(creator) && dissolve != null){
+            if (player.getName().equals(creator) && dissolve != null) {
                 itemData.add(value.get("itemID-Meta"));
                 itemData.add(value.get("count"));
                 itemData.add(value.get("nbt"));
                 Item item = PluginUtils.parseItemByList(itemData);
                 player.getInventory().addItem(item);
-                player.sendMessage(">> §a公会商店物品已返还!");
+                player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.returnItem"));
                 societyShopConfig.remove(key);
             }
         }
     }
 
     @EventHandler
-    public void onBreakShop(BlockBreakEvent event){
+    public void onBreakShop(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
         int blockFloorX = block.getFloorX();
@@ -313,7 +318,7 @@ public class SocietyListener implements Listener {
         Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
         for (Map.Entry<String, Object> entry : societyShopConfig.getAll().entrySet()) {
             String key = entry.getKey();
-            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            HashMap<String, Object> value = (HashMap<String, Object>) entry.getValue();
             int x = (int) value.get("x");
             int y = (int) value.get("y");
             int z = (int) value.get("z");
@@ -322,17 +327,17 @@ public class SocietyListener implements Listener {
                 Block signBlock = level.getBlock(new Vector3(x, y, z));
                 boolean isX = (blockFloorX + 1 == x || blockFloorX - 1 == x || blockFloorX == x);
                 boolean isZ = (blockFloorZ + 1 == z || blockFloorZ - 1 == z || blockFloorZ == z);
-                if((isX && isZ && !player.isOp())){
+                if ((isX && isZ && !player.isOp())) {
                     event.setCancelled();
-                    player.sendMessage(">> §c你没有权限移除本公会商店!");
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.destroyPermissions"));
                     return;
                 }
 
-                if(isX && isZ && player.isOp()){
-                    value.put("dissolve",true);
-                    societyShopConfig.set(key,value);
+                if (isX && isZ && player.isOp()) {
+                    value.put("dissolve", true);
+                    societyShopConfig.set(key, value);
                     societyShopConfig.save();
-                    player.sendMessage(">> §a商店移除成功");
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.destroy"));
                     return;
                 }
             }
@@ -340,7 +345,7 @@ public class SocietyListener implements Listener {
     }
 
     @EventHandler
-    public void onQuitGame(PlayerQuitEvent event){
+    public void onQuitGame(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         affrimBuyPlayer.remove(player.getName());
     }

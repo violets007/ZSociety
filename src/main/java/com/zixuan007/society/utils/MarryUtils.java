@@ -25,7 +25,7 @@ public class MarryUtils{
 
     /**
      * 检测指定玩家是否结婚
-     * @param playerName
+     * @param playerName 玩家名
      * @return
      */
     public static boolean isMarry(String playerName){
@@ -183,5 +183,7 @@ public class MarryUtils{
         int genderByPlayerName = getGenderByPlayerName(playerName);
         return genderByPlayerName == 0?"女":"男";
     }
+
+
 
 }

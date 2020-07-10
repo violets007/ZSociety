@@ -64,7 +64,7 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
                 add(jobGrade);
             }
         });
-        society.saveData();
+        SocietyUtils.saveSociety(society);
 
         if(PluginUtils.isOnlineByName(playerName)){
             Server.getInstance().getPlayer(playerName).sendTitle(PluginUtils.getLanguageInfo("message.setJobWindow.upJob",new String[]{"${jobName}"},new String[]{jobName}));

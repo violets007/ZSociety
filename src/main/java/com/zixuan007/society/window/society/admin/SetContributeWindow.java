@@ -77,7 +77,7 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
         SocietyUtils.societies.remove(society);
         society.setSocietyMoney(contribute.doubleValue());
         SocietyUtils.societies.add(society);
-        society.saveData();
+        SocietyUtils.saveSociety(society);
         String societyName = society.getSocietyName();
         Double societyMoney = society.getSocietyMoney();
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setContributeWindow.setContribute",new String[]{"${societyName}","${societyMoney}"},new String[]{societyName,societyMoney+""}),null,closeButtonName,closeImagePath));

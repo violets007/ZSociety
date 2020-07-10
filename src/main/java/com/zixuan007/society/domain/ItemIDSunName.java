@@ -10,7 +10,6 @@ import java.util.Map;
 /**
  * @author Winfxk
  * @author Anders233
- *
  */
 public enum ItemIDSunName {
     /**
@@ -1903,8 +1902,8 @@ public enum ItemIDSunName {
      */
     FIRE_CHARGE("火球", 385, 0, "textures/items/fireball.png"),
     /**
-     *  书
-     *  */
+     * 书
+     */
     WRITE_BOOK("书", 387, 0, "textures/items/book_written.png"),
     /**
      * 绿宝石
@@ -2135,7 +2134,6 @@ public enum ItemIDSunName {
      */
     BEET("甜菜根", 457, 0, "textures/items/beetroot.png"),
     /**
-     *
      * 鹦鹉螺壳
      */
     YINGWU("鹦鹉螺壳", 465, 0, "textures/items/nautilus.png"),
@@ -2162,278 +2160,278 @@ public enum ItemIDSunName {
     SWEET_BERRIES("甜梅", 477, 0, "textures/items/sweet_berries.png"),
     /**
      * 岩浆块
-     * */
-    MAGMA("岩浆块",213,0,"textures/blocks/magma.png"),
+     */
+    MAGMA("岩浆块", 213, 0, "textures/blocks/magma.png"),
     /**
      * 淡灰色混凝土粉末
-     * */
-    CONCRETE_POWDER_SILVER("淡灰色混凝土粉末",237,8,"textures/blocks/concrete_powder_silver.png"),
+     */
+    CONCRETE_POWDER_SILVER("淡灰色混凝土粉末", 237, 8, "textures/blocks/concrete_powder_silver.png"),
     /**
      * 灰色混凝土粉末
-     * */
-    CONCRETE_POWDER_GRAY("灰色混凝土粉末",237,7,"textures/blocks/concrete_powder_gray.png"),
+     */
+    CONCRETE_POWDER_GRAY("灰色混凝土粉末", 237, 7, "textures/blocks/concrete_powder_gray.png"),
     /**
      * 黑色混凝土粉末
-     * */
-    CONCRETE_POWDER_BLACK("黑色混凝土粉末",237,15,"textures/blocks/concrete_powder_black.png"),
+     */
+    CONCRETE_POWDER_BLACK("黑色混凝土粉末", 237, 15, "textures/blocks/concrete_powder_black.png"),
     /**
      * 棕色混凝土粉末
-     * */
-    CONCRETE_POWDER_BROWN("棕色混凝土粉末",237,12,"textures/blocks/concrete_powder_brown.png"),
+     */
+    CONCRETE_POWDER_BROWN("棕色混凝土粉末", 237, 12, "textures/blocks/concrete_powder_brown.png"),
     /**
      * 红色混凝土粉末
-     * */
-    CONCRETE_POWDER_RED("红色混凝土粉末",237,14,"textures/blocks/concrete_powder_red.png"),
+     */
+    CONCRETE_POWDER_RED("红色混凝土粉末", 237, 14, "textures/blocks/concrete_powder_red.png"),
     /**
      * 橙色混凝土粉末
-     * */
-    CONCRETE_POWDER_ORANGE("橙色混凝土粉末",237,1,"textures/blocks/concrete_powder_orange.png"),
+     */
+    CONCRETE_POWDER_ORANGE("橙色混凝土粉末", 237, 1, "textures/blocks/concrete_powder_orange.png"),
     /**
      * 黄色混凝土粉末
-     * */
-    CONCRETE_POWDER_YELLOW("黄色混凝土粉末",237,4,"textures/blocks/concrete_powder_yellow.png"),
+     */
+    CONCRETE_POWDER_YELLOW("黄色混凝土粉末", 237, 4, "textures/blocks/concrete_powder_yellow.png"),
     /**
      * 黄绿色混凝土粉末
-     * */
-    CONCRETE_POWDER_LIME("黄绿色混凝土粉末",237,5,"textures/blocks/concrete_powder_lime.png"),
+     */
+    CONCRETE_POWDER_LIME("黄绿色混凝土粉末", 237, 5, "textures/blocks/concrete_powder_lime.png"),
     /**
      * 绿色混凝土粉末
-     * */
-    CONCRETE_POWDER_GREEN("绿色混凝土粉末",237,13,"textures/blocks/concrete_powder_green.png"),
+     */
+    CONCRETE_POWDER_GREEN("绿色混凝土粉末", 237, 13, "textures/blocks/concrete_powder_green.png"),
     /**
      * 青色混凝土粉末
-     * */
-    CONCRETE_POWDER_CYAN("青色混凝土粉末",237,9,"textures/blocks/concrete_powder_cyan.png"),
+     */
+    CONCRETE_POWDER_CYAN("青色混凝土粉末", 237, 9, "textures/blocks/concrete_powder_cyan.png"),
     /**
      * 淡蓝色混凝土粉末
-     * */
-    CONCRETE_POWDER_LIGHT_BLUE("淡蓝色混凝土粉末",237,3,"textures/blocks/concrete_powder_light_blue.png"),
+     */
+    CONCRETE_POWDER_LIGHT_BLUE("淡蓝色混凝土粉末", 237, 3, "textures/blocks/concrete_powder_light_blue.png"),
     /**
      * 蓝色混凝土粉末
-     * */
-    CONCRETE_POWDER_BLUE("蓝色混凝土粉末",237,11,"textures/blocks/concrete_powder_blue.png"),
+     */
+    CONCRETE_POWDER_BLUE("蓝色混凝土粉末", 237, 11, "textures/blocks/concrete_powder_blue.png"),
     /**
      * 紫色混凝土粉末
-     * */
-    CONCRETE_POWDER_PURPLE("紫色混凝土粉末",237,10,"textures/blocks/concrete_powder_purple.png"),
+     */
+    CONCRETE_POWDER_PURPLE("紫色混凝土粉末", 237, 10, "textures/blocks/concrete_powder_purple.png"),
     /**
      * 品红色混凝土粉末
-     * */
-    CONCRETE_POWDER_MAGENTA("品红色混凝土粉末",237,2,"textures/blocks/concrete_powder_magenta.png"),
+     */
+    CONCRETE_POWDER_MAGENTA("品红色混凝土粉末", 237, 2, "textures/blocks/concrete_powder_magenta.png"),
     /**
      * 粉色混凝土粉末
-     * */
-    CONCRETE_POWDER_PINK("粉色混凝土粉末",237,6,"textures/blocks/concrete_powder_pink.png"),
+     */
+    CONCRETE_POWDER_PINK("粉色混凝土粉末", 237, 6, "textures/blocks/concrete_powder_pink.png"),
     /**
      * 白色混凝土粉末
-     * */
-    CONCRETE_POWDER_WHITE("白色混凝土粉末",237,0,"textures/blocks/concrete_powder_white.png"),
+     */
+    CONCRETE_POWDER_WHITE("白色混凝土粉末", 237, 0, "textures/blocks/concrete_powder_white.png"),
 
     /**
      * 淡灰色混凝土
-     * */
-    CONCRETE_SILVER("淡灰色混凝土",236,8,"textures/blocks/concrete_silver.png"),
+     */
+    CONCRETE_SILVER("淡灰色混凝土", 236, 8, "textures/blocks/concrete_silver.png"),
     /**
      * 灰色混凝土
-     * */
-    CONCRETE_GRAY("灰色混凝土",236,7,"textures/blocks/concrete_gray.png"),
+     */
+    CONCRETE_GRAY("灰色混凝土", 236, 7, "textures/blocks/concrete_gray.png"),
     /**
      * 黑色混凝土
-     * */
-    CONCRETE_BLACK("黑色混凝土",236,15,"textures/blocks/concrete_black.png"),
+     */
+    CONCRETE_BLACK("黑色混凝土", 236, 15, "textures/blocks/concrete_black.png"),
     /**
      * 棕色混凝土
-     * */
-    CONCRETE_BROWN("棕色混凝土",236,12,"textures/blocks/concrete_brown.png"),
+     */
+    CONCRETE_BROWN("棕色混凝土", 236, 12, "textures/blocks/concrete_brown.png"),
     /**
      * 红色混凝土
-     * */
-    CONCRETE_RED("红色混凝土",236,14,"textures/blocks/concrete_red.png"),
+     */
+    CONCRETE_RED("红色混凝土", 236, 14, "textures/blocks/concrete_red.png"),
     /**
      * 橙色混凝土
-     * */
-    CONCRETE_ORANGE("橙色混凝土",236,1,"textures/blocks/concrete_orange.png"),
+     */
+    CONCRETE_ORANGE("橙色混凝土", 236, 1, "textures/blocks/concrete_orange.png"),
     /**
      * 黄色混凝土
-     * */
-    CONCRETE_YELLOW("黄色混凝土",236,4,"textures/blocks/concrete_yellow.png"),
+     */
+    CONCRETE_YELLOW("黄色混凝土", 236, 4, "textures/blocks/concrete_yellow.png"),
     /**
      * 黄绿色混凝土
-     * */
-    CONCRETE_LIME("黄绿色混凝土",236,5,"textures/blocks/concrete_lime.png"),
+     */
+    CONCRETE_LIME("黄绿色混凝土", 236, 5, "textures/blocks/concrete_lime.png"),
     /**
      * 绿色混凝土
-     * */
-    CONCRETE_GREEN("绿色混凝土",236,13,"textures/blocks/concrete_green.png"),
+     */
+    CONCRETE_GREEN("绿色混凝土", 236, 13, "textures/blocks/concrete_green.png"),
     /**
      * 青色混凝土
-     * */
-    CONCRETE_CYAN("青色混凝土",236,9,"textures/blocks/concrete_cyan.png"),
+     */
+    CONCRETE_CYAN("青色混凝土", 236, 9, "textures/blocks/concrete_cyan.png"),
     /**
      * 淡蓝色混凝土
-     * */
-    CONCRETE_LIGHT_BLUE("淡蓝色混凝土",236,3,"textures/blocks/concrete_light_blue.png"),
+     */
+    CONCRETE_LIGHT_BLUE("淡蓝色混凝土", 236, 3, "textures/blocks/concrete_light_blue.png"),
     /**
      * 蓝色混凝土
-     * */
-    CONCRETE_BLUE("蓝色混凝土",236,11,"textures/blocks/concrete_blue.png"),
+     */
+    CONCRETE_BLUE("蓝色混凝土", 236, 11, "textures/blocks/concrete_blue.png"),
     /**
      * 紫色混凝土
-     * */
-    CONCRETE_PURPLE("紫色混凝土",236,10,"textures/blocks/concrete_purple.png"),
+     */
+    CONCRETE_PURPLE("紫色混凝土", 236, 10, "textures/blocks/concrete_purple.png"),
     /**
      * 品红色混凝土
-     * */
-    CONCRETE_MAGENTA("品红色混凝土",236,2,"textures/blocks/concrete_magenta.png"),
+     */
+    CONCRETE_MAGENTA("品红色混凝土", 236, 2, "textures/blocks/concrete_magenta.png"),
     /**
      * 粉色混凝土
-     * */
-    CONCRETE_PINK("粉色混凝土",236,6,"textures/blocks/concrete_pink.png"),
+     */
+    CONCRETE_PINK("粉色混凝土", 236, 6, "textures/blocks/concrete_pink.png"),
     /**
      * 白色混凝土
-     * */
-    CONCRETE_WHITE("白色混凝土",236,0,"textures/blocks/concrete_white.png"),
+     */
+    CONCRETE_WHITE("白色混凝土", 236, 0, "textures/blocks/concrete_white.png"),
     /**
      * 盔甲架
-     * */
-    ARMOR_STAND_ITEM("盔甲架",425,0,"textures/items/armor_stand.png"),
+     */
+    ARMOR_STAND_ITEM("盔甲架", 425, 0, "textures/items/armor_stand.png"),
     /**
      * 书与羽毛
-     * */
-    BOOK_WRITABLE("书与羽毛",386,0,"textures/items/book_writable.png"),
+     */
+    BOOK_WRITABLE("书与羽毛", 386, 0, "textures/items/book_writable.png"),
     /**
      * 白色潜匿之贝箱子
-     * */
-    SHULKER_TOP_WHITE("白色潜匿之贝箱子",218,0,"textures/blocks/shulker_top_white.png"),
+     */
+    SHULKER_TOP_WHITE("白色潜匿之贝箱子", 218, 0, "textures/blocks/shulker_top_white.png"),
     /**
      * 淡灰色潜匿之贝箱子
-     * */
-    SHULKER_TOP_SILVER("淡灰色潜匿之贝箱子",218,8,"textures/blocks/shulker_top_silver.png"),
+     */
+    SHULKER_TOP_SILVER("淡灰色潜匿之贝箱子", 218, 8, "textures/blocks/shulker_top_silver.png"),
     /**
      * 灰色潜匿之贝箱子
-     * */
-    SHULKER_TOP_GRAY("灰色潜匿之贝箱子",218,7,"textures/blocks/shulker_top_gray.png"),
+     */
+    SHULKER_TOP_GRAY("灰色潜匿之贝箱子", 218, 7, "textures/blocks/shulker_top_gray.png"),
     /**
      * 黑色潜匿之贝箱子
-     * */
-    SHULKER_TOP_BLACK("黑色潜匿之贝箱子",218,15,"textures/blocks/shulker_top_black.png"),
+     */
+    SHULKER_TOP_BLACK("黑色潜匿之贝箱子", 218, 15, "textures/blocks/shulker_top_black.png"),
     /**
      * 棕色潜匿之贝箱子
-     * */
-    SHULKER_TOP_BROWN("棕色潜匿之贝箱子",218,12,"textures/blocks/shulker_top_brown.png"),
+     */
+    SHULKER_TOP_BROWN("棕色潜匿之贝箱子", 218, 12, "textures/blocks/shulker_top_brown.png"),
     /**
      * 红色潜匿之贝箱子
-     * */
-    SHULKER_TOP_RED("红色潜匿之贝箱子",218,14,"textures/blocks/shulker_top_red.png"),
+     */
+    SHULKER_TOP_RED("红色潜匿之贝箱子", 218, 14, "textures/blocks/shulker_top_red.png"),
     /**
      * 橙色潜匿之贝箱子
-     * */
-    SHULKER_TOP_ORANGE("橙色潜匿之贝箱子",218,1,"textures/blocks/shulker_top_orange.png"),
+     */
+    SHULKER_TOP_ORANGE("橙色潜匿之贝箱子", 218, 1, "textures/blocks/shulker_top_orange.png"),
     /**
      * 黄色潜匿之贝箱子
-     * */
-    SHULKER_TOP_YELLOW("黄色潜匿之贝箱子",218,4,"textures/blocks/shulker_top_yellow.png"),
+     */
+    SHULKER_TOP_YELLOW("黄色潜匿之贝箱子", 218, 4, "textures/blocks/shulker_top_yellow.png"),
     /**
      * 黄绿色潜匿之贝箱子
-     * */
-    SHULKER_TOP_LIME("黄绿色潜匿之贝箱子",218,5,"textures/blocks/shulker_top_lime.png"),
+     */
+    SHULKER_TOP_LIME("黄绿色潜匿之贝箱子", 218, 5, "textures/blocks/shulker_top_lime.png"),
     /**
      * 绿色潜匿之贝箱子
-     * */
-    SHULKER_TOP_GREEN("绿色潜匿之贝箱子",218,13,"textures/blocks/shulker_top_green.png"),
+     */
+    SHULKER_TOP_GREEN("绿色潜匿之贝箱子", 218, 13, "textures/blocks/shulker_top_green.png"),
     /**
      * 青色潜匿之贝箱子
-     * */
-    SHULKER_TOP_CYAN("青色潜匿之贝箱子",218,9,"textures/blocks/shulker_top_cyan.png"),
+     */
+    SHULKER_TOP_CYAN("青色潜匿之贝箱子", 218, 9, "textures/blocks/shulker_top_cyan.png"),
     /**
      * 淡蓝色潜匿之贝箱子
-     * */
-    SHULKER_TOP_LIGHT_BLUE("淡蓝色潜匿之贝箱子",218,3,"textures/blocks/shulker_top_light_blue.png"),
+     */
+    SHULKER_TOP_LIGHT_BLUE("淡蓝色潜匿之贝箱子", 218, 3, "textures/blocks/shulker_top_light_blue.png"),
     /**
      * 蓝色潜匿之贝箱子
-     * */
-    SHULKER_TOP_BLUE("蓝色潜匿之贝箱子",218,11,"textures/blocks/shulker_top_blue.png"),
+     */
+    SHULKER_TOP_BLUE("蓝色潜匿之贝箱子", 218, 11, "textures/blocks/shulker_top_blue.png"),
     /**
      * 紫色潜匿之贝箱子
-     * */
-    SHULKER_TOP_PURPLE("紫色潜匿之贝箱子",218,10,"textures/blocks/shulker_top_purple.png"),
+     */
+    SHULKER_TOP_PURPLE("紫色潜匿之贝箱子", 218, 10, "textures/blocks/shulker_top_purple.png"),
     /**
      * 品红色潜匿之贝箱子
-     * */
-    SHULKER_TOP_MAGENTA("品红色潜匿之贝箱子",218,2,"textures/blocks/shulker_top_magenta.png"),
+     */
+    SHULKER_TOP_MAGENTA("品红色潜匿之贝箱子", 218, 2, "textures/blocks/shulker_top_magenta.png"),
     /**
      * 粉色潜匿之贝箱子
-     * */
-    SHULKER_TOP_PINK("粉色潜匿之贝箱子",218,6,"textures/blocks/shulker_top_pink.png"),
+     */
+    SHULKER_TOP_PINK("粉色潜匿之贝箱子", 218, 6, "textures/blocks/shulker_top_pink.png"),
     /**
      * 白色床
-     * */
-    BED_WHITE("白色床",355,0,"textures/items/bed_white.png"),
+     */
+    BED_WHITE("白色床", 355, 0, "textures/items/bed_white.png"),
     /**
      * 淡灰色床
-     * */
-    BED_SILVER("淡灰色床",355,8,"textures/items/bed_silver.png"),
+     */
+    BED_SILVER("淡灰色床", 355, 8, "textures/items/bed_silver.png"),
     /**
      * 灰色床
-     * */
-    BED_GRAY("灰色床",355,7,"textures/items/bed_gray.png"),
+     */
+    BED_GRAY("灰色床", 355, 7, "textures/items/bed_gray.png"),
     /**
      * 黑色床
-     * */
-    BED_BLACK("黑色床",355,15,"textures/items/bed_black.png"),
+     */
+    BED_BLACK("黑色床", 355, 15, "textures/items/bed_black.png"),
     /**
      * 棕色床
-     * */
-    BED_BROWN("棕色床",355,12,"textures/items/bed_brown.png"),
+     */
+    BED_BROWN("棕色床", 355, 12, "textures/items/bed_brown.png"),
     /**
      * 红色床
-     * */
-    BED_RED("红色床",355,14,"textures/items/bed_red.png"),
+     */
+    BED_RED("红色床", 355, 14, "textures/items/bed_red.png"),
     /**
      * 橙色床
-     * */
-    BED_ORANGE("橙色床",355,1,"textures/items/bed_orange.png"),
+     */
+    BED_ORANGE("橙色床", 355, 1, "textures/items/bed_orange.png"),
     /**
      * 黄色床
-     * */
-    BED_YELLOW("黄色床",355,4,"textures/items/bed_yellow.png"),
+     */
+    BED_YELLOW("黄色床", 355, 4, "textures/items/bed_yellow.png"),
     /**
      * 黄绿色床
-     * */
-    BED_LIME("黄绿色床",355,5,"textures/items/bed_lime.png"),
+     */
+    BED_LIME("黄绿色床", 355, 5, "textures/items/bed_lime.png"),
     /**
      * 绿色床
-     * */
-    BED_GREEN("绿色床",355,13,"textures/items/bed_green.png"),
+     */
+    BED_GREEN("绿色床", 355, 13, "textures/items/bed_green.png"),
     /**
      * 青色床
-     * */
-    BED_CYAN("青色床",355,9,"textures/items/bed_cyan.png"),
+     */
+    BED_CYAN("青色床", 355, 9, "textures/items/bed_cyan.png"),
     /**
      * 淡蓝色床
-     * */
-    BED_LIGHT_BLUE("淡蓝色床",355,3,"textures/items/bed_light_blue.png"),
+     */
+    BED_LIGHT_BLUE("淡蓝色床", 355, 3, "textures/items/bed_light_blue.png"),
     /**
      * 蓝色床
-     * */
-    BED_BLUE("蓝色床",355,11,"textures/items/bed_blue.png"),
+     */
+    BED_BLUE("蓝色床", 355, 11, "textures/items/bed_blue.png"),
     /**
      * 紫色床
-     * */
-    BED_PURPLE("紫色床",355,10,"textures/items/bed_purple.png"),
+     */
+    BED_PURPLE("紫色床", 355, 10, "textures/items/bed_purple.png"),
     /**
      * 品红色床
-     * */
-    BED_MAGENTA("品红色床",355,2,"textures/items/bed_magenta.png"),
+     */
+    BED_MAGENTA("品红色床", 355, 2, "textures/items/bed_magenta.png"),
     /**
      * 粉色床
-     * */
-    BED_PINK("粉色床",355,6,"textures/items/bed_pink.png"),
+     */
+    BED_PINK("粉色床", 355, 6, "textures/items/bed_pink.png"),
 
     /**
      * 弩
-     * */
-    CROSSBOW("弩",471,0,"textures/items/crossbow_standby.png");
+     */
+    CROSSBOW("弩", 471, 0, "textures/items/crossbow_standby.png");
 
 
     private int ID, Damage;
@@ -2442,6 +2440,7 @@ public enum ItemIDSunName {
     private static final HashMap<String, Map<String, Object>> ID_MAP = new HashMap<>();
     private static final HashMap<String, ItemIDSunName> ItemIDSunName_MAP = new HashMap<>();
     private static final ArrayList<HashMap<String, Object>> All = new ArrayList<>();
+
     static {
         for (ItemIDSunName item : ItemIDSunName.values()) {
             HashMap<String, Object> map = new HashMap<String, Object>();
@@ -2505,9 +2504,9 @@ public enum ItemIDSunName {
     public static String getIDByPath(Item item) {
         String name = item.getId() + ":" + item.getDamage();
         String path = getIDByPath(name);
-        if(path == null){
+        if (path == null) {
             path = getIDByPath(item.getId());
-            if(path == null){
+            if (path == null) {
                 return "textures/ui/how_to_play_button_default";
             }
         }
@@ -2564,16 +2563,16 @@ public enum ItemIDSunName {
 
     public static String getIDByName(Item item) {
         String name = getIDByName(item.getId() + ":" + item.getDamage());
-        if(item.hasCustomName()){
+        if (item.hasCustomName()) {
             return item.getCustomName();
-        }else{
-            if(name == null){
+        } else {
+            if (name == null) {
                 name = getIDByName(item.getId() + ":0");
-                if(name != null){
+                if (name != null) {
                     return name;
                 }
                 return item.getName();
-            }else{
+            } else {
                 return name;
             }
         }

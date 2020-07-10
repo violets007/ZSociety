@@ -63,13 +63,13 @@ public class WindowManager {
     }
 
 
-    public static SocietyListWindow getSocietyListWindow(int cuurent, WindowType windowType) {
-        List<Society> societyList = SocietyUtils.getSocietyList(cuurent);
+    public static SocietyListWindow getSocietyListWindow(int current, WindowType windowType) {
+        List<Society> societyList = SocietyUtils.getSocietyList(current);
         int limit = 10;
-        int totalPage = SocietyUtils.getSocietyListTotalPage(cuurent, limit);
-        String content = "§a当前第 §b" + cuurent + " §a总页数 §b" + totalPage;
+        int totalPage = SocietyUtils.getSocietyListTotalPage(current, limit);
+        String content = "§a当前第 §b" + current + " §a总页数 §b" + totalPage;
         FormWindow formWindow = WindowManager.getFormWindow(windowType);
-        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW,content,cuurent,totalPage,societyList,formWindow);
+        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW,content,current,totalPage,societyList,formWindow);
         return societyListWindow;
     }
 

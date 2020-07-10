@@ -17,7 +17,7 @@ public enum VipType {
     private String typeName;
 
     VipType(String typeName) {
-        this.typeName=typeName;
+        this.typeName = typeName;
     }
 
     public String getTypeName() {

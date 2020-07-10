@@ -7,6 +7,7 @@ import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowCustom;
 import com.sun.istack.internal.NotNull;
 import com.zixuan007.society.window.response.ResponseListennerCustom;
+
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -24,7 +25,7 @@ public class CustomWindow extends FormWindowCustom implements ResponseListennerC
 
     public static boolean onEvent(FormWindow formWindow, FormResponse response, Player player) {
         if (formWindow instanceof CustomWindow) {
-            CustomWindow window = (CustomWindow)formWindow;
+            CustomWindow window = (CustomWindow) formWindow;
             if (window.wasClosed() || response == null) {
                 if (window.isBack.booleanValue()) {
                     window.callBack(player);
@@ -33,8 +34,7 @@ public class CustomWindow extends FormWindowCustom implements ResponseListennerC
                 }
                 window.closed = false;
             } else {
-
-                window.callClicked((FormResponseCustom)response, player);
+                window.callClicked((FormResponseCustom) response, player);
             }
             return true;
         }

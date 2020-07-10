@@ -5,7 +5,6 @@ import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Marry;
 import com.zixuan007.society.event.marry.DivorceMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
@@ -14,9 +13,6 @@ import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
-
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * 结婚功能窗口

@@ -11,6 +11,7 @@ import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +45,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
 
         this.societyList = (List<Society>) objects[3];
         for (Society society : societyList) {
-            addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName()));
+            addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName()+" §6lv_§0"+society.getGrade()));
         }
         if (currentPage < totalPage) {
             addButton(new ElementButton("下一页"));
@@ -103,6 +104,14 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
                 if (PluginUtils.isOnlineByName(society.getPresidentName())) {
                     String playerName = player1.getName();
                     Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(PluginUtils.getLanguageInfo("message.societyListWindow.playerApplyJoinSociety",new String[]{"${playerName}"},new String[]{playerName}));
+                }
+                String key = "等级" + society.getGrade();
+                ArrayList<Object> configGrades = (ArrayList<Object>) SocietyPlugin.getInstance().getConfig().get(key);
+                Integer maxMemberCount = (Integer) configGrades.get(0);
+                int societyMemberCount = society.getMembers().size();
+                if(societyMemberCount >= maxMemberCount){
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyListWindow.overtakeMaxMember"), societyWindow, backButtonName, backButtonImage));
+                    return;
                 }
                 SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new PlayerApplyJoinSocietyEvent(player1, society));
             } else {

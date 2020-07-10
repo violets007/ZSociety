@@ -11,6 +11,7 @@ import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,16 +88,16 @@ public class SocietyUtils {
         return null;
     }
 
-    public static List<String> getMemberList(Society society, int currentPage) {
+    /*public static List<String> getMemberList(Society society, int currentPage) {
         return getMemberList(society, currentPage, 10);
     }
 
-    /**
+    *//**
      * 获取当前公会的成员列表
      * @param society 公会实体类
      * @param currentPage 当前页数
      * @return
-     */
+     *//*
     public static List<String> getMemberList(Society society, int currentPage, int limit) {
         HashMap<String, ArrayList<Object>> postMap = society.getPost();
         ArrayList<HashMap<String, Object>> postList = new ArrayList<>();
@@ -142,7 +143,7 @@ public class SocietyUtils {
         }
 
         return null;
-    }
+    }*/
 
     /**
      * 检测字符串内容是否为数字
@@ -196,9 +197,9 @@ public class SocietyUtils {
         return null;
     }
 
-    public static int getTotalSocietiesPage() {
+   /* public static int getTotalSocietiesPage() {
         return (SocietyUtils.societies.size() % 10 == 0) ? (SocietyUtils.societies.size() / 10) : (SocietyUtils.societies.size() / 10 + 1);
-    }
+    }*/
 
     /**
      * 获获取公会列表总页数
@@ -353,7 +354,7 @@ public class SocietyUtils {
                 add(1);
             }
         });
-        society.saveData();
+        SocietyUtils.saveSociety(society);
     }
 
     /**
@@ -470,6 +471,31 @@ public class SocietyUtils {
         SocietyPlugin.getInstance().getLogger().debug(SocietyUtils.societies.toString());
     }
 
-
+    /**
+     * 保存公会数据内容
+     * @param society
+     */
+    public static void saveSociety(Society society){
+        String societyName = society.getSocietyName();
+        String societyFilePath = PluginUtils.SOCIETY_FOLDER + societyName + ".yml";
+        File file = new File(societyFilePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Config config = new Config(file);
+        config.set("sid", society.getSid());
+        config.set("societyName", societyName);
+        config.set("presidentName", society.getPresidentName());
+        config.set("createTime", society.getCreateTime());
+        config.set("societyMoney", society.getSocietyMoney());
+        config.set("psots", society.getPost());
+        config.set("grade", society.getGrade());
+        config.set("tempApply", society.getTempApply());
+        config.save();
+    }
 
 }

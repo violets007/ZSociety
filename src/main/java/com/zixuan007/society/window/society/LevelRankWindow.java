@@ -1,8 +1,6 @@
 package com.zixuan007.society.window.society;
 
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -10,8 +8,6 @@ import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 
 import java.util.Collections;
-import java.util.Comparator;
-
 
 
 /**

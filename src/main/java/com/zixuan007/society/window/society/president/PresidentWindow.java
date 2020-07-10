@@ -92,7 +92,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 }
                 society.setSocietyMoney(societyMoney - updateMoney);
                 society.setGrade(society.getGrade() + 1);
-                society.saveData();
+                SocietyUtils.saveSociety(society);
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.upGrade"), presidentWindow, backButtonName, backButtonImage));
                 break;
 

@@ -18,9 +18,9 @@ public class DivorceMarryEvent extends PlayerEvent {
         return handlers;
     }
 
-    public DivorceMarryEvent(Player player,Marry marry) {
+    public DivorceMarryEvent(Player player, Marry marry) {
         this.player = player;
-        this.marry=marry;
+        this.marry = marry;
     }
 
     public Marry getMarry() {

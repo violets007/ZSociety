@@ -2,15 +2,12 @@ package com.zixuan007.society.window.title.admin;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.form.element.Element;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.utils.PluginUtils;
-import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.CustomWindow;
 import com.zixuan007.society.window.WindowLoader;
@@ -18,8 +15,6 @@ import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author zixuan007
@@ -27,7 +22,6 @@ import java.util.Random;
 public class RemoveTitleWindow extends CustomWindow implements WindowLoader {
     public RemoveTitleWindow() {
         super(PluginUtils.getWindowConfigInfo("removeTitleWindow.title"));
-
     }
 
     @Override

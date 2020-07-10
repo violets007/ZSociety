@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TitleCommand extends Command {
 
-    public final static String COMMAND_NAME= SocietyPlugin.getInstance().getLanguageConfig().getString("command.title");
+    public final static String COMMAND_NAME = SocietyPlugin.getInstance().getLanguageConfig().getString("command.title");
 
     public TitleCommand() {
         super(COMMAND_NAME, "§e显示称号功能窗口");
@@ -25,14 +25,14 @@ public class TitleCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String name, String[] args) {
-        Player player = (Player)sender;
+        Player player = (Player) sender;
         if (name.equals(this.getName())) {
             ArrayList<String> titles = TitleUtils.titleList.get(player.getName());
-            if(titles == null || titles.size() <= 0){
-                player.sendMessage( PluginUtils.getLanguageInfo("message.notExistTitle"));
+            if (titles == null || titles.size() <= 0) {
+                player.sendMessage(PluginUtils.getLanguageInfo("message.notExistTitle"));
                 return true;
             }
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.TITLE_WINDOW,player));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.TITLE_WINDOW, player));
             return true;
         }
         return false;

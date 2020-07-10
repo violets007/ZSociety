@@ -1,5 +1,5 @@
 ##中文语言包
-
+version: 1.0.8alpha
 #指令部分
 
 #管理命令
@@ -15,10 +15,10 @@ command.privilege: 特权
 
 #消息提示
 #管理命令消息提示
-message.giveTitle.help: §f>> §4/§b管理 §a给予 §e称号 §6[玩家名字] §6[称号]
+message.giveTitle.help: §f>> §4/§b管理 §a给予 §f称号 §6[玩家名字] §6[称号]
 message.giveTitle.notPlayer: §f>> §c此玩家不存在!
 message.existTitle: §f>> §c玩家 §b${playerName} §c已拥有此称号,请勿重复给予
-message.giveTitle: §f>> §a成功被给予称号 §e ${playerName}
+message.giveTitle: §f>> §a成功被给予称号 §f ${playerName}
 message.reload: §f>> §aConfig重新加载成功,请重新打开窗口
 
 message.isConsole: §4禁止在控制台输入命令
@@ -58,8 +58,8 @@ message.playerApplyList.acceptJoinSociety: §a成功同意 §b${playerName} §a�
 message.setJobWindow.isMe: §c设置职位的玩家不能是自己
 message.setJobWindow.isJoinSociety: §c设置的成员还没有加入公会
 message.setJobWindow.notSocietyMember: §c设置的成员还没有加入公会
-message.setJobWindow.upJob: §a职位成功升级为 §e${jobName}
-message.setJobWindow.setJob: §a成功设置 §b${playerName} §a职位为 §e${jobName}
+message.setJobWindow.upJob: §a职位成功升级为 §f${jobName}
+message.setJobWindow.setJob: §a成功设置 §b${playerName} §a职位为 §f${jobName}
 
 #移除成员窗口
 message.removeMemberWindow.removeMember: §c成员 §b${playerName} 被踢出公会
@@ -68,7 +68,19 @@ message.removeMemberWindow.kickPlayer: §c你被被踢出公会
 #创建公会商店窗口
 message.createSocietyShopWindow.isNumber: §c输入的价格不是数字
 message.createSocietyShopWindow.rarelyItemCount: §c此物品数量不足
-message.createSocietyShopWindow.clickWallSign: §e请点击墙上的木牌
+message.createSocietyShopWindow.clickWallSign: §f请点击墙上的木牌
+message.createSocietyShopWindow.isJoin: §f>> §c检测到你当前还没有加入公会
+message.createSocietyShopWindow.alreadSetShop: §f>> §c此木牌已经设置了商店,请勿重复设置
+message.createSocietyShopWindow.success: §f>> §a公会商店创建成功
+message.createSocietyShopWindow.rarelyCoin: §f>> §a当前余额不足无法进行购买
+message.createSocietyShopWindow.unableBuy: §f>> §c你还没有加入公会无法进行购买
+message.createSocietyShopWindow.unableBuy1: §f>> §c你不是本公会成员无法进行购买
+message.createSocietyShopWindow.alreadDestroy: §f>> §c此木牌商店功能或者公会已解散,等待人员销毁!
+message.createSocietyShopWindow.affrimBuy: §f>> §c请再点击一次购买
+message.createSocietyShopWindow.buySuccess: §f>> §a购买成功,进行木牌的销毁
+message.createSocietyShopWindow.returnItem: §f>> §a公会商店物品已返还!
+message.createSocietyShopWindow.destroyPermissions: §f>> §c你没有权限移除本公会商店!
+message.createSocietyShopWindow.destroy: §f>> §a商店移除成功
 
 #公会贡献窗口
 message.contributionWindow.isJoinSociety: §c您当前还没有加入公会,请先加入公会
@@ -80,6 +92,8 @@ message.contributionWindow.contributionCoin: §a贡献成功,当前公会经济 
 #公会列表窗口
 message.societyListWindow.isJoinSociety: §c您当前已经加入过公会,请勿二次点击加入
 message.societyListWindow.playerApplyJoinSociety: §f>> §a玩家 §b${playerName} §a正在申请进入公会,§c请审核
+message.societyListWindow.overtakeMaxMember: §f>> §c当前公会人数已满,请选择加入其它公会
+
 
 #解散公会窗口
 message.dissolveWindow.notSociety: §c此公会已经被解散,请设置其他公会
@@ -88,12 +102,12 @@ message.dissolveWindow.dissolveSociety: §a成功解散 §b${societyName} §a公
 #设置贡献窗口
 message.setContributeWindow.isNumber: §c设置的贡献值不是数字
 message.setContributeWindow.notSociety: §c此公会已经被解散,请设置其他公会
-message.setContributeWindow.setContribute: §a成功设置 §b${societyName} §a贡献值为 §e${societyMoney}
+message.setContributeWindow.setContribute: §a成功设置 §b${societyName} §a贡献值为 §f${societyMoney}
 
 #设置公会等级窗口
 message.setSocietyGrade.isNumber: §c设置的等级不是数字请重新输入
 message.setSocietyGrade.notSociety: §c此公会已经被解散,请设置其他公会
-message.setSocietyGrade.setSocietyGrade: §a成功设置 §b${societyName} §a等级为 §e${societyGrade}
+message.setSocietyGrade.setSocietyGrade: §a成功设置 §b${societyName} §a等级为 §f${societyGrade}
 
 #结婚窗口
 message.marryWindow.isMarry: §c您当前已经结婚,请勿重复
@@ -114,11 +128,11 @@ message.proposeWindow.rarelyCoin: §c求婚资金不足,求婚需要 ${proposeMo
 message.proposeWindow.propose: §b${proposeName} §a向§c ${recipientName} §a求婚成功
 
 #移除情侣窗口
-message.removeMarryWindow.remove: §a成功移除Mid为 §e${mid} §a的夫妻
+message.removeMarryWindow.remove: §a成功移除Mid为 §f${mid} §a的夫妻
 
 #设置夫妻公共资产窗口
 message.setMarryMoneyWindow.isNumber: §c设置的金额不是数字
-message.setMarryMoneyWindow.set: §a成功设置指定夫妻资产为 §e${marryMoney}
+message.setMarryMoneyWindow.set: §a成功设置指定夫妻资产为 §f${marryMoney}
 
 #称号窗口
 message.titleWindow.remove: §a佩戴的称号已经被管理员移除
@@ -128,7 +142,7 @@ message.titleWindow.wearTitle: §a成功佩戴§r§l ${title} §r§a称号
 message.setTitleWindow.isPlayerName: §c输入的玩家名字不存在
 message.setTitleWindow.isTitle: §c称号内容不能为空
 message.setTitleWindow.existTitle: §c玩家 §b${playerName} 已经拥有此称号,请勿重复设置
-message.setTitleWindow.setTitle: §a成功设置 §b${playerName} §a的称号为 §e${title}
+message.setTitleWindow.setTitle: §a成功设置 §b${playerName} §a的称号为 §f${title}
 
 #移除称号窗口
 message.removeTitleWindow.notTitle: §c此玩家还没有称号
@@ -140,18 +154,27 @@ message.removeTitleWindow.removeTitle: §c你的部分称号已经被管理员�
 message.createTitleShopWindow.isTitle: §c售卖的称号不能为空
 message.createTitleShopWindow.isNumber: §c输入的金额不是数字
 message.createTitleShopWindow.titleExist: §c此称号已经存在
-message.createTitleShopWindow.clickWallSign: §e请点击贴在墙上的木牌
+message.createTitleShopWindow.clickWallSign: §f请点击贴在墙上的木牌
+message.createTitleShop.success: §f>> §a称号商店创建成功
+message.createTitleShop.permissions: §f>> §c你没有权限移除称号商店
+message.createTitleShop.remove: §f>> §a移除商店成功
+
+message.clickWallSign: §f>> §c请点击贴在墙上的木牌
+message.buyTitle.rarelyCoin: §f>> §c余额不足无法购买
+message.buyTitle.existTitle: §f>> §c你应经存在此称号,请勿重复购买
+message.buyTitle.affrimBuy: §f>> §c请再次点击一次木牌
+message.buyTitle.success: §f>> §a成功购买 §b${title} §a称号
 
 #特权窗口
 message.privilegeWindow.setFlight: §f>> §a生存飞行 §b${allowFlight}
 message.PrivilegeWindow.isVip: §f>> §c你不是VIP无法进行查看
 
 #高级特权窗口
-message.advancedPrivilegeWindow.setCreative: §f>> §a创造模式 §e${creative}
+message.advancedPrivilegeWindow.setCreative: §f>> §a创造模式 §f${creative}
 
 #移除特权窗口
 message.removePrivilegeWindow.notPrivilege: §c输入的玩家名并没有特权
 message.removePrivilegeWindow.removePrivilege: §a成功移除 §b${playerName} §a的特权
 
 #设置玩家特权窗口
-message.setPrivilegeWindow.set: §a成功设置玩家 §b${setPrivilegePlayerName} §a的 §c${elementContent} §a天数为 §e${time} §a天
+message.setPrivilegeWindow.set: §a成功设置玩家 §b${setPrivilegePlayerName} §a的 §c${elementContent} §a天数为 §f${time} §a天

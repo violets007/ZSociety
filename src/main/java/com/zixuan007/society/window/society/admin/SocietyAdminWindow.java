@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Lang;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;

@@ -9,7 +9,7 @@ import com.zixuan007.society.SocietyPlugin;
 /**
  * 结婚数据实体类
  */
-public class Marry{
+public class Marry {
     private long mid; //结婚ID方方便进行查询
     private String propose;//求婚方姓名
     private int proposeSex;//求婚方性别
@@ -22,92 +22,93 @@ public class Marry{
     /**
      * 初始化构造方法
      */
-    public Marry(){}
+    public Marry() {
+    }
 
     /**
      * 初始化当前配置信息
      */
-    public static Marry init(Config config){
-        Marry marry=new Marry();
-        long mid=0;
-        if(config.get("mid") instanceof Lang){
-            mid= (long) config.get("mid");
-        }else{
-            mid= ((Integer) config.get("mid")).longValue();
+    public static Marry init(Config config) {
+        Marry marry = new Marry();
+        long mid = 0;
+        if (config.get("mid") instanceof Long) {
+            mid = (long) config.get("mid");
+        } else {
+            mid = ((Integer) config.get("mid")).longValue();
         }
-        String propose= (String) config.get("求婚者");
-        int proposeSex= (int) config.get("求婚者性别");
-        String recipient= (String) config.get("被求婚者");
-        int recipientSex= (int) config.get("被求婚者性别");
-        Double money= (double) config.get("公共资金");
-        String marryDate=(String)config.get("结婚时间");
+        String propose = (String) config.get("求婚者");
+        int proposeSex = (int) config.get("求婚者性别");
+        String recipient = (String) config.get("被求婚者");
+        int recipientSex = (int) config.get("被求婚者性别");
+        Double money = (double) config.get("公共资金");
+        String marryDate = (String) config.get("结婚时间");
 
-        marry.mid=mid;
-        marry.propose=propose;
-        marry.proposeSex=proposeSex;
-        marry.recipient=recipient;
-        marry.recipientSex=recipientSex;
-        marry.money=money;
-        marry.marryDate=marryDate;
+        marry.mid = mid;
+        marry.propose = propose;
+        marry.proposeSex = proposeSex;
+        marry.recipient = recipient;
+        marry.recipientSex = recipientSex;
+        marry.money = money;
+        marry.marryDate = marryDate;
         return marry;
 
     }
 
 
-    public long getMid(){
+    public long getMid() {
         return mid;
     }
 
-    public void setMid(){
-        this.mid=mid;
+    public void setMid() {
+        this.mid = mid;
     }
 
-    public String getPropose(){
+    public String getPropose() {
         return propose;
     }
-    public void setPropose(String propose){
-        this.propose=propose;
-        
+
+    public void setPropose(String propose) {
+        this.propose = propose;
     }
 
-    public int getProposeSex(){
+    public int getProposeSex() {
         return proposeSex;
     }
 
-    public void setProposeSex(int proposeSex){
-        this.proposeSex=proposeSex;
+    public void setProposeSex(int proposeSex) {
+        this.proposeSex = proposeSex;
     }
 
-    public void setRecipient(String recipient){
-       this.recipient=recipient;
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
     }
 
-    public String getRecipient(){
+    public String getRecipient() {
         return this.recipient;
     }
 
-    public void setRecipientSex(){
-        this.recipientSex=recipientSex;
+    public void setRecipientSex() {
+        this.recipientSex = recipientSex;
     }
 
-    public int getRecipientSex(){
+    public int getRecipientSex() {
         return recipientSex;
     }
 
-    public Double getMoney(){
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Double money){
-        this.money=money;
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
-    public String getMarryDate(){
+    public String getMarryDate() {
         return marryDate;
     }
 
-    public void setMarryDate(){
-        this.marryDate=marryDate;
+    public void setMarryDate() {
+        this.marryDate = marryDate;
     }
 
     public void setMarryDate(String marryDate) {
