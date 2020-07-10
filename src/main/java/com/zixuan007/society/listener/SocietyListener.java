@@ -180,6 +180,7 @@ public class SocietyListener implements Listener {
                     ((BlockEntitySign) blockEntity).setText(lineText.toArray(new String[lineText.size()]));
                     SocietyUtils.onCreatePlayer.remove(player.getName());
                     player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.success"));
+                    affrimBuyPlayer.remove(player.getName());
                     event.setCancelled(true);
                     return;
                 }

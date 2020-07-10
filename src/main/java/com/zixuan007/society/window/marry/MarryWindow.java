@@ -52,7 +52,8 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.marryWindow.isMarry"),marryWindow,backButtonName,backButtonImage));
                     return;
                 }
-                ProposeWindow proposeWindow = WindowManager.getProposeWindow();
+
+                ProposeWindow proposeWindow = (ProposeWindow) WindowManager.getFormWindow(WindowType.PROPOSE_WINDOW);
                 proposeWindow.setBack(true);
                 proposeWindow.setParent(this);
                 player.showFormWindow(proposeWindow);

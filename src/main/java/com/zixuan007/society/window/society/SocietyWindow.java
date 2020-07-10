@@ -127,10 +127,11 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, societyWindow));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, player));
                 break;
             default:
                 break;
+
         }
 
     }
