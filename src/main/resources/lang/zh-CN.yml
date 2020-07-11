@@ -179,3 +179,10 @@ message.removePrivilegeWindow.removePrivilege: §a成功移除 §b${playerName} 
 
 #设置玩家特权窗口
 message.setPrivilegeWindow.set: §a成功设置玩家 §b${setPrivilegePlayerName} §a的 §c${elementContent} §a天数为 §f${time} §a天
+message.privilegeListWindow.noData: §c当前还没有拥有特权的玩家
+
+#移除夫妻窗口
+message.RemoveMarryWindow.noMarry: §c当前还没有一对夫妻
+
+#设置夫妻公共资产窗口
+message.SetMarryMoneyWindow.noMarry: §c当前还没有一对夫妻

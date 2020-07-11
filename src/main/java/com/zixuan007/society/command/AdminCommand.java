@@ -61,7 +61,8 @@ public class AdminCommand extends Command {
         }
         switch (args[0]) {
             case SOCIETY_ARGS:
-                player.showFormWindow(new SocietyAdminWindow());
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SOCIETY_ADMIN_WINDOW));
                 return true;
             case TITLE_ARGS:
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.TITLE_MANAGER_WINDOW));
@@ -70,7 +71,7 @@ public class AdminCommand extends Command {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MARRY_ADMIN_WINDOW));
                 return true;
             case PRIVILEGE_ARGS:
-                player.showFormWindow(WindowManager.getPrivilegeManagerWindow());
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_MANAGER_WINDOW));
                 return true;
             case GIVE_TITLE_ARGS:
                 if (args.length < FOUR_ARGS_LENGTH) {

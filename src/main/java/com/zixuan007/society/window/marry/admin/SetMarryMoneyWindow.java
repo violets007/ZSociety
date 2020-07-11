@@ -39,7 +39,7 @@ public class SetMarryMoneyWindow extends CustomWindow implements WindowLoader {
             addElement(new ElementDropdown("结婚夫妻列表",midList));
             addElement(new ElementInput("","设置的经济数量"));
         }else{
-            addElement(new ElementLabel("当前还没有一对夫妻"));
+            addElement(new ElementLabel(PluginUtils.getLanguageInfo("message.SetMarryMoneyWindow.noMarry")));
         }
         return this;
     }

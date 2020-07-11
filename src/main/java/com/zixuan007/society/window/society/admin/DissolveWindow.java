@@ -29,7 +29,7 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
         ArrayList<Society> societies = SocietyUtils.societies;
         if (societies.size() > 0) {
             for (Society society : societies) {
-                String buttonContent = society.getSocietyName();
+                String buttonContent = society.getSocietyName()+" "+society.getSid();
                 addButton(new ElementButton(buttonContent));
             }
         } else {
@@ -41,7 +41,7 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
     @Override
     public void onClick(int id, Player player) {
         ElementButton elementButton = getButtons().get(id);
-        String sidStr = elementButton.getText().split(" ")[0];
+        String sidStr = elementButton.getText().split(" ")[1];
         int sid = Integer.parseInt(sidStr);
         Society society = SocietyUtils.getSocietysByID(sid);
         String closeButtonName=PluginUtils.getWindowConfigInfo("messageWindow.close.button");

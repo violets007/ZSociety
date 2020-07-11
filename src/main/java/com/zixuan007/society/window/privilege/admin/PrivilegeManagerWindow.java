@@ -21,12 +21,12 @@ public class PrivilegeManagerWindow extends SimpleWindow implements WindowLoader
 
     @Override
     public FormWindow init(Object... objects) {
-        ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,"privilegeManagerWindow.setPrivilege.button.imgPath");
-        ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,"privilegeManagerWindow.removePrivilege.button.imgPath");
-        ElementButtonImageData img3 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,"privilegeManagerWindow.viewPrivilegePlayer.button.imgPath");
+        ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("privilegeManagerWindow.setPrivilege.button.imgPath"));
+        ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("privilegeManagerWindow.removePrivilege.button.imgPath"));
+        ElementButtonImageData img3 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,PluginUtils.getWindowConfigInfo("privilegeManagerWindow.viewPrivilegePlayer.button.imgPath"));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("privilegeManagerWindow.setPrivilege.button"),img1));
-        addButton(new ElementButton("privilegeManagerWindow.removePrivilege.button",img2));
-        addButton(new ElementButton("privilegeManagerWindow.viewPrivilegePlayer.button",img3));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("privilegeManagerWindow.removePrivilege.button"),img2));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("privilegeManagerWindow.viewPrivilegePlayer.button"),img3));
         return this;
     }
 

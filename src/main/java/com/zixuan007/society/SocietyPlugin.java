@@ -20,7 +20,10 @@ import com.zixuan007.society.window.marry.admin.MarryAdminWindow;
 import com.zixuan007.society.window.marry.admin.RemoveMarryWindow;
 import com.zixuan007.society.window.marry.admin.SetMarryMoneyWindow;
 import com.zixuan007.society.window.society.*;
+import com.zixuan007.society.window.society.admin.DissolveWindow;
 import com.zixuan007.society.window.society.admin.SetContributeWindow;
+import com.zixuan007.society.window.society.admin.SetGradeWindow;
+import com.zixuan007.society.window.society.admin.SocietyAdminWindow;
 import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.president.PresidentWindow;
 import com.zixuan007.society.window.society.president.RemoveMemberWindow;
@@ -82,7 +85,7 @@ public class SocietyPlugin extends PluginBase {
      */
     public void init() {
         new MetricsLite(this);
-        fundebug = new Fundebug("4bb7d8ecfd1aec2c41abcb23263885bda019310ebcd7edeb042cbef1965af0af"); //Bug反馈插件
+
         checkPlugin("EconomyAPI");
         if (instance == null) {
             instance = this;
@@ -90,6 +93,9 @@ public class SocietyPlugin extends PluginBase {
         checkConfig();
         saveResource("lang/zh-CN.yml", true);
         saveResource("WindowConfig.yml", true);
+        PluginUtils.loadJar(getDataFolder()+File.separator+"fundebug-java-0.3.1.jar");
+
+
         loadConfig();
         registerCommand();
         registerWindow();
@@ -192,6 +198,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeInfoWindow.class);
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_INFO_WINDOW, PrivilegeInfoWindow.class);
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_MANAGER_WINDOW, PrivilegeManagerWindow.class);
+        PluginUtils.addWindowClass(WindowType.SOCIETY_ADMIN_WINDOW, SocietyAdminWindow.class);
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_LIST_WINDOW, PrivilegeListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_PRIVILEGE_WINDOW, RemovePrivilegeWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_PRIVILEGE_WINDOW, SetPrivilegeWindow.class);
@@ -220,8 +227,12 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.REMOVE_MEMBER_WINDOW, RemoveMemberWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_CONTRIBUTE_WINDOW, SetContributeWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_JOB_WINDOW, SetJobWindow.class);
+        PluginUtils.addWindowClass(WindowType.SET_GRADE_WINDOW, SetGradeWindow.class);
+        PluginUtils.addWindowClass(WindowType.DISSOLVE_WINDOW, DissolveWindow.class);
         PluginUtils.addWindowClass(WindowType.MESSAGE_WINDOW, MessageWindow.class);
         PluginUtils.addWindowClass(WindowType.MODAL_WINDOW, ModalWindow.class);
+
+
     }
 
 

@@ -30,7 +30,7 @@ public class RemoveMarryWindow extends SimpleWindow implements WindowLoader {
                 addButton(new ElementButton(marry.getMid()+" 丈夫: §b"+marry.getPropose()+"§r 妻子: §a"+marry.getRecipient()));
             }
         }else{
-            setContent("当前还没有一对夫妻");
+            setContent(PluginUtils.getLanguageInfo("message.RemoveMarryWindow.noMarry"));
         }
         return this;
     }

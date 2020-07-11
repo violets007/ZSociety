@@ -100,11 +100,11 @@ presidentWindow.removeMember.button.imgPath: textures/ui/book.edit.default
 presidentWindow.dissolve.button.imgPath: textures/ui/book.edit.default
 
 #管理公会窗口按钮1图片
-societyAdminWindow.setSocietyGrade.button.imgPath: textures/ui/book.edit.default
+societyAdminWindow.setSocietyGrade.button.imgPath: textures/ui/dev_glyph_color.png
 #管理公会窗口按钮2图片
-societyAdminWindow.setSocietyContribution.button.imgPath: textures/ui/book.edit.default
+societyAdminWindow.setSocietyContribution.button.imgPath: textures/ui/dev_glyph_color.png
 #管理公会窗口按钮3图片
-societyAdminWindow.dissolve.button.imgPath: textures/ui/book.edit.default
+societyAdminWindow.dissolve.button.imgPath: textures/ui/realms_red_x.png
 
 #########特权窗口配置#########
 #VIP窗口标题
@@ -151,11 +151,11 @@ advancedPrivilegeWindow.switchCreate.button.imgPath: textures/ui/icon_armor.png
 #SVIP窗口SVIP信息按钮图片路径
 advancedPrivilegeWindow.openInfo.button.imgPath: textures/ui/Friend1.png
 #特权管理窗口按钮1图片路径
-privilegeManagerWindow.setPrivilege.button.imgPath: textures/ui/Friend1.png
+privilegeManagerWindow.setPrivilege.button.imgPath: textures/ui/automation_glyph_color.png
 #特权管理窗口按钮2图片路径
-privilegeManagerWindow.removePrivilege.button.imgPath: textures/ui/Friend1.png
+privilegeManagerWindow.removePrivilege.button.imgPath: textures/ui/cancel.png
 #特权管理窗口按钮3图片路径
-privilegeManagerWindow.viewPrivilegePlayer.button.imgPath: textures/ui/Friend1.png
+privilegeManagerWindow.viewPrivilegePlayer.button.imgPath: textures/ui/copy
 
 
 #########称号窗口配置#########
@@ -212,17 +212,25 @@ marryWindow.transfer.button: §e传送到情侣身边
 marryWindow.divorceMarry.button: §e离婚
 #结婚窗口按钮5
 marryWindow.moneyRankWindow.button: §e夫妻公共资产排行榜
+#结婚管理窗口按钮1
+marryAdminWindow.setContribution.button: §e设置夫妻公共资产
+#结婚管理窗口按钮2
+marryAdminWindow.remove.button: §e移除指定夫妻
 
 #结婚窗口按钮1图片路径
-marryWindow.propose.button.imgPath: textures/ui/Friend1.png
+marryWindow.propose.button.imgPath: textures/ui/regeneration_effect.png
 #结婚窗口按钮2图片路径
-marryWindow.addPublicFunds.button.imgPath: textures/ui/Friend1.png
+marryWindow.addPublicFunds.button.imgPath: textures/ui/xbox_dpad.png
 #结婚窗口按钮3图片路径
-marryWindow.transfer.button.imgPath: textures/ui/Friend1.png
+marryWindow.transfer.button.imgPath: textures/ui/restore_arrow_default.png
 #结婚窗口按钮4图片路径
-marryWindow.divorceMarry.button.imgPath: textures/ui/Friend1.png
+marryWindow.divorceMarry.button.imgPath: textures/ui/heart_half.png
 #结婚窗口按钮5图片路径
-marryWindow.moneyRankWindow.button.imgPath: textures/ui/Friend1.png
+marryWindow.moneyRankWindow.button.imgPath: textures/ui/absorption_effect.png
+#结婚管理窗口按钮1图片路径
+marryAdminWindow.setContribution.button.imgPath: textures/ui/dev_glyph_color.png
+#结婚管理窗口按钮2图片路径
+marryAdminWindow.remove.button.imgPath: textures/ui/dev_glyph_color.png
 
 #消息窗口标题
 messageWindow.title: §e消息提示

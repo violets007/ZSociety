@@ -140,6 +140,11 @@ public enum  WindowType {
     PRESIDENT_WINDOW("PresidentWindow"),
 
     /**
+     * 公会管理界面
+     */
+    SOCIETY_ADMIN_WINDOW("SocietyAdminWindow"),
+
+    /**
      * 玩家申请列表窗口
      */
     PLAYER_APPLY_LIST_WINDOW("PlayerApplyListWindow"),
@@ -165,6 +170,11 @@ public enum  WindowType {
     SET_GRADE_WINDOW("SetGradeWindow"),
 
     /**
+     * 解散公会窗口
+     */
+    DISSOLVE_WINDOW("DissolveWindow"),
+
+    /**
      * 消息窗口
      */
     MESSAGE_WINDOW("MessageWindow"),
@@ -173,6 +183,7 @@ public enum  WindowType {
      * 确认窗口
      */
     MODAL_WINDOW("ModalWindow"),
+
     ;
 
 

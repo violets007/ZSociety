@@ -2,6 +2,7 @@ package com.zixuan007.society.window.marry.admin;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
@@ -20,8 +21,10 @@ public class MarryAdminWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        addButton(new ElementButton("设置指定夫妻公共资产"));
-        addButton(new ElementButton("移除指定夫妻"));
+        ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("marryAdminWindow.setContribution.button.imgPath"));
+        ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("marryAdminWindow.remove.button.imgPath"));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryAdminWindow.setContribution.button"),img1));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryAdminWindow.remove.button"),img2));
         return this;
     }
 

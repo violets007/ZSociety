@@ -7,6 +7,8 @@ import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
+import com.zixuan007.society.window.WindowManager;
+import com.zixuan007.society.window.WindowType;
 
 
 /**
@@ -34,13 +36,16 @@ public class SocietyAdminWindow extends SimpleWindow implements WindowLoader {
     public void onClick(int id, Player player) {
         switch (id){
             case 0:
-                player.showFormWindow(new SetGradeWindow());
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_GRADE_WINDOW));
                 break;
             case 1:
-                player.showFormWindow(new SetContributeWindow());
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_CONTRIBUTE_WINDOW));
                 break;
             case 2:
-                player.showFormWindow(new DissolveWindow());
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.DISSOLVE_WINDOW));
                 break;
             default:
                 break;
