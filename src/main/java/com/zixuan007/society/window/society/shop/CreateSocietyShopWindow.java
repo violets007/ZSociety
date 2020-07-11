@@ -53,7 +53,7 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         String sellPriceStr = response.getInputResponse(0);
-        FormWindow createSocietyShopForm = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW);
+        FormWindow createSocietyShopForm = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW,player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
@@ -71,7 +71,6 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
         String itemCustomName = split[1];
         Item item = player.getInventory().getItem(Integer.parseInt(index));
         if(!SocietyUtils.isNumeric(itemCountStr) || itemCountStr.equals("")){
-
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isNumber"), createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }

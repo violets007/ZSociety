@@ -73,7 +73,7 @@ message.createSocietyShopWindow.clickWallSign: §f请点击墙上的木牌
 message.createSocietyShopWindow.isJoin: §f>> §c检测到你当前还没有加入公会
 message.createSocietyShopWindow.alreadSetShop: §f>> §c此木牌已经设置了商店,请勿重复设置
 message.createSocietyShopWindow.success: §f>> §a公会商店创建成功
-message.createSocietyShopWindow.rarelyCoin: §f>> §a当前余额不足无法进行购买
+message.createSocietyShopWindow.rarelyCoin: §f>> §c当前余额不足无法进行购买
 message.createSocietyShopWindow.unableBuy: §f>> §c你还没有加入公会无法进行购买
 message.createSocietyShopWindow.unableBuy1: §f>> §c你不是本公会成员无法进行购买
 message.createSocietyShopWindow.alreadDestroy: §f>> §c此木牌商店功能或者公会已解散,等待人员销毁!
