@@ -1,4 +1,4 @@
-package com.zixuan007.society.window.vip.admin;
+package com.zixuan007.society.window.privilege.admin;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;

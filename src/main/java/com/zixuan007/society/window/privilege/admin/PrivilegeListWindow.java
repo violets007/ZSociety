@@ -1,4 +1,4 @@
-package com.zixuan007.society.window.vip.admin;
+package com.zixuan007.society.window.privilege.admin;
 
 import cn.nukkit.form.element.ElementLabel;
 import com.zixuan007.society.domain.Vip;

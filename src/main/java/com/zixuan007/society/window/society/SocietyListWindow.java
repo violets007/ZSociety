@@ -109,10 +109,15 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
                 ArrayList<Object> configGrades = (ArrayList<Object>) SocietyPlugin.getInstance().getConfig().get(key);
                 Integer maxMemberCount = (Integer) configGrades.get(0);
                 int societyMemberCount = society.getMembers().size();
+
+                //公会人员已满
                 if(societyMemberCount >= maxMemberCount){
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyListWindow.overtakeMaxMember"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
+
+
+
                 SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new PlayerApplyJoinSocietyEvent(player1, society));
             } else {
                 player1.showFormWindow(getParent());

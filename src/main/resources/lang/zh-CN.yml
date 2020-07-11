@@ -60,6 +60,7 @@ message.setJobWindow.isJoinSociety: §c设置的成员还没有加入公会
 message.setJobWindow.notSocietyMember: §c设置的成员还没有加入公会
 message.setJobWindow.upJob: §a职位成功升级为 §f${jobName}
 message.setJobWindow.setJob: §a成功设置 §b${playerName} §a职位为 §f${jobName}
+message.setJobWindow.existJobGrade: §c此职位等级已经存在,请填写相对应的职位名称
 
 #移除成员窗口
 message.removeMemberWindow.removeMember: §c成员 §b${playerName} 被踢出公会

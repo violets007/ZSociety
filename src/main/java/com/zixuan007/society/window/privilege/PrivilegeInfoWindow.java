@@ -1,4 +1,4 @@
-package com.zixuan007.society.window.vip;
+package com.zixuan007.society.window.privilege;
 
 
 import cn.nukkit.Player;

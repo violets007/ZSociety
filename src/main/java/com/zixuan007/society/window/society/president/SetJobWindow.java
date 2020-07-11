@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * @author zixuan007
  */
 public class SetJobWindow extends CustomWindow implements WindowLoader {
+
     public SetJobWindow() {
         super(PluginUtils.getWindowConfigInfo("setJobWindow.title"));
     }
@@ -29,8 +30,8 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         addElement(new ElementInput("", "§e玩家名称"));
-        ElementDropdown elementDropdown = new ElementDropdown("§e职位列表", SocietyUtils.getAllPost());
-        addElement(elementDropdown);
+        addElement(new ElementInput("", "§e职位名称"));
+        addElement(new ElementInput("", "§e职位等级"));
         return this;
     }
 
@@ -38,9 +39,10 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         String playerName = response.getInputResponse(0);
-        FormResponseData dropdownResponse = response.getDropdownResponse(1);
-        final String jobName = dropdownResponse.getElementContent();
-        final int jobGrade = SocietyUtils.getPostGradeByName(jobName);
+        String jobName = response.getInputResponse(1);
+        String jobGradeStr = response.getInputResponse(2);
+        int jobGrade = Integer.parseInt(jobGradeStr);
+
         FormWindow setJobWindow = WindowManager.getFormWindow(WindowType.SET_JOB_WINDOW);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
@@ -58,6 +60,16 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.notSocietyMember"), setJobWindow, backButtonName, backButtonImage));
             return;
         }
+
+        for (ArrayList<Object> arrayList : society.getMembers().values()) {
+            String postName = (String) arrayList.get(1);
+            Integer postGrade = (Integer) arrayList.get(1);
+            if(postGrade == jobGrade && !postName.equals(jobName)){
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.existJobGrade"), setJobWindow, backButtonName, backButtonImage));
+                return;
+            }
+        }
+
         society.getPost().put(playerName, new ArrayList() {
             {
                 add(jobName);

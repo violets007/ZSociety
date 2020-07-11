@@ -1,6 +1,7 @@
 package com.zixuan007.society.listener;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockWallSign;
 import cn.nukkit.blockentity.BlockEntity;
@@ -10,10 +11,13 @@ import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockBreakEvent;
 import cn.nukkit.event.player.*;
+import cn.nukkit.event.server.DataPacketReceiveEvent;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.network.protocol.DataPacket;
+import cn.nukkit.network.protocol.TextPacket;
 import cn.nukkit.utils.Binary;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
@@ -54,17 +58,9 @@ public class SocietyListener implements Listener {
         final Config config = this.societyPlugin.getConfig();
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
-        society.getPost().put(player.getName(), new ArrayList<Object>() {
-            {
-                ArrayList<Object> post = (ArrayList) config.get("post");
-                HashMap<String, Object> map = (HashMap) post.get(0);
-                this.add(map.get("name"));
-                this.add(map.get("grade"));
-            }
-        });
-        SocietyUtils.saveSociety(society);
-        SocietyUtils.societies.add(event.getSociety());
-        SocietyPlugin.getInstance().getLogger().info("§a玩家: §b" + player.getName() + " §a创建公会名称: §e" + society.getSocietyName());
+        SocietyUtils.addMember(player.getName(), society, "会长", 0);
+        SocietyUtils.societies.add(society);
+        SocietyPlugin.getInstance().getLogger().info("§a玩家: §b§l" + player.getName() + " §r§a创建公会名称: §e" + society.getSocietyName());
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a创建 §l§b" + society.getSocietyName() + " §a公会成功", societyWindow, backButtonName, backButtonImage));
     }
@@ -85,7 +81,7 @@ public class SocietyListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onQuic(PlayerQuitSocietyEvent event) {
+    public void onQuit(PlayerQuitSocietyEvent event) {
         Player player = event.getPlayer();
         Society society = event.getSociety();
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
@@ -348,5 +344,29 @@ public class SocietyListener implements Listener {
     public void onQuitGame(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         affrimBuyPlayer.remove(player.getName());
+    }
+
+    @EventHandler
+    public void onReceive(DataPacketReceiveEvent event) {
+        DataPacket packet = event.getPacket();
+        Player player = event.getPlayer();
+        Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
+        if (SocietyUtils.isJoinSociety(player.getName())) {
+            if (packet instanceof TextPacket) {
+                if (((TextPacket) packet).type == TextPacket.TYPE_CHAT) {
+                    if (SocietyUtils.societyChatPlayers.containsKey(player.getName())) {
+                        HashMap<String, ArrayList<Object>> post = society.getPost();
+                        for (String playerName : post.keySet()) {
+                            Server server = SocietyPlugin.getInstance().getServer();
+                            Player societyMember = server.getPlayer(playerName);
+                            if (societyMember != null) {
+                                societyMember.sendMessage("[公会频道] " + playerName + ">> " + ((TextPacket) packet).message);
+                                event.setCancelled();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

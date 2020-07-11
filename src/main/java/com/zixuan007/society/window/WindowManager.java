@@ -7,10 +7,8 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.marry.AddPublicFunds;
 import com.zixuan007.society.window.marry.MoneyRankWindow;
 import com.zixuan007.society.window.marry.ProposeWindow;
-import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
 import com.zixuan007.society.window.society.SocietyListWindow;
-import com.zixuan007.society.window.society.president.SetJobWindow;
-import com.zixuan007.society.window.vip.admin.PrivilegeManagerWindow;
+import com.zixuan007.society.window.privilege.admin.PrivilegeManagerWindow;
 
 import java.util.HashMap;
 import java.util.List;

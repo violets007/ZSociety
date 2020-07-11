@@ -20,6 +20,7 @@ import java.util.Map;
  * @author zixuan007
  */
 public class SetTitleWindow extends CustomWindow implements WindowLoader {
+
     public SetTitleWindow() {
         super(PluginUtils.getWindowConfigInfo("setTitleWindow.title"));
     }
@@ -46,7 +47,6 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (societyPlugin.getTitleConfig().get(playerName) == null) {
-
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.isPlayerName"),setTitleWindow,backButtonName,backButtonImage));
             return;
         }
@@ -60,10 +60,13 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.existTitle"),setTitleWindow,backButtonName,backButtonImage));
             return;
         }
+
         /*Config titleConfig = societyPlugin.getTitleConfig();
         TitleUtils.addTitle(playerName,title);
         titleConfig.set(playerName, TitleUtils.getTitles(playerName));
         titleConfig.save();*/
+
+
 
         TitleUtils.addTitle(playerName,title);
 

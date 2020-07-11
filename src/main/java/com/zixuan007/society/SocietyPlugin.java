@@ -4,8 +4,8 @@ package com.zixuan007.society;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
+import com.fundebug.Fundebug;
 import com.zixuan007.society.command.*;
-import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.listener.*;
 import com.zixuan007.society.task.ShowTask;
 import com.zixuan007.society.task.CheckPrivilegeTimeTask;
@@ -31,13 +31,13 @@ import com.zixuan007.society.window.title.admin.CreateTitleShopWindow;
 import com.zixuan007.society.window.title.admin.RemoveTitleWindow;
 import com.zixuan007.society.window.title.admin.SetTitleWindow;
 import com.zixuan007.society.window.title.admin.TitleManagerWindow;
-import com.zixuan007.society.window.vip.PrivilegeInfoWindow;
-import com.zixuan007.society.window.vip.AdvancedPrivilegeWindow;
-import com.zixuan007.society.window.vip.PrivilegeWindow;
-import com.zixuan007.society.window.vip.admin.PrivilegeListWindow;
-import com.zixuan007.society.window.vip.admin.PrivilegeManagerWindow;
-import com.zixuan007.society.window.vip.admin.RemovePrivilegeWindow;
-import com.zixuan007.society.window.vip.admin.SetPrivilegeWindow;
+import com.zixuan007.society.window.privilege.PrivilegeInfoWindow;
+import com.zixuan007.society.window.privilege.AdvancedPrivilegeWindow;
+import com.zixuan007.society.window.privilege.PrivilegeWindow;
+import com.zixuan007.society.window.privilege.admin.PrivilegeListWindow;
+import com.zixuan007.society.window.privilege.admin.PrivilegeManagerWindow;
+import com.zixuan007.society.window.privilege.admin.RemovePrivilegeWindow;
+import com.zixuan007.society.window.privilege.admin.SetPrivilegeWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
-
+    private Fundebug fundebug;
     private static SocietyPlugin instance;
 
 
@@ -82,6 +82,7 @@ public class SocietyPlugin extends PluginBase {
      */
     public void init() {
         new MetricsLite(this);
+        fundebug = new Fundebug("4bb7d8ecfd1aec2c41abcb23263885bda019310ebcd7edeb042cbef1965af0af"); //Bug反馈插件
         checkPlugin("EconomyAPI");
         if (instance == null) {
             instance = this;
@@ -269,4 +270,11 @@ public class SocietyPlugin extends PluginBase {
         return windowConfig;
     }
 
+    public Fundebug getFundebug() {
+        return fundebug;
+    }
+
+    public void setFundebug(Fundebug fundebug) {
+        this.fundebug = fundebug;
+    }
 }

@@ -8,8 +8,7 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zixuan007
@@ -32,18 +31,42 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
             setBack(true);
         }
         this.society = SocietyUtils.getSocietyByPlayerName(player.getName());
-        this.memberList= new ArrayList(society.getPost().keySet());
         StringBuilder sb = new StringBuilder();
         sb.append("§l§d公会成员列表\n");
-        /*for (int i = memberList.size()-1; i >= 0; i--) {
-            String name = memberList.get(i);
-            String postByName = SocietyUtils.getPostByName(name, society);
-            sb.append("职位>> §c" + postByName + " §f名称>> §b§l" + name + "\n");
-        }*/
-        memberList.forEach(name -> {
-            String postByName = SocietyUtils.getPostByName(name, society);
-            sb.append("职位>> §c" + postByName + " §f名称>> §b§l" + name + "\n");
+
+        ArrayList<ArrayList<Object>> memberList = new ArrayList<>();
+
+        for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
+            String playerName = entry.getKey();
+            ArrayList<Object> value = entry.getValue();
+            String postName = (String) value.get(0);
+            Integer postGrade = (Integer) value.get(1);
+            memberList.add(new ArrayList<Object>(){
+                {
+                    add(playerName);
+                    add(postName);
+                    add(postGrade);
+                }
+            });
+        }
+
+       memberList.sort(new Comparator<ArrayList<Object>>() {
+           @Override
+           public int compare(ArrayList<Object> o1, ArrayList<Object> o2) {
+               Integer postGrade1 = (Integer) o1.get(1);
+               Integer postGrade2 = (Integer) o2.get(1);
+               return  postGrade1 < postGrade2 ? 1:0;
+           }
+       });
+
+
+        memberList.forEach(arrayList -> {
+            String playerName = (String) arrayList.get(0);
+            String postName = (String) arrayList.get(1);
+            sb.append("职位>> §c" + postName + " §f名称>> §b§l" + playerName + "\n");
         });
+
+
         setContent(sb.toString());
         return this;
     }

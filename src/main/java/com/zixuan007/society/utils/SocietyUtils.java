@@ -10,6 +10,7 @@ import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,9 +31,11 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
 public class SocietyUtils {
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     public static ArrayList<Society> societies = new ArrayList<>();
+    public static HashMap<String,String> societyChatPlayers=new HashMap<>();
 
     /**
      * 指定的公会名称是否存在
+     *
      * @param societyName 公会名
      * @return
      */
@@ -44,6 +47,7 @@ public class SocietyUtils {
 
     /**
      * 获取当前格式化后的日期
+     *
      * @return
      */
     public static String getFormatDateTime() {
@@ -54,13 +58,14 @@ public class SocietyUtils {
 
     /**
      * 指定的玩家是否加入过公会
+     *
      * @param playerName 玩家名
      * @return
      */
     public static boolean isJoinSociety(String playerName) {
         ArrayList<Society> societies = SocietyUtils.societies;
         for (Society society : societies) {
-            for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>)society.getPost().entrySet()) {
+            for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>) society.getPost().entrySet()) {
                 String name = entry.getKey();
                 if (name.equals(playerName)) {
                     return true;
@@ -71,14 +76,13 @@ public class SocietyUtils {
     }
 
     /**
-     *
      * @param playerName
      * @return
      */
     public static Society getSocietyByPlayerName(String playerName) {
         ArrayList<Society> societies = SocietyUtils.societies;
         for (Society society : societies) {
-            for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>)society.getPost().entrySet()) {
+            for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>) society.getPost().entrySet()) {
                 String name = entry.getKey();
                 if (name.equals(playerName)) {
                     return society;
@@ -88,65 +92,9 @@ public class SocietyUtils {
         return null;
     }
 
-    /*public static List<String> getMemberList(Society society, int currentPage) {
-        return getMemberList(society, currentPage, 10);
-    }
-
-    *//**
-     * 获取当前公会的成员列表
-     * @param society 公会实体类
-     * @param currentPage 当前页数
-     * @return
-     *//*
-    public static List<String> getMemberList(Society society, int currentPage, int limit) {
-        HashMap<String, ArrayList<Object>> postMap = society.getPost();
-        ArrayList<HashMap<String, Object>> postList = new ArrayList<>();
-        ArrayList<String> tempList = new ArrayList<>();
-        for (Map.Entry<String, ArrayList<Object>> entry : postMap.entrySet()) {
-            ArrayList<Object> value = entry.getValue();
-            final String playerName = entry.getKey();
-            final Integer grade = (Integer)value.get(1);
-            postList.add(new HashMap<String, Object>() {
-                {
-                    put("name",playerName);
-                    put("grade",grade);
-                }
-            });
-        }
-
-
-        Collections.sort(postList, new Comparator<HashMap<String, Object>>() {
-            @Override
-            public int compare(HashMap<String, Object> map1, HashMap<String, Object> map2) {
-                Integer grade = (Integer)map1.get("grade");
-                Integer grade1 = (Integer)map2.get("grade");
-                return (grade.intValue() < grade1.intValue()) ? 1 : ((grade.intValue() > grade1.intValue()) ? -1 : (grade.equals(grade1) ? 0 : -1));
-            }
-        });
-        postList.forEach(map -> {
-            String name = (String)map.get("name");
-            tempList.add(name);
-        });
-        ArrayList<String> members = tempList;
-        int pageNumber = (members.size() % limit == 0) ? (society.getPost().size() / limit) : (society.getPost().size() / limit + 1);
-        if (currentPage > pageNumber) return null;
-        if (currentPage == 1) {
-            if (members.size() <= limit) return members;
-            if (members.size() > limit) return members.subList(0, limit);
-        } else {
-            int pageNumberSize = --currentPage * limit;
-            List<String> subMembers = members.subList(pageNumberSize, members.size());
-            if (subMembers.size() < limit) {
-                return members.subList(pageNumberSize, pageNumberSize + subMembers.size());
-            }
-            return members.subList(pageNumberSize, pageNumberSize + limit);
-        }
-
-        return null;
-    }*/
-
     /**
      * 检测字符串内容是否为数字
+     *
      * @param str
      * @return
      */
@@ -160,12 +108,9 @@ public class SocietyUtils {
     }
 
 
-    public static int getTotalMemberPage(Society society) {
-        return getTotalMemberPage(society, 10);
-    }
-
     /**
      * 获取指定公会成员列表总页数
+     *
      * @param society
      * @return
      */
@@ -175,6 +120,7 @@ public class SocietyUtils {
 
     /**
      * 获取公会列表
+     *
      * @param currentPage 当前页面
      * @return
      */
@@ -197,12 +143,9 @@ public class SocietyUtils {
         return null;
     }
 
-   /* public static int getTotalSocietiesPage() {
-        return (SocietyUtils.societies.size() % 10 == 0) ? (SocietyUtils.societies.size() / 10) : (SocietyUtils.societies.size() / 10 + 1);
-    }*/
-
     /**
      * 获获取公会列表总页数
+     *
      * @param currentPage
      * @param limit
      * @return
@@ -215,6 +158,7 @@ public class SocietyUtils {
 
     /**
      * 获取公会实体类通过公会ID
+     *
      * @param sid 公会ID
      * @return
      */
@@ -229,15 +173,16 @@ public class SocietyUtils {
 
     /**
      * 获取玩家所在公会的职位
+     *
      * @param playerName
      * @return 没有则返回-1
      */
     public static int getPostGradeByName(String playerName) {
         Config config = SocietyPlugin.getInstance().getConfig();
-        ArrayList<HashMap<String, Object>> post = (ArrayList<HashMap<String, Object>>)config.get("post");
+        ArrayList<HashMap<String, Object>> post = (ArrayList<HashMap<String, Object>>) config.get("post");
         for (HashMap<String, Object> map : post) {
-            Integer grade = (Integer)map.get("grade");
-            String name1 = (String)map.get("name");
+            Integer grade = (Integer) map.get("grade");
+            String name1 = (String) map.get("name");
             if (name1.equals(playerName))
                 return grade.intValue();
         }
@@ -246,6 +191,7 @@ public class SocietyUtils {
 
     /**
      * 检测玩家是否是会长
+     *
      * @param playerName 玩家名称
      * @return
      */
@@ -258,6 +204,7 @@ public class SocietyUtils {
 
     /**
      * 移除公会
+     *
      * @param societyName 公会名称
      */
     public static void removeSociety(String societyName) {
@@ -274,19 +221,21 @@ public class SocietyUtils {
 
     /**
      * 获取当前玩家的职位
+     *
      * @param playerName 玩家名称
-     * @param society 玩家所在的公会
+     * @param society    玩家所在的公会
      * @return
      */
     public static String getPostByName(String playerName, Society society) {
-        if(society == null) return "无职位";
+        if (society == null) return "无职位";
         ArrayList<Object> list = society.getPost().get(playerName);
-        if(list.size() < 1) return "无职位";
-        return (String)list.get(0);
+        if (list.size() < 1) return "无职位";
+        return (String) list.get(0);
     }
 
     /**
      * 格式化按钮文本
+     *
      * @param tipText
      * @param player
      * @return
@@ -297,13 +246,14 @@ public class SocietyUtils {
 
     /**
      * 格式化聊天文本
+     *
      * @param player
      * @param message
      * @return
      */
     public static String formatChat(Player player, String message) {
         Config config = SocietyPlugin.getInstance().getConfig();
-        String chatText = (String)config.get("chatFormat");
+        String chatText = (String) config.get("chatFormat");
         chatText = chatText.replaceAll("\\$\\{message\\}", message);
         return formatText(chatText, player);
     }
@@ -311,6 +261,7 @@ public class SocietyUtils {
 
     /**
      * 获取创建下一个公会的ID
+     *
      * @return
      */
     public static long getNextSid() {
@@ -328,30 +279,33 @@ public class SocietyUtils {
 
     /**
      * 获取当前配置信息的所有职位
+     *
      * @return
      */
     public static List<String> getAllPost() {
-        List<Map<String, Object>> post = (List<Map<String, Object>>)SocietyPlugin.getInstance().getConfig().get("post");
+        List<Map<String, Object>> post = (List<Map<String, Object>>) SocietyPlugin.getInstance().getConfig().get("post");
         ArrayList<String> arrayList = new ArrayList<>();
         for (Map<String, Object> map : post) {
-            String name = (String)map.get("name");
+            String name = (String) map.get("name");
             if (name.equals("会长"))
-                continue;  arrayList.add(name);
+                continue;
+            arrayList.add(name);
         }
         return arrayList;
     }
 
     /**
      * 添加成员
-     * @param playerNmae
+     *
+     * @param playerName
      * @param society
      */
-    public static void addMember(String playerNmae, Society society) {
-        SocietyUtils.societies.forEach(society1 -> society1.getTempApply().remove(playerNmae));
-        society.getPost().put(playerNmae, new ArrayList() {
+    public static void addMember(String playerName, Society society,String postName,int postGrade) {
+        SocietyUtils.societies.forEach(society1 -> society1.getTempApply().remove(playerName));
+        society.getPost().put(playerName, new ArrayList() {
             {
-                add("精英");
-                add(1);
+                add(postName);
+                add(postGrade);
             }
         });
         SocietyUtils.saveSociety(society);
@@ -359,39 +313,34 @@ public class SocietyUtils {
 
     /**
      * 给公会所有成员发送标题信息
+     *
      * @param title
      */
-    public static void sendMemberTitle(String title,Society society){
+    public static void sendMemberTitle(String title, Society society) {
         if (society.getPost().size() <= 0) return;
         for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
             String playerName = entry.getKey();
-            if(!PluginUtils.isOnlineByName(playerName)) continue;
-            if(society.getPresidentName().equals(playerName)) continue;
+            if (!PluginUtils.isOnlineByName(playerName)) continue;
+            if (society.getPresidentName().equals(playerName)) continue;
             Server.getInstance().getPlayer(playerName).sendTitle(title);
         }
     }
 
     /**
      * 检测指定的方块坐标是否已经设置过商店
+     *
      * @param block
      * @return
      */
-    public static boolean isSetShop(Block block){
+    public static boolean isSetShop(Block block) {
         for (Map.Entry<String, Object> entry : SocietyPlugin.getInstance().getTitleShopConfig().getAll().entrySet()) {
             String key = entry.getKey();
             List<Object> value = (List<Object>) entry.getValue();
             int titleSignX = (int) value.get(0);
             int titleSignY = (int) value.get(1);
             int titleSignZ = (int) value.get(2);
-            if(titleSignX == block.getFloorX() && titleSignY == block.getFloorY() && titleSignZ == block.getFloorZ()) return true;
-        }
-        for (Map.Entry<String, Object> entry : SocietyPlugin.getInstance().getSocietyShopConfig().getAll().entrySet()) {
-            String key = entry.getKey();
-            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
-            int societySignX= (int) value.get("x");
-            int societySignY= (int) value.get("y");
-            int societySignZ= (int) value.get("x");
-
+            if (titleSignX == block.getFloorX() && titleSignY == block.getFloorY() && titleSignZ == block.getFloorZ())
+                return true;
         }
         return false;
     }
@@ -399,17 +348,18 @@ public class SocietyUtils {
 
     /**
      * 解散公会移除所有的本公会商店
+     *
      * @param society
      */
-    public static void removeSocietyShopBySid(Society society){
+    public static void removeSocietyShopBySid(Society society) {
         Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
         for (Map.Entry<String, Object> entry : societyShopConfig.getAll().entrySet()) {
             String key = entry.getKey();
-            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            HashMap<String, Object> value = (HashMap<String, Object>) entry.getValue();
             int sid = (int) value.get("sid");
-            if(sid == society.getSid()){
-                value.put("dissolve",true);
-                societyShopConfig.set(key,value);
+            if (sid == society.getSid()) {
+                value.put("dissolve", true);
+                societyShopConfig.set(key, value);
                 societyShopConfig.save();
                 //进行玩家商店内容的返还
                 removeShopSign(key);
@@ -419,11 +369,12 @@ public class SocietyUtils {
 
     /**
      * 移除商店木牌
+     *
      * @param key
      */
-    public static void removeShopSign(String key){
+    public static void removeShopSign(String key) {
         Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
-        HashMap<String,Object> societyData = (HashMap<String, Object>) societyShopConfig.get(key);
+        HashMap<String, Object> societyData = (HashMap<String, Object>) societyShopConfig.get(key);
         int x = (int) societyData.get("x");
         int y = (int) societyData.get("y");
         int z = (int) societyData.get("z");
@@ -431,7 +382,7 @@ public class SocietyUtils {
         for (Level level : Server.getInstance().getLevels().values()) {
             Vector3 vector3 = new Vector3(x, y, z);
             Block block = level.getBlock(vector3);
-            if(block != null && block.getLevel().getName().equals(levelName) && block instanceof BlockWallSign){
+            if (block != null && block.getLevel().getName().equals(levelName) && block instanceof BlockWallSign) {
                 block.onBreak(Item.get(0));
             }
         }
@@ -439,17 +390,18 @@ public class SocietyUtils {
 
     /**
      * 移除玩家指定公会创建过的商店
+     *
      * @param society
      */
-    public static void removeCreateShop(Society society,String playerName){
+    public static void removeCreateShop(Society society, String playerName) {
         Config societyShopConfig = SocietyPlugin.getInstance().getSocietyShopConfig();
         for (Map.Entry<String, Object> entry : societyShopConfig.getAll().entrySet()) {
             String key = entry.getKey();
-            HashMap<String,Object> value = (HashMap<String, Object>) entry.getValue();
+            HashMap<String, Object> value = (HashMap<String, Object>) entry.getValue();
             int sid = (int) value.get("sid");
             String creator = (String) value.get("creator");
-            if(society.getSid() == sid && creator.equals(playerName)){
-                value.put("dissolve",true);
+            if (society.getSid() == sid && creator.equals(playerName)) {
+                value.put("dissolve", true);
                 removeShopSign(key);
             }
         }
@@ -473,9 +425,10 @@ public class SocietyUtils {
 
     /**
      * 保存公会数据内容
+     *
      * @param society
      */
-    public static void saveSociety(Society society){
+    public static void saveSociety(Society society) {
         String societyName = society.getSocietyName();
         String societyFilePath = PluginUtils.SOCIETY_FOLDER + societyName + ".yml";
         File file = new File(societyFilePath);
@@ -497,5 +450,29 @@ public class SocietyUtils {
         config.set("tempApply", society.getTempApply());
         config.save();
     }
+
+   /* *//**
+     * 给公会添加公会成员
+     *
+     * @param society
+     * @param playerName
+     *//*
+    public static void addSocietyMember(Society society, String playerName) {
+        ArrayList<ArrayList<Object>> memberList = new ArrayList<>();
+        for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
+            ArrayList<Object> value = entry.getValue();
+            String postName = (String) value.get(0);
+            Integer postGrade = (Integer) value.get(1);
+            memberList.add(new ArrayList<Object>() {
+                {
+                    add(playerName);
+                    add(postName);
+                    add(postGrade);
+                }
+            });
+        }
+
+        SocietyUtils.saveSociety(society);
+    }*/
 
 }

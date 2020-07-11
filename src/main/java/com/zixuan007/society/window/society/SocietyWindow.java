@@ -42,6 +42,10 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.levelRank.button"), img7));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.contribution.button"), img8));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.createShopWindow.button"), img9));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("${societyChat} 公会聊天"), img9));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("设置公会传送点"), img9));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("修改公会资料"), img9));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("发起发起公会战"), img9));
         return this;
     }
 
@@ -128,6 +132,12 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, societyWindow));
+                break;
+            case 9:
+                player.sendMessage("开启了公会聊天模式");
+                break;
+            case 10:
+                player.sendMessage("成功设置了公会出生点");
                 break;
             default:
                 break;
