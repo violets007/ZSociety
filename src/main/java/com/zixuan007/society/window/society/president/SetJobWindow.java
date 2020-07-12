@@ -62,7 +62,7 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
         }
 
         for (ArrayList<Object> arrayList : society.getMembers().values()) {
-            String postName = (String) arrayList.get(1);
+            String postName = (String) arrayList.get(0);
             Integer postGrade = (Integer) arrayList.get(1);
             if(postGrade == jobGrade && !postName.equals(jobName)){
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.existJobGrade"), setJobWindow, backButtonName, backButtonImage));

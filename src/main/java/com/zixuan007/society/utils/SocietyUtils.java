@@ -334,11 +334,19 @@ public class SocietyUtils {
      */
     public static boolean isSetShop(Block block) {
         for (Map.Entry<String, Object> entry : SocietyPlugin.getInstance().getTitleShopConfig().getAll().entrySet()) {
-            String key = entry.getKey();
             List<Object> value = (List<Object>) entry.getValue();
             int titleSignX = (int) value.get(0);
             int titleSignY = (int) value.get(1);
             int titleSignZ = (int) value.get(2);
+            if (titleSignX == block.getFloorX() && titleSignY == block.getFloorY() && titleSignZ == block.getFloorZ())
+                return true;
+        }
+        for (Map.Entry<String, Object> entry : SocietyPlugin.getInstance().getSocietyShopConfig().getAll().entrySet()) {
+
+            HashMap<String,Object> value = (HashMap<String,Object>) entry.getValue();
+            int titleSignX = (int) value.get("x");
+            int titleSignY = (int) value.get("y");
+            int titleSignZ = (int) value.get("z");
             if (titleSignX == block.getFloorX() && titleSignY == block.getFloorY() && titleSignZ == block.getFloorZ())
                 return true;
         }
@@ -448,31 +456,9 @@ public class SocietyUtils {
         config.set("psots", society.getPost());
         config.set("grade", society.getGrade());
         config.set("tempApply", society.getTempApply());
+        config.set("position", society.getPosition());
         config.save();
     }
 
-   /* *//**
-     * 给公会添加公会成员
-     *
-     * @param society
-     * @param playerName
-     *//*
-    public static void addSocietyMember(Society society, String playerName) {
-        ArrayList<ArrayList<Object>> memberList = new ArrayList<>();
-        for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
-            ArrayList<Object> value = entry.getValue();
-            String postName = (String) value.get(0);
-            Integer postGrade = (Integer) value.get(1);
-            memberList.add(new ArrayList<Object>() {
-                {
-                    add(playerName);
-                    add(postName);
-                    add(postGrade);
-                }
-            });
-        }
-
-        SocietyUtils.saveSociety(society);
-    }*/
 
 }

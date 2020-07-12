@@ -55,7 +55,7 @@ societyShopFormat:
 post:
   - {
     name: 会长, #名称
-    grade: 0, #职位等级
+    grade: 20, #职位等级
     count: 1 #可拥有数量 (会长必须唯一) -1代表无限
   }
   - {
@@ -70,7 +70,7 @@ post:
   }
   - {
     name: 精英,
-    grade: 3,
+    grade: 1,
     count: 1
   }
 

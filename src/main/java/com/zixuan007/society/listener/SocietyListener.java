@@ -58,7 +58,9 @@ public class SocietyListener implements Listener {
         final Config config = this.societyPlugin.getConfig();
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
-        SocietyUtils.addMember(player.getName(), society, "会长", 0);
+        ArrayList<Object> post = (ArrayList<Object>) config.get("post");
+        HashMap<String,Object> postInfo = (HashMap<String, Object>) post.get(0);
+        SocietyUtils.addMember(player.getName(), society, "会长", (Integer) postInfo.get("grade"));
         SocietyUtils.societies.add(society);
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b§l" + player.getName() + " §r§a创建公会名称: §e" + society.getSocietyName());
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
@@ -131,6 +133,12 @@ public class SocietyListener implements Listener {
                     player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.alreadSetShop"));
                     return;
                 }
+
+                if(player.isCreative() && !player.isOp()){
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isCreative"));
+                    return;
+                }
+
 
                 Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
                 //进行数据的存储
@@ -360,8 +368,8 @@ public class SocietyListener implements Listener {
                         for (String playerName : post.keySet()) {
                             Server server = SocietyPlugin.getInstance().getServer();
                             Player societyMember = server.getPlayer(playerName);
-                            if (societyMember != null) {
-                                societyMember.sendMessage("[公会频道] " + playerName + ">> " + ((TextPacket) packet).message);
+                            if (societyMember != null && SocietyUtils.societyChatPlayers.containsKey(societyMember.getName())) {
+                                societyMember.sendMessage("§f[§e公会频道§f]§f[§9"+SocietyUtils.getPostByName(playerName,society)+"§f] §l§b" + playerName + "§r§f>> " + ((TextPacket) packet).message);
                                 event.setCancelled();
                             }
                         }

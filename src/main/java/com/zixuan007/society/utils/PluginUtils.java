@@ -5,6 +5,7 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.Binary;
+import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.window.WindowManager;
@@ -24,24 +25,14 @@ import java.util.*;
  * @author zixuan007
  */
 public class PluginUtils {
-    /**
-     * 系统文件分隔符
-     */
+
     public static final String FILE_SEPARATOR = System.getProperty("file.separator");
-
-    /**
-     * 公会数据文件路径
-     */
     public static final String SOCIETY_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR;
-
-    /**
-     * 公会配置文件夹
-     */
     public static final String CONFIG_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;
     public static final String MARRY_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Marry" + FILE_SEPARATOR;
     public static final String PRIVILEGE_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Vip" + FILE_SEPARATOR;
 
-    public static SocietyPlugin society = SocietyPlugin.getInstance();
+    public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
 
 
     /**
@@ -76,6 +67,8 @@ public class PluginUtils {
         String societyGrade = society != null ? society.getGrade() + "" : "无等级";
         String postName = SocietyUtils.getPostByName(player.getName(), society);
         String title = TitleUtils.getTitles(player.getName()).size() <= 0 ? "无称号" : TitleUtils.getTitles(player.getName()).get(0);
+        HashMap<String, String> societyChatPlayers = SocietyUtils.societyChatPlayers;
+        String societyChat=societyChatPlayers.containsKey(player.getName()) ? "§a开启" : "§c关闭";
         String privilege="";
         if (PrivilegeUtils.isVIP(player.getName()) || PrivilegeUtils.isSvip(player.getName())) {
             privilege = PrivilegeUtils.isVIP(player.getName()) ? "§l§eVIP§f+" : "§l§cS§aV§l§bIP§f+";
@@ -94,6 +87,7 @@ public class PluginUtils {
         text = text.replace("${world}", name)
                 .replace("${societyName}", societyNam)
                 .replace("${societyGrade}", societyGrade)
+                .replace("${societyChat}", societyChat)
                 .replace("${playerName}", player.getName())
                 .replace("${post}", postName)
                 .replace("${tps}", ticksPerSecond + "")
@@ -189,10 +183,10 @@ public class PluginUtils {
 
     public static String getLanguageInfo(Player player, String key) {
         if (player != null) {
-            String languageInfo = society.getLanguageConfig().getString(key, key);
+            String languageInfo = societyPlugin.getLanguageConfig().getString(key, key);
             return formatText(languageInfo, player);
         }
-        return society.getLanguageConfig().getString(key, key);
+        return societyPlugin.getLanguageConfig().getString(key, key);
     }
 
     public static String getWindowConfigInfo(String key) {
@@ -201,37 +195,24 @@ public class PluginUtils {
 
     public static String getWindowConfigInfo(Player player, String key) {
         if (player != null) {
-            String windowInfo = society.getWindowConfig().getString(key, key);
+            String windowInfo = societyPlugin.getWindowConfig().getString(key, key);
             return formatText(windowInfo, player);
         }
-        return society.getWindowConfig().getString(key, key);
+        return societyPlugin.getWindowConfig().getString(key, key);
     }
 
-    /**
-     * 动态加载jar包
-     * @param jarPath
-     */
-    public static void loadJar(String jarPath) {
-        File jarFile = new File(jarPath);
-        // 从URLClassLoader类中获取类所在文件夹的方法，jar也可以认为是一个文件夹
-        Method method = null;
-        try {
-            method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-        } catch (NoSuchMethodException | SecurityException e1) {
-            e1.printStackTrace();
+    public static File checkConfig(String pluginPath,String path){
+        File file = new File(path);
+        if (file.exists()) {
+            Config config = new Config(file, Config.YAML);
+            String version = (String) config.get("version");
+            if(version == null || !version.equals(societyPlugin.getDescription().getVersion())){
+                societyPlugin.saveResource(pluginPath,true);
+                societyPlugin.getLogger().info("检测到: "+path+" 文件版本过低,进行覆盖!");
+            }
+        }else{
+            societyPlugin.saveResource(pluginPath);
         }
-        // 获取方法的访问权限以便写回
-        boolean accessible = method.isAccessible();
-        try {
-            method.setAccessible(true);
-            // 获取系统类加载器
-            URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-            URL url = jarFile.toURI().toURL();
-            method.invoke(classLoader, url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            method.setAccessible(accessible);
-        }
+        return file;
     }
 }

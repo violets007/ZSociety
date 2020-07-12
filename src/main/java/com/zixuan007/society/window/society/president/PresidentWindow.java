@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
+import cn.nukkit.level.Position;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.utils.PluginUtils;
@@ -38,12 +39,14 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         ElementButtonImageData img3 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.upGrade.button.imgPath"));
         ElementButtonImageData img4 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.removeMember.button.imgPath"));
         ElementButtonImageData img5 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.dissolve.button.imgPath"));
+        ElementButtonImageData img6 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.dissolve.button.imgPath"));
 
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.setJobWindow.button"), img1));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.playerApplyList.button"), img2));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.upGrade.button"), img3));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.removeMember.button"), img4));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.dissolve.button"), img5));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyAdminWindow.setSpawn.button"), img6));
         return this;
     }
 
@@ -114,6 +117,16 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 SocietyUtils.removeSocietyShopBySid(society);
                 SocietyUtils.societies.remove(society);
                 SocietyUtils.removeSociety(society.getSocietyName());
+                break;
+            case 5:
+                Position position = player.getPosition();
+                double x = position.x;
+                double y = position.y;
+                double z = position.z;
+                String levelName = position.getLevel().getName();
+                society.setPosition(x+","+y+","+z+","+levelName);
+                SocietyUtils.saveSociety(society);
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.setSpawn"), null, backButtonName, backButtonImage));
                 break;
             default:
                 break;

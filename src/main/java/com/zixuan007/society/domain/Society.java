@@ -16,6 +16,7 @@ public class Society {
     private HashMap<String, ArrayList<Object>> members =new HashMap<String, ArrayList<Object>>();
     private int grade = 1;
     private ArrayList<String> tempApply = new ArrayList<>();
+    private String position;
 
     public Society() {}
 
@@ -46,6 +47,7 @@ public class Society {
             society.members = (HashMap<String, ArrayList<Object>>)config.get("psots");
             society.grade = config.getInt("grade");
             society.tempApply = (ArrayList)config.getList("tempApply");
+            society.position = (String) config.get("position");
             return society;
         }
     }
@@ -117,6 +119,14 @@ public class Society {
 
     public HashMap<String, ArrayList<Object>> getMembers() {
         return members;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     @Override

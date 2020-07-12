@@ -50,6 +50,10 @@ societyWindow.levelRank.button: §e公会等级排行榜
 societyWindow.contribution.button: §e贡献经济
 #公会功能窗口按钮9
 societyWindow.createShopWindow.button: §e创建公会商店
+#公会功能窗口按钮10
+societyWindow.societyChat.button: §a开启§e-§c关闭§e公会聊天
+#公会功能窗口按钮11
+societyWindow.tpaSociety.button: §e传送至公会出生点
 
 #会长管理窗口按钮1
 presidentWindow.setJobWindow.button: §e设置公会职
@@ -68,6 +72,8 @@ societyAdminWindow.setSocietyGrade.button: §e设置公会等级
 societyAdminWindow.setSocietyContribution.button: §e设置公会贡献值
 #管理公会窗口按钮3
 societyAdminWindow.dissolve.button: §e解散玩家公会
+#管理公会窗口按钮4
+societyAdminWindow.setSpawn.button: §e设置公会出生点
 
 #创建公会按钮1图片路径
 societyWindow.createSociety.button.imgPath: textures/ui/anvil_icon.png
@@ -87,17 +93,21 @@ societyWindow.levelRank.button.imgPath: textures/ui/feedIcon
 societyWindow.contribution.button.imgPath: textures/ui/wither_heart_flash.png
 #创建公会商店按钮图片
 societyWindow.createShopWindow.button.imgPath: textures/ui/conduit_power_effect.png
+#公会聊天按钮图片
+societyWindow.societyChat.button.imgPath: textures/ui/Feedback.png
+#传送到公会出生点按钮
+societyWindow.tpaSociety.button.imgPath: textures/ui/restore_arrow_default.png
 
 #会长管理窗口按钮1图片
-presidentWindow.setJobWindow.button.imgPath: textures/ui/book.edit.default
+presidentWindow.setJobWindow.button.imgPath: textures/ui/dev_glyph_color.png
 #会长管理窗口按钮2图片
-presidentWindow.playerApplyList.button.imgPath: textures/ui/book.edit.default
+presidentWindow.playerApplyList.button.imgPath: textures/ui/copy
 #会长管理窗口按钮3图片
-presidentWindow.upGrade.button.imgPath: textures/ui/book.edit.default
+presidentWindow.upGrade.button.imgPath: textures/ui/share_apple.png
 #会长管理窗口按钮4图片
-presidentWindow.removeMember.button.imgPath: textures/ui/book.edit.default
+presidentWindow.removeMember.button.imgPath: textures/ui/cancel.png
 #会长管理窗口按钮5图片
-presidentWindow.dissolve.button.imgPath: textures/ui/book.edit.default
+presidentWindow.dissolve.button.imgPath: textures/ui/trash_default.png
 
 #管理公会窗口按钮1图片
 societyAdminWindow.setSocietyGrade.button.imgPath: textures/ui/dev_glyph_color.png

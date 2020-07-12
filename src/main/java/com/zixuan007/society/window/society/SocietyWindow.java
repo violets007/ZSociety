@@ -4,6 +4,8 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
+import cn.nukkit.level.Level;
+import cn.nukkit.level.Position;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
 import com.zixuan007.society.utils.PluginUtils;
@@ -32,6 +34,10 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         ElementButtonImageData img7 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.levelRank.button.imgPath"));
         ElementButtonImageData img8 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.contribution.button.imgPath"));
         ElementButtonImageData img9 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.createShopWindow.button.imgPath"));
+        ElementButtonImageData img10 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button.imgPath"));
+        ElementButtonImageData img11 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button.imgPath"));
+        /*ElementButtonImageData img12 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button.imgPath"));
+        ElementButtonImageData img13 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button.imgPath"));*/
 
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.createSociety.button"), img1));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.managerSociety.button"), img2));
@@ -42,10 +48,10 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.levelRank.button"), img7));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.contribution.button"), img8));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.createShopWindow.button"), img9));
-        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("${societyChat} 公会聊天"), img9));
-        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("设置公会传送点"), img9));
-        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("修改公会资料"), img9));
-        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("发起发起公会战"), img9));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button"), img10));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button"), img11));
+        /*this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("修改公会资料"), img12));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("发起发起公会战"), img13));*/
         return this;
     }
 
@@ -134,10 +140,37 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, player));
                 break;
             case 9:
-                player.sendMessage("开启了公会聊天模式");
+                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
+                    return;
+                }
+                if(SocietyUtils.societyChatPlayers.containsKey(player.getName())){
+                    SocietyUtils.societyChatPlayers.remove(player.getName());
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.disabledChat"));
+                }else{
+                    SocietyUtils.societyChatPlayers.put(player.getName(),society.getSocietyName());
+                    player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.enableChat"));
+                }
+
                 break;
             case 10:
-                player.sendMessage("成功设置了公会出生点");
+                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
+                    return;
+                }
+                String position = society.getPosition();
+                if(position == null || position.length() <= 0){
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.notSpawn"), societyWindow, backButtonName, backButtonImage));
+                    return;
+                }
+                String[] split = position.split(",");
+                Double x = Double.valueOf(split[0]);
+                Double y = Double.valueOf(split[1]);
+                Double z = Double.valueOf(split[2]);
+                String levelName = split[3];
+                Level level = player.getServer().getLevelByName(levelName);
+                player.teleport(new Position(x,y,z,level));
+                player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.spawn"));
                 break;
             default:
                 break;

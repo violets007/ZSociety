@@ -4,7 +4,6 @@ package com.zixuan007.society;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
-import com.fundebug.Fundebug;
 import com.zixuan007.society.command.*;
 import com.zixuan007.society.listener.*;
 import com.zixuan007.society.task.ShowTask;
@@ -60,7 +59,6 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
-    private Fundebug fundebug;
     private static SocietyPlugin instance;
 
 
@@ -87,20 +85,21 @@ public class SocietyPlugin extends PluginBase {
         new MetricsLite(this);
 
         checkPlugin("EconomyAPI");
+
         if (instance == null) {
             instance = this;
         }
-        checkConfig();
-        saveResource("lang/zh-CN.yml", true);
-        saveResource("WindowConfig.yml", true);
-        PluginUtils.loadJar(getDataFolder()+File.separator+"fundebug-java-0.3.1.jar");
 
+        checkConfig();
+        saveResource("WindowConfig.yml", true);
 
         loadConfig();
         registerCommand();
         registerWindow();
+
         getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
         getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20 * 60);
+
         resisterListener();
     }
 
@@ -134,9 +133,9 @@ public class SocietyPlugin extends PluginBase {
         String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
         String language = (String) config.get("language");
         String languagePath = PluginUtils.CONFIG_FOLDER + "lang" + PluginUtils.FILE_SEPARATOR + language;
-        String titleShopPath = PluginUtils.CONFIG_FOLDER + "TitleShopData.yml";
+        String titleShopPath = PluginUtils.CONFIG_FOLDER + "TitleShop.yml";
         String marryPath = PluginUtils.CONFIG_FOLDER + "Marry.yml";
-        String societyShopConfigPath = PluginUtils.CONFIG_FOLDER + "societyShop.yml";
+        String societyShopConfigPath = PluginUtils.CONFIG_FOLDER + "SocietyShop.yml";
         String windowConfig = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
 
         this.titleConfig = new Config(titleConfigPath);
@@ -170,23 +169,12 @@ public class SocietyPlugin extends PluginBase {
      * 检测主配置文件的版本是否相同
      */
     public void checkConfig() {
-        String path = PluginUtils.CONFIG_FOLDER + "Config.yml";
-        File file = new File(path);
-        if (!file.exists()) {
-            saveResource("Config.yml");
-        } else {
-            Config config = new Config(file, 2);
-            String version = (String) config.get("version");
-            String pluginVersion = getDescription().getVersion();
-            if (version == null || !version.equals(pluginVersion)) {
-                saveResource("Config.yml", true);
-                getLogger().info("§c检测到Config.yml文件版本太低,自动进行覆盖");
-            } else {
-                saveResource("Config.yml");
-            }
-        }
         String configPath = PluginUtils.CONFIG_FOLDER + "Config.yml";
-        this.config = new Config(configPath);
+        String languagePath = getDataFolder() + File.separator + "lang" + File.separator + "zh-CN.yml";
+
+        config=new Config(PluginUtils.checkConfig("Config.yml",configPath),Config.YAML);
+        languageConfig=new Config(PluginUtils.checkConfig("lang/zh-CN.yml",languagePath),Config.YAML);
+
     }
 
     /**
@@ -281,11 +269,4 @@ public class SocietyPlugin extends PluginBase {
         return windowConfig;
     }
 
-    public Fundebug getFundebug() {
-        return fundebug;
-    }
-
-    public void setFundebug(Fundebug fundebug) {
-        this.fundebug = fundebug;
-    }
 }

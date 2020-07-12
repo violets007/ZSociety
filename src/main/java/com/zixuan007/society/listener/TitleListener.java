@@ -22,6 +22,7 @@ import com.zixuan007.society.event.title.BuyTitleEvent;
 import com.zixuan007.society.event.title.CreateTitleShopEvent;
 import com.zixuan007.society.event.title.RemoveTitleShopEvent;
 import com.zixuan007.society.utils.PluginUtils;
+import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.utils.TitleUtils;
 
 import java.util.ArrayList;
@@ -63,6 +64,10 @@ public class TitleListener implements Listener {
         if (TitleUtils.onCreateName.containsKey(playerName)) {
             if (id == Block.WALL_SIGN) {
                 if (blockEntity instanceof BlockEntitySign) {
+                    if (SocietyUtils.isSetShop(block)) {
+                        player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.alreadSetShop"));
+                        return;
+                    }
                     ArrayList<String> titleText = (ArrayList<String>) this.societyPlugin.getConfig().getList("titleShopFormat");
                     ArrayList<String> tempList = new ArrayList<>();
                     String title = (String) TitleUtils.onCreateName.get(playerName).get("title");
@@ -76,7 +81,7 @@ public class TitleListener implements Listener {
                 }
             } else {
 
-                player.sendMessage( PluginUtils.getLanguageInfo("message.clickWallSign"));
+                player.sendMessage(PluginUtils.getLanguageInfo("message.clickWallSign"));
             }
         }
     }
@@ -91,7 +96,6 @@ public class TitleListener implements Listener {
         int z = block.getFloorZ();
         String levelName = block.getLevel().getName();
         Config titleShopConfig = SocietyPlugin.getInstance().getTitleShopConfig();
-
         if (id == Block.WALL_SIGN) {
             for (Map.Entry<String, Object> map : titleShopConfig.getAll().entrySet()) {
                 String key = map.getKey();
@@ -103,23 +107,29 @@ public class TitleListener implements Listener {
                 String str_Money = (String) list.get(4);
                 int money = Integer.parseInt(str_Money);
                 if (x == signX && y == signY && z == signZ && levelName.equals(signLevelName)) {
+
                     if (this.affirmBuyTitlePlayer.contains(player.getName())) {
                         if (EconomyAPI.getInstance().myMoney(player) < money) {
                             player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.rarelyCoin"));
                             return;
                         }
+
                         if (TitleUtils.isExistTitle(player.getName(), key)) {
                             player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.existTitle"));
                             return;
                         }
+
+
                         EconomyAPI.getInstance().reduceMoney(player, money);
                         SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new BuyTitleEvent(player, key, money));
-                        continue;
+                        return;
                     }
-                    if(!TitleUtils.onCreateName.containsKey(player.getName())){
+
+                    if (!this.affirmBuyTitlePlayer.contains(player.getName()) && !SocietyUtils.onCreatePlayer.containsKey(player.getName()) && !TitleUtils.onCreateName.containsKey(player.getName())) {
                         this.affirmBuyTitlePlayer.add(player.getName());
                         player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.affrimBuy"));
                     }
+
                 }
             }
         }
@@ -134,7 +144,7 @@ public class TitleListener implements Listener {
         titleConfig.set(player.getName(), TitleUtils.titleList.get(player.getName()));
         titleConfig.save();
         this.affirmBuyTitlePlayer.remove(player.getName());
-        player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.success",new String[]{"${title}"},new String[]{title}));
+        player.sendMessage(PluginUtils.getLanguageInfo("message.buyTitle.success", new String[]{"${title}"}, new String[]{title}));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -142,6 +152,7 @@ public class TitleListener implements Listener {
         Player player = event.getPlayer();
         String playerName = player.getName();
         BlockEntitySign wallSign = event.getWallSign();
+
         Config titleShopConfig = this.societyPlugin.getTitleShopConfig();
         String title = (String) TitleUtils.onCreateName.get(playerName).get("title");
         String money = (String) TitleUtils.onCreateName.get(playerName).get("money");
@@ -151,6 +162,7 @@ public class TitleListener implements Listener {
         list.add(wallSign.getFloorZ());
         list.add(wallSign.getLevel().getName());
         list.add(money);
+
         SocietyPlugin.getInstance().getLogger().debug("创建称号商店的内容: " + list);
         titleShopConfig.set(title, list);
         titleShopConfig.save();

@@ -33,6 +33,10 @@ message.societyWindow.isJoin: §c当前还没加入公会请先加入公会
 message.societyWindow.unableQuitSociety: §c你是会长无法退出公会,请解散公会!
 message.societyWindow.isQuitSociety: §c您确认要退出 §b ${societyName} §c公会吗?
 message.societyWindow.quitSociety: §a玩家 §b ${playerName} §a成功退出公会.
+message.societyWindow.enableChat: §f>> §a开启了公会聊天模式
+message.societyWindow.disabledChat: §f>> §a关闭了公会聊天模式
+message.societyWindow.spawn: §f>> §a成功传送至公会出生点
+message.societyWindow.notSpawn: §f>> §c会长还没设置出生点
 
 #创建公会窗口
 message.createSocietyWindow.existSociety: §c此公会名称已经存在
@@ -47,6 +51,7 @@ message.presidentWindow.upGrade: §a公会升级成功
 message.presidentWindow.notMember: §c当前没有可以移除的人员
 message.presidentWindow.dissolveSociety: §a成功解散 §b ${societyName}
 message.presidentWindow.presidentDissolveSociety: §b ${playerName} §c解散了公会
+message.presidentWindow.setSpawn: §a成功设置公会出生点
 
 
 #玩家申请加入公会窗口
@@ -69,9 +74,10 @@ message.removeMemberWindow.kickPlayer: §c你被被踢出公会
 #创建公会商店窗口
 message.createSocietyShopWindow.isNumber: §c输入的价格不是数字
 message.createSocietyShopWindow.rarelyItemCount: §c此物品数量不足
-message.createSocietyShopWindow.clickWallSign: §f请点击墙上的木牌
+message.createSocietyShopWindow.clickWallSign: §f>> §a请点击墙上的木牌
 message.createSocietyShopWindow.isJoin: §f>> §c检测到你当前还没有加入公会
 message.createSocietyShopWindow.alreadSetShop: §f>> §c此木牌已经设置了商店,请勿重复设置
+message.createSocietyShopWindow.isCreative: §f>> §c创造模式下无法进行商店的创建
 message.createSocietyShopWindow.success: §f>> §a公会商店创建成功
 message.createSocietyShopWindow.rarelyCoin: §f>> §c当前余额不足无法进行购买
 message.createSocietyShopWindow.unableBuy: §f>> §c你还没有加入公会无法进行购买
@@ -155,7 +161,7 @@ message.removeTitleWindow.removeTitle: §c你的部分称号已经被管理员�
 message.createTitleShopWindow.isTitle: §c售卖的称号不能为空
 message.createTitleShopWindow.isNumber: §c输入的金额不是数字
 message.createTitleShopWindow.titleExist: §c此称号已经存在
-message.createTitleShopWindow.clickWallSign: §f请点击贴在墙上的木牌
+message.createTitleShopWindow.clickWallSign: §e请点击贴在墙上的木牌
 message.createTitleShop.success: §f>> §a称号商店创建成功
 message.createTitleShop.permissions: §f>> §c你没有权限移除称号商店
 message.createTitleShop.remove: §f>> §a移除商店成功

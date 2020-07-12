@@ -53,6 +53,7 @@ public class CreateTitleShopWindow extends CustomWindow implements WindowLoader 
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createTitleShopWindow.titleExist"),createTitleShopWindow,backButtonName,backButtonImage));
             return;
         }
+
         TitleUtils.onCreateName.put(player.getName(),new HashMap<String,Object>(){
             {
                 put("title",title);
