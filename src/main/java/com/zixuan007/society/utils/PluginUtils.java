@@ -211,7 +211,7 @@ public class PluginUtils {
                 societyPlugin.getLogger().info("检测到: "+path+" 文件版本过低,进行覆盖!");
             }
         }else{
-            societyPlugin.saveResource(pluginPath);
+            societyPlugin.saveResource(pluginPath,true);
         }
         return file;
     }
