@@ -135,6 +135,10 @@ public class AdminCommand extends Command {
                 new CommandParameter("§e玩家名§r", CommandParamType.STRING, false),
                 new CommandParameter("§6设置的称号§r", CommandParamType.STRING, true)
         });
+        getCommandParameters().put(RELOAD_ARGS, new CommandParameter[]{
+                new CommandParameter(RELOAD_ARGS, new String[]{RELOAD_ARGS}),
+
+        });
     }
 
 
@@ -144,6 +148,7 @@ public class AdminCommand extends Command {
         player.sendMessage(">> §b/管理 §a公会");
         player.sendMessage(">> §b/管理 §a结婚");
         player.sendMessage(">> §b/管理 §a特权");
+        player.sendMessage(">> §b/管理 §areload");
         player.sendMessage(">> §b/管理 §e给予 §e称号 §e玩家名 §6[称号]");
         return true;
     }
