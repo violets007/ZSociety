@@ -23,7 +23,7 @@ public class RemovePrivilegeWindow extends CustomWindow implements WindowLoader 
     @Override
     public FormWindow init(Object... objects) {
         getElements().clear();
-        addElement(new ElementInput("","玩家名称"));
+        addElement(new ElementInput("", "玩家名称"));
         return this;
     }
 
@@ -34,17 +34,17 @@ public class RemovePrivilegeWindow extends CustomWindow implements WindowLoader 
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
-        if(!PrivilegeUtils.isVIP(playerName) && !PrivilegeUtils.isSvip(playerName)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removePrivilegeWindow.notPrivilege"),removePrivilegeWindow,backButtonName,backButtonImage));
+        if (!PrivilegeUtils.isVIP(playerName) && !PrivilegeUtils.isSvip(playerName)) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.removePrivilegeWindow.notPrivilege"), removePrivilegeWindow, backButtonName, backButtonImage));
             return;
         }
         PrivilegeUtils.removePivilegeData(playerName);
-        if(PluginUtils.isOnlineByName(playerName)){
+        if (PluginUtils.isOnlineByName(playerName)) {
             Server.getInstance().getPlayer(playerName).setAllowInteract(false);
-        }else{
+        } else {
             PrivilegeUtils.removePrivilegeName.add(playerName);
         }
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removePrivilegeWindow.removePrivilege",new String[]{"${playerName}"},new String[]{playerName}),removePrivilegeWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.removePrivilegeWindow.removePrivilege", new String[]{"${playerName}"}, new String[]{playerName}), removePrivilegeWindow, backButtonName, backButtonImage));
     }
 
 

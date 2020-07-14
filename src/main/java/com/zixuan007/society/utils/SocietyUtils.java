@@ -31,7 +31,7 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
 public class SocietyUtils {
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     public static ArrayList<Society> societies = new ArrayList<>();
-    public static HashMap<String,String> societyChatPlayers=new HashMap<>();
+    public static HashMap<String, String> societyChatPlayers = new HashMap<>();
 
     /**
      * 指定的公会名称是否存在
@@ -300,7 +300,7 @@ public class SocietyUtils {
      * @param playerName
      * @param society
      */
-    public static void addMember(String playerName, Society society,String postName,int postGrade) {
+    public static void addMember(String playerName, Society society, String postName, int postGrade) {
         SocietyUtils.societies.forEach(society1 -> society1.getTempApply().remove(playerName));
         society.getPost().put(playerName, new ArrayList() {
             {
@@ -343,7 +343,7 @@ public class SocietyUtils {
         }
         for (Map.Entry<String, Object> entry : SocietyPlugin.getInstance().getSocietyShopConfig().getAll().entrySet()) {
 
-            HashMap<String,Object> value = (HashMap<String,Object>) entry.getValue();
+            HashMap<String, Object> value = (HashMap<String, Object>) entry.getValue();
             int titleSignX = (int) value.get("x");
             int titleSignY = (int) value.get("y");
             int titleSignZ = (int) value.get("z");

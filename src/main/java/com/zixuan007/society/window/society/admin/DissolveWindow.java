@@ -29,7 +29,7 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
         ArrayList<Society> societies = SocietyUtils.societies;
         if (societies.size() > 0) {
             for (Society society : societies) {
-                String buttonContent = society.getSocietyName()+" "+society.getSid();
+                String buttonContent = society.getSocietyName() + " " + society.getSid();
                 addButton(new ElementButton(buttonContent));
             }
         } else {
@@ -44,11 +44,11 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
         String sidStr = elementButton.getText().split(" ")[1];
         int sid = Integer.parseInt(sidStr);
         Society society = SocietyUtils.getSocietysByID(sid);
-        String closeButtonName=PluginUtils.getWindowConfigInfo("messageWindow.close.button");
-        String closeImagePath=PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
+        String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
+        String closeImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
 
-        if(!SocietyUtils.societies.contains(society)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.dissolveWindow.notSociety"),null,closeButtonName,closeImagePath));
+        if (!SocietyUtils.societies.contains(society)) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.dissolveWindow.notSociety"), null, closeButtonName, closeImagePath));
             return;
         }
 
@@ -56,7 +56,7 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
         SocietyUtils.societies.remove(society);
         SocietyUtils.removeSociety(society.getSocietyName());
         String societyName = society.getSocietyName();
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.dissolveWindow.dissolveSociety",new String[]{"${societyName}"},new String[]{societyName}),null,closeButtonName,closeImagePath));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.dissolveWindow.dissolveSociety", new String[]{"${societyName}"}, new String[]{societyName}), null, closeButtonName, closeImagePath));
 
     }
 

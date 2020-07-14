@@ -27,33 +27,34 @@ public class MarryListener implements Listener {
 
     private SocietyPlugin societyPlugin;
 
-    public MarryListener(SocietyPlugin societyPlugin){
-        this.societyPlugin=societyPlugin;
+    public MarryListener(SocietyPlugin societyPlugin) {
+        this.societyPlugin = societyPlugin;
     }
 
     /**
      * 进入游戏进行性别选择
+     *
      * @param event
      */
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onMove(PlayerMoveEvent event){
+    public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
         String closeButtonImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
-        if(SocietyPlugin.getInstance().getMarryConfig().get(player.getName()) == null){
+        if (SocietyPlugin.getInstance().getMarryConfig().get(player.getName()) == null) {
 
-            ModalWindow affrimWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW,"§e请选择当前的性别","男","女");
+            ModalWindow affrimWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "§e请选择当前的性别", "男", "女");
             Config marryConfig = SocietyPlugin.getInstance().getMarryConfig();
-            affrimWindow.setButtonClickedListener((affrim,player1)->{
-                String gender="";
-                if(affrim){
-                    marryConfig.set(player1.getName(),1);
-                    gender="§b男";
-                }else{
-                    marryConfig.set(player1.getName(),0);
-                    gender="§c女";
+            affrimWindow.setButtonClickedListener((affrim, player1) -> {
+                String gender = "";
+                if (affrim) {
+                    marryConfig.set(player1.getName(), 1);
+                    gender = "§b男";
+                } else {
+                    marryConfig.set(player1.getName(), 0);
+                    gender = "§c女";
                 }
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功选择为 "+gender,null,closeButtonName,closeButtonImagePath));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功选择为 " + gender, null, closeButtonName, closeButtonImagePath));
                 marryConfig.save();
             });
             affrimWindow.setBack(true);
@@ -61,18 +62,18 @@ public class MarryListener implements Listener {
             player.showFormWindow(affrimWindow);
         }
         String name = MarryUtils.proposeFailName.get(player.getName());
-        if(name != null){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§b"+name+"§c拒绝了你的求婚",null,closeButtonName,closeButtonImagePath));
+        if (name != null) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§b" + name + "§c拒绝了你的求婚", null, closeButtonName, closeButtonImagePath));
             MarryUtils.proposeFailName.remove(player.getName());
         }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onMarry(PlayerMarryEvent event){
+    public void onMarry(PlayerMarryEvent event) {
         String propose = event.getPropose();
         String recipient = event.getRecipient();
         Date marryDate = event.getMarryDate();
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
         String marryConfigPath = PluginUtils.MARRY_FOLDER + propose + "_" + recipient + ".yml";
         Config config = new Config(marryConfigPath, Config.YAML);
         Marry marry = new Marry();
@@ -88,13 +89,13 @@ public class MarryListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onDivorceMarry(DivorceMarryEvent event){
+    public void onDivorceMarry(DivorceMarryEvent event) {
         Player player = event.getPlayer();
         Marry marry = MarryUtils.getMarryByName(player.getName());
         String propose = marry.getPropose();
         String recipient = marry.getRecipient();
         MarryUtils.removeMarry(marry);
-        Server.getInstance().broadcastMessage("§b"+propose+" §a和 §b"+recipient+"§a离婚了");
+        Server.getInstance().broadcastMessage("§b" + propose + " §a和 §b" + recipient + "§a离婚了");
     }
 
 

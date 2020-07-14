@@ -1,4 +1,5 @@
 package com.zixuan007.society.window.title.admin;
+
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
@@ -14,7 +15,7 @@ import com.zixuan007.society.window.WindowType;
  */
 public class TitleManagerWindow extends SimpleWindow implements WindowLoader {
     public TitleManagerWindow() {
-        super( PluginUtils.getWindowConfigInfo("titleManagerWindow.title"), "");
+        super(PluginUtils.getWindowConfigInfo("titleManagerWindow.title"), "");
     }
 
     @Override
@@ -24,9 +25,9 @@ public class TitleManagerWindow extends SimpleWindow implements WindowLoader {
         ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("titleManagerWindow.removeTitle.button.imgPath"));
         ElementButtonImageData img3 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("titleManagerWindow.createTitleShop.button.imgPath"));
 
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("titleManagerWindow.setTitle.button"),img1));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("titleManagerWindow.removeTitle.button"),img2));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("titleManagerWindow.createTitleShop.button"),img3));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("titleManagerWindow.setTitle.button"), img1));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("titleManagerWindow.removeTitle.button"), img2));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("titleManagerWindow.createTitleShop.button"), img3));
         return this;
     }
 

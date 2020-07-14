@@ -19,16 +19,16 @@ public class PrivilegeListWindow extends CustomWindow implements WindowLoader {
 
     @Override
     public FormWindow init(Object... objects) {
-        StringBuilder sb=new StringBuilder();
-        for(Vip vip:PrivilegeUtils.privilegeList){
+        StringBuilder sb = new StringBuilder();
+        for (Vip vip : PrivilegeUtils.privilegeList) {
             sb.setLength(0);
-            sb.append("§eVid§f: §b"+vip.getVid()+"\n")
-                    .append("§e持有人§f: §b"+vip.getPlayerName()+"\n")
-                    .append("§e特权类型§f: §l§d"+vip.getVip_Type().getTypeName()+"\n")
-                    .append("§r§e到期时间§f: §b"+vip.getHoldTime()+"\n");
+            sb.append("§eVid§f: §b" + vip.getVid() + "\n")
+                    .append("§e持有人§f: §b" + vip.getPlayerName() + "\n")
+                    .append("§e特权类型§f: §l§d" + vip.getVip_Type().getTypeName() + "\n")
+                    .append("§r§e到期时间§f: §b" + vip.getHoldTime() + "\n");
             addElement(new ElementLabel(sb.toString()));
         }
-        if(getElements().size() == 0){
+        if (getElements().size() == 0) {
             addElement(new ElementLabel(PluginUtils.getLanguageInfo("message.privilegeListWindow.noData")));
         }
         return this;

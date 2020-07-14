@@ -144,11 +144,11 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-                if(SocietyUtils.societyChatPlayers.containsKey(player.getName())){
+                if (SocietyUtils.societyChatPlayers.containsKey(player.getName())) {
                     SocietyUtils.societyChatPlayers.remove(player.getName());
                     player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.disabledChat"));
-                }else{
-                    SocietyUtils.societyChatPlayers.put(player.getName(),society.getSocietyName());
+                } else {
+                    SocietyUtils.societyChatPlayers.put(player.getName(), society.getSocietyName());
                     player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.enableChat"));
                 }
 
@@ -159,7 +159,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
                 String position = society.getPosition();
-                if(position == null || position.length() <= 0){
+                if (position == null || position.length() <= 0) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.notSpawn"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
@@ -169,7 +169,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 Double z = Double.valueOf(split[2]);
                 String levelName = split[3];
                 Level level = player.getServer().getLevelByName(levelName);
-                player.teleport(new Position(x,y,z,level));
+                player.teleport(new Position(x, y, z, level));
                 player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.spawn"));
                 break;
             default:

@@ -44,7 +44,7 @@ public class RemoveTitleWindow extends CustomWindow implements WindowLoader {
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if (titleList == null || titleList.size() <= 0) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removeTitleWindow.notTitle"),removeTitleWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.removeTitleWindow.notTitle"), removeTitleWindow, backButtonName, backButtonImage));
             return;
         }
         ArrayList<String> removeTitle = new ArrayList<>();
@@ -54,19 +54,19 @@ public class RemoveTitleWindow extends CustomWindow implements WindowLoader {
             }
         }
         if (removeTitle.size() <= 0) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removeTitleWindow.titleNotExist"),removeTitleWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.removeTitleWindow.titleNotExist"), removeTitleWindow, backButtonName, backButtonImage));
             return;
         }
         titleList.removeAll(removeTitle);
         titleConfig.set(playerName, titleList);
         titleConfig.save();
 
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removeTitleWindow.remove"),removeTitleWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.removeTitleWindow.remove"), removeTitleWindow, backButtonName, backButtonImage));
 
 
         if (PluginUtils.isOnlineByName(playerName)) {
             Player player1 = Server.getInstance().getPlayer(playerName);
-            player1.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.removeTitleWindow.removeTitle"),removeTitleWindow,backButtonName,backButtonImage));
+            player1.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.removeTitleWindow.removeTitle"), removeTitleWindow, backButtonName, backButtonImage));
         }
 
 

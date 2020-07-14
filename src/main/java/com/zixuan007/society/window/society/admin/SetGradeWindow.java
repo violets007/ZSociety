@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 /**
  * 设置公会等级窗口
+ *
  * @author zixuan007
  */
 public class SetGradeWindow extends CustomWindow implements WindowLoader {
@@ -36,10 +37,10 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         if (societies.size() > 0) {
             ArrayList<String> sidList = new ArrayList<>();
             for (Society society : societies) {
-                sidList.add(society.getSid()+" "+society.getSocietyName());
+                sidList.add(society.getSid() + " " + society.getSocietyName());
             }
-            addElement(new ElementDropdown("公会列表",sidList));
-            addElement(new ElementInput("","请输入玩家等级"));
+            addElement(new ElementDropdown("公会列表", sidList));
+            addElement(new ElementInput("", "请输入玩家等级"));
         } else {
             addElement(new ElementLabel("没有可以设置的公会"));
         }
@@ -56,12 +57,12 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
 
         String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
         String closeButtonImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
-        if(getElements().size() <= 1){
+        if (getElements().size() <= 1) {
             return;
         }
 
-        if(!SocietyUtils.isNumeric(gradeStr)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setSocietyGrade.isNumber"),setGradeWindow,backButtonName,backButtonImage));
+        if (!SocietyUtils.isNumeric(gradeStr)) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.isNumber"), setGradeWindow, backButtonName, backButtonImage));
             return;
         }
 
@@ -71,8 +72,8 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         int grade = Integer.parseInt(gradeStr);
         Society society = SocietyUtils.getSocietysByID(sid);
 
-        if(!SocietyUtils.societies.contains(society)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setSocietyGrade.notSociety"),null,closeButtonName,closeButtonImagePath));
+        if (!SocietyUtils.societies.contains(society)) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.notSociety"), null, closeButtonName, closeButtonImagePath));
             return;
         }
 
@@ -82,7 +83,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         SocietyUtils.saveSociety(society);
         String societyName = society.getSocietyName();
         int societyGrade = society.getGrade();
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.setSocietyGrade",new String[]{"${societyName}","${societyGrade}"},new String[]{societyName,societyGrade+""}),null,closeButtonName,closeButtonImagePath));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.setSocietyGrade", new String[]{"${societyName}", "${societyGrade}"}, new String[]{societyName, societyGrade + ""}), null, closeButtonName, closeButtonImagePath));
     }
 
 

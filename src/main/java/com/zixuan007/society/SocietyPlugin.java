@@ -172,9 +172,9 @@ public class SocietyPlugin extends PluginBase {
         String windowConfigPath = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
         String languagePath = getDataFolder() + File.separator + "lang" + File.separator + "zh-CN.yml";
 
-        config=new Config(PluginUtils.checkConfig("Config.yml",configPath),Config.YAML);
-        languageConfig=new Config(PluginUtils.checkConfig("lang/zh-CN.yml",languagePath),Config.YAML);
-        languageConfig=new Config(PluginUtils.checkConfig("WindowConfig.yml",windowConfigPath),Config.YAML);
+        config = new Config(PluginUtils.checkConfig("Config.yml", configPath), Config.YAML);
+        languageConfig = new Config(PluginUtils.checkConfig("lang/zh-CN.yml", languagePath), Config.YAML);
+        languageConfig = new Config(PluginUtils.checkConfig("WindowConfig.yml", windowConfigPath), Config.YAML);
 
 
     }

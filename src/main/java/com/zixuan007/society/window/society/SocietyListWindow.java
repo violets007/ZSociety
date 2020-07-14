@@ -32,7 +32,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        String content= (String) objects[0];
+        String content = (String) objects[0];
         int currentPage = (int) objects[1];
         int totalPage = (int) objects[2];
 
@@ -45,13 +45,13 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
 
         this.societyList = (List<Society>) objects[3];
         for (Society society : societyList) {
-            addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName()+" §6lv_§0"+society.getGrade()));
+            addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName() + " §6lv_§0" + society.getGrade()));
         }
         if (currentPage < totalPage) {
             addButton(new ElementButton("下一页"));
         }
 
-        if(objects.length >= 4 && objects[4] != null){
+        if (objects.length >= 4 && objects[4] != null) {
             setParent((FormWindow) objects[4]);
             setBack(true);
         }
@@ -68,7 +68,6 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
         SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(--currentPage, WindowType.SOCIETY_WINDOW);
         player.showFormWindow(societyListWindow);
     }
-
 
 
     @Override
@@ -94,16 +93,16 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
         if (this.currentPage == 1) {
             society = this.societyList.get(id);
 
-            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW,"§e您确定要加入 §b" + (this.societyList.get(id)).getSocietyName() + " §e公会吗?","§a确认加入","§c取消加入");
+            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "§e您确定要加入 §b" + (this.societyList.get(id)).getSocietyName() + " §e公会吗?", "§a确认加入", "§c取消加入");
         } else {
             society = this.societyList.get(id - 1);
-            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW,"§e您确定要加入 §b" + (this.societyList.get(id - 1)).getSocietyName() + " §e公会吗?","§a确认加入","§c取消加入");
+            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "§e您确定要加入 §b" + (this.societyList.get(id - 1)).getSocietyName() + " §e公会吗?", "§a确认加入", "§c取消加入");
         }
         affirmWindow.setButtonClickedListener((affirm, player1) -> {
             if (affirm) {
                 if (PluginUtils.isOnlineByName(society.getPresidentName())) {
                     String playerName = player1.getName();
-                    Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(PluginUtils.getLanguageInfo("message.societyListWindow.playerApplyJoinSociety",new String[]{"${playerName}"},new String[]{playerName}));
+                    Server.getInstance().getPlayer(society.getPresidentName()).sendMessage(PluginUtils.getLanguageInfo("message.societyListWindow.playerApplyJoinSociety", new String[]{"${playerName}"}, new String[]{playerName}));
                 }
                 String key = "等级" + society.getGrade();
                 ArrayList<Object> configGrades = (ArrayList<Object>) SocietyPlugin.getInstance().getConfig().get(key);
@@ -111,11 +110,10 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
                 int societyMemberCount = society.getMembers().size();
 
                 //公会人员已满
-                if(societyMemberCount >= maxMemberCount){
+                if (societyMemberCount >= maxMemberCount) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyListWindow.overtakeMaxMember"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
-
 
 
                 SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new PlayerApplyJoinSocietyEvent(player1, society));
@@ -126,8 +124,6 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
 
         player.showFormWindow(affirmWindow);
     }
-
-
 
 
 }

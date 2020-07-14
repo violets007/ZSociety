@@ -22,7 +22,7 @@ public class ContributionRankingWindow extends SimpleWindow implements WindowLoa
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        if(objects != null && objects.length >= 1 && objects[0] != null){
+        if (objects != null && objects.length >= 1 && objects[0] != null) {
             setParent((FormWindow) objects[0]);
             setBack(true);
         }

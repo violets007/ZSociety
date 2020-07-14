@@ -23,7 +23,7 @@ public class PrivilegeInfoWindow extends SimpleWindow implements WindowLoader {
     public FormWindow init(Object... objects) {
         Player player = (Player) objects[0];
         Vip vip = (Vip) objects[1];
-        setTitle(PluginUtils.getWindowConfigInfo(player,"privilegeInfoWindow.title"));
+        setTitle(PluginUtils.getWindowConfigInfo(player, "privilegeInfoWindow.title"));
         String sb = "§6VID §b" + vip.getVid() + "\n" +
                 "§6持有时间 §b" + vip.getHoldTime() + "\n" +
                 "§6特权类型 §b" + vip.getVip_Type().getTypeName() + "\n";

@@ -19,9 +19,9 @@ public class PrivilegeListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onJoin(PlayerJoinEvent event){
+    public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if(PrivilegeUtils.removePrivilegeName.contains(player.getName())){
+        if (PrivilegeUtils.removePrivilegeName.contains(player.getName())) {
             player.setAllowFlight(false);
             PrivilegeUtils.removePivilegeData(player.getName());
             PrivilegeUtils.removePrivilegeName.remove(player.getName());

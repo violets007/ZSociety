@@ -25,7 +25,7 @@ public class AddPublicFunds extends CustomWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getElements().clear();
-        addElement(new ElementInput("","请输入增加的金额"));
+        addElement(new ElementInput("", "请输入增加的金额"));
         return this;
     }
 
@@ -37,16 +37,16 @@ public class AddPublicFunds extends CustomWindow implements WindowLoader {
         FormWindow addPublicFunds = WindowManager.getFormWindow(WindowType.ADD_PUBLIC_FUNDS);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
-        if(myMoney < money){
+        if (myMoney < money) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.addPublicFunds.rarelyCoin"), addPublicFunds, backButtonName, backButtonImage));
             return;
         }
 
-        EconomyAPI.getInstance().reduceMoney(player,money);
+        EconomyAPI.getInstance().reduceMoney(player, money);
         Marry marry = MarryUtils.getMarryByName(player.getName());
-        marry.setMoney(marry.getMoney()+money);
+        marry.setMoney(marry.getMoney() + money);
         MarryUtils.saveMarry(marry);
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.addPublicFunds.contribute",new String[]{"${money}"},new String[]{money+""}), addPublicFunds, backButtonName, backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.addPublicFunds.contribute", new String[]{"${money}"}, new String[]{money + ""}), addPublicFunds, backButtonName, backButtonImage));
     }
 
 

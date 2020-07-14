@@ -1,4 +1,5 @@
 package com.zixuan007.society.utils;
+
 import cn.nukkit.Server;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.service.NKServiceManager;
@@ -99,7 +100,7 @@ public class MetricsLite {
             try {
                 // Check the UUID
                 UUID.fromString(config.getString("serverUuid"));
-            } catch (Exception ignored){
+            } catch (Exception ignored) {
                 map.put("serverUuid", UUID.randomUUID().toString());
             }
         }
@@ -137,7 +138,8 @@ public class MetricsLite {
                     service.getField("B_STATS_VERSION"); // Our identifier :)
                     found = true; // We aren't the first
                     break;
-                } catch (NoSuchFieldException ignored) { }
+                } catch (NoSuchFieldException ignored) {
+                }
             }
             // Register our service
             Server.getInstance().getServiceManager().register(MetricsLite.class, this, plugin, ServicePriority.NORMAL);
@@ -258,7 +260,7 @@ public class MetricsLite {
                     field.setInt(handle, handle.getModifiers() & ~Modifier.FINAL);
                     handle.setAccessible(true);
                     providers = ((Map<Class<?>, List<RegisteredServiceProvider<?>>>) handle.get((NKServiceManager) (Server.getInstance().getServiceManager()))).get(service);
-                } catch(IllegalAccessException | IllegalArgumentException | SecurityException e) {
+                } catch (IllegalAccessException | IllegalArgumentException | SecurityException e) {
                     // Something went wrong! :(
                     if (logFailedRequests) {
                         plugin.getLogger().warning("Failed to link to metrics class " + service.getName(), e);
@@ -272,10 +274,12 @@ public class MetricsLite {
                             if (plugin instanceof JsonObject) {
                                 pluginData.add((JsonElement) plugin);
                             }
-                        } catch (SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ignored) { }
+                        } catch (SecurityException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ignored) {
+                        }
                     }
                 }
-            } catch (NoSuchFieldException ignored) { }
+            } catch (NoSuchFieldException ignored) {
+            }
         });
 
         data.add("plugins", pluginData);
@@ -298,7 +302,7 @@ public class MetricsLite {
      * Sends the data to the bStats server.
      *
      * @param plugin Any plugin. It's just used to get a logger instance.
-     * @param data The data to send.
+     * @param data   The data to send.
      * @throws Exception If the request failed.
      */
     private static void sendData(Plugin plugin, JsonObject data) throws Exception {

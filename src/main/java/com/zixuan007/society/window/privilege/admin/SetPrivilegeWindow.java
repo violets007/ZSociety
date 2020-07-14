@@ -38,7 +38,7 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
         ArrayList<String> vipType = new ArrayList<>();
         vipType.add(VipType.VIP.getTypeName());
         vipType.add(VipType.SVIP.getTypeName());
-        addElement(new ElementDropdown("特权类型",vipType));
+        addElement(new ElementDropdown("特权类型", vipType));
         return this;
     }
 
@@ -49,30 +49,30 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
         FormWindow setPrivilegeWindow = WindowManager.getFormWindow(WindowType.SET_PRIVILEGE_WINDOW);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
-        if(!SocietyUtils.isNumeric(timeStr) || "".equals(timeStr)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§c输入的不是数字",setPrivilegeWindow,backButtonName,backButtonImage));
+        if (!SocietyUtils.isNumeric(timeStr) || "".equals(timeStr)) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§c输入的不是数字", setPrivilegeWindow, backButtonName, backButtonImage));
             return;
         }
 
-        int time=Integer.parseInt(timeStr);
+        int time = Integer.parseInt(timeStr);
         FormResponseData dropdownResponse = response.getDropdownResponse(2);
         String elementContent = dropdownResponse.getElementContent();
 
         Vip vip = new Vip();
         vip.setVid(PrivilegeUtils.getNextVid());
         long expireTime = System.currentTimeMillis() + 60 * 60 * 24 * time * 1000;
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
         String format = simpleDateFormat.format(new Date(expireTime));
         vip.setHoldTime(format);
         vip.setBuyDate("");
         vip.setPlayerName(setPrivilegePlayerName);
-        vip.setVip_Type(elementContent.equals(VipType.VIP.getTypeName())?VipType.VIP:VipType.SVIP);
+        vip.setVip_Type(elementContent.equals(VipType.VIP.getTypeName()) ? VipType.VIP : VipType.SVIP);
         PrivilegeUtils.savePrivilege(vip);
-        if(!PrivilegeUtils.isSvip(setPrivilegePlayerName) && !PrivilegeUtils.isVIP(setPrivilegePlayerName)) {
+        if (!PrivilegeUtils.isSvip(setPrivilegePlayerName) && !PrivilegeUtils.isVIP(setPrivilegePlayerName)) {
             PrivilegeUtils.privilegeList.add(vip);
         }
 
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setPrivilegeWindow.set",new String[]{"${setPrivilegePlayerName}","${elementContent}","${time}"},new String[]{setPrivilegePlayerName,elementContent,time+""}),setPrivilegeWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setPrivilegeWindow.set", new String[]{"${setPrivilegePlayerName}", "${elementContent}", "${time}"}, new String[]{setPrivilegePlayerName, elementContent, time + ""}), setPrivilegeWindow, backButtonName, backButtonImage));
     }
 
 

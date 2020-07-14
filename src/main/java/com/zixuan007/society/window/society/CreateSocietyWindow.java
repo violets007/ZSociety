@@ -30,8 +30,8 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getElements().clear();
-        if(objects.length >= 1){
-            FormWindow formWindow= (FormWindow) objects[0];
+        if (objects.length >= 1) {
+            FormWindow formWindow = (FormWindow) objects[0];
             setBack(true);
             setParent(formWindow);
         }
@@ -48,24 +48,24 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (societyNameExist) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.existSociety"),createSociety,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyWindow.existSociety"), createSociety, backButtonName, backButtonImage));
         } else {
             Double createSocietyMoney;
-            if(societyPlugin.getConfig().get("createSocietyMoney") instanceof Integer){
-                createSocietyMoney=((Integer) societyPlugin.getConfig().get("createSocietyMoney")).doubleValue();
-            }else{
-                createSocietyMoney= (Double) societyPlugin.getConfig().get("createSocietyMoney");
+            if (societyPlugin.getConfig().get("createSocietyMoney") instanceof Integer) {
+                createSocietyMoney = ((Integer) societyPlugin.getConfig().get("createSocietyMoney")).doubleValue();
+            } else {
+                createSocietyMoney = (Double) societyPlugin.getConfig().get("createSocietyMoney");
             }
             double myMoney = EconomyAPI.getInstance().myMoney(player);
             if (myMoney < createSocietyMoney) {
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.InsufficientBalance",new String[]{"${createSocietyMoney}"},new String[]{createSocietyMoney+""}),createSociety,backButtonName,backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyWindow.InsufficientBalance", new String[]{"${createSocietyMoney}"}, new String[]{createSocietyMoney + ""}), createSociety, backButtonName, backButtonImage));
             } else if (societyName != null && !"".equals(societyName)) {
                 EconomyAPI.getInstance().reduceMoney(player, createSocietyMoney, true);
                 long count = SocietyUtils.getNextSid();
                 Society society = new Society(count, societyName, player.getName(), SocietyUtils.getFormatDateTime(), 0.0D, new HashMap<>());
                 societyPlugin.getServer().getPluginManager().callEvent(new PlayerCreateSocietyEvent(player, society));
             } else {
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createSocietyWindow.societyNameIsNull"),createSociety,backButtonName,backButtonImage));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyWindow.societyNameIsNull"), createSociety, backButtonName, backButtonImage));
             }
         }
     }

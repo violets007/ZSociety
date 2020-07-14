@@ -6,10 +6,12 @@ import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
+
 import java.util.Collection;
 
 /**
  * 底部Tip显示
+ *
  * @author zixuan007
  */
 public class ShowTask extends PluginTask<SocietyPlugin> {
@@ -24,7 +26,7 @@ public class ShowTask extends PluginTask<SocietyPlugin> {
     public void onRun(int i) {
         Collection<Player> players = owner.getServer().getOnlinePlayers().values();
         Config config = SocietyPlugin.getInstance().getConfig();
-        String tempText=config.getString("tipText");
+        String tempText = config.getString("tipText");
         String configNameTag = (String) config.get("nameTagFormat");
         if (config.getBoolean(IS_TIP)) {
             for (Player player : players) {

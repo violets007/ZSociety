@@ -27,11 +27,11 @@ public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        Player player= (Player) objects[0];
+        Player player = (Player) objects[0];
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
-        this.sid=society.getSid();
-        if(society.getPost() != null){
-            String[] memberList= society.getPost().entrySet().toArray(new String[0]);
+        this.sid = society.getSid();
+        if (society.getPost() != null) {
+            String[] memberList = society.getPost().entrySet().toArray(new String[0]);
             for (String name : memberList) {
                 if (name.equals(society.getPresidentName())) {
                     continue;
@@ -52,14 +52,14 @@ public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
-        MessageWindow messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"§a成功移除成员 §b" + playerName, presidentWindow,backButtonName,backButtonImage);
-        SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.removeMemberWindow.removeMember",new String[]{"${playerName}"},new String[]{playerName}),society);
-        if(PluginUtils.isOnlineByName(playerName)) {
+        MessageWindow messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功移除成员 §b" + playerName, presidentWindow, backButtonName, backButtonImage);
+        SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.removeMemberWindow.removeMember", new String[]{"${playerName}"}, new String[]{playerName}), society);
+        if (PluginUtils.isOnlineByName(playerName)) {
             Server.getInstance().getPlayer(playerName).sendTitle(PluginUtils.getLanguageInfo("message.removeMemberWindow.kickPlayer"));
         }
         player.showFormWindow(messageWindow);
         //移除玩家在此公会创建过的商店
-        SocietyUtils.removeCreateShop(society,playerName);
+        SocietyUtils.removeCreateShop(society, playerName);
     }
 
 

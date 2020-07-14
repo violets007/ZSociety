@@ -19,12 +19,12 @@ public class MessageWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        String message= (String) objects[0];
-        FormWindow formWindow= (FormWindow) objects[1];
-        String buttonName= (String) objects[2];
-        String imgPath= (String) objects[3];
+        String message = (String) objects[0];
+        FormWindow formWindow = (FormWindow) objects[1];
+        String buttonName = (String) objects[2];
+        String imgPath = (String) objects[3];
         setContent(message);
-        addButton(new ElementButton(buttonName,new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH,imgPath)));
+        addButton(new ElementButton(buttonName, new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, imgPath)));
         setParent(formWindow);
         return this;
     }

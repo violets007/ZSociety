@@ -23,14 +23,14 @@ public class MarryAdminWindow extends SimpleWindow implements WindowLoader {
         getButtons().clear();
         ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("marryAdminWindow.setContribution.button.imgPath"));
         ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("marryAdminWindow.remove.button.imgPath"));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryAdminWindow.setContribution.button"),img1));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryAdminWindow.remove.button"),img2));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryAdminWindow.setContribution.button"), img1));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("marryAdminWindow.remove.button"), img2));
         return this;
     }
 
     @Override
     public void onClick(int id, Player player) {
-        switch (id){
+        switch (id) {
             case 0:
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_MARRY_MONEY_WINDOW));
                 break;

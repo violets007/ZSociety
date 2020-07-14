@@ -1,4 +1,5 @@
 package com.zixuan007.society.window.title.admin;
+
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
@@ -42,22 +43,22 @@ public class CreateTitleShopWindow extends CustomWindow implements WindowLoader 
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
         if (title.isEmpty() || title.equals(" ")) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createTitleShopWindow.isTitle"),createTitleShopWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createTitleShopWindow.isTitle"), createTitleShopWindow, backButtonName, backButtonImage));
             return;
         }
         if ("".equals(money) || !SocietyUtils.isNumeric(money)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createTitleShopWindow.isNumber"),createTitleShopWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createTitleShopWindow.isNumber"), createTitleShopWindow, backButtonName, backButtonImage));
             return;
         }
         if (SocietyPlugin.getInstance().getTitleShopConfig().get(title) != null) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.createTitleShopWindow.titleExist"),createTitleShopWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createTitleShopWindow.titleExist"), createTitleShopWindow, backButtonName, backButtonImage));
             return;
         }
 
-        TitleUtils.onCreateName.put(player.getName(),new HashMap<String,Object>(){
+        TitleUtils.onCreateName.put(player.getName(), new HashMap<String, Object>() {
             {
-                put("title",title);
-                put("money",money);
+                put("title", title);
+                put("money", money);
             }
         });
 

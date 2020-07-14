@@ -21,13 +21,13 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
     private long sid;
 
     public PlayerApplyListWindow(List<String> tempApply, long sid) {
-        super( PluginUtils.getWindowConfigInfo("playerApplyListWindow.title"), "§e申请加入公会人员");
+        super(PluginUtils.getWindowConfigInfo("playerApplyListWindow.title"), "§e申请加入公会人员");
     }
 
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        Player player= (Player) objects[0];
+        Player player = (Player) objects[0];
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         this.tempApply = society.getTempApply();
         this.sid = society.getSid();
@@ -44,14 +44,14 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
 
         if (SocietyUtils.isJoinSociety(playerName)) {
 
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.isJoinSociety",new String[]{"${playerName}"},new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.isJoinSociety", new String[]{"${playerName}"}, new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
             return;
         }
 
         Society society = SocietyUtils.getSocietysByID(this.sid);
-        SocietyUtils.addMember(playerName, society,"精英",20);
-        SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.playerApplyList.joinSociety",new String[]{"${playerName}"},new String[]{playerName}),society);
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.acceptJoinSociety",new String[]{"${playerName}"},new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
+        SocietyUtils.addMember(playerName, society, "精英", 20);
+        SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.playerApplyList.joinSociety", new String[]{"${playerName}"}, new String[]{playerName}), society);
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.acceptJoinSociety", new String[]{"${playerName}"}, new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
     }
 
 

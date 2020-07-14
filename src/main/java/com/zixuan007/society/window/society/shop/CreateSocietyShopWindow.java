@@ -32,32 +32,32 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
     @Override
     public FormWindow init(Object... objects) {
         getElements().clear();
-        addElement(new ElementInput("","售卖物品的价格"));
-        Player player= (Player) objects[0];
-        this.player=player;
+        addElement(new ElementInput("", "售卖物品的价格"));
+        Player player = (Player) objects[0];
+        this.player = player;
         ArrayList<String> itemName = new ArrayList<>();
         for (Map.Entry<Integer, Item> entry : player.getInventory().getContents().entrySet()) {
             Integer key = entry.getKey();
             Item value = entry.getValue();
-            if(value.getCustomName() == null || value.getCustomName().equals("")){
+            if (value.getCustomName() == null || value.getCustomName().equals("")) {
                 String idByName = ItemIDSunName.getIDByName(value);
                 value.setCustomName(idByName);
             }
-            itemName.add(key+"-"+value.getCustomName());
+            itemName.add(key + "-" + value.getCustomName());
         }
-        addElement(new ElementDropdown("背包物品",itemName));
-        addElement(new ElementInput("","请写入物品数量"));
+        addElement(new ElementDropdown("背包物品", itemName));
+        addElement(new ElementInput("", "请写入物品数量"));
         return this;
     }
 
     @Override
     public void onClick(FormResponseCustom response, Player player) {
         String sellPriceStr = response.getInputResponse(0);
-        FormWindow createSocietyShopForm = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW,player);
+        FormWindow createSocietyShopForm = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
-        if(!SocietyUtils.isNumeric(sellPriceStr) || sellPriceStr.equals("")){
+        if (!SocietyUtils.isNumeric(sellPriceStr) || sellPriceStr.equals("")) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isNumber"), createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
@@ -70,18 +70,18 @@ public class CreateSocietyShopWindow extends CustomWindow implements WindowLoade
         String index = split[0];
         String itemCustomName = split[1];
         Item item = player.getInventory().getItem(Integer.parseInt(index));
-        if(!SocietyUtils.isNumeric(itemCountStr) || itemCountStr.equals("")){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isNumber"), createSocietyShopForm, backButtonName, backButtonImage));
+        if (!SocietyUtils.isNumeric(itemCountStr) || itemCountStr.equals("")) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isNumber"), createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
         int itemCount = Integer.parseInt(itemCountStr);
-        if(item.count < itemCount){
+        if (item.count < itemCount) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyShopWindow.rarelyItemCount"), createSocietyShopForm, backButtonName, backButtonImage));
             return;
         }
         item.setCount(itemCount);
         player.getInventory().removeItem(item);
-        SocietyUtils.onCreatePlayer.put(player.getName(),new ArrayList<Object>(){
+        SocietyUtils.onCreatePlayer.put(player.getName(), new ArrayList<Object>() {
             {
                 add(sellPrice);
                 add(item);

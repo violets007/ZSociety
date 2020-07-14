@@ -124,7 +124,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 double y = position.y;
                 double z = position.z;
                 String levelName = position.getLevel().getName();
-                society.setPosition(x+","+y+","+z+","+levelName);
+                society.setPosition(x + "," + y + "," + z + "," + levelName);
                 SocietyUtils.saveSociety(society);
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.setSpawn"), null, backButtonName, backButtonImage));
                 break;

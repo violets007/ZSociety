@@ -1,4 +1,5 @@
 package com.zixuan007.society.window.title.admin;
+
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
@@ -31,9 +32,9 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
         Config titleConfig = SocietyPlugin.getInstance().getTitleConfig();
         ArrayList<String> players = new ArrayList<>();
         for (Map.Entry<String, Object> entry : titleConfig.getAll().entrySet()) {
-           players.add(entry.getKey());
+            players.add(entry.getKey());
         }
-        addElement(new ElementDropdown("",players));
+        addElement(new ElementDropdown("", players));
         addElement(new ElementInput("", "称号"));
         return this;
     }
@@ -47,17 +48,17 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (societyPlugin.getTitleConfig().get(playerName) == null) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.isPlayerName"),setTitleWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setTitleWindow.isPlayerName"), setTitleWindow, backButtonName, backButtonImage));
             return;
         }
         if (title.trim().equals("") || title.equals(" ")) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.isTitle"),setTitleWindow,backButtonName,backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setTitleWindow.isTitle"), setTitleWindow, backButtonName, backButtonImage));
             return;
         }
-        title=title.replaceAll(" ","");
+        title = title.replaceAll(" ", "");
         ArrayList<String> arrayList = TitleUtils.titleList.get(playerName);
-        if(TitleUtils.isExistTitle(playerName,title)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.existTitle"),setTitleWindow,backButtonName,backButtonImage));
+        if (TitleUtils.isExistTitle(playerName, title)) {
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setTitleWindow.existTitle"), setTitleWindow, backButtonName, backButtonImage));
             return;
         }
 
@@ -67,10 +68,9 @@ public class SetTitleWindow extends CustomWindow implements WindowLoader {
         titleConfig.save();*/
 
 
+        TitleUtils.addTitle(playerName, title);
 
-        TitleUtils.addTitle(playerName,title);
-
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.setTitleWindow.setTitle",new String[]{"${playerName}","${title}"},new String[]{playerName,title}),setTitleWindow,backButtonName,backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setTitleWindow.setTitle", new String[]{"${playerName}", "${title}"}, new String[]{playerName, title}), setTitleWindow, backButtonName, backButtonImage));
     }
 
 

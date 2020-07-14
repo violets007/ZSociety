@@ -37,16 +37,16 @@ public class TitleWindow extends SimpleWindow implements WindowLoader {
     public void onClick(int id, Player player) {
         ArrayList<String> titles = TitleUtils.titleList.get(player.getName());
         String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
-        String closeButtonImagePath=PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
+        String closeButtonImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         if (titles.get(id) == null || titles.size() <= 0) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.titleWindow.remove"),null,closeButtonName,closeButtonImagePath));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.titleWindow.remove"), null, closeButtonName, closeButtonImagePath));
             return;
         }
         String title = titles.get(id);
         titles.remove(title);
-        titles.add(0,title);
-        TitleUtils.saveTitle(playerName,titles);
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.titleWindow.wearTitle",new String[]{"${title}"},new String[]{title}),null,closeButtonName,closeButtonImagePath));
+        titles.add(0, title);
+        TitleUtils.saveTitle(playerName, titles);
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.titleWindow.wearTitle", new String[]{"${title}"}, new String[]{title}), null, closeButtonName, closeButtonImagePath));
     }
 
 

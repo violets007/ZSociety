@@ -52,7 +52,7 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
             return;
         }
         if (!SocietyUtils.isJoinSociety(playerName)) {
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,  PluginUtils.getLanguageInfo("message.setJobWindow.isJoinSociety"), setJobWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.isJoinSociety"), setJobWindow, backButtonName, backButtonImage));
             return;
         }
         Society society = SocietyUtils.getSocietyByPlayerName(playerName);
@@ -64,7 +64,7 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
         for (ArrayList<Object> arrayList : society.getMembers().values()) {
             String postName = (String) arrayList.get(0);
             Integer postGrade = (Integer) arrayList.get(1);
-            if(postGrade == jobGrade && !postName.equals(jobName)){
+            if (postGrade == jobGrade && !postName.equals(jobName)) {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.existJobGrade"), setJobWindow, backButtonName, backButtonImage));
                 return;
             }
@@ -78,10 +78,10 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
         });
         SocietyUtils.saveSociety(society);
 
-        if(PluginUtils.isOnlineByName(playerName)){
-            Server.getInstance().getPlayer(playerName).sendTitle(PluginUtils.getLanguageInfo("message.setJobWindow.upJob",new String[]{"${jobName}"},new String[]{jobName}));
+        if (PluginUtils.isOnlineByName(playerName)) {
+            Server.getInstance().getPlayer(playerName).sendTitle(PluginUtils.getLanguageInfo("message.setJobWindow.upJob", new String[]{"${jobName}"}, new String[]{jobName}));
         }
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.setJob",new String[]{"${playerName}","${jobName}"},new String[]{playerName,jobName}), setJobWindow, backButtonName, backButtonImage));
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.setJob", new String[]{"${playerName}", "${jobName}"}, new String[]{playerName, jobName}), setJobWindow, backButtonName, backButtonImage));
     }
 
 

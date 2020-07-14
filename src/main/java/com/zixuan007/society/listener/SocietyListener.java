@@ -59,7 +59,7 @@ public class SocietyListener implements Listener {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         ArrayList<Object> post = (ArrayList<Object>) config.get("post");
-        HashMap<String,Object> postInfo = (HashMap<String, Object>) post.get(0);
+        HashMap<String, Object> postInfo = (HashMap<String, Object>) post.get(0);
         SocietyUtils.addMember(player.getName(), society, "会长", (Integer) postInfo.get("grade"));
         SocietyUtils.societies.add(society);
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b§l" + player.getName() + " §r§a创建公会名称: §e" + society.getSocietyName());
@@ -134,7 +134,7 @@ public class SocietyListener implements Listener {
                     return;
                 }
 
-                if(player.isCreative() && !player.isOp()){
+                if (player.isCreative() && !player.isOp()) {
                     player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isCreative"));
                     return;
                 }
@@ -369,7 +369,7 @@ public class SocietyListener implements Listener {
                             Server server = SocietyPlugin.getInstance().getServer();
                             Player societyMember = server.getPlayer(playerName);
                             if (societyMember != null && SocietyUtils.societyChatPlayers.containsKey(societyMember.getName())) {
-                                societyMember.sendMessage("§f[§e公会频道§f]§f[§9"+SocietyUtils.getPostByName(playerName,society)+"§f] §l§b" + playerName + "§r§f>> " + ((TextPacket) packet).message);
+                                societyMember.sendMessage("§f[§e公会频道§f]§f[§9" + SocietyUtils.getPostByName(playerName, society) + "§f] §l§b" + playerName + "§r§f>> " + ((TextPacket) packet).message);
                                 event.setCancelled();
                             }
                         }

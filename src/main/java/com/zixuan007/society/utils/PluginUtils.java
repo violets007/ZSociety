@@ -68,8 +68,8 @@ public class PluginUtils {
         String postName = SocietyUtils.getPostByName(player.getName(), society);
         String title = TitleUtils.getTitles(player.getName()).size() <= 0 ? "无称号" : TitleUtils.getTitles(player.getName()).get(0);
         HashMap<String, String> societyChatPlayers = SocietyUtils.societyChatPlayers;
-        String societyChat=societyChatPlayers.containsKey(player.getName()) ? "§a开启" : "§c关闭";
-        String privilege="";
+        String societyChat = societyChatPlayers.containsKey(player.getName()) ? "§a开启" : "§c关闭";
+        String privilege = "";
         if (PrivilegeUtils.isVIP(player.getName()) || PrivilegeUtils.isSvip(player.getName())) {
             privilege = PrivilegeUtils.isVIP(player.getName()) ? "§l§eVIP§f+" : "§l§cS§aV§l§bIP§f+";
         }
@@ -122,6 +122,7 @@ public class PluginUtils {
 
     /**
      * 获取求婚所需要的金额
+     *
      * @return
      */
     public static Double getProposeMoney() {
@@ -201,17 +202,17 @@ public class PluginUtils {
         return societyPlugin.getWindowConfig().getString(key, key);
     }
 
-    public static File checkConfig(String pluginPath,String path){
+    public static File checkConfig(String pluginPath, String path) {
         File file = new File(path);
         if (file.exists()) {
             Config config = new Config(file, Config.YAML);
             String version = (String) config.get("version");
-            if(version == null || !version.equals(societyPlugin.getDescription().getVersion())){
-                societyPlugin.saveResource(pluginPath,true);
-                societyPlugin.getLogger().info("检测到: "+path+" 文件版本过低,进行覆盖!");
+            if (version == null || !version.equals(societyPlugin.getDescription().getVersion())) {
+                societyPlugin.saveResource(pluginPath, true);
+                societyPlugin.getLogger().info("检测到: " + path + " 文件版本过低,进行覆盖!");
             }
-        }else{
-            societyPlugin.saveResource(pluginPath,true);
+        } else {
+            societyPlugin.saveResource(pluginPath, true);
         }
         return file;
     }

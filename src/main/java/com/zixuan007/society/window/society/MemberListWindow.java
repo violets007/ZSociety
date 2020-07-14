@@ -25,8 +25,8 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        Player player= (Player) objects[0];
-        if(objects.length >= 2 && objects[1] != null){
+        Player player = (Player) objects[0];
+        if (objects.length >= 2 && objects[1] != null) {
             setParent((FormWindow) objects[1]);
             setBack(true);
         }
@@ -41,7 +41,7 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
             ArrayList<Object> value = entry.getValue();
             String postName = (String) value.get(0);
             Integer postGrade = (Integer) value.get(1);
-            memberList.add(new ArrayList<Object>(){
+            memberList.add(new ArrayList<Object>() {
                 {
                     add(playerName);
                     add(postName);
@@ -50,21 +50,21 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
             });
         }
 
-       memberList.sort(new Comparator<ArrayList<Object>>() {
-           @Override
-           public int compare(ArrayList<Object> o1, ArrayList<Object> o2) {
-               Integer postGrade1 = (Integer) o1.get(2);
-               Integer postGrade2 = (Integer) o2.get(2);
-               return  (postGrade1 > postGrade2) ? -1:(postGrade2 > postGrade1) ? 1 : 0;
-           }
-       });
+        memberList.sort(new Comparator<ArrayList<Object>>() {
+            @Override
+            public int compare(ArrayList<Object> o1, ArrayList<Object> o2) {
+                Integer postGrade1 = (Integer) o1.get(2);
+                Integer postGrade2 = (Integer) o2.get(2);
+                return (postGrade1 > postGrade2) ? -1 : (postGrade2 > postGrade1) ? 1 : 0;
+            }
+        });
 
 
         memberList.forEach(arrayList -> {
             String playerName = (String) arrayList.get(0);
             String postName = (String) arrayList.get(1);
             Integer postGrade = (Integer) arrayList.get(2);
-            sb.append("§r职位: §c" + postName + " §f名称: §b§l" + playerName + " §r职位等级: §6"+postGrade+"\n");
+            sb.append("§r职位: §c" + postName + " §f名称: §b§l" + playerName + " §r职位等级: §6" + postGrade + "\n");
         });
 
 
