@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * 窗口管理界面
+ *
  * @author zixuan007
  */
 public class WindowManager {
@@ -24,7 +25,7 @@ public class WindowManager {
      */
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
 
-    private final static HashMap<WindowType,Class> registerWindow=new HashMap<>();
+    private final static HashMap<WindowType, Class> registerWindow = new HashMap<>();
     /**
      * 储存玩家已经打开过的GUI
      */
@@ -36,21 +37,22 @@ public class WindowManager {
 
     /**
      * 获取到指定类型的表单窗口
+     *
      * @param windowType 窗口类型
-     * @param parameter 窗口初始化数据
+     * @param parameter  窗口初始化数据
      * @return
      */
-    public static FormWindow getFormWindow(WindowType windowType, Object ...parameter){
+    public static FormWindow getFormWindow(WindowType windowType, Object... parameter) {
         Class clazz = registerWindow.get(windowType);
         FormWindow formWindow;
-        if(clazz != null){
+        if (clazz != null) {
             try {
-                if(alreadyOpenForms.containsKey(windowType.windowName)){
+                if (alreadyOpenForms.containsKey(windowType.windowName)) {
                     formWindow = alreadyOpenForms.get(windowType.windowName);
-                }else{
+                } else {
                     formWindow = (FormWindow) clazz.newInstance();
                 }
-                if(formWindow instanceof WindowLoader){
+                if (formWindow instanceof WindowLoader) {
                     return ((WindowLoader) formWindow).init(parameter);
                 }
             } catch (InstantiationException | IllegalAccessException e) {
@@ -67,25 +69,17 @@ public class WindowManager {
         int totalPage = SocietyUtils.getSocietyListTotalPage(current, limit);
         String content = "§a当前第 §b" + current + " §a总页数 §b" + totalPage;
         FormWindow formWindow = WindowManager.getFormWindow(windowType);
-        SocietyListWindow societyListWindow= (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW,content,current,totalPage,societyList,formWindow);
+        SocietyListWindow societyListWindow = (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW, content, current, totalPage, societyList, formWindow);
         return societyListWindow;
     }
 
 
-    public static ProposeWindow getProposeWindow(){
-        return new ProposeWindow();
-    }
-
-    public static AddPublicFunds getAddPublicFunds(){
+    public static AddPublicFunds getAddPublicFunds() {
         return new AddPublicFunds();
     }
 
-    public static MoneyRankWindow getMoneyRankWindow(){
+    public static MoneyRankWindow getMoneyRankWindow() {
         return new MoneyRankWindow();
-    }
-
-    public static PrivilegeManagerWindow getPrivilegeManagerWindow(){
-        return new PrivilegeManagerWindow();
     }
 
     public static HashMap<WindowType, Class> getRegisterWindow() {

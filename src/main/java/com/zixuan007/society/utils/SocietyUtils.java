@@ -456,7 +456,12 @@ public class SocietyUtils {
         config.set("psots", society.getPost());
         config.set("grade", society.getGrade());
         config.set("tempApply", society.getTempApply());
-        config.set("position", society.getPosition());
+        if(society.getPosition() != null){
+            config.set("position", society.getPosition());
+        }
+        if(society != null){
+            config.set("description", society.getDescription());
+        }
         config.save();
     }
 

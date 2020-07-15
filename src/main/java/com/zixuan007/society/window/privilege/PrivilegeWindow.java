@@ -5,8 +5,9 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
+import com.zixuan007.society.domain.PrivilegeType;
 import com.zixuan007.society.domain.Vip;
-import com.zixuan007.society.domain.VipType;
+
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.SimpleWindow;
@@ -47,10 +48,11 @@ public class PrivilegeWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 1:
                 Vip privilege = PrivilegeUtils.getPivilegeByPlayerName(player.getName());
-                if (privilege != null && privilege.getVip_Type().equals(VipType.VIP)) {
+                if (privilege != null && privilege.getVip_Type().equals(PrivilegeType.VIP)) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW, player, privilege));
                 } else {
                     player.sendMessage(PluginUtils.getLanguageInfo("message.PrivilegeWindow.isVip"));
+
                 }
                 break;
             default:

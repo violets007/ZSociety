@@ -47,6 +47,8 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.removeMember.button"), img4));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.dissolve.button"), img5));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyAdminWindow.setSpawn.button"), img6));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("修改公会备注资料"), img6));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("发起公会战争"), img6));
         return this;
     }
 
@@ -127,6 +129,11 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 society.setPosition(x + "," + y + "," + z + "," + levelName);
                 SocietyUtils.saveSociety(society);
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.setSpawn"), null, backButtonName, backButtonImage));
+                break;
+            case 6:
+
+                break;
+            case 7:
                 break;
             default:
                 break;

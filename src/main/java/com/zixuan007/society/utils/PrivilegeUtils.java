@@ -3,8 +3,9 @@ package com.zixuan007.society.utils;
 import cn.nukkit.utils.Config;
 import com.sun.istack.internal.NotNull;
 import com.zixuan007.society.SocietyPlugin;
+import com.zixuan007.society.domain.PrivilegeType;
 import com.zixuan007.society.domain.Vip;
-import com.zixuan007.society.domain.VipType;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class PrivilegeUtils {
      */
     public static boolean isVIP(@NotNull String playerName) {
         for (Vip vip : privilegeList) {
-            if (vip.getPlayerName().equals(playerName) && vip.getVip_Type().getTypeName().equals(VipType.VIP.getTypeName()))
+            if (vip.getPlayerName().equals(playerName) && vip.getVip_Type().getTypeName().equals(PrivilegeType.VIP.getTypeName()))
                 return true;
         }
         return false;
@@ -35,7 +36,7 @@ public class PrivilegeUtils {
      */
     public static boolean isSvip(@NotNull String playerName) {
         for (Vip vip : privilegeList) {
-            if (vip.getPlayerName().equals(playerName) && vip.getVip_Type().getTypeName().equals(VipType.SVIP.getTypeName()))
+            if (vip.getPlayerName().equals(playerName) && vip.getVip_Type().getTypeName().equals(PrivilegeType.SVIP.getTypeName()))
                 return true;
         }
         return false;

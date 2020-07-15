@@ -22,7 +22,7 @@ language: zh-CN.yml
 isChat: true
 
 #称号格式
-chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${zmarry}§7]§b${playerName}§f ${message}"
+chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${marry}§7]§b${playerName}§f ${message}"
 
 #是否显示底部信息 （如果有底部显示建议false）
 isTip: false

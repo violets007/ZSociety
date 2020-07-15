@@ -17,6 +17,7 @@ public class Society {
     private int grade = 1;
     private ArrayList<String> tempApply = new ArrayList<>();
     private String position;
+    private String description;
 
     public Society() {}
 
@@ -48,6 +49,7 @@ public class Society {
             society.grade = config.getInt("grade");
             society.tempApply = (ArrayList)config.getList("tempApply");
             society.position = (String) config.get("position");
+            society.description= (String) config.get("description");
             return society;
         }
     }
@@ -127,6 +129,14 @@ public class Society {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

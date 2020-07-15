@@ -135,6 +135,11 @@ public enum  WindowType {
     CREATE_SOCIETY_SHOP_WINDOW("CreateSocietyShopWindow"),
 
     /**
+     * 公会详细信息
+     */
+    SOCIETY_INFO_WINDOW("SocietyInfoWindow"),
+
+    /**
      * 会长管理界面
      */
     PRESIDENT_WINDOW("PresidentWindow"),
@@ -173,6 +178,11 @@ public enum  WindowType {
      * 解散公会窗口
      */
     DISSOLVE_WINDOW("DissolveWindow"),
+
+    /**
+     * 修改公会资料
+     */
+    MODIFY_SOCIETY_INFO_WINDOW("ModifySocietyInfoWindow"),
 
     /**
      * 消息窗口

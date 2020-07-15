@@ -6,8 +6,9 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
+import com.zixuan007.society.domain.PrivilegeType;
 import com.zixuan007.society.domain.Vip;
-import com.zixuan007.society.domain.VipType;
+
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -36,8 +37,8 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
         addElement(new ElementInput("§e需要设置的玩家名称"));
         addElement(new ElementInput("§e需要设置的天数"));
         ArrayList<String> vipType = new ArrayList<>();
-        vipType.add(VipType.VIP.getTypeName());
-        vipType.add(VipType.SVIP.getTypeName());
+        vipType.add(PrivilegeType.VIP.getTypeName());
+        vipType.add(PrivilegeType.SVIP.getTypeName());
         addElement(new ElementDropdown("特权类型", vipType));
         return this;
     }
@@ -66,7 +67,7 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
         vip.setHoldTime(format);
         vip.setBuyDate("");
         vip.setPlayerName(setPrivilegePlayerName);
-        vip.setVip_Type(elementContent.equals(VipType.VIP.getTypeName()) ? VipType.VIP : VipType.SVIP);
+        vip.setVip_Type(elementContent.equals(PrivilegeType.VIP.getTypeName()) ? PrivilegeType.VIP : PrivilegeType.SVIP);
         PrivilegeUtils.savePrivilege(vip);
         if (!PrivilegeUtils.isSvip(setPrivilegePlayerName) && !PrivilegeUtils.isVIP(setPrivilegePlayerName)) {
             PrivilegeUtils.privilegeList.add(vip);

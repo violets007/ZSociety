@@ -6,7 +6,7 @@ import cn.nukkit.utils.Config;
  * Vip数据模板
  */
 public class Vip {
-    private VipType vip_Type = VipType.VIP;
+    private PrivilegeType vip_Type = PrivilegeType.VIP;
 
     private long vid;
     private String BuyDate;
@@ -29,7 +29,7 @@ public class Vip {
         vip.setBuyDate(buyDate);
         vip.setPlayerName(playerName);
         vip.setHoldTime(holdTime);
-        vip.setVip_Type(vip_type.equals(VipType.VIP.getTypeName()) ? VipType.VIP : VipType.SVIP);
+        vip.setVip_Type(vip_type.equals(PrivilegeType.VIP.getTypeName()) ? PrivilegeType.VIP : PrivilegeType.SVIP);
 
         return vip;
     }
@@ -66,11 +66,11 @@ public class Vip {
         this.holdTime = holdTime;
     }
 
-    public VipType getVip_Type() {
+    public PrivilegeType getVip_Type() {
         return vip_Type;
     }
 
-    public void setVip_Type(VipType vip_Type) {
+    public void setVip_Type(PrivilegeType vip_Type) {
         this.vip_Type = vip_Type;
     }
 

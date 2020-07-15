@@ -23,10 +23,7 @@ import com.zixuan007.society.window.society.admin.DissolveWindow;
 import com.zixuan007.society.window.society.admin.SetContributeWindow;
 import com.zixuan007.society.window.society.admin.SetGradeWindow;
 import com.zixuan007.society.window.society.admin.SocietyAdminWindow;
-import com.zixuan007.society.window.society.president.PlayerApplyListWindow;
-import com.zixuan007.society.window.society.president.PresidentWindow;
-import com.zixuan007.society.window.society.president.RemoveMemberWindow;
-import com.zixuan007.society.window.society.president.SetJobWindow;
+import com.zixuan007.society.window.society.president.*;
 import com.zixuan007.society.window.society.shop.CreateSocietyShopWindow;
 import com.zixuan007.society.window.title.TitleWindow;
 import com.zixuan007.society.window.title.admin.CreateTitleShopWindow;
@@ -117,11 +114,11 @@ public class SocietyPlugin extends PluginBase {
      * 注册插件命令
      */
     public void registerCommand() {
-        getServer().getCommandMap().register("society", new SocietyCommand(), "公会");
-        getServer().getCommandMap().register("title", new TitleCommand(), "称号");
-        getServer().getCommandMap().register("marry", new MarryCommand(), "结婚");
-        getServer().getCommandMap().register("privilege", new VipCommand(), "特权");
-        getServer().getCommandMap().register("admin", new AdminCommand(), "管理");
+        getServer().getCommandMap().register("society", new SocietyCommand());
+        getServer().getCommandMap().register("title", new TitleCommand());
+        getServer().getCommandMap().register("marry", new MarryCommand());
+        getServer().getCommandMap().register("privilege", new VipCommand());
+        getServer().getCommandMap().register("admin", new AdminCommand());
     }
 
 
@@ -176,7 +173,6 @@ public class SocietyPlugin extends PluginBase {
         languageConfig = new Config(PluginUtils.checkConfig("lang/zh-CN.yml", languagePath), Config.YAML);
         languageConfig = new Config(PluginUtils.checkConfig("WindowConfig.yml", windowConfigPath), Config.YAML);
 
-
     }
 
     /**
@@ -205,11 +201,13 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.REMOVE_MARRY_WINDOW, RemoveMarryWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_MARRY_MONEY_WINDOW, SetMarryMoneyWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_WINDOW, SocietyWindow.class);
+        PluginUtils.addWindowClass(WindowType.SOCIETY_INFO_WINDOW,SocietyInfoWindow.class);
         PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_WINDOW, CreateSocietyWindow.class);
         PluginUtils.addWindowClass(WindowType.Member_List_Window, MemberListWindow.class);
         PluginUtils.addWindowClass(WindowType.CONTRIBUTION_RANKING_WINDOW, ContributionRankingWindow.class);
         PluginUtils.addWindowClass(WindowType.LEVEL_RANK_WINDOW, LevelRankWindow.class);
         PluginUtils.addWindowClass(WindowType.CONTRIBUTION_WINDOW, ContributionWindow.class);
+        PluginUtils.addWindowClass(WindowType.MODIFY_SOCIETY_INFO_WINDOW, ModifySocietyInfoWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_LIST_WINDOW, SocietyListWindow.class);
         PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_SHOP_WINDOW, CreateSocietyShopWindow.class);
         PluginUtils.addWindowClass(WindowType.PRESIDENT_WINDOW, PresidentWindow.class);
@@ -221,8 +219,6 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.DISSOLVE_WINDOW, DissolveWindow.class);
         PluginUtils.addWindowClass(WindowType.MESSAGE_WINDOW, MessageWindow.class);
         PluginUtils.addWindowClass(WindowType.MODAL_WINDOW, ModalWindow.class);
-
-
     }
 
 

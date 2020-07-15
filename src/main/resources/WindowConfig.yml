@@ -32,6 +32,8 @@ setGradeWindow.title: §e设置公会等级
 dissolveWindow.title: §e解散玩家公会
 #公会列表标题
 societyListWindow.title: §e公会列表
+#修改公会信息窗口
+modifySocietyInfoWindow.title: §e修改公会信息
 
 #公会功能窗口按钮1
 societyWindow.createSociety.button: §e创建公会
@@ -48,13 +50,15 @@ societyWindow.contributionRanking.button: §e公会经济贡献排行榜
 #公会功能窗口按钮7
 societyWindow.levelRank.button: §e公会等级排行榜
 #公会功能窗口按钮8
-societyWindow.contribution.button: §e贡献经济
+societyWindow.contribution.button: §e公会贡献
 #公会功能窗口按钮9
 societyWindow.createShopWindow.button: §e创建公会商店
 #公会功能窗口按钮10
 societyWindow.societyChat.button: §a开启§e-§c关闭§e公会聊天
 #公会功能窗口按钮11
 societyWindow.tpaSociety.button: §e传送至公会出生点
+#公会功能窗口按钮12
+societyWindow.societyInfo.button: §e公会信息
 
 #会长管理窗口按钮1
 presidentWindow.setJobWindow.button: §e设置公会职

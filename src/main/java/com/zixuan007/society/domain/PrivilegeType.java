@@ -4,7 +4,7 @@ package com.zixuan007.society.domain;
  * @author zixuan007
  */
 
-public enum VipType {
+public enum PrivilegeType {
     /**
      * 普通特权
      */
@@ -16,7 +16,7 @@ public enum VipType {
 
     private String typeName;
 
-    VipType(String typeName) {
+    PrivilegeType(String typeName) {
         this.typeName = typeName;
     }
 
