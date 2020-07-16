@@ -60,7 +60,7 @@ post:
   }
   - {
     name: 副会长,
-    grade: 1,
+    grade: 3,
     count: 1
   }
   - {

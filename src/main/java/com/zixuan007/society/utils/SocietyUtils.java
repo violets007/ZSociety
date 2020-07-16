@@ -465,5 +465,11 @@ public class SocietyUtils {
         config.save();
     }
 
+    /**
+     * 检测是否设置公会战数据
+     */
+    public static boolean isSetSocietyWarData(){
+       return SocietyPlugin.getInstance().getSocietyWarConfig().getAll().entrySet().size() != 0 ? true:false;
+    }
 
 }

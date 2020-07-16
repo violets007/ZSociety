@@ -56,6 +56,7 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
+    private Config societyWarConfig;
     private static SocietyPlugin instance;
 
 
@@ -133,6 +134,7 @@ public class SocietyPlugin extends PluginBase {
         String marryPath = PluginUtils.CONFIG_FOLDER + "Marry.yml";
         String societyShopConfigPath = PluginUtils.CONFIG_FOLDER + "SocietyShop.yml";
         String windowConfig = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
+        String societyWarConfig = PluginUtils.CONFIG_FOLDER + "societyWarConfig.yml";
 
         this.titleConfig = new Config(titleConfigPath);
         this.titleShopConfig = new Config(titleShopPath);
@@ -140,6 +142,7 @@ public class SocietyPlugin extends PluginBase {
         this.societyShopConfig = new Config(societyShopConfigPath);
         this.languageConfig = new Config(languagePath);
         this.windowConfig = new Config(windowConfig);
+        this.societyWarConfig=new Config(societyWarConfig);
 
         //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
@@ -267,4 +270,11 @@ public class SocietyPlugin extends PluginBase {
         return windowConfig;
     }
 
+    public Config getSocietyWarConfig() {
+        return societyWarConfig;
+    }
+
+    public void setSocietyWarConfig(Config societyWarConfig) {
+        this.societyWarConfig = societyWarConfig;
+    }
 }

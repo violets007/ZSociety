@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
+/**
+ * @author zixuan007
+ */
 public class Society {
 
     private long sid;

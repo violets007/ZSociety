@@ -47,8 +47,8 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.removeMember.button"), img4));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.dissolve.button"), img5));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyAdminWindow.setSpawn.button"), img6));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("修改公会备注资料"), img6));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("发起公会战争"), img6));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyAdminWindow.modifySocietyInfoWindow.button"), img6));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyAdminWindow.sendSocietyWar.button"), img6));
         return this;
     }
 
@@ -131,9 +131,14 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.setSpawn"), null, backButtonName, backButtonImage));
                 break;
             case 6:
-
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MODIFY_SOCIETY_INFO_WINDOW,player));
                 break;
             case 7:
+                if(!SocietyUtils.isSetSocietyWarData()){
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.noSetWarData"), presidentWindow, backButtonName, backButtonImage));
+                    return;
+                }
+
                 break;
             default:
                 break;

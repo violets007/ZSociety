@@ -52,6 +52,7 @@ message.presidentWindow.notMember: §c当前没有可以移除的人员
 message.presidentWindow.dissolveSociety: §a成功解散 §b ${societyName}
 message.presidentWindow.presidentDissolveSociety: §b ${playerName} §c解散了公会
 message.presidentWindow.setSpawn: §a成功设置公会出生点
+message.presidentWindow.noSetWarData: §c当前管理员还没有设置公会战
 message.modifySocietyInfoWindow.notDescription: §c请先填写好公会描述内容
 message.modifySocietyInfoWindow.success: §a修改公会描述内容成功
 

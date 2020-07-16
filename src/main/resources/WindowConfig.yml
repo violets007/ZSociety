@@ -34,6 +34,8 @@ dissolveWindow.title: §e解散玩家公会
 societyListWindow.title: §e公会列表
 #修改公会信息窗口
 modifySocietyInfoWindow.title: §e修改公会信息
+#发送公会战争窗口
+sendSocietyWarWindow.title: §e发起公会战争
 
 #公会功能窗口按钮1
 societyWindow.createSociety.button: §e创建公会
@@ -79,6 +81,10 @@ societyAdminWindow.setSocietyContribution.button: §e设置公会贡献值
 societyAdminWindow.dissolve.button: §e解散玩家公会
 #管理公会窗口按钮4
 societyAdminWindow.setSpawn.button: §e设置公会出生点
+#修改公会简介内容
+societyAdminWindow.modifySocietyInfoWindow.button: §e修改公会简介内容
+#发起公会战争
+societyAdminWindow.sendSocietyWar.button: §e发起公会战争
 
 #创建公会按钮1图片路径
 societyWindow.createSociety.button.imgPath: textures/ui/anvil_icon.png
@@ -120,6 +126,8 @@ societyAdminWindow.setSocietyGrade.button.imgPath: textures/ui/dev_glyph_color.p
 societyAdminWindow.setSocietyContribution.button.imgPath: textures/ui/dev_glyph_color.png
 #管理公会窗口按钮3图片
 societyAdminWindow.dissolve.button.imgPath: textures/ui/realms_red_x.png
+
+
 
 #########特权窗口配置#########
 #VIP窗口标题

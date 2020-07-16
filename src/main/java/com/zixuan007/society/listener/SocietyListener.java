@@ -368,6 +368,7 @@ public class SocietyListener implements Listener {
                         for (String playerName : post.keySet()) {
                             Server server = SocietyPlugin.getInstance().getServer();
                             Player societyMember = server.getPlayer(playerName);
+
                             if (societyMember != null && SocietyUtils.societyChatPlayers.containsKey(societyMember.getName())) {
                                 societyMember.sendMessage("§f[§e公会频道§f]§f[§9" + SocietyUtils.getPostByName(playerName, society) + "§f] §l§b" + playerName + "§r§f>> " + ((TextPacket) packet).message);
                                 event.setCancelled();
