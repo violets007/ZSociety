@@ -37,8 +37,8 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         ElementButtonImageData img9 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.createShopWindow.button.imgPath"));
         ElementButtonImageData img10 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button.imgPath"));
         ElementButtonImageData img11 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button.imgPath"));
-        /*ElementButtonImageData img12 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button.imgPath"));
-        ElementButtonImageData img13 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button.imgPath"));*/
+        ElementButtonImageData img12 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.societyInfo.button.imgPath"));
+
 
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.createSociety.button"), img1));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.managerSociety.button"), img2));
@@ -51,7 +51,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.createShopWindow.button"), img9));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button"), img10));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button"), img11));
-        this.addButton(new ElementButton(PluginUtils.getLanguageInfo("societyWindow.societyInfo.button"),img11));
+        this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.societyInfo.button"), img12));
         return this;
     }
 
@@ -78,6 +78,18 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW, player));
                 break;
             case 2:
+
+                if (SocietyUtils.societies == null || SocietyUtils.societies.size() <= 0) {
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
+                    return;
+                }
+
+                SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(1, WindowType.SOCIETY_WINDOW);
+                player.showFormWindow(societyListWindow);
+                break;
+
+            case 3:
+
                 boolean isJoinSociety = SocietyUtils.isJoinSociety(player.getName());
                 if (!isJoinSociety) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
@@ -101,7 +113,8 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
 
                 player.showFormWindow(modalWindow);
                 break;
-            case 3:
+
+            case 4:
                 if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
@@ -109,15 +122,6 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
 
                 MemberListWindow memberListWindow = (MemberListWindow) WindowManager.getFormWindow(WindowType.Member_List_Window, player, societyWindow);
                 player.showFormWindow(memberListWindow);
-                break;
-            case 4:
-                if (SocietyUtils.societies == null || SocietyUtils.societies.size() <= 0) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
-                    return;
-                }
-
-                SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(1, WindowType.SOCIETY_WINDOW);
-                player.showFormWindow(societyListWindow);
                 break;
             case 5:
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CONTRIBUTION_RANKING_WINDOW, societyWindow));
@@ -173,12 +177,12 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.spawn"));
                 break;
             case 11:
-                if(!SocietyUtils.isJoinSociety(player.getName())){
+                if (!SocietyUtils.isJoinSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
 
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.SOCIETY_INFO_WINDOW,player));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SOCIETY_INFO_WINDOW, player));
                 break;
             default:
                 break;

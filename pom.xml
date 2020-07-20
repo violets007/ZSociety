@@ -37,12 +37,12 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>me.onebone</groupId>
             <artifactId>economyapi</artifactId>
             <version>1.0.1</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.fundebug</groupId>

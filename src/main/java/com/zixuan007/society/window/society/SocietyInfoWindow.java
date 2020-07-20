@@ -30,10 +30,10 @@ public class SocietyInfoWindow extends SimpleWindow implements WindowLoader {
         sb.append("§e创建时间§f: §6"+society.getCreateTime()+"\n");
         sb.append("§e公会贡献§f: §6"+society.getSocietyMoney()+"\n");
         if(society.getPosition() != null && society.getPosition().length() > 0 ){
-            sb.append("§e公会坐标§f: §6"+society.getPosition());
+            sb.append("§e公会坐标§f: §6"+society.getPosition()+"\n");
         }
         if(society.getDescription() != null){
-            sb.append("§e公会简介§f: §6"+society.getDescription());
+            sb.append("§e公会简介§f: §6"+society.getDescription()+"\n");
         }
         setContent(sb.toString());
         return this;
