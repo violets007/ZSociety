@@ -132,7 +132,7 @@ public class SocietyPlugin extends PluginBase {
         String marryPath = PluginUtils.CONFIG_FOLDER + "Marry.yml";
         String societyShopConfigPath = PluginUtils.CONFIG_FOLDER + "SocietyShop.yml";
         String windowConfig = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
-        String societyWarConfig = PluginUtils.CONFIG_FOLDER + "societyWarConfig.yml";
+        String societyWarConfig = PluginUtils.CONFIG_FOLDER + "SocietyWarConfig.yml";
 
         this.titleConfig = new Config(titleConfigPath);
         this.titleShopConfig = new Config(titleShopPath);

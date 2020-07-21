@@ -45,7 +45,6 @@ public class SimpleWindow extends FormWindowSimple implements ResponseListenerSi
                 }
                 window.closed = false;
             } else {
-
                 window.callClicked(((FormResponseSimple)response).getClickedButtonId(), player);
             }
 
