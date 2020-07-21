@@ -108,6 +108,10 @@ public enum  WindowType {
      */
     Member_List_Window("MemberListWindow"),
 
+    /**
+     * 设置公会战争数据窗口
+     */
+    Set_Society_War_Data_Window("SetSocietyWarDataWindow"),
 
     /**
      * 贡献排行榜

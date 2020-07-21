@@ -36,6 +36,8 @@ societyListWindow.title: §e公会列表
 modifySocietyInfoWindow.title: §e修改公会信息
 #发送公会战争窗口
 sendSocietyWarWindow.title: §e发起公会战争
+#设置公会经济窗口
+setSocietyMoneyWindow.title: §e设置发起公会战贡献
 
 #公会功能窗口按钮1
 societyWindow.createSociety.button: §e创建公会
@@ -138,6 +140,12 @@ societyAdminWindow.setSocietyContribution.button.imgPath: textures/ui/dev_glyph_
 #管理公会窗口按钮3图片
 societyAdminWindow.dissolve.button.imgPath: textures/ui/realms_red_x.png
 
+#设置公会战争窗口按钮1
+setSocietyWarDataWindow.setPosition1.button: §e设置坐标1
+#设置公会战争窗口按钮2
+setSocietyWarDataWindow.setPosition2.button: §e设置坐标2
+#设置公会战争窗口按钮3
+setSocietyWarDataWindow.sendWarMoney.button: §e设置发送公会战争金额
 
 
 #########特权窗口配置#########
@@ -155,6 +163,9 @@ privilegeListWindow.title: §e特权信息列表
 removePrivilegeWindow.title: §e移除玩家特权
 #设置玩家特权窗口标题
 setPrivilegeWindow.title: §e设置玩家特权
+#设置公会战争数据窗口标题
+setSocietyWarDataWindow.title: §e设置公会战争
+
 
 #VIP窗口生存飞行按钮
 privilegeWindow.survivalFlight.button: ${flight} §e生存飞行

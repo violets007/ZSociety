@@ -119,6 +119,11 @@ message.setSocietyGrade.isNumber: §c设置的等级不是数字请重新输入
 message.setSocietyGrade.notSociety: §c此公会已经被解散,请设置其他公会
 message.setSocietyGrade.setSocietyGrade: §a成功设置 §b${societyName} §a等级为 §f${societyGrade}
 
+#设置公会战数据窗口
+setSocietyWarDataWindow.setPosition1: §a成功设置坐标1
+setSocietyWarDataWindow.setPosition2: §a成功设置坐标2
+
+
 #结婚窗口
 message.marryWindow.isMarry: §c您当前已经结婚,请勿重复
 message.marryWindow.notMarry: §c您当前还没有伴侣,请先求婚

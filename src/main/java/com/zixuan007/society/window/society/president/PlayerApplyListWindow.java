@@ -20,7 +20,7 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
     private List<String> tempApply;
     private long sid;
 
-    public PlayerApplyListWindow(List<String> tempApply, long sid) {
+    public PlayerApplyListWindow() {
         super(PluginUtils.getWindowConfigInfo("playerApplyListWindow.title"), "§e申请加入公会人员");
     }
 

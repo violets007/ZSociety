@@ -19,10 +19,7 @@ import com.zixuan007.society.window.marry.admin.MarryAdminWindow;
 import com.zixuan007.society.window.marry.admin.RemoveMarryWindow;
 import com.zixuan007.society.window.marry.admin.SetMarryMoneyWindow;
 import com.zixuan007.society.window.society.*;
-import com.zixuan007.society.window.society.admin.DissolveWindow;
-import com.zixuan007.society.window.society.admin.SetContributeWindow;
-import com.zixuan007.society.window.society.admin.SetGradeWindow;
-import com.zixuan007.society.window.society.admin.SocietyAdminWindow;
+import com.zixuan007.society.window.society.admin.*;
 import com.zixuan007.society.window.society.president.*;
 import com.zixuan007.society.window.society.shop.CreateSocietyShopWindow;
 import com.zixuan007.society.window.title.TitleWindow;
@@ -37,6 +34,7 @@ import com.zixuan007.society.window.privilege.admin.PrivilegeListWindow;
 import com.zixuan007.society.window.privilege.admin.PrivilegeManagerWindow;
 import com.zixuan007.society.window.privilege.admin.RemovePrivilegeWindow;
 import com.zixuan007.society.window.privilege.admin.SetPrivilegeWindow;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -202,6 +200,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.PROPOSE_WINDOW, ProposeWindow.class);
         PluginUtils.addWindowClass(WindowType.MARRY_ADMIN_WINDOW, MarryAdminWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MARRY_WINDOW, RemoveMarryWindow.class);
+        PluginUtils.addWindowClass(WindowType.Set_Society_War_Data_Window, SetSocietyWarDataWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_MARRY_MONEY_WINDOW, SetMarryMoneyWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_WINDOW, SocietyWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_INFO_WINDOW,SocietyInfoWindow.class);
