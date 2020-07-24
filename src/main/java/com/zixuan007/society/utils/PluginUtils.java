@@ -94,7 +94,7 @@ public class PluginUtils {
                 .replace("${money}", myMoney.toString())
                 .replace("${itemID}", itemID)
                 .replace("${title}", title)
-                .replace("${zmarry}", marry)
+                .replace("${marry}", marry)
                 .replace("${privilege}", privilege)
                 .replace("${flight}", allowFlight ? "§c关闭" : "§a开启§r")
                 .replace("${create}", player.isCreative() ? "§c关闭" : "§a开启")

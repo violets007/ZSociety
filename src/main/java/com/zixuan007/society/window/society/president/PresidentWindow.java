@@ -85,8 +85,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
 
-                playerApplyListWindow = (PlayerApplyListWindow) WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW, player);
-                player.showFormWindow(playerApplyListWindow);
+                player.showFormWindow( WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW,player));
                 break;
             case 2:
                 list = (ArrayList<Object>) societyPlugin.getConfig().get("等级" + society.getGrade());
