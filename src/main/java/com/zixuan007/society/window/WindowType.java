@@ -189,6 +189,12 @@ public enum  WindowType {
     MODIFY_SOCIETY_INFO_WINDOW("ModifySocietyInfoWindow"),
 
     /**
+     * 发取公会战争
+     */
+    SEND_SOCIETY_WAR_WINDOW("SendSocietyWarWindow"),
+
+
+    /**
      * 消息窗口
      */
     MESSAGE_WINDOW("MessageWindow"),

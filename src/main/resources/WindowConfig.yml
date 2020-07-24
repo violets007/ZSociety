@@ -80,6 +80,8 @@ presidentWindow.setSpawn.button: §e设置公会出生点
 presidentWindow.modifySocietyInfoWindow.button: §e修改公会简介内容
 #发起公会战争
 presidentWindow.sendSocietyWar.button: §e发起公会战争
+#查看发送公会战争状态
+presidentWindow.sendSocietyWarStatus.button: §e查看发起的公会战争状态
 
 
 #管理公会窗口按钮1
@@ -130,8 +132,11 @@ presidentWindow.dissolve.button.imgPath: textures/ui/trash_default.png
 presidentWindow.setSpawn.button.imgPath: textures/ui/dev_glyph_color.png
 #会长管理窗口按钮7图片
 presidentWindow.modifySocietyInfoWindow.button.imgPath: textures/ui/text_color_paintbrush.png
-#发送公会战争
-presidentWindow.sendSocietyWar.button.imgPath: textures/ui/invite_base.png
+#会长管理窗口按钮8图片
+presidentWindow.sendSocietyWar.button.imgPath: textures/ui/text_color_paintbrush.png
+#会长管理窗口按钮9图片
+presidentWindow.sendSocietyWarStatus.button.imgPath: textures/ui/text_color_paintbrush.png
+
 
 #管理公会窗口按钮1图片
 societyAdminWindow.setSocietyGrade.button.imgPath: textures/ui/dev_glyph_color.png

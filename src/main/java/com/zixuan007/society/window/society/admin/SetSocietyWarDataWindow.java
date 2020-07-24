@@ -32,7 +32,7 @@ public class SetSocietyWarDataWindow extends SimpleWindow implements WindowLoade
 
     @Override
     public void onClick(int id, Player player) {
-        Config societyWarConfig = SocietyPlugin.getInstance().getSocietyWarConfig();
+        Config config = SocietyPlugin.getInstance().getConfig();
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         FormWindow formWindow = WindowManager.getFormWindow(WindowType.Set_Society_War_Data_Window);
@@ -40,12 +40,12 @@ public class SetSocietyWarDataWindow extends SimpleWindow implements WindowLoade
         switch (id){
             case 0:
                 String position1=player.getPosition().getFloorX()+"-"+player.getPosition().getFloorY()+"-"+player.getPosition().getFloorZ();
-                societyWarConfig.set("坐标1",position1);
+                config.set("坐标1",position1);
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("setSocietyWarDataWindow.setPosition1"), formWindow, backButtonName, backButtonImage));
                 break;
             case 1:
                 String position2 =player.getPosition().getFloorX()+"-"+player.getPosition().getFloorY()+"-"+player.getPosition().getFloorZ();
-                societyWarConfig.set("坐标2",position2);
+                config.set("坐标2",position2);
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("setSocietyWarDataWindow.setPosition2"), formWindow, backButtonName, backButtonImage));
                 break;
             case 2:
@@ -57,7 +57,7 @@ public class SetSocietyWarDataWindow extends SimpleWindow implements WindowLoade
         }
 
         if(SocietyUtils.isSetSocietyWarData()){
-          societyWarConfig.save();
+          config.save();
         }
     }
 }

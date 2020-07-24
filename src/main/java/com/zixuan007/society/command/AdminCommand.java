@@ -105,12 +105,12 @@ public class AdminCommand extends Command {
                 switch (args[1]){
                     case "set1":
                         String position1=player.getPosition().getFloorX()+"-"+player.getPosition().getFloorY()+"-"+player.getPosition().getFloorZ();
-                        SocietyPlugin.getInstance().getSocietyWarConfig().set("坐标1",position1);
+                        SocietyPlugin.getInstance().getConfig().set("坐标1",position1);
                         player.sendMessage("设置坐标1成功");
                         return true;
                     case "set2":
                         String position2 =player.getPosition().getFloorX()+"-"+player.getPosition().getFloorY()+"-"+player.getPosition().getFloorZ();
-                        SocietyPlugin.getInstance().getSocietyWarConfig().set("坐标2",position2);
+                        SocietyPlugin.getInstance().getConfig().set("坐标2",position2);
                         player.sendMessage("设置坐标2成功");
                         return true;
                     case "money":
@@ -123,8 +123,8 @@ public class AdminCommand extends Command {
                         }
                         String moneyStr = args[2];
                         int money = Integer.parseInt(moneyStr);
-                        SocietyPlugin.getInstance().getSocietyWarConfig().set("money",money);
-                        SocietyPlugin.getInstance().getSocietyWarConfig().save();
+                        SocietyPlugin.getInstance().getConfig().set("money",money);
+                        SocietyPlugin.getInstance().getConfig().save();
                         return true;
                     default:
                         break;

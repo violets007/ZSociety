@@ -8,6 +8,7 @@ import com.zixuan007.society.SocietyPlugin;
 
 /**
  * 结婚数据实体类
+ * @author zixuan007
  */
 public class Marry {
     private long mid; //结婚ID方方便进行查询
@@ -51,7 +52,6 @@ public class Marry {
         marry.money = money;
         marry.marryDate = marryDate;
         return marry;
-
     }
 
 

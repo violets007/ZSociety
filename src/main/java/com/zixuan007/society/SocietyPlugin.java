@@ -54,7 +54,7 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
-    private Config societyWarConfig;
+//    private Config societyWarConfig;
     private static SocietyPlugin instance;
 
 
@@ -140,7 +140,7 @@ public class SocietyPlugin extends PluginBase {
         this.societyShopConfig = new Config(societyShopConfigPath);
         this.languageConfig = new Config(languagePath);
         this.windowConfig = new Config(windowConfig);
-        this.societyWarConfig=new Config(societyWarConfig);
+//        this.societyWarConfig=new Config(societyWarConfig);
 
         //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
@@ -201,6 +201,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.MARRY_ADMIN_WINDOW, MarryAdminWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MARRY_WINDOW, RemoveMarryWindow.class);
         PluginUtils.addWindowClass(WindowType.Set_Society_War_Data_Window, SetSocietyWarDataWindow.class);
+        PluginUtils.addWindowClass(WindowType.SEND_SOCIETY_WAR_WINDOW, SendSocietyWarWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_MARRY_MONEY_WINDOW, SetMarryMoneyWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_WINDOW, SocietyWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_INFO_WINDOW,SocietyInfoWindow.class);
@@ -269,11 +270,11 @@ public class SocietyPlugin extends PluginBase {
         return windowConfig;
     }
 
-    public Config getSocietyWarConfig() {
+    /*public Config getSocietyWarConfig() {
         return societyWarConfig;
     }
 
     public void setSocietyWarConfig(Config societyWarConfig) {
         this.societyWarConfig = societyWarConfig;
-    }
+    }*/
 }

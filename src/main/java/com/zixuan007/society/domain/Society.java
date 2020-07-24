@@ -21,6 +21,7 @@ public class Society {
     private ArrayList<String> tempApply = new ArrayList<>();
     private String position;
     private String description;
+    private boolean isWar;
 
     public Society() {}
 
@@ -141,6 +142,8 @@ public class Society {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 
     @Override
     public String toString() {

@@ -60,7 +60,6 @@ public class ContributionWindow extends CustomWindow implements WindowLoader {
                             Double contributionCoin = society.getSocietyMoney();
                             WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.contributionCoin", new String[]{"${contributionCoin}"}, new String[]{contributionCoin + ""}), contributionForm, backButtonName, backButtonImage);
                         } else {
-
                             messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.rarelyCoin"), contributionForm, backButtonName, backButtonImage);
                         }
                     }

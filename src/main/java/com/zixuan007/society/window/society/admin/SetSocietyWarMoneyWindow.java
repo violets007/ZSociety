@@ -16,10 +16,10 @@ import com.zixuan007.society.window.WindowType;
 /**
  * @author zixuan007
  */
-public class SetSocietyMoneyWindow extends CustomWindow implements WindowLoader {
+public class SetSocietyWarMoneyWindow extends CustomWindow implements WindowLoader {
 
 
-    public SetSocietyMoneyWindow() {
+    public SetSocietyWarMoneyWindow() {
         super("设置发起公会战争贡献");
     }
 
@@ -41,7 +41,7 @@ public class SetSocietyMoneyWindow extends CustomWindow implements WindowLoader 
             return;
         }
         Integer money = Integer.getInteger(moneyStr);
-        Config societyWarConfig = SocietyPlugin.getInstance().getSocietyWarConfig();
+        Config societyWarConfig = SocietyPlugin.getInstance().getConfig();
         societyWarConfig.set("money",money);
         if(SocietyUtils.isSetSocietyWarData()){
             societyWarConfig.save();

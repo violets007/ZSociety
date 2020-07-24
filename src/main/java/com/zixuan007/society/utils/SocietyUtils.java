@@ -27,6 +27,7 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
 
 /**
  * 公会插件工具类
+ * @author zixuan007
  */
 public class SocietyUtils {
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
@@ -42,7 +43,7 @@ public class SocietyUtils {
     public static Boolean isSocietyNameExist(String societyName) {
         String filePath = SOCIETY_FOLDER + societyName + ".yml";
         File societyFile = new File(filePath);
-        return Boolean.valueOf(societyFile.exists());
+        return societyFile.exists();
     }
 
     /**
@@ -53,7 +54,7 @@ public class SocietyUtils {
     public static String getFormatDateTime() {
         long nowTime = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-        return sdf.format(Long.valueOf(nowTime));
+        return sdf.format(nowTime);
     }
 
     /**
@@ -183,8 +184,9 @@ public class SocietyUtils {
         for (HashMap<String, Object> map : post) {
             Integer grade = (Integer) map.get("grade");
             String name1 = (String) map.get("name");
-            if (name1.equals(playerName))
+            if (name1.equals(playerName)) {
                 return grade.intValue();
+            }
         }
         return -1;
     }
@@ -197,7 +199,9 @@ public class SocietyUtils {
      */
     public static boolean isChairman(String playerName) {
         for (Society society : SocietyUtils.societies) {
-            if (society.getPresidentName().equals(playerName)) return true;
+            if (society.getPresidentName().equals(playerName)) {
+                return true;
+            }
         }
         return false;
     }
@@ -227,9 +231,13 @@ public class SocietyUtils {
      * @return
      */
     public static String getPostByName(String playerName, Society society) {
-        if (society == null) return "无职位";
+        if (society == null) {
+            return "无职位";
+        }
         ArrayList<Object> list = society.getPost().get(playerName);
-        if (list.size() < 1) return "无职位";
+        if (list.size() < 1) {
+            return "无职位";
+        }
         return (String) list.get(0);
     }
 
@@ -287,8 +295,9 @@ public class SocietyUtils {
         ArrayList<String> arrayList = new ArrayList<>();
         for (Map<String, Object> map : post) {
             String name = (String) map.get("name");
-            if (name.equals("会长"))
+            if (name.equals("会长")) {
                 continue;
+            }
             arrayList.add(name);
         }
         return arrayList;
@@ -421,12 +430,16 @@ public class SocietyUtils {
     public static void loadSocietyConfig() {
         File societyFolder = new File(PluginUtils.SOCIETY_FOLDER);
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
-        if (!societyFolder.exists()) societyFolder.mkdirs();
+        if (!societyFolder.exists()) {
+            societyFolder.mkdirs();
+        }
         File[] files = societyFolder.listFiles();
         for (File file : files) {
             Config config = new Config(file);
             societyPlugin.getSocietyConfigList().add(config);
-            if (file.getName().endsWith(".yml")) SocietyUtils.societies.add(Society.init(config));
+            if (file.getName().endsWith(".yml")) {
+                SocietyUtils.societies.add(Society.init(config));
+            }
         }
         SocietyPlugin.getInstance().getLogger().debug(SocietyUtils.societies.toString());
     }
@@ -442,7 +455,11 @@ public class SocietyUtils {
         File file = new File(societyFilePath);
         if (!file.exists()) {
             try {
-                file.createNewFile();
+                boolean newFile = file.createNewFile();
+                if(!newFile){
+                    SocietyPlugin.getInstance().getLogger().info("公会配置文件: "+file.getAbsolutePath()+" 文件创建失败,请检查文件配置");
+                    return;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -459,7 +476,8 @@ public class SocietyUtils {
         if(society.getPosition() != null){
             config.set("position", society.getPosition());
         }
-        if(society != null){
+
+        if(society.getDescription() != null){
             config.set("description", society.getDescription());
         }
         config.save();
@@ -469,7 +487,7 @@ public class SocietyUtils {
      * 检测是否设置公会战数据
      */
     public static boolean isSetSocietyWarData(){
-       return SocietyPlugin.getInstance().getSocietyWarConfig().getAll().entrySet().size() != 0 ? true:false;
+       return SocietyPlugin.getInstance().getConfig().getAll().entrySet().size() != 0;
     }
 
 }

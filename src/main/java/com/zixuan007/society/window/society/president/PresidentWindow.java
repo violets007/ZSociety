@@ -16,6 +16,8 @@ import com.zixuan007.society.window.WindowType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zixuan007
@@ -42,6 +44,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         ElementButtonImageData img6 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.setSpawn.button.imgPath"));
         ElementButtonImageData img7 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.modifySocietyInfoWindow.button.imgPath"));
         ElementButtonImageData img8 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button.imgPath"));
+        ElementButtonImageData img9 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWarStatus.button.imgPath"));
 
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.setJobWindow.button"), img1));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.playerApplyList.button"), img2));
@@ -51,6 +54,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.setSpawn.button"), img6));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.modifySocietyInfoWindow.button"), img7));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button"), img8));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWarStatus.button"), img9));
         return this;
     }
 
@@ -76,8 +80,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.SET_JOB_WINDOW, player));
                 break;
             case 1:
-                tempApply = society.getTempApply();
-                if (tempApply == null || tempApply.size() <= 0) {
+                if (society.getTempApply() == null || society.getTempApply().size() <= 0) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.isApplyPlayer"), presidentWindow, backButtonName, backButtonImage));
                     return;
                 }
@@ -140,6 +143,12 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.noSetWarData"), presidentWindow, backButtonName, backButtonImage));
                     return;
                 }
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SEND_SOCIETY_WAR_WINDOW,player));
+                break;
+
+            case 9:
+
 
                 break;
             default:
