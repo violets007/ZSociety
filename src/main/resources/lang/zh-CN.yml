@@ -109,6 +109,11 @@ message.societyListWindow.overtakeMaxMember: §f>> §c当前公会人数已满,�
 message.dissolveWindow.notSociety: §c此公会已经被解散,请设置其他公会
 message.dissolveWindow.dissolveSociety: §a成功解散 §b${societyName} §a公会
 
+#发送公会战争窗口
+message.sendSocietyWarWindow.isNumber: §c当前输入的发送金额不是数字
+message.sendSocietyWarWindow.rarelyCoin: §c当前发起公会战金额过低,最低发起金额需要 §b${money}
+message.sendSocietyWarWindow.success: §a成功向 §b${societyName} §a发起公会战!
+
 #设置贡献窗口
 message.setContributeWindow.isNumber: §c设置的贡献值不是数字
 message.setContributeWindow.notSociety: §c此公会已经被解散,请设置其他公会

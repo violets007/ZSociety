@@ -88,6 +88,7 @@ public class MarryListener implements Listener {
         MarryUtils.marrys.add(marry);
     }
 
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDivorceMarry(DivorceMarryEvent event) {
         Player player = event.getPlayer();

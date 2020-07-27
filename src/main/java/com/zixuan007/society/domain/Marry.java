@@ -1,13 +1,11 @@
 package com.zixuan007.society.domain;
 
-import java.util.Date;
-
 
 import cn.nukkit.utils.Config;
-import com.zixuan007.society.SocietyPlugin;
 
 /**
  * 结婚数据实体类
+ *
  * @author zixuan007
  */
 public class Marry {
@@ -41,7 +39,7 @@ public class Marry {
         int proposeSex = (int) config.get("求婚者性别");
         String recipient = (String) config.get("被求婚者");
         int recipientSex = (int) config.get("被求婚者性别");
-        Double money = (double) config.get("公共资金");
+        double money = (double) config.get("公共资金");
         String marryDate = (String) config.get("结婚时间");
 
         marry.mid = mid;

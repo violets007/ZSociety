@@ -54,7 +54,6 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
-//    private Config societyWarConfig;
     private static SocietyPlugin instance;
 
 

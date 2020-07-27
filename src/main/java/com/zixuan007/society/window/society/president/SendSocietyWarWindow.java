@@ -58,19 +58,22 @@ public class SendSocietyWarWindow extends CustomWindow implements WindowLoader {
         String closeButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         FormWindow formWindow = WindowManager.getFormWindow(WindowType.SEND_SOCIETY_WAR_WINDOW);
         if(!SocietyUtils.isNumeric(moneyStr)){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "当前输入的发送金额不是数字", formWindow, backButtonName, backButtonImage));
+
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.sendSocietyWarWindow.isNumber"), formWindow, backButtonName, backButtonImage));
             return;
         }
 
         int money = Integer.parseInt(moneyStr);
         if(money < config){
-            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "当前发起公会战金额过低,最低发起金额需要: "+config, formWindow, backButtonName, backButtonImage));
+            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.sendSocietyWarWindow.rarelyCoin",new String[]{"${money}"},new String[]{config+""}), formWindow, backButtonName, backButtonImage));
             return;
         }
 
-        Society society = SocietyUtils.getSocietysByID(Long.parseLong(sid));
+        Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
+        Society targetSociety = SocietyUtils.getSocietysByID(Integer.parseInt(sid));
 
 
-        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,"成功向: "+societyName+" 发起公会战!",null,closeButtonName,closeButtonImage));
+
+        player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.sendSocietyWarWindow.success",new String[]{"${societyName}"},new String[]{societyName}),null,closeButtonName,closeButtonImage));
     }
 }
