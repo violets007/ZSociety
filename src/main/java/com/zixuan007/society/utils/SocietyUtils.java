@@ -490,4 +490,27 @@ public class SocietyUtils {
        return SocietyPlugin.getInstance().getConfig().getAll().entrySet().size() != 0;
     }
 
+
+    /**
+     * 加载公会战争配置文件夹
+     */
+    public static void loadSocietyWarConfig(){
+        String warFolderPath = PluginUtils.WAR_FOLDER;
+        File warFolder = new File(warFolderPath);
+        if(!warFolder.exists()) {
+            warFolder.mkdirs();
+        }
+
+        File[] files = warFolder.listFiles();
+        if(files == null || files.length <= 0){
+            return;
+        }
+
+        for (File file : files) {
+            Config config = new Config(file);
+            List<Config> societyWarList = SocietyPlugin.getInstance().getSocietyWarList();
+            societyWarList.add(config);
+        }
+
+    }
 }

@@ -143,6 +143,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
 
+
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.SEND_SOCIETY_WAR_WINDOW,player));
                 break;
 

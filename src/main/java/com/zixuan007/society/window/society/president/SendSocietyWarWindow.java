@@ -8,6 +8,7 @@ import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.domain.SocietyWar;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
@@ -41,6 +42,8 @@ public class SendSocietyWarWindow extends CustomWindow implements WindowLoader {
         addElement(new ElementDropdown("列表",arrayList));
         addElement(new ElementInput("","发起公会战争的金额"));
 
+        //发起公会战的时间
+        
         return this;
     }
 
@@ -58,7 +61,6 @@ public class SendSocietyWarWindow extends CustomWindow implements WindowLoader {
         String closeButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
         FormWindow formWindow = WindowManager.getFormWindow(WindowType.SEND_SOCIETY_WAR_WINDOW);
         if(!SocietyUtils.isNumeric(moneyStr)){
-
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.sendSocietyWarWindow.isNumber"), formWindow, backButtonName, backButtonImage));
             return;
         }
@@ -72,6 +74,9 @@ public class SendSocietyWarWindow extends CustomWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         Society targetSociety = SocietyUtils.getSocietysByID(Integer.parseInt(sid));
 
+        SocietyWar societyWar = new SocietyWar();
+        societyWar.setSid(society.getSid());
+        societyWar.setSid2(targetSociety.getSid());
 
 
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW,PluginUtils.getLanguageInfo("message.sendSocietyWarWindow.success",new String[]{"${societyName}"},new String[]{societyName}),null,closeButtonName,closeButtonImage));
