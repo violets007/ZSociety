@@ -54,7 +54,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.setSpawn.button"), img6));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.modifySocietyInfoWindow.button"), img7));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button"), img8));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWarStatus.button"), img9));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.lookSocietyWarStatus.button"), img9));
         return this;
     }
 
@@ -147,7 +147,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.SEND_SOCIETY_WAR_WINDOW,player));
                 break;
 
-            case 9:
+            case 8:
 
 
                 break;

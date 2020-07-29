@@ -36,8 +36,10 @@ societyListWindow.title: §e公会列表
 modifySocietyInfoWindow.title: §e修改公会信息
 #发送公会战争窗口
 sendSocietyWarWindow.title: §e发起公会战争
+#设置公会战贡献金额
+setSocietyWarMoneyWindow.title: §e设置公会战贡献
 #设置公会经济窗口
-setSocietyMoneyWindow.title: §e设置发起公会战贡献
+setSocietyMoneyWindow.title: §e设置公会贡献
 
 #公会功能窗口按钮1
 societyWindow.createSociety.button: §e创建公会
@@ -81,7 +83,7 @@ presidentWindow.modifySocietyInfoWindow.button: §e修改公会简介内容
 #发起公会战争
 presidentWindow.sendSocietyWar.button: §e发起公会战争
 #查看发送公会战争状态
-presidentWindow.sendSocietyWarStatus.button: §e查看发起的公会战争状态
+presidentWindow.lookSocietyWarStatus.button: §e查看公会战书
 
 
 #管理公会窗口按钮1

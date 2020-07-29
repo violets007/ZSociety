@@ -110,8 +110,10 @@ message.dissolveWindow.notSociety: §c此公会已经被解散,请设置其他�
 message.dissolveWindow.dissolveSociety: §a成功解散 §b${societyName} §a公会
 
 #发送公会战争窗口
-message.sendSocietyWarWindow.isNumber: §c当前输入的发送金额不是数字
+message.sendSocietyWarWindow.isNumber: §c当前发送的金额输入的不是数字或者准备开战时间输入的不是数字
 message.sendSocietyWarWindow.rarelyCoin: §c当前发起公会战金额过低,最低发起金额需要 §b${money}
+message.sendSocietyWarWindow.notDate: §c输入的日期不是有效时间
+
 message.sendSocietyWarWindow.success: §a成功向 §b${societyName} §a发起公会战!
 
 #设置贡献窗口
@@ -128,7 +130,9 @@ message.setSocietyGrade.setSocietyGrade: §a成功设置 §b${societyName} §a�
 setSocietyWarDataWindow.setPosition1: §a成功设置坐标1
 setSocietyWarDataWindow.setPosition2: §a成功设置坐标2
 
-
+message:
+  sendSocietyWarWindow:
+    isNumber:
 #结婚窗口
 message.marryWindow.isMarry: §c您当前已经结婚,请勿重复
 message.marryWindow.notMarry: §c您当前还没有伴侣,请先求婚

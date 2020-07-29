@@ -8,10 +8,19 @@ import java.util.Date;
  * @author zixuan007
  */
 public class SocietyWar {
+    private long wid; //公会战id
     private long sid; //公会方1
     private long sid2; //公会方2
     private Date warTime;
     private String status; //当前公会战争状态
+
+    public long getWid() {
+        return wid;
+    }
+
+    public void setWid(long wid) {
+        this.wid = wid;
+    }
 
     public long getSid() {
         return sid;

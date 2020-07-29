@@ -10,6 +10,7 @@ import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.domain.SocietyWar;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +33,7 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
 public class SocietyUtils {
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     public static ArrayList<Society> societies = new ArrayList<>();
+    public static ArrayList<SocietyWar> societyWars=new ArrayList<>();
     public static HashMap<String, String> societyChatPlayers = new HashMap<>();
 
     /**
@@ -285,6 +287,7 @@ public class SocietyUtils {
         return ++max;
     }
 
+
     /**
      * 获取当前配置信息的所有职位
      *
@@ -512,5 +515,32 @@ public class SocietyUtils {
             societyWarList.add(config);
         }
 
+    }
+
+    /**
+     * 创建公会战争
+     * @param societyWar 公会战争数据bean
+     */
+    public static void createSocietyWar(SocietyWar societyWar){
+        long sid = societyWar.getSid();
+        long sid2 = societyWar.getSid2();
+        Society society = SocietyUtils.getSocietysByID(sid);
+        Society society1 = SocietyUtils.getSocietysByID(sid2);
+
+        String societyName = society.getSocietyName();
+        String societyName1 = society1.getSocietyName();
+
+        String configName = societyName + "_" + societyName1;
+        Config societyWarConfig = new Config(PluginUtils.WAR_FOLDER + configName);
+
+        societyWarConfig.set("wid",societyWar.getWid());
+        societyWarConfig.set("sid",sid);
+        societyWarConfig.set("sid2",sid2);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        String formatDate = sdf.format(societyWar.getWarTime());
+        societyWarConfig.set("warTime",formatDate);
+        societyWarConfig.set("status",societyWar.getStatus());
+        societyWars.add(societyWar);
+        societyWarConfig.save();
     }
 }
