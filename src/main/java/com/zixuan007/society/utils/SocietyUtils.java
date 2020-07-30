@@ -15,12 +15,7 @@ import com.zixuan007.society.domain.SocietyWar;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 import static com.zixuan007.society.utils.PluginUtils.SOCIETY_FOLDER;
@@ -28,12 +23,13 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
 
 /**
  * 公会插件工具类
+ *
  * @author zixuan007
  */
 public class SocietyUtils {
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     public static ArrayList<Society> societies = new ArrayList<>();
-    public static ArrayList<SocietyWar> societyWars=new ArrayList<>();
+    public static ArrayList<SocietyWar> societyWars = new ArrayList<>();
     public static HashMap<String, String> societyChatPlayers = new HashMap<>();
 
     /**
@@ -459,8 +455,8 @@ public class SocietyUtils {
         if (!file.exists()) {
             try {
                 boolean newFile = file.createNewFile();
-                if(!newFile){
-                    SocietyPlugin.getInstance().getLogger().info("公会配置文件: "+file.getAbsolutePath()+" 文件创建失败,请检查文件配置");
+                if (!newFile) {
+                    SocietyPlugin.getInstance().getLogger().info("公会配置文件: " + file.getAbsolutePath() + " 文件创建失败,请检查文件配置");
                     return;
                 }
             } catch (IOException e) {
@@ -476,11 +472,11 @@ public class SocietyUtils {
         config.set("psots", society.getPost());
         config.set("grade", society.getGrade());
         config.set("tempApply", society.getTempApply());
-        if(society.getPosition() != null){
+        if (society.getPosition() != null) {
             config.set("position", society.getPosition());
         }
 
-        if(society.getDescription() != null){
+        if (society.getDescription() != null) {
             config.set("description", society.getDescription());
         }
         config.save();
@@ -489,23 +485,23 @@ public class SocietyUtils {
     /**
      * 检测是否设置公会战数据
      */
-    public static boolean isSetSocietyWarData(){
-       return SocietyPlugin.getInstance().getConfig().getAll().entrySet().size() != 0;
+    public static boolean isSetSocietyWarData() {
+        return SocietyPlugin.getInstance().getConfig().getAll().entrySet().size() != 0;
     }
 
 
     /**
      * 加载公会战争配置文件夹
      */
-    public static void loadSocietyWarConfig(){
+    public static void loadSocietyWarConfig() {
         String warFolderPath = PluginUtils.WAR_FOLDER;
         File warFolder = new File(warFolderPath);
-        if(!warFolder.exists()) {
+        if (!warFolder.exists()) {
             warFolder.mkdirs();
         }
 
         File[] files = warFolder.listFiles();
-        if(files == null || files.length <= 0){
+        if (files == null || files.length <= 0) {
             return;
         }
 
@@ -519,9 +515,10 @@ public class SocietyUtils {
 
     /**
      * 创建公会战争
+     *
      * @param societyWar 公会战争数据bean
      */
-    public static void createSocietyWar(SocietyWar societyWar){
+    public static void createSocietyWar(SocietyWar societyWar) {
         long sid = societyWar.getSid();
         long sid2 = societyWar.getSid2();
         Society society = SocietyUtils.getSocietysByID(sid);
@@ -530,17 +527,92 @@ public class SocietyUtils {
         String societyName = society.getSocietyName();
         String societyName1 = society1.getSocietyName();
 
-        String configName = societyName + "_" + societyName1;
-        Config societyWarConfig = new Config(PluginUtils.WAR_FOLDER + configName);
+        String configName = societyName + "_" + societyName1 + ".yml";
+        Config societyWarConfig = new Config(PluginUtils.WAR_FOLDER + configName, Config.YAML);
 
-        societyWarConfig.set("wid",societyWar.getWid());
-        societyWarConfig.set("sid",sid);
-        societyWarConfig.set("sid2",sid2);
+        societyWarConfig.set("wid", societyWar.getWid());
+        societyWarConfig.set("sid", sid);
+        societyWarConfig.set("sid2", sid2);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
         String formatDate = sdf.format(societyWar.getWarTime());
-        societyWarConfig.set("warTime",formatDate);
-        societyWarConfig.set("status",societyWar.getStatus());
+        societyWarConfig.set("warTime", formatDate);
+        societyWarConfig.set("status", societyWar.getStatus());
         societyWars.add(societyWar);
         societyWarConfig.save();
+    }
+
+    public static void saveSocietyWar(SocietyWar societyWar) {
+        Society society = SocietyUtils.getSocietysByID(societyWar.getSid());
+        Society society1 = SocietyUtils.getSocietysByID(societyWar.getSid2());
+
+        String societyName = society.getSocietyName();
+        String societyName1 = society1.getSocietyName();
+
+        String configName = societyName + "_" + societyName1 + ".yml";
+
+        Config config = new Config(configName, Config.YAML);
+        config.set("wid", societyWar.getWid());
+        config.set("sid", society.getSid());
+        config.set("sid2", society1.getSid());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        String formatDate = sdf.format(societyWar.getWarTime());
+        config.set("warTime", formatDate);
+        config.set("status", societyWar.getStatus());
+
+        config.save();
+    }
+
+
+    /**
+     * 保存所有的公会战数据
+     */
+    public static void saveSocietyWar() {
+        for (SocietyWar societyWar : societyWars) {
+            saveSocietyWar(societyWar);
+        }
+    }
+
+    /**
+     * 获取公会战bean
+     *
+     * @param society
+     * @return
+     */
+    public static SocietyWar getSocietyWarBySociety(Society society) {
+        for (SocietyWar societyWar : societyWars) {
+            if (societyWar.getSid2() == society.getSid()) {
+                return societyWar;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 是否是过期的公会战
+     *
+     * @return
+     */
+    public static boolean isExpiredWar(SocietyWar societyWar) {
+        if (societyWar.getWarTime().getTime() > System.currentTimeMillis()) {
+            return true;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+        boolean flag = true;
+        try {
+            flag = !PluginUtils.hourMinuteBetween(sdf.format(new Date()), "13:00", "17:00");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return flag;
+    }
+
+    /**
+     * 移除当前公会战争配置文件夹
+     */
+    public static void removeSocietyWarConfig(SocietyWar societyWar) {
+        //TODO 移除配置文件
     }
 }

@@ -9,6 +9,7 @@ import cn.nukkit.utils.Config;
  * @author zixuan007
  */
 public class Marry {
+
     private long mid; //结婚ID方方便进行查询
     private String propose;//求婚方姓名
     private int proposeSex;//求婚方性别

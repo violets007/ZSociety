@@ -68,7 +68,9 @@ public class SocietyPlugin extends PluginBase {
     @Override
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
+
         SocietyUtils.societies.forEach(SocietyUtils::saveSociety);
+        SocietyUtils.saveSocietyWar();
         config.save();
         marryConfig.save();
         titleShopConfig.save();
@@ -179,7 +181,7 @@ public class SocietyPlugin extends PluginBase {
     }
 
     /**
-     * 注册指定的窗口
+     * 注册窗口
      */
     public void registerWindow() {
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeWindow.class);
@@ -276,11 +278,5 @@ public class SocietyPlugin extends PluginBase {
         return societyWarList;
     }
 
-    /*public Config getSocietyWarConfig() {
-        return societyWarConfig;
-    }
 
-    public void setSocietyWarConfig(Config societyWarConfig) {
-        this.societyWarConfig = societyWarConfig;
-    }*/
 }

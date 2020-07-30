@@ -7,6 +7,8 @@ import java.util.*;
 
 /**
  * 称号工具类
+ *
+ * @author zixuan007
  */
 public class TitleUtils {
 

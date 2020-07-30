@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -51,7 +52,7 @@ public class PluginUtils {
         int canBeUsed = 10;
         //填充目标数组
         for (int i = 0; i < nums.length; i++) {
-        //将随机选取的数字存入目标数组
+            //将随机选取的数字存入目标数组
             int index = random.nextInt(canBeUsed);
             nums[i] = defaultNums[index];
             //将已用过的数字扔到备选数组最后，并减小可选区域
@@ -263,5 +264,26 @@ public class PluginUtils {
         return file;
     }
 
+    /**
+     * @param nowDate   要比较的时间
+     * @param startDate 开始时间
+     * @param endDate   结束时间
+     * @return true在时间段内，false不在时间段内
+     * @throws Exception
+     */
+    public static boolean hourMinuteBetween(String nowDate, String startDate, String endDate) throws Exception {
+
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+
+        Date now = format.parse(nowDate);
+        Date start = format.parse(startDate);
+        Date end = format.parse(endDate);
+
+        long nowTime = now.getTime();
+        long startTime = start.getTime();
+        long endTime = end.getTime();
+
+        return nowTime >= startTime && nowTime <= endTime;
+    }
 
 }
