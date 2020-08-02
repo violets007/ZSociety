@@ -7,12 +7,11 @@ import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.level.Position;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.domain.SocietyWar;
+import com.zixuan007.society.domain.WarStatus;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
-import com.zixuan007.society.window.SimpleWindow;
-import com.zixuan007.society.window.WindowLoader;
-import com.zixuan007.society.window.WindowManager;
-import com.zixuan007.society.window.WindowType;
+import com.zixuan007.society.window.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +53,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.setSpawn.button"), img6));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.modifySocietyInfoWindow.button"), img7));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button"), img8));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWarStatus.button"), img9));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.lookSocietyWarStatus.button"), img9));
         return this;
     }
 
@@ -138,17 +137,44 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MODIFY_SOCIETY_INFO_WINDOW,player));
                 break;
             case 7:
-                if(!SocietyUtils.isSetSocietyWarData()){
+                if (!SocietyUtils.isSetSocietyWarData()) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.noSetWarData"), presidentWindow, backButtonName, backButtonImage));
                     return;
                 }
 
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.SEND_SOCIETY_WAR_WINDOW,player));
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SEND_SOCIETY_WAR_WINDOW, player));
                 break;
 
-            case 9:
+            case 8:
+                if (SocietyUtils.societyWars.size() == 0) {
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.notWarData"), presidentWindow, backButtonName, backButtonImage));
+                    return;
+                }
 
+                if (SocietyUtils.getSocietyWarBySociety(SocietyUtils.getSocietyByPlayerName(player.getName())) == null) {
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.notWarData"), presidentWindow, backButtonName, backButtonImage));
+                    return;
+                }
 
+                ModalWindow modalWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "你是否接受当前发起的公会战", "接受", "拒绝");
+                modalWindow.setButtonClickedListener((affrim, player1) -> {
+                    SocietyWar societyWar = SocietyUtils.getSocietyWarBySociety(society);
+                    if (affrim) {
+                        //检查当前公会战书是否过期
+                        boolean expiredWar = SocietyUtils.isExpiredWar(societyWar);
+                        if (expiredWar) {
+                            player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("当前发起的公会战已经过期!"), presidentWindow, backButtonName, backButtonImage));
+                            return;
+
+                        }
+
+                        societyWar.setStatus(WarStatus.WAIT.toString());
+                        SocietyUtils.saveSocietyWar(societyWar);
+                    } else {
+
+                    }
+                });
                 break;
             default:
                 break;

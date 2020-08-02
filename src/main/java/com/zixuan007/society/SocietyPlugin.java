@@ -6,6 +6,7 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.*;
 import com.zixuan007.society.listener.*;
+import com.zixuan007.society.task.CheckWatStatus;
 import com.zixuan007.society.task.ShowTask;
 import com.zixuan007.society.task.CheckPrivilegeTimeTask;
 import com.zixuan007.society.utils.*;
@@ -54,7 +55,7 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
-//    private Config societyWarConfig;
+    private final List<Config> societyWarList = new ArrayList<>();
     private static SocietyPlugin instance;
 
 
@@ -67,7 +68,9 @@ public class SocietyPlugin extends PluginBase {
     @Override
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
+
         SocietyUtils.societies.forEach(SocietyUtils::saveSociety);
+        SocietyUtils.saveSocietyWar();
         config.save();
         marryConfig.save();
         titleShopConfig.save();
@@ -94,7 +97,7 @@ public class SocietyPlugin extends PluginBase {
 
         getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
         getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20 * 60);
-
+        getServer().getScheduler().scheduleRepeatingTask(new CheckWatStatus(this), 20);
         resisterListener();
     }
 
@@ -145,6 +148,7 @@ public class SocietyPlugin extends PluginBase {
         //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
         SocietyUtils.loadSocietyConfig();
+        SocietyUtils.loadSocietyWarConfig();
         PrivilegeUtils.loadVipConfig();
         TitleUtils.loadConfig();
     }
@@ -177,7 +181,7 @@ public class SocietyPlugin extends PluginBase {
     }
 
     /**
-     * 注册指定的窗口
+     * 注册窗口
      */
     public void registerWindow() {
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeWindow.class);
@@ -204,7 +208,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.SEND_SOCIETY_WAR_WINDOW, SendSocietyWarWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_MARRY_MONEY_WINDOW, SetMarryMoneyWindow.class);
         PluginUtils.addWindowClass(WindowType.SOCIETY_WINDOW, SocietyWindow.class);
-        PluginUtils.addWindowClass(WindowType.SOCIETY_INFO_WINDOW,SocietyInfoWindow.class);
+        PluginUtils.addWindowClass(WindowType.SOCIETY_INFO_WINDOW, SocietyInfoWindow.class);
         PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_WINDOW, CreateSocietyWindow.class);
         PluginUtils.addWindowClass(WindowType.Member_List_Window, MemberListWindow.class);
         PluginUtils.addWindowClass(WindowType.CONTRIBUTION_RANKING_WINDOW, ContributionRankingWindow.class);
@@ -270,11 +274,9 @@ public class SocietyPlugin extends PluginBase {
         return windowConfig;
     }
 
-    /*public Config getSocietyWarConfig() {
-        return societyWarConfig;
+    public List<Config> getSocietyWarList() {
+        return societyWarList;
     }
 
-    public void setSocietyWarConfig(Config societyWarConfig) {
-        this.societyWarConfig = societyWarConfig;
-    }*/
+
 }

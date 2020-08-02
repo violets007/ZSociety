@@ -2640,7 +2640,7 @@ public enum ItemIDSunName {
     }
 
     /**
-     * @param ID 物品名称
+     * @param Name 物品名称
      * @return 根据物品ID获取物品枚举对象
      */
     public static ItemIDSunName getItem(String Name) {
@@ -2648,7 +2648,7 @@ public enum ItemIDSunName {
     }
 
     /**
-     * @param 物品ID（ID：特殊值）/物品名称
+     * @param ID（ID：特殊值）/物品名称
      * @return 尝试解析冰获取物品ID（ID：特殊值）
      */
     public static String UnknownToID(String ID) {

@@ -20,7 +20,7 @@ public class SetSocietyWarMoneyWindow extends CustomWindow implements WindowLoad
 
 
     public SetSocietyWarMoneyWindow() {
-        super("设置发起公会战争贡献");
+        super(PluginUtils.getLanguageInfo("setSocietyWarMoneyWindow.title"));
     }
 
     @Override
@@ -43,8 +43,11 @@ public class SetSocietyWarMoneyWindow extends CustomWindow implements WindowLoad
         Integer money = Integer.getInteger(moneyStr);
         Config societyWarConfig = SocietyPlugin.getInstance().getConfig();
         societyWarConfig.set("money",money);
+
         if(SocietyUtils.isSetSocietyWarData()){
             societyWarConfig.save();
         }
+
+
     }
 }
