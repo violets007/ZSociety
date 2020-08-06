@@ -47,7 +47,7 @@ public class AdvancedPrivilegeWindow extends SimpleWindow implements WindowLoade
                 break;
             case 2:
                 Vip advancedPrivilege = PrivilegeUtils.getPivilegeByPlayerName(player.getName());
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_WINDOW, player, advancedPrivilege));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.PRIVILEGE_INFO_WINDOW, player, advancedPrivilege));
                 break;
             default:
                 break;

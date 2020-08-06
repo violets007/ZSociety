@@ -20,6 +20,7 @@ import com.zixuan007.society.window.WindowType;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -61,11 +62,14 @@ public class SetPrivilegeWindow extends CustomWindow implements WindowLoader {
 
         Vip vip = new Vip();
         vip.setVid(PrivilegeUtils.getNextVid());
-        long expireTime = System.currentTimeMillis() + 60 * 60 * 24 * time * 1000;
+
+
+        Calendar calc = Calendar.getInstance();
+        calc.setTime(new Date());
+        calc.add(Calendar.DATE, time);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
-        String format = simpleDateFormat.format(new Date(expireTime));
+        String format = simpleDateFormat.format(calc.getTime());
         vip.setHoldTime(format);
-        vip.setBuyDate("");
         vip.setPlayerName(setPrivilegePlayerName);
         vip.setVip_Type(elementContent.equals(PrivilegeType.VIP.getTypeName()) ? PrivilegeType.VIP : PrivilegeType.SVIP);
         PrivilegeUtils.savePrivilege(vip);

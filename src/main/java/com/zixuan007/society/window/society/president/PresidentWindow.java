@@ -59,15 +59,15 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
 
     @Override
     public void onClick(int id, Player player) {
-        ArrayList<String> tempApply;
-        PlayerApplyListWindow playerApplyListWindow;
+        /*ArrayList<String> tempApply;
+        PlayerApplyListWindow playerApplyListWindow;*/
         ArrayList<Object> list;
         Double societyMoney;
         int updateMoney;
         RemoveMemberWindow removeMemberWindow;
         int clickedButtonId = getResponse().getClickedButtonId();
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
-        Society society = SocietyUtils.getSocietysByID(this.sid);
+        Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");

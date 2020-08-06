@@ -165,6 +165,7 @@ public class TitleListener implements Listener {
 
         SocietyPlugin.getInstance().getLogger().debug("创建称号商店的内容: " + list);
         titleShopConfig.set(title, list);
+
         titleShopConfig.save();
         StringBuilder sb = new StringBuilder();
         for (String line : wallSign.getText()) {
