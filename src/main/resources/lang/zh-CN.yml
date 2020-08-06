@@ -55,6 +55,9 @@ message.presidentWindow.setSpawn: §a成功设置公会出生点
 message.presidentWindow.noSetWarData: §c当前管理员还没有设置公会战
 message.presidentWindow.notWarData: §c当前还没有公会发起公会战争
 
+#副会长管理窗口
+message.vicePresidentWindow.notSociety: §c当前公会已经被解散
+
 #修改公会介绍窗口
 message.modifySocietyInfoWindow.notDescription: §c请先填写好公会描述内容
 message.modifySocietyInfoWindow.success: §a修改公会描述内容成功

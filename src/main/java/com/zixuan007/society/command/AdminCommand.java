@@ -138,7 +138,7 @@ public class AdminCommand extends Command {
                 return true;
 
             default:
-                return sendHelp(player);
+                return sendHelp(player); //
         }
 
     }

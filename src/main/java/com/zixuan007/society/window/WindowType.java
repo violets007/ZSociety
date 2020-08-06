@@ -149,6 +149,11 @@ public enum  WindowType {
     PRESIDENT_WINDOW("PresidentWindow"),
 
     /**
+     * 副会长管理界面
+     */
+    VICE_PRESIDENT_WINDOW("VicePresidentWindow"),
+
+    /**
      * 公会管理界面
      */
     SOCIETY_ADMIN_WINDOW("SocietyAdminWindow"),

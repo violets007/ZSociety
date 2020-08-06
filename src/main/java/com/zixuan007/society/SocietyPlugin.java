@@ -218,6 +218,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.SOCIETY_LIST_WINDOW, SocietyListWindow.class);
         PluginUtils.addWindowClass(WindowType.CREATE_SOCIETY_SHOP_WINDOW, CreateSocietyShopWindow.class);
         PluginUtils.addWindowClass(WindowType.PRESIDENT_WINDOW, PresidentWindow.class);
+        PluginUtils.addWindowClass(WindowType.VICE_PRESIDENT_WINDOW, VicePresidentWindow.class);
         PluginUtils.addWindowClass(WindowType.PLAYER_APPLY_LIST_WINDOW, PlayerApplyListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MEMBER_WINDOW, RemoveMemberWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_CONTRIBUTE_WINDOW, SetContributeWindow.class);

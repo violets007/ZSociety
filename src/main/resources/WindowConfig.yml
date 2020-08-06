@@ -65,6 +65,8 @@ societyWindow.societyChat.button: §a开启§e-§c关闭§e公会聊天
 societyWindow.tpaSociety.button: §e传送至公会出生点
 #公会功能窗口按钮12
 societyWindow.societyInfo.button: §e公会信息
+#公会功能窗口按钮13
+societyWindow.vicePresidentWindow.button: §e副会长管理
 
 #会长管理窗口按钮1
 presidentWindow.setJobWindow.button: §e设置公会职

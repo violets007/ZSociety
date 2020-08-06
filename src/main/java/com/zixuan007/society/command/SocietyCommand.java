@@ -29,7 +29,7 @@ public class SocietyCommand extends Command {
         } else {
             Player player = (Player) sender;
             if (commandName.equals(this.getName())) {
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player));
             }
         }
         return false;
