@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 import static com.zixuan007.society.utils.PluginUtils.SOCIETY_FOLDER;
@@ -452,6 +453,7 @@ public class SocietyUtils {
         String societyName = society.getSocietyName();
         String societyFilePath = PluginUtils.SOCIETY_FOLDER + societyName + ".yml";
         File file = new File(societyFilePath);
+
         if (!file.exists()) {
             try {
                 boolean newFile = file.createNewFile();
@@ -463,6 +465,7 @@ public class SocietyUtils {
                 e.printStackTrace();
             }
         }
+
         Config config = new Config(file);
         config.set("sid", society.getSid());
         config.set("societyName", societyName);
@@ -479,6 +482,12 @@ public class SocietyUtils {
         if (society.getDescription() != null) {
             config.set("description", society.getDescription());
         }
+
+        List<Society> collect = societies.stream().filter(society1 -> society1.getSid() != society.getSid()).collect(Collectors.toList());
+        collect.add(society);
+        societies.addAll(collect);
+
+
         config.save();
     }
 

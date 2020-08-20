@@ -48,7 +48,7 @@ public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietysByID(this.sid);
         society.getPost().remove(playerName);
         SocietyUtils.saveSociety(society);
-        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW);
+        FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW,player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
