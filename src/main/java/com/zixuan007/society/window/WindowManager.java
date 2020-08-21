@@ -1,5 +1,6 @@
 package com.zixuan007.society.window;
 
+import cn.nukkit.Player;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
@@ -63,12 +64,12 @@ public class WindowManager {
     }
 
 
-    public static SocietyListWindow getSocietyListWindow(int current, WindowType windowType) {
+    public static SocietyListWindow getSocietyListWindow(int current, WindowType windowType, Player player) {
         List<Society> societyList = SocietyUtils.getSocietyList(current);
         int limit = 10;
         int totalPage = SocietyUtils.getSocietyListTotalPage(current, limit);
         String content = "§a当前第 §b" + current + " §a总页数 §b" + totalPage;
-        FormWindow formWindow = WindowManager.getFormWindow(windowType);
+        FormWindow formWindow = WindowManager.getFormWindow(windowType, player);
         SocietyListWindow societyListWindow = (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW, content, current, totalPage, societyList, formWindow);
         return societyListWindow;
     }

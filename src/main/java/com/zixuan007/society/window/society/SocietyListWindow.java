@@ -60,12 +60,12 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
 
 
     public void nextPage(int currentPage, Player player) {
-        SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(++currentPage, WindowType.SOCIETY_WINDOW);
+        SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(++currentPage, WindowType.SOCIETY_WINDOW, player);
         player.showFormWindow(societyListWindow);
     }
 
     public void upPage(int currentPage, Player player) {
-        SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(--currentPage, WindowType.SOCIETY_WINDOW);
+        SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(--currentPage, WindowType.SOCIETY_WINDOW, player);
         player.showFormWindow(societyListWindow);
     }
 
@@ -73,7 +73,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
     @Override
     public void onClick(int id, Player player) {
         Society society;
-        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (id == 0 && this.currentPage != 1) {

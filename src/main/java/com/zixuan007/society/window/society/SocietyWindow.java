@@ -71,7 +71,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
     public void onClick(int id, Player player) {
         int clickedButtonId = this.getResponse().getClickedButtonId();
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
-        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         switch (clickedButtonId) {
@@ -96,7 +96,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
 
-                SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(1, WindowType.SOCIETY_WINDOW);
+                SocietyListWindow societyListWindow = WindowManager.getSocietyListWindow(1, WindowType.SOCIETY_WINDOW, player);
                 player.showFormWindow(societyListWindow);
                 break;
 

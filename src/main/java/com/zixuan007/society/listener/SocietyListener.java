@@ -63,7 +63,7 @@ public class SocietyListener implements Listener {
         SocietyUtils.addMember(player.getName(), society, "会长", (Integer) postInfo.get("grade"));
         SocietyUtils.societies.add(society);
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b§l" + player.getName() + " §r§a创建公会名称: §e" + society.getSocietyName());
-        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a创建 §l§b" + society.getSocietyName() + " §a公会成功", societyWindow, backButtonName, backButtonImage));
     }
 
@@ -77,7 +77,7 @@ public class SocietyListener implements Listener {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         SocietyUtils.saveSociety(society);
-        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
 
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功申请加入 §l§b" + society.getSocietyName() + " §a公会,请耐心等待§c会长进行处理", societyWindow, backButtonName, backButtonImage));
     }
@@ -90,7 +90,7 @@ public class SocietyListener implements Listener {
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         society.getPost().remove(player.getName());
         SocietyUtils.saveSociety(society);
-        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
 
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a成功退出 §l§c" + society.getSocietyName() + " §a公会", societyWindow, backButtonName, backButtonImage));
 

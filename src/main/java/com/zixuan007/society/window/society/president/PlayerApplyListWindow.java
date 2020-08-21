@@ -38,7 +38,7 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
     @Override
     public void onClick(int id, Player player) {
         String playerName = this.tempApply.get(id);
-        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW);
+        FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
