@@ -18,6 +18,7 @@ import com.zixuan007.society.window.society.admin.SocietyAdminWindow;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * 管理命令
@@ -44,7 +45,7 @@ public class AdminCommand extends Command {
         super(COMMAND_NAME);
         setPermission("ZSociety.command.admin");
         getCommandParameters().clear();
-        setParameter();
+        //setParameter();
     }
 
     @Override
@@ -99,31 +100,31 @@ public class AdminCommand extends Command {
                 }
 
             case "war":
-                if(args.length < TWO_ARGS_LENGTH){
+                if (args.length < TWO_ARGS_LENGTH) {
                     return sendHelp(player);
                 }
-                switch (args[1]){
+                switch (args[1]) {
                     case "set1":
-                        String position1=player.getPosition().getFloorX()+"-"+player.getPosition().getFloorY()+"-"+player.getPosition().getFloorZ();
-                        SocietyPlugin.getInstance().getConfig().set("坐标1",position1);
+                        String position1 = player.getPosition().getFloorX() + "-" + player.getPosition().getFloorY() + "-" + player.getPosition().getFloorZ();
+                        SocietyPlugin.getInstance().getConfig().set("坐标1", position1);
                         player.sendMessage("设置坐标1成功");
                         return true;
                     case "set2":
-                        String position2 =player.getPosition().getFloorX()+"-"+player.getPosition().getFloorY()+"-"+player.getPosition().getFloorZ();
-                        SocietyPlugin.getInstance().getConfig().set("坐标2",position2);
+                        String position2 = player.getPosition().getFloorX() + "-" + player.getPosition().getFloorY() + "-" + player.getPosition().getFloorZ();
+                        SocietyPlugin.getInstance().getConfig().set("坐标2", position2);
                         player.sendMessage("设置坐标2成功");
                         return true;
                     case "money":
-                        if(args.length < THREE_ARGS_LENGTH){
+                        if (args.length < THREE_ARGS_LENGTH) {
                             return sendHelp(player);
                         }
-                        if(!SocietyUtils.isSetSocietyWarData()){
+                        if (!SocietyUtils.isSetSocietyWarData()) {
                             player.sendMessage("当前还没有设置公会数据内容!");
                             return true;
                         }
                         String moneyStr = args[2];
                         int money = Integer.parseInt(moneyStr);
-                        SocietyPlugin.getInstance().getConfig().set("money",money);
+                        SocietyPlugin.getInstance().getConfig().set("money", money);
                         SocietyPlugin.getInstance().getConfig().save();
                         return true;
                     default:
@@ -138,15 +139,14 @@ public class AdminCommand extends Command {
                 return true;
 
             default:
-                return sendHelp(player); //
+                return sendHelp(player);
         }
 
     }
 
-    /**
-     * 设置参数
-     */
-    public void setParameter() {
+    @Override
+    public void setCommandParameters(Map<String, CommandParameter[]> commandParameters) {
+        commandParameters.clear();
         getCommandParameters().put(SOCIETY_ARGS, new CommandParameter[]{
                 new CommandParameter(SOCIETY_ARGS, new String[]{SOCIETY_ARGS})
         });
@@ -174,6 +174,38 @@ public class AdminCommand extends Command {
 
         });
     }
+
+    /**
+     * 设置参数
+     */
+    /*public void setParameter() {
+        getCommandParameters().put(SOCIETY_ARGS, new CommandParameter[]{
+                new CommandParameter(SOCIETY_ARGS, new String[]{SOCIETY_ARGS})
+        });
+
+        getCommandParameters().put(TITLE_ARGS, new CommandParameter[]{
+                new CommandParameter(TITLE_ARGS, new String[]{TITLE_ARGS})
+        });
+
+        getCommandParameters().put(MARRY_ARGS, new CommandParameter[]{
+                new CommandParameter(MARRY_ARGS, new String[]{MARRY_ARGS})
+        });
+
+        getCommandParameters().put(PRIVILEGE_ARGS, new CommandParameter[]{
+                new CommandParameter(PRIVILEGE_ARGS, new String[]{PRIVILEGE_ARGS})
+        });
+
+        getCommandParameters().put(GIVE_TITLE_ARGS, new CommandParameter[]{
+                new CommandParameter(GIVE_TITLE_ARGS, new String[]{GIVE_TITLE_ARGS}),
+                new CommandParameter(TITLE_ARGS, new String[]{TITLE_ARGS}),
+                new CommandParameter("§e玩家名§r", CommandParamType.STRING, false),
+                new CommandParameter("§6设置的称号§r", CommandParamType.STRING, true)
+        });
+        getCommandParameters().put(RELOAD_ARGS, new CommandParameter[]{
+                new CommandParameter(RELOAD_ARGS, new String[]{RELOAD_ARGS}),
+
+        });
+    }*/
 
 
     public boolean sendHelp(Player player) {

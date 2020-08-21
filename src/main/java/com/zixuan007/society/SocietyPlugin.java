@@ -177,7 +177,6 @@ public class SocietyPlugin extends PluginBase {
         config = new Config(PluginUtils.checkConfig("Config.yml", configPath), Config.YAML);
         languageConfig = new Config(PluginUtils.checkConfig("lang/zh-CN.yml", languagePath), Config.YAML);
         languageConfig = new Config(PluginUtils.checkConfig("WindowConfig.yml", windowConfigPath), Config.YAML);
-
     }
 
     /**
