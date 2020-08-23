@@ -483,9 +483,15 @@ public class SocietyUtils {
             config.set("description", society.getDescription());
         }
 
-        List<Society> collect = societies.stream().filter(society1 -> society1.getSid() != society.getSid()).collect(Collectors.toList());
-        collect.add(society);
-        societies.addAll(collect);
+
+        /*for (int i = 0; i < societies.size(); i++) {
+            Society societyConfig = societies.get(i);
+            if (societyConfig.getSid() == society.getSid()) {
+                societies.set(i,society);
+            }
+        }*/
+        SocietyUtils.removeSociety(society.getSocietyName());
+        societies.add(society);
 
 
         config.save();

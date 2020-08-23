@@ -9,14 +9,34 @@ import cn.nukkit.utils.Config;
  * @author zixuan007
  */
 public class Marry {
-
-    private long mid; //结婚ID方方便进行查询
-    private String propose;//求婚方姓名
-    private int proposeSex;//求婚方性别
-    private String recipient;//接收方姓名
-    private int recipientSex;//被求婚方性别
-    private Double money;//公共资金
-    private String marryDate;//结婚日期
+    /**
+     * 结婚ID方方便进行查询
+     */
+    private long mid;
+    /**
+     * 求婚方姓名
+     */
+    private String propose;
+    /**
+     * 求婚方性别
+     */
+    private int proposeSex;
+    /**
+     * 接收方姓名
+     */
+    private String recipient;
+    /**
+     * 被求婚方性别
+     */
+    private int recipientSex;
+    /**
+     * 公共资金
+     */
+    private Double money;
+    /**
+     * 结婚日期
+     */
+    private String marryDate;
 
 
     /**

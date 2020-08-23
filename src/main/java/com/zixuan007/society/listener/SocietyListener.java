@@ -40,7 +40,7 @@ import java.util.*;
  */
 public class SocietyListener implements Listener {
     private SocietyPlugin societyPlugin;
-    private List<String> affrimBuyPlayer = new ArrayList<>();
+    private final List<String> affrimBuyPlayer = new ArrayList<>();
 
     public SocietyListener(SocietyPlugin societyPlugin) {
         this.societyPlugin = societyPlugin;
@@ -277,9 +277,16 @@ public class SocietyListener implements Listener {
             if (dissolve != null) {
                 String creator = (String) value.get("creator");
                 if (player.getName().equals(creator)) {
-                    itemData.add(value.get("itemID-Meta"));
+
+                    String itemID = (String) value.get("itemID-Meta");
+                    itemID = itemID.replace("-", "负数");
+
+
+                    itemData.add(itemID);
                     itemData.add(value.get("count"));
                     itemData.add(value.get("nbt"));
+
+
                     Item item = PluginUtils.parseItemByList(itemData);
                     player.getInventory().addItem(item);
                     societyShopConfig.remove(key);
@@ -301,9 +308,12 @@ public class SocietyListener implements Listener {
             Object dissolve = value.get("dissolve");
             ArrayList<Object> itemData = new ArrayList<>();
             if (player.getName().equals(creator) && dissolve != null) {
-                itemData.add(value.get("itemID-Meta"));
+                String itemID = (String) value.get("itemID-Meta");
+                itemID = itemID.replace("-", "负数");
+                itemData.add(itemID);
                 itemData.add(value.get("count"));
                 itemData.add(value.get("nbt"));
+
                 Item item = PluginUtils.parseItemByList(itemData);
                 player.getInventory().addItem(item);
                 player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.returnItem"));

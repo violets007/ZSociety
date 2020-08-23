@@ -84,7 +84,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
 
-                player.showFormWindow( WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW,player));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW, player));
                 break;
             case 2:
                 list = (ArrayList<Object>) societyPlugin.getConfig().get("等级" + society.getGrade());
@@ -110,10 +110,8 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
 
-                Arrays.asList(society.getPost().keySet().toArray(new String[0]));
-                removeMemberWindow = (RemoveMemberWindow) WindowManager.getFormWindow(WindowType.Member_List_Window, player);
-                removeMemberWindow.setParent(this);
-                player.showFormWindow(removeMemberWindow);
+
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.REMOVE_MEMBER_WINDOW, player));
                 break;
             case 4:
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.dissolveSociety", new String[]{"${societyName}"}, new String[]{society.getSocietyName()}), null, closeButtonName, closeButtonImage));
@@ -134,7 +132,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.setSpawn"), null, backButtonName, backButtonImage));
                 break;
             case 6:
-                player.showFormWindow(WindowManager.getFormWindow(WindowType.MODIFY_SOCIETY_INFO_WINDOW,player));
+                player.showFormWindow(WindowManager.getFormWindow(WindowType.MODIFY_SOCIETY_INFO_WINDOW, player));
                 break;
             case 7:
                 if (!SocietyUtils.isSetSocietyWarData()) {

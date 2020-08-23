@@ -77,9 +77,6 @@ public class SocietyPlugin extends PluginBase {
         societyShopConfig.save();
     }
 
-    /**
-     * 初始化插件数据
-     */
     public void init() {
         new MetricsLite(this);
 
@@ -101,9 +98,6 @@ public class SocietyPlugin extends PluginBase {
         resisterListener();
     }
 
-    /**
-     * 注册事件监听器
-     */
     public void resisterListener() {
         getServer().getPluginManager().registerEvents(new ResponseLister(), this);
         getServer().getPluginManager().registerEvents(new SocietyListener(this), this);
@@ -112,9 +106,6 @@ public class SocietyPlugin extends PluginBase {
         getServer().getPluginManager().registerEvents(new PrivilegeListener(this), this);
     }
 
-    /**
-     * 注册插件命令
-     */
     public void registerCommand() {
         getServer().getCommandMap().register("society", new SocietyCommand());
         getServer().getCommandMap().register("title", new TitleCommand());
@@ -124,9 +115,6 @@ public class SocietyPlugin extends PluginBase {
     }
 
 
-    /**
-     * 加载配置文件
-     */
     public void loadConfig() {
         String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
         String language = (String) config.get("language");
@@ -166,9 +154,7 @@ public class SocietyPlugin extends PluginBase {
         }
     }
 
-    /**
-     * 检测主配置文件的版本是否相同
-     */
+
     public void checkConfig() {
         String configPath = PluginUtils.CONFIG_FOLDER + "Config.yml";
         String windowConfigPath = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
@@ -179,9 +165,7 @@ public class SocietyPlugin extends PluginBase {
         languageConfig = new Config(PluginUtils.checkConfig("WindowConfig.yml", windowConfigPath), Config.YAML);
     }
 
-    /**
-     * 注册窗口
-     */
+
     public void registerWindow() {
         PluginUtils.addWindowClass(WindowType.PRIVILEGE_WINDOW, PrivilegeWindow.class);
         PluginUtils.addWindowClass(WindowType.ADVANCED_PRIVILEGE_WINDOW, AdvancedPrivilegeWindow.class);

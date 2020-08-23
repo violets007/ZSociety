@@ -181,16 +181,17 @@ public class PluginUtils {
      * @return
      */
     public static Item parseItemByList(List<Object> list) {
-        if (list == null) {
+        if (list == null && list.size() < 1) {
             return null;
         }
         String itemIDMetaStr = (String) list.get(0);
         String[] split = itemIDMetaStr.split("-");
-        int itemID = Integer.parseInt(split[0]);
+        int itemID = Integer.parseInt(split[0].replace("负数", "-"));
         int meta = Integer.parseInt(split[1]);
         int count = (int) list.get(1);
         String nbtHexString = (String) list.get(2);
         byte[] bytes = Binary.hexStringToBytes(nbtHexString);
+
         return Item.get(itemID, meta, count, bytes);
     }
 

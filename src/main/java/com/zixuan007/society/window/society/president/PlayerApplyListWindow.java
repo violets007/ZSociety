@@ -42,7 +42,7 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
-        if (SocietyUtils.isJoinSociety(playerName)) {
+        if (!SocietyUtils.isJoinSociety(playerName)) {
 
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.isJoinSociety", new String[]{"${playerName}"}, new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
             return;

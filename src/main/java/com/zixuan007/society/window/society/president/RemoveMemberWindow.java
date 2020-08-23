@@ -31,7 +31,7 @@ public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         this.sid = society.getSid();
         if (society.getPost() != null) {
-            String[] memberList = society.getPost().entrySet().toArray(new String[0]);
+            String[] memberList = society.getPost().keySet().toArray(new String[0]);
             for (String name : memberList) {
                 if (name.equals(society.getPresidentName())) {
                     continue;
