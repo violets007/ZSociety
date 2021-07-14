@@ -1,7 +1,6 @@
 package com.zixuan007.society.utils;
 
 import cn.nukkit.utils.Config;
-import com.sun.istack.internal.NotNull;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.PrivilegeType;
 import com.zixuan007.society.domain.Vip;
@@ -10,6 +9,9 @@ import com.zixuan007.society.domain.Vip;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * @author ZSociety @ zixuan007
+ */
 public class PrivilegeUtils {
     public static ArrayList<Vip> privilegeList = new ArrayList<>();
     public static ArrayList<String> removePrivilegeName = new ArrayList<String>();//需要移除特权的玩家名称
@@ -20,7 +22,7 @@ public class PrivilegeUtils {
      * @param playerName
      * @return
      */
-    public static boolean isVIP(@NotNull String playerName) {
+    public static boolean isVIP(String playerName) {
         for (Vip vip : privilegeList) {
             if (vip.getPlayerName().equals(playerName) && vip.getVip_Type().getTypeName().equals(PrivilegeType.VIP.getTypeName()))
                 return true;
@@ -34,7 +36,7 @@ public class PrivilegeUtils {
      * @param playerName
      * @return
      */
-    public static boolean isSvip(@NotNull String playerName) {
+    public static boolean isSvip(String playerName) {
         for (Vip vip : privilegeList) {
             if (vip.getPlayerName().equals(playerName) && vip.getVip_Type().getTypeName().equals(PrivilegeType.SVIP.getTypeName()))
                 return true;
@@ -107,6 +109,7 @@ public class PrivilegeUtils {
      * @param vip
      */
     public static void savePrivilege(Vip vip) {
+
         String configPath = PluginUtils.PRIVILEGE_FOLDER + vip.getPlayerName() + ".yml";
         Config config = new Config(configPath, Config.YAML);
         config.set("vid", vip.getVid());
@@ -115,6 +118,7 @@ public class PrivilegeUtils {
         config.set("playerName", vip.getPlayerName());
         config.set("holdTime", vip.getHoldTime());
         config.save();
+
         privilegeList.forEach((vip1) -> {
             if (vip1.getPlayerName().equals(vip.getPlayerName())) {
                 vip1.setVid(vip.getVid());
@@ -123,6 +127,7 @@ public class PrivilegeUtils {
                 vip1.setVip_Type(vip.getVip_Type());
             }
         });
+
         //每次保存查看下列表数据
         SocietyPlugin.getInstance().getLogger().info(privilegeList.toString());
     }

@@ -27,10 +27,10 @@ public class LevelRankWindow extends SimpleWindow implements WindowLoader {
             setBack(true);
         }
         StringBuilder sb = new StringBuilder();
-        Collections.sort(SocietyUtils.societies, (o1, o2) -> Integer.compare(o2.getGrade(), o1.getGrade()));
+        Collections.sort(SocietyUtils.getSocieties(), (o1, o2) -> Integer.compare(o2.getGrade(), o1.getGrade()));
         sb.append("§l§d公会等级排名§f(§c前五§f)\n");
-        for (int i = 0; i < SocietyUtils.societies.size() && i <= 4; i++) {
-            Society society = SocietyUtils.societies.get(i);
+        for (int i = 0; i < SocietyUtils.getSocieties().size() && i <= 4; i++) {
+            Society society = SocietyUtils.getSocieties().get(i);
             String societyName1 = society.getSocietyName();
             int grade = society.getGrade();
             sb.append("§f公会名称 §a" + societyName1 + " §f公会等级 §b" + grade + "\n");

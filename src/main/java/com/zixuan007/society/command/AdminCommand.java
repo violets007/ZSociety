@@ -43,27 +43,27 @@ public class AdminCommand extends Command {
 
     public AdminCommand() {
         super(COMMAND_NAME);
-        setPermission("ZSociety.command.admin");
+        setPermission("society.command.admin");
         getCommandParameters().clear();
-        //setParameter();
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] args) {
-        if (commandSender instanceof ConsoleCommandSender) {
-            return false;
-        }
+
+
         if (!commandSender.isOp()) {
             return false;
         }
 
-        Player player = (Player) commandSender;
+        Player player = null;
+        if (!(commandSender instanceof ConsoleCommandSender))
+            player = (Player) commandSender;
+
         if (args.length < ONE_ARGS_LENGTH) {
             return sendHelp(player);
         }
         switch (args[0]) {
             case SOCIETY_ARGS:
-
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.SOCIETY_ADMIN_WINDOW));
                 return true;
             case TITLE_ARGS:
@@ -77,28 +77,33 @@ public class AdminCommand extends Command {
                 return true;
             case GIVE_TITLE_ARGS:
                 if (args.length < FOUR_ARGS_LENGTH) {
-                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
+                    commandSender.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
                     return false;
                 }
 
                 if (!TITLE_ARGS.equals(args[ONE_ARGS_LENGTH])) {
-                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
+                    commandSender.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
                     return false;
                 }
-                if (SocietyPlugin.getInstance().getTitleConfig().get(args[TWO_ARGS_LENGTH]) == null) {
-                    player.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.notPlayer"));
+
+                /*if (SocietyPlugin.getInstance().getTitleConfig().get(args[TWO_ARGS_LENGTH]) == null) {
+                    commandSender.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.notPlayer"));
                     return false;
-                }
+                }*/
+
                 String title = args[THREE_ARGS_LENGTH];
                 if (TitleUtils.isExistTitle(args[TWO_ARGS_LENGTH], title)) {
-                    player.sendMessage(PluginUtils.getLanguageInfo("message.existTitle", new String[]{"${playerName}"}, new String[]{args[TWO_ARGS_LENGTH]}));
+                    commandSender.sendMessage(PluginUtils.getLanguageInfo("message.existTitle", new String[]{"${playerName}"}, new String[]{args[TWO_ARGS_LENGTH]}));
                     return false;
                 }
+
                 TitleUtils.addTitle(args[TWO_ARGS_LENGTH], title);
                 if (PluginUtils.isOnlineByName(args[TWO_ARGS_LENGTH])) {
                     Server.getInstance().getPlayer(PluginUtils.getLanguageInfo("message.giveTitle", new String[]{"${playerName}"}, new String[]{args[THREE_ARGS_LENGTH]}));
                 }
 
+                commandSender.sendMessage("称号给予成功");
+                return true;
             case "war":
                 if (args.length < TWO_ARGS_LENGTH) {
                     return sendHelp(player);
@@ -174,38 +179,6 @@ public class AdminCommand extends Command {
 
         });
     }
-
-    /**
-     * 设置参数
-     */
-    /*public void setParameter() {
-        getCommandParameters().put(SOCIETY_ARGS, new CommandParameter[]{
-                new CommandParameter(SOCIETY_ARGS, new String[]{SOCIETY_ARGS})
-        });
-
-        getCommandParameters().put(TITLE_ARGS, new CommandParameter[]{
-                new CommandParameter(TITLE_ARGS, new String[]{TITLE_ARGS})
-        });
-
-        getCommandParameters().put(MARRY_ARGS, new CommandParameter[]{
-                new CommandParameter(MARRY_ARGS, new String[]{MARRY_ARGS})
-        });
-
-        getCommandParameters().put(PRIVILEGE_ARGS, new CommandParameter[]{
-                new CommandParameter(PRIVILEGE_ARGS, new String[]{PRIVILEGE_ARGS})
-        });
-
-        getCommandParameters().put(GIVE_TITLE_ARGS, new CommandParameter[]{
-                new CommandParameter(GIVE_TITLE_ARGS, new String[]{GIVE_TITLE_ARGS}),
-                new CommandParameter(TITLE_ARGS, new String[]{TITLE_ARGS}),
-                new CommandParameter("§e玩家名§r", CommandParamType.STRING, false),
-                new CommandParameter("§6设置的称号§r", CommandParamType.STRING, true)
-        });
-        getCommandParameters().put(RELOAD_ARGS, new CommandParameter[]{
-                new CommandParameter(RELOAD_ARGS, new String[]{RELOAD_ARGS}),
-
-        });
-    }*/
 
 
     public boolean sendHelp(Player player) {

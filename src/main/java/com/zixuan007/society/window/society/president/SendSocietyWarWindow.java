@@ -37,7 +37,7 @@ public class SendSocietyWarWindow extends CustomWindow implements WindowLoader {
         Player player = (Player) objects[0];
         ArrayList<String> arrayList = new ArrayList<>();
 
-        for (Society configSociety : SocietyUtils.societies) {
+        for (Society configSociety : SocietyUtils.getSocieties()) {
             if (configSociety.getPresidentName().equals(player.getName())) {
                 continue;
             }

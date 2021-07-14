@@ -29,6 +29,7 @@ message.notExistPrivilege: §f>> §c你还没有特权,请先联系管理员购�
 #公会功能窗口
 message.societyWindow.existSociety: §c你已经存在公会,无法创建请先退出当前公会
 message.societyWindow.notPresident: §c您没有权限管理公会
+message.societyWindow.doesNotExist: §c当前还没有玩家创建过公会
 message.societyWindow.isJoin: §c当前还没加入公会请先加入公会
 message.societyWindow.unableQuitSociety: §c你是会长无法退出公会,请解散公会!
 message.societyWindow.isQuitSociety: §c您确认要退出 §b ${societyName} §c公会吗?

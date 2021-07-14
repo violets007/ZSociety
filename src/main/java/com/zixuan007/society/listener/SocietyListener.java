@@ -30,7 +30,6 @@ import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.utils.TitleUtils;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
-import com.zixuan007.society.window.society.MessageWindow;
 import me.onebone.economyapi.EconomyAPI;
 
 import java.util.*;
@@ -60,8 +59,8 @@ public class SocietyListener implements Listener {
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         ArrayList<Object> post = (ArrayList<Object>) config.get("post");
         HashMap<String, Object> postInfo = (HashMap<String, Object>) post.get(0);
+        SocietyUtils.getSocieties().add(society);
         SocietyUtils.addMember(player.getName(), society, "会长", (Integer) postInfo.get("grade"));
-        SocietyUtils.societies.add(society);
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b§l" + player.getName() + " §r§a创建公会名称: §e" + society.getSocietyName());
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a创建 §l§b" + society.getSocietyName() + " §a公会成功", societyWindow, backButtonName, backButtonImage));
@@ -372,7 +371,7 @@ public class SocietyListener implements Listener {
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         if (SocietyUtils.isJoinSociety(player.getName())) {
             if (packet instanceof TextPacket) {
-                if (((TextPacket) packet).type == TextPacket.TYPE_CHAT) {
+                if (((TextPacket) packet).type == TextPacket.TYPE_CHAT && society != null) {
                     if (SocietyUtils.societyChatPlayers.containsKey(player.getName())) {
                         HashMap<String, ArrayList<Object>> post = society.getPost();
                         for (String playerName : post.keySet()) {

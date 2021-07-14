@@ -91,8 +91,8 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 break;
             case 2:
 
-                if (SocietyUtils.societies == null || SocietyUtils.societies.size() <= 0) {
-                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
+                if (SocietyUtils.getSocieties() == null || SocietyUtils.getSocieties().size() <= 0) {
+                    player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.doesNotExist"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
 

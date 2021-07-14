@@ -5,7 +5,6 @@ import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowModal;
-import com.sun.istack.internal.NotNull;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.response.ResponseListenerModal;
 
@@ -78,14 +77,14 @@ public class ModalWindow extends FormWindowModal implements ResponseListenerModa
     }
 
 
-    public final ModalWindow onClick(@NotNull BiConsumer<Boolean, Player> listener) {
+    public final ModalWindow onClick(BiConsumer<Boolean, Player> listener) {
         Objects.requireNonNull(listener);
         this.buttonClickedListener = listener;
         return this;
     }
 
 
-    public final void onClosed(@NotNull Consumer<Player> listener) {
+    public final void onClosed(Consumer<Player> listener) {
         Objects.requireNonNull(listener);
         this.windowClosedListener = listener;
     }

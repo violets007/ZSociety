@@ -26,11 +26,11 @@ public class ContributionRankingWindow extends SimpleWindow implements WindowLoa
             setParent((FormWindow) objects[0]);
             setBack(true);
         }
-        Collections.sort(SocietyUtils.societies, (o1, o2) -> Double.compare(o2.getSocietyMoney().doubleValue(), o1.getSocietyMoney().doubleValue()));
+        Collections.sort(SocietyUtils.getSocieties(), (o1, o2) -> Double.compare(o2.getSocietyMoney().doubleValue(), o1.getSocietyMoney().doubleValue()));
         StringBuilder sb = new StringBuilder();
         sb.append("§l§d公会经济排名§f(§c前五§f)\n");
-        for (int i = 0; i < SocietyUtils.societies.size() && i <= 4; i++) {
-            Society society = SocietyUtils.societies.get(i);
+        for (int i = 0; i < SocietyUtils.getSocieties().size() && i <= 4; i++) {
+            Society society = SocietyUtils.getSocieties().get(i);
             long sid = society.getSid();
             String societyName1 = society.getSocietyName();
             Double societyMoney = society.getSocietyMoney();

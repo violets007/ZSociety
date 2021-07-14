@@ -31,24 +31,27 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         this.tempApply = society.getTempApply();
         this.sid = society.getSid();
-        tempApply.forEach(name -> addButton(new ElementButton(name)));
+        if (tempApply.size() > 0 && !tempApply.get(0).equals(""))
+            tempApply.forEach(name -> addButton(new ElementButton(name)));
         return this;
     }
 
     @Override
     public void onClick(int id, Player player) {
+        Society society = SocietyUtils.getSocietysByID(sid);
         String playerName = this.tempApply.get(id);
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
 
-        if (!SocietyUtils.isJoinSociety(playerName)) {
-
+        if (SocietyUtils.isJoinSociety(playerName)) {
+            society.getTempApply().remove(playerName);
+            SocietyUtils.saveSociety(society);
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.isJoinSociety", new String[]{"${playerName}"}, new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
             return;
         }
 
-        Society society = SocietyUtils.getSocietysByID(this.sid);
+
         SocietyUtils.addMember(playerName, society, "精英", 1);
         SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.playerApplyList.joinSociety", new String[]{"${playerName}"}, new String[]{playerName}), society);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.acceptJoinSociety", new String[]{"${playerName}"}, new String[]{playerName}), societyWindow, backButtonName, backButtonImage));

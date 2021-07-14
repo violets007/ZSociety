@@ -63,9 +63,9 @@ public class SocietyUtils {
      * @return
      */
     public static boolean isJoinSociety(String playerName) {
-        ArrayList<Society> societies = SocietyUtils.societies;
+        ArrayList<Society> societies = SocietyUtils.getSocieties();
         for (Society society : societies) {
-            for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>) society.getPost().entrySet()) {
+            for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
                 String name = entry.getKey();
                 if (name.equals(playerName)) {
                     return true;
@@ -80,15 +80,21 @@ public class SocietyUtils {
      * @return
      */
     public static Society getSocietyByPlayerName(String playerName) {
-        ArrayList<Society> societies = SocietyUtils.societies;
-        for (Society society : societies) {
-            for (Map.Entry<String, ArrayList<Object>> entry : (Iterable<Map.Entry<String, ArrayList<Object>>>) society.getPost().entrySet()) {
+        ArrayList<Society> societies = SocietyUtils.getSocieties();
+        Iterator<Society> iterator = societies.iterator();
+        while (iterator.hasNext()) {
+            Society society = iterator.next();
+            if (society == null || society.getPost() == null || society.getPost().entrySet() == null) {
+                return null;
+            }
+            for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
                 String name = entry.getKey();
                 if (name.equals(playerName)) {
                     return society;
                 }
             }
         }
+
         return null;
     }
 
@@ -125,7 +131,7 @@ public class SocietyUtils {
      * @return
      */
     public static List<Society> getSocietyList(int currentPage) {
-        ArrayList<Society> societies = SocietyUtils.societies;
+        ArrayList<Society> societies = SocietyUtils.getSocieties();
         int totalPage = (societies.size() % 10 == 0) ? (societies.size() / 10) : (societies.size() / 10 + 1);
         if (currentPage > totalPage) return null;
         if (currentPage == 1) {
@@ -163,7 +169,7 @@ public class SocietyUtils {
      * @return
      */
     public static Society getSocietysByID(long sid) {
-        for (Society society : SocietyUtils.societies) {
+        for (Society society : SocietyUtils.getSocieties()) {
             if (society.getSid() == sid) {
                 return society;
             }
@@ -197,7 +203,7 @@ public class SocietyUtils {
      * @return
      */
     public static boolean isChairman(String playerName) {
-        for (Society society : SocietyUtils.societies) {
+        for (Society society : SocietyUtils.getSocieties()) {
             if (society.getPresidentName().equals(playerName)) {
                 return true;
             }
@@ -272,8 +278,8 @@ public class SocietyUtils {
      * @return
      */
     public static long getNextSid() {
-        ArrayList<Society> societies = SocietyUtils.societies;
-        int size = SocietyUtils.societies.size();
+        ArrayList<Society> societies = SocietyUtils.getSocieties();
+        int size = SocietyUtils.getSocieties().size();
         if (size == 0) return 1L;
         long max = 0L;
         for (Society society : societies) {
@@ -310,7 +316,7 @@ public class SocietyUtils {
      * @param society
      */
     public static void addMember(String playerName, Society society, String postName, int postGrade) {
-        SocietyUtils.societies.forEach(society1 -> society1.getTempApply().remove(playerName));
+        SocietyUtils.getSocieties().forEach(society1 -> society1.getTempApply().remove(playerName));
         society.getPost().put(playerName, new ArrayList() {
             {
                 add(postName);
@@ -422,6 +428,8 @@ public class SocietyUtils {
                 removeShopSign(key);
             }
         }
+
+        //移除
     }
 
     /**
@@ -433,15 +441,42 @@ public class SocietyUtils {
         if (!societyFolder.exists()) {
             societyFolder.mkdirs();
         }
-        File[] files = societyFolder.listFiles();
-        for (File file : files) {
-            Config config = new Config(file);
-            societyPlugin.getSocietyConfigList().add(config);
-            if (file.getName().endsWith(".yml")) {
-                SocietyUtils.societies.add(Society.init(config));
+
+        boolean enableDatabase = SocietyPlugin.getInstance().getConfig().getBoolean("enableDatabase", false);
+        if (!enableDatabase) {
+            File[] files = societyFolder.listFiles();
+            for (File file : files) {
+                Config config = new Config(file);
+                societyPlugin.getSocietyConfigList().add(config);
+                if (file.getName().endsWith(".yml")) {
+                    Society society = Society.init(config);
+                    //校验当前公会数据是否同步
+                    if (society != null && !society.isSynchronous()) {
+                        society.setSynchronous(true);
+                        saveSociety(society);
+                    }
+                    System.out.println(society);
+                    SocietyUtils.getSocieties().add(society);
+                }
             }
+        } else {
+            File[] files = societyFolder.listFiles();
+            for (File file : files) {
+                Config config = new Config(file);
+                societyPlugin.getSocietyConfigList().add(config);
+                if (file.getName().endsWith(".yml")) {
+                    Society society = Society.init(config);
+                    //校验当前公会数据是否同步
+                    if (society != null) {
+                        society.setSynchronous(true);
+                        saveSociety(society);
+                    }
+                    SocietyUtils.getSocieties().add(society);
+                }
+            }
+
         }
-        SocietyPlugin.getInstance().getLogger().debug(SocietyUtils.societies.toString());
+        SocietyPlugin.getInstance().getLogger().debug(SocietyUtils.getSocieties().toString());
     }
 
     /**
@@ -483,15 +518,24 @@ public class SocietyUtils {
             config.set("description", society.getDescription());
         }
 
-
+        config.set("synchronous", society.isSynchronous());
         /*for (int i = 0; i < societies.size(); i++) {
             Society societyConfig = societies.get(i);
             if (societyConfig.getSid() == society.getSid()) {
                 societies.set(i,society);
             }
         }*/
-        SocietyUtils.removeSociety(society.getSocietyName());
-        societies.add(society);
+        //SocietyUtils.removeSociety(society.getSocietyName());
+        //societies.add(society);
+        getSocieties().forEach(society1 -> {
+            if (society1.getSid() == society.getSid()) {
+                society1.setSocietyName(society.getSocietyName());
+                society1.setSocietyMoney(society.getSocietyMoney());
+                society1.setGrade(society.getGrade());
+                society1.setPosition(society.getPosition());
+                society1.setTempApply(society.getTempApply());
+            }
+        });
 
 
         config.save();
@@ -622,6 +666,14 @@ public class SocietyUtils {
         }
 
         return flag;
+    }
+
+    public static ArrayList<Society> getSocieties() {
+        return societies;
+    }
+
+    public static void setSocieties(ArrayList<Society> societies) {
+        SocietyUtils.societies = societies;
     }
 
     /**

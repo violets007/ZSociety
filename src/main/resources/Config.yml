@@ -9,6 +9,12 @@
 #用于检测配置文件版本
 version: 1.0.8alpha
 
+##是否开启使用Mysql数据库进行连接
+enableDatabase: false
+
+##数据库名字
+databaseName: DTSRPG
+
 #默认创建公会金额(浮点类型不能删除.0)
 createSocietyMoney: 100000.0
 
@@ -22,7 +28,7 @@ language: zh-CN.yml
 isChat: true
 
 #称号格式
-chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${marry}§7]§b${playerName}§f ${message}"
+chatFormat: "${privilege}§r§7[§6${world}§7][${title}§7][§e${societyName}§7]§7[${marry}§7]§b${playerName}§f❥${message}"
 
 #是否显示底部信息 （如果有底部显示建议false）
 isTip: false

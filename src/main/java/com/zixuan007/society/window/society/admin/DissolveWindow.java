@@ -26,7 +26,7 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getButtons().clear();
-        ArrayList<Society> societies = SocietyUtils.societies;
+        ArrayList<Society> societies = SocietyUtils.getSocieties();
         if (societies.size() > 0) {
             for (Society society : societies) {
                 String buttonContent = society.getSocietyName() + " " + society.getSid();
@@ -47,13 +47,13 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
         String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
         String closeImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
 
-        if (!SocietyUtils.societies.contains(society)) {
+        if (!SocietyUtils.getSocieties().contains(society)) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.dissolveWindow.notSociety"), null, closeButtonName, closeImagePath));
             return;
         }
 
         SocietyUtils.removeSocietyShopBySid(society);
-        SocietyUtils.societies.remove(society);
+        SocietyUtils.getSocieties().remove(society);
         SocietyUtils.removeSociety(society.getSocietyName());
         String societyName = society.getSocietyName();
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.dissolveWindow.dissolveSociety", new String[]{"${societyName}"}, new String[]{societyName}), null, closeButtonName, closeImagePath));

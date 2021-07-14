@@ -17,6 +17,10 @@ public class ZsocietyAPI {
         instance = new ZsocietyAPI();
     }
 
+    public static ZsocietyAPI getInstance() {
+        return instance;
+    }
+
     /**
      * 获取公会名称
      *
@@ -125,10 +129,6 @@ public class ZsocietyAPI {
             return true;
         }
         return false;
-    }
-
-    public static ZsocietyAPI getInstance() {
-        return instance;
     }
 
 

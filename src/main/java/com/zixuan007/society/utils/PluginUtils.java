@@ -6,6 +6,7 @@ import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.Binary;
 import cn.nukkit.utils.Config;
+import com.google.gson.Gson;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.domain.Society;
 import com.zixuan007.society.window.WindowManager;
@@ -13,10 +14,6 @@ import com.zixuan007.society.window.WindowType;
 import me.onebone.economyapi.EconomyAPI;
 
 import java.io.File;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -287,4 +284,58 @@ public class PluginUtils {
         return nowTime >= startTime && nowTime <= endTime;
     }
 
+    /**
+     * list转字符串
+     *
+     * @param list
+     * @return
+     */
+    public static String listToString(List<String> list) {
+        if (list == null) {
+            return null;
+        }
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        //第一个前面不拼接","
+        for (String string : list) {
+            if (first) {
+                first = false;
+            } else {
+                result.append(",");
+            }
+            result.append(string);
+        }
+        return result.toString();
+    }
+
+    /**
+     * string转list
+     *
+     * @param strs
+     * @return
+     */
+    public static List<String> stringToList(String strs) {
+        String str[] = strs.split(",");
+        return Arrays.asList(str);
+    }
+
+    /**
+     * Map转换为Json字符串
+     *
+     * @param map
+     * @return
+     */
+    public static String mapToJsonString(Map<String, ArrayList<Object>> map) {
+        return new Gson().toJson(map);
+    }
+
+    /**
+     * Map转String
+     *
+     * @param str
+     * @return
+     */
+    public static HashMap<String, ArrayList<Object>> stringToMap(String str) {
+        return new Gson().fromJson(str, HashMap.class);
+    }
 }

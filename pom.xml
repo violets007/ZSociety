@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Zscoiety</groupId>
+    <groupId>com.zixuan007</groupId>
     <artifactId>ZSociety</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -35,6 +35,7 @@
             <groupId>cn.nukkit</groupId>
             <artifactId>nukkit</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -44,10 +45,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.fundebug</groupId>
-            <artifactId>fundebug-java</artifactId>
-            <version>0.3.1</version>
-        </dependency>
+
     </dependencies>
 </project>

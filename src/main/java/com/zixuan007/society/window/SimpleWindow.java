@@ -5,7 +5,6 @@ import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowSimple;
-import com.sun.istack.internal.NotNull;
 import com.zixuan007.society.window.response.ResponseListenerSimple;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -73,14 +72,14 @@ public class SimpleWindow extends FormWindowSimple implements ResponseListenerSi
     }
 
 
-    public final void onClicked(@NotNull BiConsumer<Integer, Player> listener) {
+    public final void onClicked(BiConsumer<Integer, Player> listener) {
         Objects.requireNonNull(listener);
         if (this.buttonClickedListener != null) {
             this.buttonClickedListener = listener;
         }
     }
 
-    public final void onClosed(@NotNull Consumer<Player> listener) {
+    public final void onClosed(Consumer<Player> listener) {
         Objects.requireNonNull(listener);
         if (this.windowClosedListener != null) {
             this.windowClosedListener = listener;

@@ -16,13 +16,15 @@ public class Society {
     private String presidentName;
     private String createTime;
     private Double societyMoney;
-    private HashMap<String, ArrayList<Object>> members =new HashMap<String, ArrayList<Object>>();
+    private HashMap<String, ArrayList<Object>> members = new HashMap<String, ArrayList<Object>>();
     private int grade = 1;
     private ArrayList<String> tempApply = new ArrayList<>();
     private String position;
     private String description;
+    private boolean synchronous;
 
-    public Society() {}
+    public Society() {
+    }
 
     public Society(long sid, String societyName, String presidentName, String createTime, Double societyMoney, HashMap<String, ArrayList<Object>> members) {
         this.sid = sid;
@@ -39,20 +41,21 @@ public class Society {
         } else {
             Society society = new Society();
             if (config.get("sid") instanceof Integer) {
-                society.sid = ((Integer)config.get("sid")).longValue();
+                society.sid = ((Integer) config.get("sid")).longValue();
             }
             if (config.get("sid") instanceof Long) {
-                society.sid = (Long)config.get("sid");
+                society.sid = (Long) config.get("sid");
             }
             society.societyName = config.getString("societyName");
             society.presidentName = config.getString("presidentName");
             society.createTime = config.getString("createTime");
             society.societyMoney = config.getDouble("societyMoney");
-            society.members = (HashMap<String, ArrayList<Object>>)config.get("psots");
+            society.members = (HashMap<String, ArrayList<Object>>) config.get("psots", new HashMap<String, ArrayList<Object>>());
             society.grade = config.getInt("grade");
-            society.tempApply = (ArrayList)config.getList("tempApply");
-            society.position = (String) config.get("position");
-            society.description= (String) config.get("description");
+            society.tempApply = (ArrayList<String>) config.getList("tempApply", new ArrayList());
+            society.position = config.getString("position");
+            society.description = config.getString("description");
+            society.synchronous = config.getBoolean("synchronous", false);
             return society;
         }
     }
@@ -142,11 +145,18 @@ public class Society {
         this.description = description;
     }
 
+    public boolean isSynchronous() {
+        return synchronous;
+    }
 
+    public void setSynchronous(boolean synchronous) {
+        this.synchronous = synchronous;
+    }
 
     @Override
     public String toString() {
         return "Society{sid=" + this.sid + ", societyName='" + this.societyName + '\'' + ", presidentName='" + this.presidentName + '\'' + ", createTime='" + this.createTime + '\'' + ", societyMoney=" + this.societyMoney + ", psots=" + this.members + ", grade=" + this.grade + ", tempApply=" + this.tempApply + '}';
     }
+
 
 }

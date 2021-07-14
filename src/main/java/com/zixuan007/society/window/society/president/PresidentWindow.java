@@ -110,7 +110,6 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
 
-
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.REMOVE_MEMBER_WINDOW, player));
                 break;
             case 4:
@@ -118,7 +117,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.presidentWindow.presidentDissolveSociety", new String[]{"${playerName}"}, new String[]{player.getName()}), society);
                 //移除指定的公会商店
                 SocietyUtils.removeSocietyShopBySid(society);
-                SocietyUtils.societies.remove(society);
+                SocietyUtils.getSocieties().remove(society);
                 SocietyUtils.removeSociety(society.getSocietyName());
                 break;
             case 5:

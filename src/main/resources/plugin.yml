@@ -6,7 +6,7 @@ api: ["1.0.0"]
 
 
 permissions:
-  ZSociety.command.user:
+  society.command.user:
     default: true
-  ZSociety.command.admin:
+  society.command.admin:
     default: op

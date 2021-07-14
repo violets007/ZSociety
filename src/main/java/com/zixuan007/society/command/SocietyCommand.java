@@ -18,7 +18,7 @@ public class SocietyCommand extends Command {
 
     public SocietyCommand() {
         super(COMMAND_NAME, "§e显示公会功能窗口", "");
-        this.setPermission("ZSociety.command.user");
+        this.setPermission("society.command.user");
         this.getCommandParameters().clear();
     }
 

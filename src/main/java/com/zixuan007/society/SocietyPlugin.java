@@ -69,7 +69,6 @@ public class SocietyPlugin extends PluginBase {
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
 
-        SocietyUtils.societies.forEach(SocietyUtils::saveSociety);
         SocietyUtils.saveSocietyWar();
         config.save();
         marryConfig.save();
@@ -142,7 +141,7 @@ public class SocietyPlugin extends PluginBase {
     }
 
     /**
-     * 检测插件
+     * 检查插件依赖
      *
      * @param pluginName 插件名称
      */

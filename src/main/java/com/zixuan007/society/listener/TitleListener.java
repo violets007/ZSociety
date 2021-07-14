@@ -45,6 +45,7 @@ public class TitleListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
         Config titleConfig = this.societyPlugin.getTitleConfig();
         ArrayList<String> title = (ArrayList<String>) titleConfig.getStringList(player.getName());
         if (title == null) {

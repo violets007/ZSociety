@@ -40,7 +40,7 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
             String playerName = entry.getKey();
             ArrayList<Object> value = entry.getValue();
             String postName = (String) value.get(0);
-            Integer postGrade = (Integer) value.get(1);
+            Integer postGrade = ((int) value.get(1));
             memberList.add(new ArrayList<Object>() {
                 {
                     add(playerName);

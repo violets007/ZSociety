@@ -5,7 +5,6 @@ import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowCustom;
-import com.sun.istack.internal.NotNull;
 import com.zixuan007.society.window.response.ResponseListennerCustom;
 
 import java.util.Objects;
@@ -66,12 +65,12 @@ public class CustomWindow extends FormWindowCustom implements ResponseListennerC
         player.showFormWindow(this.parent);
     }
 
-    public final void onClick(@NotNull BiConsumer<FormResponseCustom, Player> listener) {
+    public final void onClick(BiConsumer<FormResponseCustom, Player> listener) {
         Objects.requireNonNull(listener);
         this.buttonClickedListener = listener;
     }
 
-    public void onClose(@NotNull Consumer<Player> listener) {
+    public void onClose(Consumer<Player> listener) {
         Objects.requireNonNull(listener);
         this.windowClosedListener = listener;
     }

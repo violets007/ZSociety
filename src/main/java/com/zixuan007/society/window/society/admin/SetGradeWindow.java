@@ -33,7 +33,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
     @Override
     public FormWindow init(Object... objects) {
         getElements().clear();
-        ArrayList<Society> societies = SocietyUtils.societies;
+        ArrayList<Society> societies = SocietyUtils.getSocieties();
         if (societies.size() > 0) {
             ArrayList<String> sidList = new ArrayList<>();
             for (Society society : societies) {
@@ -72,14 +72,14 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         int grade = Integer.parseInt(gradeStr);
         Society society = SocietyUtils.getSocietysByID(sid);
 
-        if (!SocietyUtils.societies.contains(society)) {
+        if (!SocietyUtils.getSocieties().contains(society)) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.notSociety"), null, closeButtonName, closeButtonImagePath));
             return;
         }
 
-        SocietyUtils.societies.remove(society);
+        SocietyUtils.getSocieties().remove(society);
         society.setGrade(grade);
-        SocietyUtils.societies.add(society);
+        SocietyUtils.getSocieties().add(society);
         SocietyUtils.saveSociety(society);
         String societyName = society.getSocietyName();
         int societyGrade = society.getGrade();
