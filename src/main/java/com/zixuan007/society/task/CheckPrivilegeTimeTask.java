@@ -3,7 +3,7 @@ package com.zixuan007.society.task;
 import cn.nukkit.scheduler.PluginTask;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Vip;
+import com.zixuan007.society.pojo.Vip;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 

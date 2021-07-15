@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
@@ -45,14 +45,14 @@ public class ContributionWindow extends CustomWindow implements WindowLoader {
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
         if (!strMoney.equals("") && SocietyUtils.isNumeric(strMoney)) {
-            if (!SocietyUtils.isJoinSociety(player.getName())) {
+            if (!SocietyUtils.hasSociety(player.getName())) {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.isJoinSociety"), contributionForm, backButtonName, backButtonImage));
             } else {
                 int money = Integer.parseInt(strMoney);
                 if (money > 0) {
                     double myMoney = EconomyAPI.getInstance().myMoney(player);
                     if (myMoney < (double) money) {
-                        messageWindow= (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.rarelyCoin"), contributionForm, backButtonName, backButtonImage);
+                        messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.rarelyCoin"), contributionForm, backButtonName, backButtonImage);
                     } else {
                         Society society = SocietyUtils.getSocietysByID(this.sid);
                         society.setSocietyMoney(society.getSocietyMoney() + (double) money);

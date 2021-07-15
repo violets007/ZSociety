@@ -14,11 +14,14 @@ import java.util.Collection;
  *
  * @author zixuan007
  */
-public class ShowTask extends PluginTask<SocietyPlugin> {
-    private static final String IS_TIP = "isTip";
-    private static final String IS_SET_NAME_TAG = "isSetNameTag";
+public class ShowTipTask extends PluginTask<SocietyPlugin> {
 
-    public ShowTask(SocietyPlugin owner) {
+    private static final String ENABLE_TIP = "底部显示开启";
+    private static final String ENABLE_NAMETAG = "玩家标签显示开启";
+    private static final String NAMETAG_FORMAT = "玩家名称标签格式";
+    private static final String TIP_FORMAT = "底部格式化";
+
+    public ShowTipTask(SocietyPlugin owner) {
         super(owner);
     }
 
@@ -26,16 +29,16 @@ public class ShowTask extends PluginTask<SocietyPlugin> {
     public void onRun(int i) {
         Collection<Player> players = owner.getServer().getOnlinePlayers().values();
         Config config = SocietyPlugin.getInstance().getConfig();
-        String tempText = config.getString("tipText");
-        String configNameTag = (String) config.get("nameTagFormat");
-        if (config.getBoolean(IS_TIP)) {
+        String tempText = config.getString(TIP_FORMAT);
+        String configNameTag = (String) config.get(NAMETAG_FORMAT);
+        if (config.getBoolean(ENABLE_TIP)) {
             for (Player player : players) {
                 tempText = SocietyUtils.formatButtomText(tempText, player);
                 player.sendTip(tempText);
             }
         }
 
-        if (config.getBoolean(IS_SET_NAME_TAG)) {
+        if (config.getBoolean(ENABLE_NAMETAG)) {
             for (Player player : players) {
                 String formatNameTag = PluginUtils.formatText(configNameTag, player);
                 player.setNameTag(formatNameTag);

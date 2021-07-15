@@ -6,8 +6,7 @@ import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
-import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -102,7 +101,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
 
             case 3:
 
-                boolean isJoinSociety = SocietyUtils.isJoinSociety(player.getName());
+                boolean isJoinSociety = SocietyUtils.hasSociety(player.getName());
                 if (!isJoinSociety) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
@@ -127,7 +126,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 break;
 
             case 4:
-                if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
+                if (society == null || !SocietyUtils.hasSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
@@ -142,21 +141,21 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.LEVEL_RANK_WINDOW, societyWindow));
                 break;
             case 7:
-                if (society == null || !SocietyUtils.isJoinSociety(player.getName())) {
+                if (society == null || !SocietyUtils.hasSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CONTRIBUTION_WINDOW, player, societyWindow));
                 break;
             case 8:
-                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                if (!SocietyUtils.hasSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_SHOP_WINDOW, player));
                 break;
             case 9:
-                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                if (!SocietyUtils.hasSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
@@ -170,7 +169,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
 
                 break;
             case 10:
-                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                if (!SocietyUtils.hasSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }
@@ -189,7 +188,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 player.sendMessage(PluginUtils.getLanguageInfo("message.societyWindow.spawn"));
                 break;
             case 11:
-                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                if (!SocietyUtils.hasSociety(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.isJoin"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }

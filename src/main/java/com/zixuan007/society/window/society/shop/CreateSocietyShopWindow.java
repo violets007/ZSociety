@@ -7,7 +7,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.item.Item;
-import com.zixuan007.society.domain.ItemIDSunName;
+import com.zixuan007.society.pojo.ItemIDSunName;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;

@@ -3,9 +3,10 @@ package com.zixuan007.society.window;
 
 /**
  * 窗口类型
+ *
  * @author zixuan007
  */
-public enum  WindowType {
+public enum WindowType {
 
     /**
      * VIP功能窗口
@@ -38,7 +39,11 @@ public enum  WindowType {
      */
     SET_PRIVILEGE_WINDOW("SetPrivilegeWindow"),
 
+    /**
+     * 称号管理
+     */
     TITLE_MANAGER_WINDOW("TitleManagerWindow"),
+
     /**
      * 称号列表窗口
      */
@@ -214,8 +219,8 @@ public enum  WindowType {
 
     public String windowName;
 
-    WindowType(String windowName){
-        this.windowName=windowName;
+    WindowType(String windowName) {
+        this.windowName = windowName;
 
     }
 

@@ -5,7 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.event.society.PlayerApplyJoinSocietyEvent;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -84,7 +84,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
             nextPage(this.currentPage, player);
             return;
         }
-        if (SocietyUtils.isJoinSociety(player.getName())) {
+        if (SocietyUtils.hasSociety(player.getName())) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyListWindow.isJoinSociety"), societyWindow, backButtonName, backButtonImage));
             return;
         }

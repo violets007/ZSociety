@@ -9,14 +9,13 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Society;
-import com.zixuan007.society.domain.SocietyWar;
+import com.zixuan007.society.pojo.Society;
+import com.zixuan007.society.pojo.SocietyWar;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 import static com.zixuan007.society.utils.PluginUtils.SOCIETY_FOLDER;
@@ -48,7 +47,7 @@ public class SocietyUtils {
     /**
      * 获取当前格式化后的日期
      *
-     * @return
+     * @return yyyy年MM月dd日 HH:mm:ss
      */
     public static String getFormatDateTime() {
         long nowTime = System.currentTimeMillis();
@@ -57,12 +56,12 @@ public class SocietyUtils {
     }
 
     /**
-     * 指定的玩家是否加入过公会
+     * 指定玩家是否加入过公会
      *
      * @param playerName 玩家名
      * @return
      */
-    public static boolean isJoinSociety(String playerName) {
+    public static boolean hasSociety(String playerName) {
         ArrayList<Society> societies = SocietyUtils.getSocieties();
         for (Society society : societies) {
             for (Map.Entry<String, ArrayList<Object>> entry : society.getPost().entrySet()) {
@@ -266,7 +265,7 @@ public class SocietyUtils {
      */
     public static String formatChat(Player player, String message) {
         Config config = SocietyPlugin.getInstance().getConfig();
-        String chatText = (String) config.get("chatFormat");
+        String chatText = (String) config.get("称号格式");
         chatText = chatText.replaceAll("\\$\\{message\\}", message);
         return formatText(chatText, player);
     }
@@ -432,9 +431,7 @@ public class SocietyUtils {
         //移除
     }
 
-    /**
-     * 加载公会配置文件
-     */
+
     public static void loadSocietyConfig() {
         File societyFolder = new File(PluginUtils.SOCIETY_FOLDER);
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
@@ -442,40 +439,22 @@ public class SocietyUtils {
             societyFolder.mkdirs();
         }
 
-        boolean enableDatabase = SocietyPlugin.getInstance().getConfig().getBoolean("enableDatabase", false);
-        if (!enableDatabase) {
-            File[] files = societyFolder.listFiles();
-            for (File file : files) {
-                Config config = new Config(file);
-                societyPlugin.getSocietyConfigList().add(config);
-                if (file.getName().endsWith(".yml")) {
-                    Society society = Society.init(config);
-                    //校验当前公会数据是否同步
-                    if (society != null && !society.isSynchronous()) {
-                        society.setSynchronous(true);
-                        saveSociety(society);
-                    }
-                    System.out.println(society);
-                    SocietyUtils.getSocieties().add(society);
+        File[] files = societyFolder.listFiles();
+        for (File file : files) {
+            Config config = new Config(file);
+            societyPlugin.getSocietyConfigList().add(config);
+            if (file.getName().endsWith(".yml")) {
+                Society society = Society.init(config);
+                //校验当前公会数据是否同步
+                if (society != null) {
+                    society.setSynchronous(true);
+                    saveSociety(society);
                 }
+                SocietyUtils.getSocieties().add(society);
             }
-        } else {
-            File[] files = societyFolder.listFiles();
-            for (File file : files) {
-                Config config = new Config(file);
-                societyPlugin.getSocietyConfigList().add(config);
-                if (file.getName().endsWith(".yml")) {
-                    Society society = Society.init(config);
-                    //校验当前公会数据是否同步
-                    if (society != null) {
-                        society.setSynchronous(true);
-                        saveSociety(society);
-                    }
-                    SocietyUtils.getSocieties().add(society);
-                }
-            }
-
         }
+
+
         SocietyPlugin.getInstance().getLogger().debug(SocietyUtils.getSocieties().toString());
     }
 
@@ -519,14 +498,6 @@ public class SocietyUtils {
         }
 
         config.set("synchronous", society.isSynchronous());
-        /*for (int i = 0; i < societies.size(); i++) {
-            Society societyConfig = societies.get(i);
-            if (societyConfig.getSid() == society.getSid()) {
-                societies.set(i,society);
-            }
-        }*/
-        //SocietyUtils.removeSociety(society.getSocietyName());
-        //societies.add(society);
         getSocieties().forEach(society1 -> {
             if (society1.getSid() == society.getSid()) {
                 society1.setSocietyName(society.getSocietyName());

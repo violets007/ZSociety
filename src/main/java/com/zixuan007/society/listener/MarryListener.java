@@ -8,8 +8,8 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerMoveEvent;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Marry;
-import com.zixuan007.society.event.marry.DivorceMarryEvent;
+import com.zixuan007.society.pojo.Marry;
+import com.zixuan007.society.event.marry.PlayerDivorceEvent;
 import com.zixuan007.society.event.marry.PlayerMarryEvent;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
@@ -90,7 +90,7 @@ public class MarryListener implements Listener {
 
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onDivorceMarry(DivorceMarryEvent event) {
+    public void onDivorceMarry(PlayerDivorceEvent event) {
         Player player = event.getPlayer();
         Marry marry = MarryUtils.getMarryByName(player.getName());
         String propose = marry.getPropose();

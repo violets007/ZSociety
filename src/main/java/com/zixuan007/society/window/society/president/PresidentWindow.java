@@ -6,17 +6,13 @@ import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.level.Position;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Society;
-import com.zixuan007.society.domain.SocietyWar;
-import com.zixuan007.society.domain.WarStatus;
+import com.zixuan007.society.pojo.Society;
+import com.zixuan007.society.pojo.SocietyWar;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author zixuan007
@@ -166,7 +162,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
 
                         }
 
-                        societyWar.setStatus(WarStatus.WAIT.toString());
+                        // societyWar.setStatus(WarStatus.WAIT.toString());
                         SocietyUtils.saveSocietyWar(societyWar);
                     } else {
 

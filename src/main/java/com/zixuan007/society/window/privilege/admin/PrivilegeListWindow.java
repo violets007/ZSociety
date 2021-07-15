@@ -2,7 +2,7 @@ package com.zixuan007.society.window.privilege.admin;
 
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Vip;
+import com.zixuan007.society.pojo.Vip;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;
 import com.zixuan007.society.window.CustomWindow;

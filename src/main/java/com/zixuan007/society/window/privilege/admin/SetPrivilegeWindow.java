@@ -6,8 +6,8 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.PrivilegeType;
-import com.zixuan007.society.domain.Vip;
+import com.zixuan007.society.pojo.PrivilegeType;
+import com.zixuan007.society.pojo.Vip;
 
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.PrivilegeUtils;

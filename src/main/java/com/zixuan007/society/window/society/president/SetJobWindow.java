@@ -2,12 +2,10 @@ package com.zixuan007.society.window.society.president;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
-import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.CustomWindow;
@@ -51,7 +49,7 @@ public class SetJobWindow extends CustomWindow implements WindowLoader {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.isMe"), setJobWindow, backButtonName, backButtonImage));
             return;
         }
-        if (!SocietyUtils.isJoinSociety(playerName)) {
+        if (!SocietyUtils.hasSociety(playerName)) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setJobWindow.isJoinSociety"), setJobWindow, backButtonName, backButtonImage));
             return;
         }

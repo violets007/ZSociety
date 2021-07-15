@@ -8,7 +8,7 @@ import cn.nukkit.event.player.PlayerEvent;
 /**
  * @author zixuan007
  */
-public class CreateTitleShopEvent extends PlayerEvent {
+public class PlayerCreateTitleShopEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
     private BlockEntitySign wallSign;
 
@@ -16,7 +16,7 @@ public class CreateTitleShopEvent extends PlayerEvent {
         return handlers;
     }
 
-    public CreateTitleShopEvent(Player player, BlockEntitySign wallSign) {
+    public PlayerCreateTitleShopEvent(Player player, BlockEntitySign wallSign) {
         this.player = player;
         this.wallSign = wallSign;
     }

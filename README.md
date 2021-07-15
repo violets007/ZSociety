@@ -53,7 +53,7 @@
 ```java
 package com.zixuan007.society.api;
 
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.utils.*;
 
 public class ZsocietyAPI {
