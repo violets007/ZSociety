@@ -8,7 +8,7 @@ import cn.nukkit.utils.Binary;
 import cn.nukkit.utils.Config;
 import com.google.gson.Gson;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
 import me.onebone.economyapi.EconomyAPI;
@@ -18,9 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * 插件工具类
- *
  * @author zixuan007
+ * @description: 插件工具类
+ * @date: 2021/7/14 下午2:56
  */
 public class PluginUtils {
 
@@ -35,37 +35,6 @@ public class PluginUtils {
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
 
 
-    public static String generateNumber() {
-        String no = "";
-        //初始化备选数组
-        int[] defaultNums = new int[10];
-        for (int i = 0; i < defaultNums.length; i++) {
-            defaultNums[i] = i;
-        }
-
-        Random random = new Random();
-        int[] nums = new int[LENGTH];
-        //默认数组中可以选择的部分长度
-        int canBeUsed = 10;
-        //填充目标数组
-        for (int i = 0; i < nums.length; i++) {
-            //将随机选取的数字存入目标数组
-            int index = random.nextInt(canBeUsed);
-            nums[i] = defaultNums[index];
-            //将已用过的数字扔到备选数组最后，并减小可选区域
-            swap(index, canBeUsed - 1, defaultNums);
-            canBeUsed--;
-        }
-        if (nums.length > 0) {
-            for (int i = 0; i < nums.length; i++) {
-                no += nums[i];
-            }
-        }
-
-        return no;
-    }
-
-
     private static void swap(int i, int j, int[] nums) {
         int temp = nums[i];
         nums[i] = nums[j];
@@ -75,7 +44,7 @@ public class PluginUtils {
     /**
      * 检测玩家名字是否在线
      *
-     * @param playerName
+     * @param playerName 玩家名字
      * @return
      */
     public static boolean isOnlineByName(String playerName) {
@@ -163,7 +132,7 @@ public class PluginUtils {
      * @return
      */
     public static Double getProposeMoney() {
-        Object proposeMoneyOBJ = SocietyPlugin.getInstance().getConfig().get("proposeMoney");
+        Object proposeMoneyOBJ = SocietyPlugin.getInstance().getConfig().get("求婚金额");
         if (proposeMoneyOBJ instanceof Integer) {
             return ((Integer) proposeMoneyOBJ).doubleValue();
         } else {
@@ -241,7 +210,7 @@ public class PluginUtils {
     }
 
     /**
-     * 检测配置文件
+     * 检测插件配置版本
      *
      * @param pluginPath
      * @param path
@@ -319,15 +288,6 @@ public class PluginUtils {
         return Arrays.asList(str);
     }
 
-    /**
-     * Map转换为Json字符串
-     *
-     * @param map
-     * @return
-     */
-    public static String mapToJsonString(Map<String, ArrayList<Object>> map) {
-        return new Gson().toJson(map);
-    }
 
     /**
      * Map转String

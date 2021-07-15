@@ -7,7 +7,7 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Marry;
+import com.zixuan007.society.pojo.Marry;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;

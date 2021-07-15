@@ -1,4 +1,4 @@
-package com.zixuan007.society.domain;
+package com.zixuan007.society.pojo;
 
 
 import cn.nukkit.utils.Config;

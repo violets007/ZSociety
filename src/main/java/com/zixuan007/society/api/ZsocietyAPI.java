@@ -1,10 +1,12 @@
 package com.zixuan007.society.api;
 
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.utils.*;
 
 /**
  * @author zixuan007
+ * @description: 公会相关接口
+ * @date: 2021/7/14 下午2:41
  */
 public class ZsocietyAPI {
     public static ZsocietyAPI instance;

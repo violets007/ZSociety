@@ -5,8 +5,8 @@ import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Marry;
-import com.zixuan007.society.event.marry.DivorceMarryEvent;
+import com.zixuan007.society.pojo.Marry;
+import com.zixuan007.society.event.marry.PlayerDivorceEvent;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
@@ -99,7 +99,7 @@ public class MarryWindow extends SimpleWindow implements WindowLoader {
                 marry = MarryUtils.getMarryByName(player.getName());
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.marryWindow.divorceMarry"), marryWindow, backButtonName, backButtonImage));
 
-                Server.getInstance().getPluginManager().callEvent(new DivorceMarryEvent(player, marry));
+                Server.getInstance().getPluginManager().callEvent(new PlayerDivorceEvent(player, marry));
                 break;
             case 4:
                 if (MarryUtils.marrys.size() < 1) {

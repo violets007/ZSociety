@@ -6,8 +6,7 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.command.*;
 import com.zixuan007.society.listener.*;
-import com.zixuan007.society.task.CheckWatStatus;
-import com.zixuan007.society.task.ShowTask;
+import com.zixuan007.society.task.ShowTipTask;
 import com.zixuan007.society.task.CheckPrivilegeTimeTask;
 import com.zixuan007.society.utils.*;
 import com.zixuan007.society.window.ModalWindow;
@@ -78,22 +77,18 @@ public class SocietyPlugin extends PluginBase {
 
     public void init() {
         new MetricsLite(this);
-
         checkPlugin("EconomyAPI");
-
         if (instance == null) {
             instance = this;
         }
 
-        checkConfig();
-
+        initConfig();
         loadConfig();
         registerCommand();
         registerWindow();
 
-        getServer().getScheduler().scheduleRepeatingTask(new ShowTask(this), 10);
+        getServer().getScheduler().scheduleRepeatingTask(new ShowTipTask(this), 10);
         getServer().getScheduler().scheduleRepeatingTask(new CheckPrivilegeTimeTask(this), 20 * 60);
-        getServer().getScheduler().scheduleRepeatingTask(new CheckWatStatus(this), 20);
         resisterListener();
     }
 
@@ -115,14 +110,13 @@ public class SocietyPlugin extends PluginBase {
 
 
     public void loadConfig() {
-        String titleConfigPath = PluginUtils.CONFIG_FOLDER + "Title.yml";
-        String language = (String) config.get("language");
+        String titleConfigPath = PluginUtils.CONFIG_FOLDER + "title.yml";
+        String language = config.getString("语言");
         String languagePath = PluginUtils.CONFIG_FOLDER + "lang" + PluginUtils.FILE_SEPARATOR + language;
-        String titleShopPath = PluginUtils.CONFIG_FOLDER + "TitleShop.yml";
-        String marryPath = PluginUtils.CONFIG_FOLDER + "Marry.yml";
-        String societyShopConfigPath = PluginUtils.CONFIG_FOLDER + "SocietyShop.yml";
-        String windowConfig = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
-        String societyWarConfig = PluginUtils.CONFIG_FOLDER + "SocietyWarConfig.yml";
+        String titleShopPath = PluginUtils.CONFIG_FOLDER + "title-shop.yml";
+        String marryPath = PluginUtils.CONFIG_FOLDER + "marry.yml";
+        String societyShopConfigPath = PluginUtils.CONFIG_FOLDER + "society-shop.yml";
+        String windowConfig = PluginUtils.CONFIG_FOLDER + "window-config.yml";
 
         this.titleConfig = new Config(titleConfigPath);
         this.titleShopConfig = new Config(titleShopPath);
@@ -130,7 +124,6 @@ public class SocietyPlugin extends PluginBase {
         this.societyShopConfig = new Config(societyShopConfigPath);
         this.languageConfig = new Config(languagePath);
         this.windowConfig = new Config(windowConfig);
-//        this.societyWarConfig=new Config(societyWarConfig);
 
         //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
@@ -154,14 +147,14 @@ public class SocietyPlugin extends PluginBase {
     }
 
 
-    public void checkConfig() {
-        String configPath = PluginUtils.CONFIG_FOLDER + "Config.yml";
-        String windowConfigPath = PluginUtils.CONFIG_FOLDER + "WindowConfig.yml";
-        String languagePath = getDataFolder() + File.separator + "lang" + File.separator + "zh-CN.yml";
+    public void initConfig() {
+        String configPath = PluginUtils.CONFIG_FOLDER + "society-config.yml";
+        String windowConfigPath = PluginUtils.CONFIG_FOLDER + "window-config.yml";
+        String languagePath = getDataFolder() + File.separator + "lang" + File.separator + "zh_CN.yml";
 
-        config = new Config(PluginUtils.checkConfig("Config.yml", configPath), Config.YAML);
-        languageConfig = new Config(PluginUtils.checkConfig("lang/zh-CN.yml", languagePath), Config.YAML);
-        languageConfig = new Config(PluginUtils.checkConfig("WindowConfig.yml", windowConfigPath), Config.YAML);
+        config = new Config(PluginUtils.checkConfig("society-config.yml", configPath), Config.YAML);
+        languageConfig = new Config(PluginUtils.checkConfig("lang/zh_CN.yml", languagePath), Config.YAML);
+        languageConfig = new Config(PluginUtils.checkConfig("window-config.yml", windowConfigPath), Config.YAML);
     }
 
 

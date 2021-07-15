@@ -14,13 +14,12 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.event.title.BuyTitleEvent;
-import com.zixuan007.society.event.title.CreateTitleShopEvent;
-import com.zixuan007.society.event.title.RemoveTitleShopEvent;
+import com.zixuan007.society.event.title.PlayerBuyTitleEvent;
+import com.zixuan007.society.event.title.PlayerCreateTitleShopEvent;
+import com.zixuan007.society.event.title.PlayerRemoveTitleShopEvent;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.utils.TitleUtils;
@@ -69,7 +68,7 @@ public class TitleListener implements Listener {
                         player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.alreadSetShop"));
                         return;
                     }
-                    ArrayList<String> titleText = (ArrayList<String>) this.societyPlugin.getConfig().getList("titleShopFormat");
+                    ArrayList<String> titleText = (ArrayList<String>) this.societyPlugin.getConfig().getList("称号商店格式");
                     ArrayList<String> tempList = new ArrayList<>();
                     String title = (String) TitleUtils.onCreateName.get(playerName).get("title");
                     String money = (String) TitleUtils.onCreateName.get(playerName).get("money");
@@ -77,7 +76,7 @@ public class TitleListener implements Listener {
                     tempList.set(1, (titleText.get(1)).replaceAll("\\$\\{title\\}", title));
                     tempList.set(2, (titleText.get(2)).replaceAll("\\$\\{money\\}", money));
                     ((BlockEntitySign) blockEntity).setText(tempList.<String>toArray(new String[tempList.size()]));
-                    SocietyPlugin.getInstance().getServer().getPluginManager().callEvent((Event) new CreateTitleShopEvent(player, (BlockEntitySign) blockEntity));
+                    SocietyPlugin.getInstance().getServer().getPluginManager().callEvent((Event) new PlayerCreateTitleShopEvent(player, (BlockEntitySign) blockEntity));
                     event.setCancelled(true);
                 }
             } else {
@@ -122,7 +121,7 @@ public class TitleListener implements Listener {
 
 
                         EconomyAPI.getInstance().reduceMoney(player, money);
-                        SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new BuyTitleEvent(player, key, money));
+                        SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new PlayerBuyTitleEvent(player, key, money));
                         return;
                     }
 
@@ -137,7 +136,7 @@ public class TitleListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onBuyTitle(BuyTitleEvent event) {
+    public void onBuyTitle(PlayerBuyTitleEvent event) {
         Player player = event.getPlayer();
         String title = event.getTitle();
         Config titleConfig = this.societyPlugin.getTitleConfig();
@@ -149,7 +148,7 @@ public class TitleListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onCreateTitleShop(CreateTitleShopEvent event) {
+    public void onCreateTitleShop(PlayerCreateTitleShopEvent event) {
         Player player = event.getPlayer();
         String playerName = player.getName();
         BlockEntitySign wallSign = event.getWallSign();
@@ -217,21 +216,21 @@ public class TitleListener implements Listener {
                     player.sendMessage(PluginUtils.getLanguageInfo("message.createTitleShop.permissions"));
                     event.setCancelled();
                 } else {
-                    SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new RemoveTitleShopEvent(player, block, title));
+                    SocietyPlugin.getInstance().getServer().getPluginManager().callEvent(new PlayerRemoveTitleShopEvent(player, block, title));
                 }
             }
         });
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onRemoveTitleShop(RemoveTitleShopEvent event) {
+    public void onRemoveTitleShop(PlayerRemoveTitleShopEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
         Config titleShopConfig = this.societyPlugin.getTitleShopConfig();
         titleShopConfig.remove(event.getTitle());
         titleShopConfig.save();
         Config config = SocietyPlugin.getInstance().getConfig();
-        ArrayList<String> textList = (ArrayList) config.getList("titleShopFormat");
+        ArrayList<String> textList = (ArrayList) config.getList("称号商店格式");
         String signTitle = textList.get(1);
         signTitle = signTitle.replaceAll("\\$\\{title\\}", event.getTitle());
         player.sendMessage(PluginUtils.getLanguageInfo("message.createTitleShop.remove"));

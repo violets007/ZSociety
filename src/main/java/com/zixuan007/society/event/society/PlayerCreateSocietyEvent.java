@@ -2,7 +2,7 @@ package com.zixuan007.society.event.society;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.HandlerList;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 
 /**
  * @author zixuan007

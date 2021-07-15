@@ -2,8 +2,8 @@ package com.zixuan007.society.utils;
 
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.PrivilegeType;
-import com.zixuan007.society.domain.Vip;
+import com.zixuan007.society.pojo.PrivilegeType;
+import com.zixuan007.society.pojo.Vip;
 
 
 import java.io.File;

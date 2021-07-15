@@ -3,15 +3,13 @@ package com.zixuan007.society.window.marry.admin;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindow;
-import com.zixuan007.society.domain.Marry;
+import com.zixuan007.society.pojo.Marry;
 import com.zixuan007.society.utils.MarryUtils;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.window.SimpleWindow;
 import com.zixuan007.society.window.WindowLoader;
 import com.zixuan007.society.window.WindowManager;
 import com.zixuan007.society.window.WindowType;
-
-import java.util.ArrayList;
 
 /**
  * @author zixuan007

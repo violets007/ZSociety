@@ -2,7 +2,7 @@ package com.zixuan007.society.utils;
 
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Marry;
+import com.zixuan007.society.pojo.Marry;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -97,9 +97,6 @@ public class MarryUtils {
         return marrysConfig.get(configName);
     }
 
-    /**
-     * 加载结婚数据文件
-     */
     public static void loadMarryConfig() {
         String marryFolder = PluginUtils.MARRY_FOLDER;
         File file = new File(marryFolder);

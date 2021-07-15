@@ -10,6 +10,8 @@ import com.zixuan007.society.utils.PrivilegeUtils;
 
 /**
  * @author zixuan007
+ * @description: 特权检测
+ * @date: 2021/7/14 下午2:28
  */
 public class PrivilegeListener implements Listener {
     private SocietyPlugin societyPlugin;

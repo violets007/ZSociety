@@ -21,7 +21,7 @@ import cn.nukkit.network.protocol.TextPacket;
 import cn.nukkit.utils.Binary;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.event.society.PlayerApplyJoinSocietyEvent;
 import com.zixuan007.society.event.society.PlayerCreateSocietyEvent;
 import com.zixuan007.society.event.society.PlayerQuitSocietyEvent;
@@ -109,7 +109,7 @@ public class SocietyListener implements Listener {
     public void onChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
-        if (this.societyPlugin.getConfig().getBoolean("isChat")) {
+        if (this.societyPlugin.getConfig().getBoolean("聊天显示开启")) {
             message = SocietyUtils.formatChat(player, message);
             event.setFormat(message);
         }
@@ -122,7 +122,7 @@ public class SocietyListener implements Listener {
 
         if (SocietyUtils.onCreatePlayer.containsKey(player.getName())) {
             if (block instanceof BlockWallSign) {
-                if (!SocietyUtils.isJoinSociety(player.getName())) {
+                if (!SocietyUtils.hasSociety(player.getName())) {
                     player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.isJoin"));
                     SocietyUtils.onCreatePlayer.remove(player.getName());
                     return;
@@ -170,7 +170,7 @@ public class SocietyListener implements Listener {
                 if (blockEntity instanceof BlockEntitySign) {
                     Config config = societyPlugin.getConfig();
                     ArrayList<String> lineText = new ArrayList<>();
-                    List<String> societyShopFormat = (List<String>) config.get("societyShopFormat");
+                    List<String> societyShopFormat = (List<String>) config.get("公会商店格式");
 
                     for (int i = 0; i < societyShopFormat.size(); i++) {
                         String text = societyShopFormat.get(i);
@@ -221,7 +221,7 @@ public class SocietyListener implements Listener {
                             player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.rarelyCoin"));
                             return;
                         }
-                        if (!SocietyUtils.isJoinSociety(player.getName())) {
+                        if (!SocietyUtils.hasSociety(player.getName())) {
                             player.sendMessage(PluginUtils.getLanguageInfo("message.createSocietyShopWindow.unableBuy"));
                             return;
                         }
@@ -369,7 +369,7 @@ public class SocietyListener implements Listener {
         DataPacket packet = event.getPacket();
         Player player = event.getPlayer();
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
-        if (SocietyUtils.isJoinSociety(player.getName())) {
+        if (SocietyUtils.hasSociety(player.getName())) {
             if (packet instanceof TextPacket) {
                 if (((TextPacket) packet).type == TextPacket.TYPE_CHAT && society != null) {
                     if (SocietyUtils.societyChatPlayers.containsKey(player.getName())) {

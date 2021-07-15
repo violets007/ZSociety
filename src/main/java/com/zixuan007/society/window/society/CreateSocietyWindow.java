@@ -5,7 +5,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindow;
 import com.zixuan007.society.SocietyPlugin;
-import com.zixuan007.society.domain.Society;
+import com.zixuan007.society.pojo.Society;
 import com.zixuan007.society.event.society.PlayerCreateSocietyEvent;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
@@ -51,7 +51,7 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyWindow.existSociety"), createSociety, backButtonName, backButtonImage));
         } else {
             Double createSocietyMoney;
-            if (societyPlugin.getConfig().get("createSocietyMoney") instanceof Integer) {
+            if (societyPlugin.getConfig().get("创建公会金额") instanceof Integer) {
                 createSocietyMoney = ((Integer) societyPlugin.getConfig().get("createSocietyMoney")).doubleValue();
             } else {
                 createSocietyMoney = (Double) societyPlugin.getConfig().get("createSocietyMoney");

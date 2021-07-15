@@ -25,9 +25,12 @@ public class VipCommand extends Command {
 
     @Override
     public boolean execute(CommandSender commandSender, String commandName, String[] strings) {
+
         if (commandSender instanceof ConsoleCommandSender) {
+            commandSender.sendMessage("禁止终端输入命令");
             return false;
         }
+
         Player player = (Player) commandSender;
         if (commandName.equals(getName())) {
             if (strings.length < 1) {
