@@ -27,6 +27,7 @@ import static com.zixuan007.society.utils.PluginUtils.formatText;
  * @author zixuan007
  */
 public class SocietyUtils {
+
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     public static ArrayList<Society> societies = new ArrayList<>();
     public static ArrayList<SocietyWar> societyWars = new ArrayList<>();
@@ -38,7 +39,7 @@ public class SocietyUtils {
      * @param societyName 公会名
      * @return
      */
-    public static Boolean isSocietyNameExist(String societyName) {
+    public static Boolean hasSocietyByName(String societyName) {
         String filePath = SOCIETY_FOLDER + societyName + ".yml";
         File societyFile = new File(filePath);
         return societyFile.exists();
@@ -74,10 +75,7 @@ public class SocietyUtils {
         return false;
     }
 
-    /**
-     * @param playerName
-     * @return
-     */
+
     public static Society getSocietyByPlayerName(String playerName) {
         ArrayList<Society> societies = SocietyUtils.getSocieties();
         Iterator<Society> iterator = societies.iterator();
@@ -112,16 +110,6 @@ public class SocietyUtils {
         return true;
     }
 
-
-    /**
-     * 获取指定公会成员列表总页数
-     *
-     * @param society
-     * @return
-     */
-    public static int getTotalMemberPage(Society society, int limit) {
-        return (society.getPost().size() % limit == 0) ? (society.getPost().size() / limit) : (society.getPost().size() / limit + 1);
-    }
 
     /**
      * 获取公会列表
@@ -167,7 +155,7 @@ public class SocietyUtils {
      * @param sid 公会ID
      * @return
      */
-    public static Society getSocietysByID(long sid) {
+    public static Society getSocietyByID(long sid) {
         for (Society society : SocietyUtils.getSocieties()) {
             if (society.getSid() == sid) {
                 return society;
@@ -177,31 +165,12 @@ public class SocietyUtils {
     }
 
     /**
-     * 获取玩家所在公会的职位
-     *
-     * @param playerName
-     * @return 没有则返回-1
-     */
-    public static int getPostGradeByName(String playerName) {
-        Config config = SocietyPlugin.getInstance().getConfig();
-        ArrayList<HashMap<String, Object>> post = (ArrayList<HashMap<String, Object>>) config.get("post");
-        for (HashMap<String, Object> map : post) {
-            Integer grade = (Integer) map.get("grade");
-            String name1 = (String) map.get("name");
-            if (name1.equals(playerName)) {
-                return grade.intValue();
-            }
-        }
-        return -1;
-    }
-
-    /**
      * 检测玩家是否是会长
      *
      * @param playerName 玩家名称
      * @return
      */
-    public static boolean isChairman(String playerName) {
+    public static boolean hasChairman(String playerName) {
         for (Society society : SocietyUtils.getSocieties()) {
             if (society.getPresidentName().equals(playerName)) {
                 return true;
@@ -289,24 +258,6 @@ public class SocietyUtils {
         return ++max;
     }
 
-
-    /**
-     * 获取当前配置信息的所有职位
-     *
-     * @return
-     */
-    public static List<String> getAllPost() {
-        List<Map<String, Object>> post = (List<Map<String, Object>>) SocietyPlugin.getInstance().getConfig().get("post");
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (Map<String, Object> map : post) {
-            String name = (String) map.get("name");
-            if (name.equals("会长")) {
-                continue;
-            }
-            arrayList.add(name);
-        }
-        return arrayList;
-    }
 
     /**
      * 添加成员
@@ -435,25 +386,22 @@ public class SocietyUtils {
     public static void loadSocietyConfig() {
         File societyFolder = new File(PluginUtils.SOCIETY_FOLDER);
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
+
         if (!societyFolder.exists()) {
             societyFolder.mkdirs();
         }
 
         File[] files = societyFolder.listFiles();
         for (File file : files) {
+            if (file.isDirectory()) continue;
+
             Config config = new Config(file);
             societyPlugin.getSocietyConfigList().add(config);
             if (file.getName().endsWith(".yml")) {
                 Society society = Society.init(config);
-                //校验当前公会数据是否同步
-                if (society != null) {
-                    society.setSynchronous(true);
-                    saveSociety(society);
-                }
                 SocietyUtils.getSocieties().add(society);
             }
         }
-
 
         SocietyPlugin.getInstance().getLogger().debug(SocietyUtils.getSocieties().toString());
     }
@@ -489,6 +437,7 @@ public class SocietyUtils {
         config.set("psots", society.getPost());
         config.set("grade", society.getGrade());
         config.set("tempApply", society.getTempApply());
+
         if (society.getPosition() != null) {
             config.set("position", society.getPosition());
         }
@@ -497,7 +446,7 @@ public class SocietyUtils {
             config.set("description", society.getDescription());
         }
 
-        config.set("synchronous", society.isSynchronous());
+
         getSocieties().forEach(society1 -> {
             if (society1.getSid() == society.getSid()) {
                 society1.setSocietyName(society.getSocietyName());
@@ -520,125 +469,6 @@ public class SocietyUtils {
     }
 
 
-    /**
-     * 加载公会战争配置文件夹
-     */
-    public static void loadSocietyWarConfig() {
-        String warFolderPath = PluginUtils.WAR_FOLDER;
-        File warFolder = new File(warFolderPath);
-        if (!warFolder.exists()) {
-            warFolder.mkdirs();
-        }
-
-        File[] files = warFolder.listFiles();
-        if (files == null || files.length <= 0) {
-            return;
-        }
-
-        for (File file : files) {
-            Config config = new Config(file);
-            List<Config> societyWarList = SocietyPlugin.getInstance().getSocietyWarList();
-            societyWarList.add(config);
-        }
-
-    }
-
-    /**
-     * 创建公会战争
-     *
-     * @param societyWar 公会战争数据bean
-     */
-    public static void createSocietyWar(SocietyWar societyWar) {
-        long sid = societyWar.getSid();
-        long sid2 = societyWar.getSid2();
-        Society society = SocietyUtils.getSocietysByID(sid);
-        Society society1 = SocietyUtils.getSocietysByID(sid2);
-
-        String societyName = society.getSocietyName();
-        String societyName1 = society1.getSocietyName();
-
-        String configName = societyName + "_" + societyName1 + ".yml";
-        Config societyWarConfig = new Config(PluginUtils.WAR_FOLDER + configName, Config.YAML);
-
-        societyWarConfig.set("wid", societyWar.getWid());
-        societyWarConfig.set("sid", sid);
-        societyWarConfig.set("sid2", sid2);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-        String formatDate = sdf.format(societyWar.getWarTime());
-        societyWarConfig.set("warTime", formatDate);
-        societyWarConfig.set("status", societyWar.getStatus());
-        societyWars.add(societyWar);
-        societyWarConfig.save();
-    }
-
-    public static void saveSocietyWar(SocietyWar societyWar) {
-        Society society = SocietyUtils.getSocietysByID(societyWar.getSid());
-        Society society1 = SocietyUtils.getSocietysByID(societyWar.getSid2());
-
-        String societyName = society.getSocietyName();
-        String societyName1 = society1.getSocietyName();
-
-        String configName = societyName + "_" + societyName1 + ".yml";
-
-        Config config = new Config(configName, Config.YAML);
-        config.set("wid", societyWar.getWid());
-        config.set("sid", society.getSid());
-        config.set("sid2", society1.getSid());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-        String formatDate = sdf.format(societyWar.getWarTime());
-        config.set("warTime", formatDate);
-        config.set("status", societyWar.getStatus());
-
-        config.save();
-    }
-
-
-    /**
-     * 保存所有的公会战数据
-     */
-    public static void saveSocietyWar() {
-        for (SocietyWar societyWar : societyWars) {
-            saveSocietyWar(societyWar);
-        }
-    }
-
-    /**
-     * 获取公会战bean
-     *
-     * @param society
-     * @return
-     */
-    public static SocietyWar getSocietyWarBySociety(Society society) {
-        for (SocietyWar societyWar : societyWars) {
-            if (societyWar.getSid2() == society.getSid()) {
-                return societyWar;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 是否是过期的公会战
-     *
-     * @return
-     */
-    public static boolean isExpiredWar(SocietyWar societyWar) {
-        if (societyWar.getWarTime().getTime() > System.currentTimeMillis()) {
-            return true;
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-
-        boolean flag = true;
-        try {
-            flag = !PluginUtils.hourMinuteBetween(sdf.format(new Date()), "13:00", "17:00");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return flag;
-    }
-
     public static ArrayList<Society> getSocieties() {
         return societies;
     }
@@ -647,10 +477,4 @@ public class SocietyUtils {
         SocietyUtils.societies = societies;
     }
 
-    /**
-     * 移除当前公会战争配置文件夹
-     */
-    public static void removeSocietyWarConfig(SocietyWar societyWar) {
-        //TODO 移除配置文件
-    }
 }

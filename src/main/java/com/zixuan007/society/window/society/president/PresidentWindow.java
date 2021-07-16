@@ -7,7 +7,6 @@ import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.level.Position;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.pojo.Society;
-import com.zixuan007.society.pojo.SocietyWar;
 import com.zixuan007.society.utils.PluginUtils;
 import com.zixuan007.society.utils.SocietyUtils;
 import com.zixuan007.society.window.*;
@@ -29,7 +28,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         getButtons().clear();
         Player player = (Player) objects[0];
         this.sid = SocietyUtils.getSocietyByPlayerName(player.getName()).getSid();
-        String societyName = SocietyUtils.getSocietysByID(sid).getSocietyName();
+        String societyName = SocietyUtils.getSocietyByID(sid).getSocietyName();
         setTitle(PluginUtils.getWindowConfigInfo("presidentWindow.title").replace("${societyName}", societyName));
         ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.setJobWindow.button.imgPath"));
         ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.playerApplyList.button.imgPath"));
@@ -38,8 +37,8 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         ElementButtonImageData img5 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.dissolve.button.imgPath"));
         ElementButtonImageData img6 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.setSpawn.button.imgPath"));
         ElementButtonImageData img7 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.modifySocietyInfoWindow.button.imgPath"));
-        ElementButtonImageData img8 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button.imgPath"));
-        ElementButtonImageData img9 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWarStatus.button.imgPath"));
+        /*ElementButtonImageData img8 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button.imgPath"));
+        ElementButtonImageData img9 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWarStatus.button.imgPath"));*/
 
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.setJobWindow.button"), img1));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.playerApplyList.button"), img2));
@@ -48,8 +47,8 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.dissolve.button"), img5));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.setSpawn.button"), img6));
         addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.modifySocietyInfoWindow.button"), img7));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button"), img8));
-        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.lookSocietyWarStatus.button"), img9));
+        /*addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.sendSocietyWar.button"), img8));
+        addButton(new ElementButton(PluginUtils.getWindowConfigInfo("presidentWindow.lookSocietyWarStatus.button"), img9));*/
         return this;
     }
 
@@ -129,7 +128,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
             case 6:
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MODIFY_SOCIETY_INFO_WINDOW, player));
                 break;
-            case 7:
+            /*case 7:
                 if (!SocietyUtils.isSetSocietyWarData()) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.noSetWarData"), presidentWindow, backButtonName, backButtonImage));
                     return;
@@ -168,7 +167,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
 
                     }
                 });
-                break;
+                break;*/
             default:
                 break;
         }

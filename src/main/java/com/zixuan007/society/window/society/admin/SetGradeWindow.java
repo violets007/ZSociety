@@ -70,7 +70,7 @@ public class SetGradeWindow extends CustomWindow implements WindowLoader {
         String sidStr = societyContent.split("")[0];
         int sid = Integer.parseInt(sidStr);
         int grade = Integer.parseInt(gradeStr);
-        Society society = SocietyUtils.getSocietysByID(sid);
+        Society society = SocietyUtils.getSocietyByID(sid);
 
         if (!SocietyUtils.getSocieties().contains(society)) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setSocietyGrade.notSociety"), null, closeButtonName, closeButtonImagePath));

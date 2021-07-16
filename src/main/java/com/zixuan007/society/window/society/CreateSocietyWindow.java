@@ -43,19 +43,15 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
     public void onClick(FormResponseCustom response, Player player) {
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         String societyName = response.getInputResponse(0);
-        Boolean societyNameExist = SocietyUtils.isSocietyNameExist(societyName);
+        Boolean societyNameExist = SocietyUtils.hasSocietyByName(societyName);
         FormWindow createSociety = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_WINDOW);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
         if (societyNameExist) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyWindow.existSociety"), createSociety, backButtonName, backButtonImage));
         } else {
-            Double createSocietyMoney;
-            if (societyPlugin.getConfig().get("创建公会金额") instanceof Integer) {
-                createSocietyMoney = ((Integer) societyPlugin.getConfig().get("createSocietyMoney")).doubleValue();
-            } else {
-                createSocietyMoney = (Double) societyPlugin.getConfig().get("createSocietyMoney");
-            }
+            int createSocietyMoney = societyPlugin.getConfig().getInt("创建公会金额");
             double myMoney = EconomyAPI.getInstance().myMoney(player);
             if (myMoney < createSocietyMoney) {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.createSocietyWindow.InsufficientBalance", new String[]{"${createSocietyMoney}"}, new String[]{createSocietyMoney + ""}), createSociety, backButtonName, backButtonImage));

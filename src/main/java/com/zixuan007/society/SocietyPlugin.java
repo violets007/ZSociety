@@ -68,7 +68,6 @@ public class SocietyPlugin extends PluginBase {
     public void onDisable() {
         this.getLogger().info("§2公会插件关闭 §c数据保存中...");
 
-        SocietyUtils.saveSocietyWar();
         config.save();
         marryConfig.save();
         titleShopConfig.save();
@@ -128,7 +127,6 @@ public class SocietyPlugin extends PluginBase {
         //需要工具类初始化配置文件
         MarryUtils.loadMarryConfig();
         SocietyUtils.loadSocietyConfig();
-        SocietyUtils.loadSocietyWarConfig();
         PrivilegeUtils.loadVipConfig();
         TitleUtils.loadConfig();
     }

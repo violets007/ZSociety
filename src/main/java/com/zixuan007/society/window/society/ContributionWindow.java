@@ -54,7 +54,7 @@ public class ContributionWindow extends CustomWindow implements WindowLoader {
                     if (myMoney < (double) money) {
                         messageWindow = (MessageWindow) WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.contributionWindow.rarelyCoin"), contributionForm, backButtonName, backButtonImage);
                     } else {
-                        Society society = SocietyUtils.getSocietysByID(this.sid);
+                        Society society = SocietyUtils.getSocietyByID(this.sid);
                         society.setSocietyMoney(society.getSocietyMoney() + (double) money);
                         if (EconomyAPI.getInstance().reduceMoney(player, money) == EconomyAPI.RET_SUCCESS) {
                             Double contributionCoin = society.getSocietyMoney();

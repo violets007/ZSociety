@@ -43,7 +43,7 @@ public class DissolveWindow extends SimpleWindow implements WindowLoader {
         ElementButton elementButton = getButtons().get(id);
         String sidStr = elementButton.getText().split(" ")[1];
         int sid = Integer.parseInt(sidStr);
-        Society society = SocietyUtils.getSocietysByID(sid);
+        Society society = SocietyUtils.getSocietyByID(sid);
         String closeButtonName = PluginUtils.getWindowConfigInfo("messageWindow.close.button");
         String closeImagePath = PluginUtils.getWindowConfigInfo("messageWindow.close.button.imgPath");
 

@@ -58,7 +58,7 @@ public class PluginUtils {
 
 
     /**
-     * 格式化传入的文本,通过玩家
+     * 玩家Tip
      *
      * @param text
      * @param player
@@ -131,13 +131,9 @@ public class PluginUtils {
      *
      * @return
      */
-    public static Double getProposeMoney() {
+    public static Integer getProposeMoney() {
         Object proposeMoneyOBJ = SocietyPlugin.getInstance().getConfig().get("求婚金额");
-        if (proposeMoneyOBJ instanceof Integer) {
-            return ((Integer) proposeMoneyOBJ).doubleValue();
-        } else {
-            return (Double) proposeMoneyOBJ;
-        }
+        return ((Integer) proposeMoneyOBJ);
     }
 
     /**
@@ -220,7 +216,7 @@ public class PluginUtils {
         File file = new File(path);
         if (file.exists()) {
             Config config = new Config(file, Config.YAML);
-            String version = (String) config.get("version");
+            String version = (String) config.get("版本");
             if (version == null || !version.equals(societyPlugin.getDescription().getVersion())) {
                 societyPlugin.saveResource(pluginPath, true);
                 societyPlugin.getLogger().info("检测到: " + path + " 文件版本过低,进行覆盖!");
@@ -253,49 +249,4 @@ public class PluginUtils {
         return nowTime >= startTime && nowTime <= endTime;
     }
 
-    /**
-     * list转字符串
-     *
-     * @param list
-     * @return
-     */
-    public static String listToString(List<String> list) {
-        if (list == null) {
-            return null;
-        }
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        //第一个前面不拼接","
-        for (String string : list) {
-            if (first) {
-                first = false;
-            } else {
-                result.append(",");
-            }
-            result.append(string);
-        }
-        return result.toString();
-    }
-
-    /**
-     * string转list
-     *
-     * @param strs
-     * @return
-     */
-    public static List<String> stringToList(String strs) {
-        String str[] = strs.split(",");
-        return Arrays.asList(str);
-    }
-
-
-    /**
-     * Map转String
-     *
-     * @param str
-     * @return
-     */
-    public static HashMap<String, ArrayList<Object>> stringToMap(String str) {
-        return new Gson().fromJson(str, HashMap.class);
-    }
 }

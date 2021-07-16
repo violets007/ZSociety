@@ -57,10 +57,10 @@ public class SocietyListener implements Listener {
         final Config config = this.societyPlugin.getConfig();
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
-        ArrayList<Object> post = (ArrayList<Object>) config.get("post");
+        ArrayList<Object> post = (ArrayList<Object>) config.get("职位");
         HashMap<String, Object> postInfo = (HashMap<String, Object>) post.get(0);
         SocietyUtils.getSocieties().add(society);
-        SocietyUtils.addMember(player.getName(), society, "会长", (Integer) postInfo.get("grade"));
+        SocietyUtils.addMember(player.getName(), society, "会长", (Integer) postInfo.get("等级"));
         SocietyPlugin.getInstance().getLogger().info("§a玩家: §b§l" + player.getName() + " §r§a创建公会名称: §e" + society.getSocietyName());
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, "§a创建 §l§b" + society.getSocietyName() + " §a公会成功", societyWindow, backButtonName, backButtonImage));

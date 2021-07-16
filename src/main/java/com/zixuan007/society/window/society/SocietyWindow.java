@@ -26,7 +26,6 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
     public FormWindow init(Object... objects) {
         getButtons().clear();
         Player player = (Player) objects[0];
-        Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
         ElementButtonImageData img1 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.createSociety.button.imgPath"));
         ElementButtonImageData img2 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.managerSociety.button.imgPath"));
         ElementButtonImageData img3 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.quitSociety.button.imgPath"));
@@ -39,7 +38,6 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         ElementButtonImageData img10 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button.imgPath"));
         ElementButtonImageData img11 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button.imgPath"));
         ElementButtonImageData img12 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.societyInfo.button.imgPath"));
-        ElementButtonImageData img13 = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, PluginUtils.getWindowConfigInfo("societyWindow.managerSociety.button.imgPath"));
 
 
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.createSociety.button"), img1));
@@ -54,14 +52,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.societyChat.button"), img10));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.tpaSociety.button"), img11));
         this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.societyInfo.button"), img12));
-        if (society != null) {
-            String postByName = SocietyUtils.getPostByName(player.getName(), society);
-            int postGrade = SocietyUtils.getPostGradeByName(player.getName());
-            //TODO 管理同意进入公会名称暂时写死后期进行维护
-            if ("副会长".equals(postByName) && postGrade >= 3) {
-                this.addButton(new ElementButton(PluginUtils.getWindowConfigInfo("societyWindow.vicePresidentWindow.button"), img13));
-            }
-        }
+
 
         return this;
     }
@@ -82,7 +73,7 @@ public class SocietyWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_WINDOW, societyWindow));
                 break;
             case 1:
-                if (!SocietyUtils.isChairman(player.getName())) {
+                if (!SocietyUtils.hasChairman(player.getName())) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyWindow.notPresident"), societyWindow, backButtonName, backButtonImage));
                     return;
                 }

@@ -67,7 +67,7 @@ public class SetContributeWindow extends CustomWindow implements WindowLoader {
         String sidStr = societyContent.split("")[0];
         int sid = Integer.parseInt(sidStr);
         Integer contribute = Integer.parseInt(contributeStr);
-        Society society = SocietyUtils.getSocietysByID(sid);
+        Society society = SocietyUtils.getSocietyByID(sid);
 
         if (!SocietyUtils.getSocieties().contains(society)) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.setContributeWindow.notSociety"), null, closeButtonName, closeImagePath));

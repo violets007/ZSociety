@@ -45,7 +45,7 @@ public class RemoveMemberWindow extends SimpleWindow implements WindowLoader {
     @Override
     public void onClick(int id, Player player) {
         String playerName = getResponse().getClickedButton().getText();
-        Society society = SocietyUtils.getSocietysByID(this.sid);
+        Society society = SocietyUtils.getSocietyByID(this.sid);
         society.getPost().remove(playerName);
         SocietyUtils.saveSociety(society);
         FormWindow presidentWindow = WindowManager.getFormWindow(WindowType.PRESIDENT_WINDOW,player);

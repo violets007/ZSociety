@@ -92,7 +92,7 @@ public class SendSocietyWarWindow extends CustomWindow implements WindowLoader {
 
 
         Society society = SocietyUtils.getSocietyByPlayerName(player.getName());
-        Society targetSociety = SocietyUtils.getSocietysByID(Integer.parseInt(sid));
+        Society targetSociety = SocietyUtils.getSocietyByID(Integer.parseInt(sid));
 
         SocietyWar societyWar = new SocietyWar();
         societyWar.setSid(society.getSid());
@@ -101,7 +101,7 @@ public class SendSocietyWarWindow extends CustomWindow implements WindowLoader {
 //        societyWar.setStatus(WarStatus.SEND.toString());
 //        societyWar.setWid(Integer.parseInt(PluginUtils.generateNumber()));
         //创建公会配置文件
-        SocietyUtils.createSocietyWar(societyWar);
+//        SocietyUtils.createSocietyWar(societyWar);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.sendSocietyWarWindow.success", new String[]{"${societyName}"}, new String[]{societyName}), null, closeButtonName, closeButtonImage));
     }
 }
