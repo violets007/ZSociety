@@ -55,7 +55,7 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
             public int compare(ArrayList<Object> o1, ArrayList<Object> o2) {
                 Integer postGrade1 = (Integer) o1.get(2);
                 Integer postGrade2 = (Integer) o2.get(2);
-                return (postGrade1 > postGrade2) ? -1 : (postGrade2 > postGrade1) ? 1 : 0;
+                return (postGrade1 < postGrade2) ? -1 : (postGrade2 > postGrade1) ? 1 : 0;
             }
         });
 
@@ -64,7 +64,8 @@ public class MemberListWindow extends SimpleWindow implements WindowLoader {
             String playerName = (String) arrayList.get(0);
             String postName = (String) arrayList.get(1);
             Integer postGrade = (Integer) arrayList.get(2);
-            sb.append("§r职位: §c" + postName + " §f名称: §b§l" + playerName + " §r职位等级: §6" + postGrade + "\n");
+//            sb.append("§r职位: §c" + postName + " §f名称: §b§l" + playerName + " §r职位等级: §6" + postGrade + "\n");
+            sb.append("§r职位: §c" + postName + " §f名称: §b§l" + playerName + "\n");
         });
 
 

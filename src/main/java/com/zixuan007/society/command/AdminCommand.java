@@ -49,8 +49,6 @@ public class AdminCommand extends Command {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] args) {
-
-
         if (!commandSender.isOp()) {
             return false;
         }
@@ -85,11 +83,6 @@ public class AdminCommand extends Command {
                     commandSender.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.help"));
                     return false;
                 }
-
-                /*if (SocietyPlugin.getInstance().getTitleConfig().get(args[TWO_ARGS_LENGTH]) == null) {
-                    commandSender.sendMessage(SocietyPlugin.getInstance().getLanguageConfig().getString("message.giveTitle.notPlayer"));
-                    return false;
-                }*/
 
                 String title = args[THREE_ARGS_LENGTH];
                 if (TitleUtils.isExistTitle(args[TWO_ARGS_LENGTH], title)) {

@@ -17,9 +17,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
-import static com.zixuan007.society.utils.PluginUtils.SOCIETY_FOLDER;
-import static com.zixuan007.society.utils.PluginUtils.formatText;
+import static com.zixuan007.society.utils.PluginUtils.*;
 
 /**
  * 公会插件工具类
@@ -274,6 +272,32 @@ public class SocietyUtils {
             }
         });
         SocietyUtils.saveSociety(society);
+    }
+
+    public static void addMember(String playerName, Society society) {
+        List<HashMap<String, Object>> configPostList = societyPlugin.getConfig().getList("职位");
+        HashMap<String, Object> lowPost = configPostList.get(configPostList.size() - 1);
+        if (lowPost == null) throw new RuntimeException("公会职位配置有误,请进行确认处理");
+        addMember(playerName, society, lowPost.get("名称").toString(), (int) lowPost.get("等级"));
+    }
+
+
+    public static boolean hasPositionExceeds(Society society, String postName) {
+        Collection<ArrayList<Object>> memberPostData = society.getPost().values();
+        int count = 0;
+        for (ArrayList<Object> postData : memberPostData) {
+            if (postData.get(0).toString().equals(postName)) count++;
+        }
+
+        List<HashMap<String, Object>> configPostList = SocietyPlugin.getInstance().getConfig().getList("职位");
+        for (HashMap<String, Object> map : configPostList) {
+            if (map.get("名称").toString().equals(postName)) {
+                int maxCount = (int) map.get("数量");
+                if (count >= maxCount) return true;
+            }
+        }
+
+        return false;
     }
 
     /**

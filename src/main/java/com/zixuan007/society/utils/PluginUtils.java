@@ -25,11 +25,10 @@ import java.util.*;
 public class PluginUtils {
 
     public static final String FILE_SEPARATOR = System.getProperty("file.separator");
-    public static final String SOCIETY_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Society" + FILE_SEPARATOR;
+    public static final String SOCIETY_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "society" + FILE_SEPARATOR;
     public static final String CONFIG_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR;
-    public static final String MARRY_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Marry" + FILE_SEPARATOR;
-    public static final String PRIVILEGE_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "Vip" + FILE_SEPARATOR;
-    public static final String WAR_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "war" + FILE_SEPARATOR;
+    public static final String MARRY_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "marry" + FILE_SEPARATOR;
+    public static final String PRIVILEGE_FOLDER = SocietyPlugin.getInstance().getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "vip" + FILE_SEPARATOR;
 
     private static final int LENGTH = 8;
     public static SocietyPlugin societyPlugin = SocietyPlugin.getInstance();

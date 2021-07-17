@@ -176,7 +176,7 @@ public enum WindowType {
     /**
      * 设置职位窗口
      */
-    SET_JOB_WINDOW("SetJobWindow"),
+    SET_RIGHTS_WINDOW("SetJobWindow"),
 
     /**
      * 设置贡献窗口

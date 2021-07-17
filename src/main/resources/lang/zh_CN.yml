@@ -1,6 +1,6 @@
 ##中文语言包
 version: 1.0.8alpha
-#指令部分
+
 
 #管理命令
 command.manage: 管理
@@ -70,12 +70,14 @@ message.playerApplyList.joinSociety: §a恭喜玩家 §b${playerName} §a成功�
 message.playerApplyList.acceptJoinSociety: §a成功同意 §b${playerName} §a加入公会
 
 #设置公会职位窗口
-message.setJobWindow.isMe: §c设置职位的玩家不能是自己
-message.setJobWindow.isJoinSociety: §c设置的成员还没有加入公会
-message.setJobWindow.notSocietyMember: §c设置的成员还没有加入公会
-message.setJobWindow.upJob: §a职位成功升级为 §f${jobName}
-message.setJobWindow.setJob: §a成功设置 §b${playerName} §a职位为 §f${jobName}
-message.setJobWindow.existJobGrade: §c此职位等级已经存在,请填写相对应的职位名称
+message.setRightsWindow.isMe: §c设置职位的玩家不能是自己
+message.setRightsWindow.isJoinSociety: §c设置的成员还没有加入公会
+message.setRightsWindow.notSocietyMember: §c设置的成员还没有加入公会
+message.setRightsWindow.positionExceeds: §c当前职位超过配置设定最大人数
+
+message.setRightsWindow.upJob: §a职位成功升级为 §f${jobName}
+message.setRightsWindow.setJob: §a成功设置 §b${playerName} §a职位为 §f${jobName}
+message.setRightsWindow.existJobGrade: §c此职位等级已经存在,请填写相对应的职位名称
 
 #移除成员窗口
 message.removeMemberWindow.removeMember: §c成员 §b${playerName} 被踢出公会

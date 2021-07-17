@@ -25,8 +25,6 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
 
     public SocietyListWindow() {
         super(PluginUtils.getWindowConfigInfo("societyListWindow.title"), "");
-
-
     }
 
     @Override
@@ -47,7 +45,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
         for (Society society : societyList) {
             addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName() + " §6lv_§0" + society.getGrade()));
         }
-        if (currentPage < totalPage) {
+        if (currentPage < this.totalPage) {
             addButton(new ElementButton("下一页"));
         }
 

@@ -54,7 +54,6 @@ public class SocietyPlugin extends PluginBase {
     private Config marryConfig;
     private Config titleShopConfig;
     private Config societyShopConfig;
-    private final List<Config> societyWarList = new ArrayList<>();
     private static SocietyPlugin instance;
 
 
@@ -195,7 +194,7 @@ public class SocietyPlugin extends PluginBase {
         PluginUtils.addWindowClass(WindowType.PLAYER_APPLY_LIST_WINDOW, PlayerApplyListWindow.class);
         PluginUtils.addWindowClass(WindowType.REMOVE_MEMBER_WINDOW, RemoveMemberWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_CONTRIBUTE_WINDOW, SetContributeWindow.class);
-        PluginUtils.addWindowClass(WindowType.SET_JOB_WINDOW, SetJobWindow.class);
+        PluginUtils.addWindowClass(WindowType.SET_RIGHTS_WINDOW, SetRightsWindow.class);
         PluginUtils.addWindowClass(WindowType.SET_GRADE_WINDOW, SetGradeWindow.class);
         PluginUtils.addWindowClass(WindowType.DISSOLVE_WINDOW, DissolveWindow.class);
         PluginUtils.addWindowClass(WindowType.MESSAGE_WINDOW, MessageWindow.class);
@@ -246,10 +245,6 @@ public class SocietyPlugin extends PluginBase {
 
     public Config getWindowConfig() {
         return windowConfig;
-    }
-
-    public List<Config> getSocietyWarList() {
-        return societyWarList;
     }
 
 

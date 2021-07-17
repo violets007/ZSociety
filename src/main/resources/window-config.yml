@@ -9,7 +9,7 @@ createSocietyWindow.title: §e创建公会
 #会长管理窗口标题
 presidentWindow.title: §l§b${societyName} §e管理
 #设置职位窗口标题
-setJobWindow.title: §e设置职位
+setRightsWindow.title: §e设置职位
 #移除成员列表窗口标题
 removeMemberWindow.title: §e移除成员列表
 #玩家申请加入公会列表
@@ -69,7 +69,7 @@ societyWindow.societyInfo.button: §e公会信息
 societyWindow.vicePresidentWindow.button: §e副会长管理
 
 #会长管理窗口按钮1
-presidentWindow.setJobWindow.button: §e设置公会职
+presidentWindow.setRightsWindow.button: §e设置公会职
 #会长管理窗口按钮2
 presidentWindow.playerApplyList.button: §e查看玩家申请列表
 #会长管理窗口按钮3
@@ -123,7 +123,7 @@ societyWindow.tpaSociety.button.imgPath: textures/ui/restore_arrow_default.png
 societyWindow.societyInfo.button.imgPath: textures/ui/copy.png
 
 #会长管理窗口按钮1图片
-presidentWindow.setJobWindow.button.imgPath: textures/ui/dev_glyph_color.png
+presidentWindow.setRightsWindow.button.imgPath: textures/ui/dev_glyph_color.png
 #会长管理窗口按钮2图片
 presidentWindow.playerApplyList.button.imgPath: textures/ui/copy
 #会长管理窗口按钮3图片

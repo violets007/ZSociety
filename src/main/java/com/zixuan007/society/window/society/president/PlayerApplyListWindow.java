@@ -52,7 +52,7 @@ public class PlayerApplyListWindow extends SimpleWindow implements WindowLoader 
         }
 
 
-        SocietyUtils.addMember(playerName, society, "精英", 1);
+        SocietyUtils.addMember(playerName, society);
         SocietyUtils.sendMemberTitle(PluginUtils.getLanguageInfo("message.playerApplyList.joinSociety", new String[]{"${playerName}"}, new String[]{playerName}), society);
         player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.playerApplyList.acceptJoinSociety", new String[]{"${playerName}"}, new String[]{playerName}), societyWindow, backButtonName, backButtonImage));
     }
