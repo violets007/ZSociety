@@ -37,6 +37,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
         setContent(content);
         this.currentPage = currentPage;
         this.totalPage = totalPage;
+
         if (currentPage != 1) {
             addButton(new ElementButton("上一页"));
         }
@@ -45,6 +46,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
         for (Society society : societyList) {
             addButton(new ElementButton("§e公会ID §b" + society.getSid() + " §e公会名称 §b" + society.getSocietyName() + " §e会长 §b" + society.getPresidentName() + " §6lv_§0" + society.getGrade()));
         }
+
         if (currentPage < this.totalPage) {
             addButton(new ElementButton("下一页"));
         }
@@ -74,28 +76,35 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
         FormWindow societyWindow = WindowManager.getFormWindow(WindowType.SOCIETY_WINDOW, player);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
+
         if (id == 0 && this.currentPage != 1) {
             upPage(this.currentPage, player);
             return;
         }
+
         if (id == limit) {
             nextPage(this.currentPage, player);
             return;
         }
+
         if (SocietyUtils.hasSociety(player.getName())) {
             player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.societyListWindow.isJoinSociety"), societyWindow, backButtonName, backButtonImage));
             return;
         }
-        ModalWindow affirmWindow;
+
+        ModalWindow affirmWindow = null;
+        String description = "";
 
         if (this.currentPage == 1) {
             society = this.societyList.get(id);
-
-            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "§e您确定要加入 §b" + (this.societyList.get(id)).getSocietyName() + " §e公会吗?", "§a确认加入", "§c取消加入");
         } else {
             society = this.societyList.get(id - 1);
-            affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "§e您确定要加入 §b" + (this.societyList.get(id - 1)).getSocietyName() + " §e公会吗?", "§a确认加入", "§c取消加入");
         }
+
+        if (society.getDescription() != null && society.getDescription().length() > 0)
+            description = "\n\n§6公会描述: \n" + society.getDescription();
+
+        affirmWindow = (ModalWindow) WindowManager.getFormWindow(WindowType.MODAL_WINDOW, "§e您确定要加入 §b" + society.getSocietyName() + " §e公会吗?" + description, "§a确认加入", "§c取消加入");
         affirmWindow.setButtonClickedListener((affirm, player1) -> {
             if (affirm) {
                 if (PluginUtils.isOnlineByName(society.getPresidentName())) {

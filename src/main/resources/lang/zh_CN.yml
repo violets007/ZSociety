@@ -111,7 +111,7 @@ message.contributionWindow.contributionCoin: §a贡献成功,当前公会经济 
 #公会列表窗口
 message.societyListWindow.isJoinSociety: §c您当前已经加入过公会,请勿二次点击加入
 message.societyListWindow.playerApplyJoinSociety: §f>> §a玩家 §b${playerName} §a正在申请进入公会,§c请审核
-message.societyListWindow.overtakeMaxMember: §f>> §c当前公会人数已满,请选择加入其它公会
+message.societyListWindow.overtakeMaxMember: §c当前公会人数已满,请选择加入其它公会
 
 
 #解散公会窗口
