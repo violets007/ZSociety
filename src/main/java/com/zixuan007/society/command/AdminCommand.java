@@ -97,38 +97,6 @@ public class AdminCommand extends Command {
 
                 commandSender.sendMessage("称号给予成功");
                 return true;
-            case "war":
-                if (args.length < TWO_ARGS_LENGTH) {
-                    return sendHelp(player);
-                }
-                switch (args[1]) {
-                    case "set1":
-                        String position1 = player.getPosition().getFloorX() + "-" + player.getPosition().getFloorY() + "-" + player.getPosition().getFloorZ();
-                        SocietyPlugin.getInstance().getConfig().set("坐标1", position1);
-                        player.sendMessage("设置坐标1成功");
-                        return true;
-                    case "set2":
-                        String position2 = player.getPosition().getFloorX() + "-" + player.getPosition().getFloorY() + "-" + player.getPosition().getFloorZ();
-                        SocietyPlugin.getInstance().getConfig().set("坐标2", position2);
-                        player.sendMessage("设置坐标2成功");
-                        return true;
-                    case "money":
-                        if (args.length < THREE_ARGS_LENGTH) {
-                            return sendHelp(player);
-                        }
-                        if (!SocietyUtils.isSetSocietyWarData()) {
-                            player.sendMessage("当前还没有设置公会数据内容!");
-                            return true;
-                        }
-                        String moneyStr = args[2];
-                        int money = Integer.parseInt(moneyStr);
-                        SocietyPlugin.getInstance().getConfig().set("money", money);
-                        SocietyPlugin.getInstance().getConfig().save();
-                        return true;
-                    default:
-                        break;
-                }
-
             case RELOAD_ARGS:
                 SocietyPlugin.getInstance().getWindowConfig().reload();
                 SocietyPlugin.getInstance().getLanguageConfig().reload();
@@ -182,9 +150,6 @@ public class AdminCommand extends Command {
         player.sendMessage(">> §b/管理 §a特权");
         player.sendMessage(">> §b/管理 §areload");
         player.sendMessage(">> §b/管理 §e给予 §e称号 §e玩家名 §6[称号]");
-        player.sendMessage(">> §b/管理 §ewar §eset1 §e设置公会坐标1");
-        player.sendMessage(">> §b/管理 §ewar §eset2 §e设置公会坐标2");
-        player.sendMessage(">> §b/管理 §ewar §emoney §e贡献值 >>最低发起公会数量的贡献值");
         return true;
     }
 }

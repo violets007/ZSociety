@@ -65,7 +65,7 @@ public class WindowManager {
     public static SocietyListWindow getSocietyListWindow(int current, WindowType windowType, Player player) {
         List<Society> societyList = SocietyUtils.getSocietyList(current);
         int limit = 10;
-        int totalPage = SocietyUtils.getSocietyListTotalPage(current, limit);
+        int totalPage = SocietyUtils.getSocietyListTotalPage(limit);
         String content = "§a当前第 §b" + current + " §a总页数 §b" + totalPage;
         FormWindow formWindow = WindowManager.getFormWindow(windowType, player);
         SocietyListWindow societyListWindow = (SocietyListWindow) WindowManager.getFormWindow(WindowType.SOCIETY_LIST_WINDOW, content, current, totalPage, societyList, formWindow);

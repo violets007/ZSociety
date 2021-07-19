@@ -33,7 +33,7 @@ public class ShowTipTask extends PluginTask<SocietyPlugin> {
         String configNameTag = (String) config.get(NAMETAG_FORMAT);
         if (config.getBoolean(ENABLE_TIP)) {
             for (Player player : players) {
-                tempText = SocietyUtils.formatButtomText(tempText, player);
+                tempText = SocietyUtils.formatButtonText(tempText, player);
                 player.sendTip(tempText);
             }
         }

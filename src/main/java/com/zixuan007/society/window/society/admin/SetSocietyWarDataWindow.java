@@ -56,8 +56,8 @@ public class SetSocietyWarDataWindow extends SimpleWindow implements WindowLoade
                 break;
         }
 
-        if(SocietyUtils.isSetSocietyWarData()){
+       /* if(SocietyUtils.isSetSocietyWarData()){
           config.save();
-        }
+        }*/
     }
 }

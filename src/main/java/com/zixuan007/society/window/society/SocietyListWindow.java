@@ -113,6 +113,7 @@ public class SocietyListWindow extends SimpleWindow implements WindowLoader {
                 }
                 String key = "等级" + society.getGrade();
                 ArrayList<Object> configGrades = (ArrayList<Object>) SocietyPlugin.getInstance().getConfig().get(key);
+                if (configGrades == null) throw new RuntimeException(key + " 相应的配置无法找到,请到society-config.yml进行配置");
                 Integer maxMemberCount = (Integer) configGrades.get(0);
                 int societyMemberCount = society.getMembers().size();
 

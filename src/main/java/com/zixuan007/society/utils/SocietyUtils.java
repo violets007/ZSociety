@@ -10,7 +10,6 @@ import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.Config;
 import com.zixuan007.society.SocietyPlugin;
 import com.zixuan007.society.pojo.Society;
-import com.zixuan007.society.pojo.SocietyWar;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,20 +27,8 @@ public class SocietyUtils {
 
     public static HashMap<String, ArrayList<Object>> onCreatePlayer = new HashMap<>();
     public static ArrayList<Society> societies = new ArrayList<>();
-    public static ArrayList<SocietyWar> societyWars = new ArrayList<>();
     public static HashMap<String, String> societyChatPlayers = new HashMap<>();
 
-    /**
-     * 指定的公会名称是否存在
-     *
-     * @param societyName 公会名
-     * @return
-     */
-    public static Boolean hasSocietyByName(String societyName) {
-        String filePath = SOCIETY_FOLDER + societyName + ".yml";
-        File societyFile = new File(filePath);
-        return societyFile.exists();
-    }
 
     /**
      * 获取当前格式化后的日期
@@ -52,6 +39,33 @@ public class SocietyUtils {
         long nowTime = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
         return sdf.format(nowTime);
+    }
+
+    /**
+     * 检测字符串内容是否为数字
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isNumeric(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 指定的公会名称是否存在
+     *
+     * @param societyName 公会名
+     * @return
+     */
+    public static Boolean hasCreateSociety(String societyName) {
+        String filePath = SOCIETY_FOLDER + societyName + ".yml";
+        File societyFile = new File(filePath);
+        return societyFile.exists();
     }
 
     /**
@@ -93,21 +107,6 @@ public class SocietyUtils {
         return null;
     }
 
-    /**
-     * 检测字符串内容是否为数字
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isNumeric(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
 
     /**
      * 获取公会列表
@@ -135,13 +134,12 @@ public class SocietyUtils {
     }
 
     /**
-     * 获获取公会列表总页数
+     * 公会列表总页数
      *
-     * @param currentPage
      * @param limit
      * @return
      */
-    public static int getSocietyListTotalPage(int currentPage, int limit) {
+    public static int getSocietyListTotalPage(int limit) {
         ArrayList<Society> societies = SocietyUtils.societies;
         int totalPage = (societies.size() % limit == 0) ? (societies.size() / limit) : (societies.size() / limit + 1);
         return totalPage;
@@ -162,12 +160,6 @@ public class SocietyUtils {
         return null;
     }
 
-    /**
-     * 检测玩家是否是会长
-     *
-     * @param playerName 玩家名称
-     * @return
-     */
     public static boolean hasChairman(String playerName) {
         for (Society society : SocietyUtils.getSocieties()) {
             if (society.getPresidentName().equals(playerName)) {
@@ -177,17 +169,12 @@ public class SocietyUtils {
         return false;
     }
 
-    /**
-     * 移除公会
-     *
-     * @param societyName 公会名称
-     */
     public static void removeSociety(String societyName) {
         String path = SOCIETY_FOLDER + societyName + ".yml";
         File file = new File(path);
         System.gc();
-        boolean isdelete = file.delete();
-        if (isdelete) {
+        boolean hasDel = file.delete();
+        if (hasDel) {
             SocietyPlugin.getInstance().getLogger().info("§a公会 §b" + file.getName() + " §a删除成功");
         } else {
             SocietyPlugin.getInstance().getLogger().info("§c公会 §4" + file.getName() + " §c删除失败");
@@ -209,7 +196,7 @@ public class SocietyUtils {
         if (list.size() < 1) {
             return "无职位";
         }
-        return (String) list.get(0);
+        return list.get(0).toString();
     }
 
     /**
@@ -219,7 +206,7 @@ public class SocietyUtils {
      * @param player
      * @return
      */
-    public static String formatButtomText(String tipText, Player player) {
+    public static String formatButtonText(String tipText, Player player) {
         return formatText(tipText, player);
     }
 
@@ -458,7 +445,7 @@ public class SocietyUtils {
         config.set("presidentName", society.getPresidentName());
         config.set("createTime", society.getCreateTime());
         config.set("societyMoney", society.getSocietyMoney());
-        config.set("psots", society.getPost());
+        config.set("members", society.getPost());
         config.set("grade", society.getGrade());
         config.set("tempApply", society.getTempApply());
 
@@ -470,26 +457,7 @@ public class SocietyUtils {
             config.set("description", society.getDescription());
         }
 
-
-        getSocieties().forEach(society1 -> {
-            if (society1.getSid() == society.getSid()) {
-                society1.setSocietyName(society.getSocietyName());
-                society1.setSocietyMoney(society.getSocietyMoney());
-                society1.setGrade(society.getGrade());
-                society1.setPosition(society.getPosition());
-                society1.setTempApply(society.getTempApply());
-            }
-        });
-
-
         config.save();
-    }
-
-    /**
-     * 检测是否设置公会战数据
-     */
-    public static boolean isSetSocietyWarData() {
-        return SocietyPlugin.getInstance().getConfig().getAll().entrySet().size() != 0;
     }
 
 

@@ -44,9 +44,9 @@ public class SetSocietyWarMoneyWindow extends CustomWindow implements WindowLoad
         Config societyWarConfig = SocietyPlugin.getInstance().getConfig();
         societyWarConfig.set("money",money);
 
-        if(SocietyUtils.isSetSocietyWarData()){
+      /*  if(SocietyUtils.isSetSocietyWarData()){
             societyWarConfig.save();
-        }
+        }*/
 
 
     }

@@ -41,20 +41,12 @@ public class Society {
         if (config.get("sid") == null) return null;
 
         Society society = new Society();
-
-        if (config.get("sid") instanceof Integer) {
-            society.sid = (Integer) config.get("sid");
-        }
-
-        if (config.get("sid") instanceof Long) {
-            society.sid = (Long) config.get("sid");
-        }
-
+        society.sid = Long.parseLong(config.get("sid").toString());
         society.societyName = config.getString("societyName");
         society.presidentName = config.getString("presidentName");
         society.createTime = config.getString("createTime");
         society.societyMoney = config.getDouble("societyMoney");
-        society.members = (HashMap<String, ArrayList<Object>>) config.get("psots", new HashMap<String, ArrayList<Object>>());
+        society.members = config.get("members", new HashMap<String, ArrayList<Object>>());
         society.grade = config.getInt("grade");
         society.tempApply = (ArrayList<String>) config.getList("tempApply", new ArrayList());
         society.position = config.getString("position");
@@ -151,8 +143,17 @@ public class Society {
 
     @Override
     public String toString() {
-        return "Society{sid=" + this.sid + ", societyName='" + this.societyName + '\'' + ", presidentName='" + this.presidentName + '\'' + ", createTime='" + this.createTime + '\'' + ", societyMoney=" + this.societyMoney + ", psots=" + this.members + ", grade=" + this.grade + ", tempApply=" + this.tempApply + '}';
+        return "Society{" +
+                "sid=" + sid +
+                ", societyName='" + societyName + '\'' +
+                ", presidentName='" + presidentName + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", societyMoney=" + societyMoney +
+                ", members=" + members +
+                ", grade=" + grade +
+                ", tempApply=" + tempApply +
+                ", position='" + position + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
-
-
 }

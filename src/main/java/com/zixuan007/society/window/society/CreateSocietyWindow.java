@@ -43,7 +43,7 @@ public class CreateSocietyWindow extends CustomWindow implements WindowLoader {
     public void onClick(FormResponseCustom response, Player player) {
         SocietyPlugin societyPlugin = SocietyPlugin.getInstance();
         String societyName = response.getInputResponse(0);
-        Boolean societyNameExist = SocietyUtils.hasSocietyByName(societyName);
+        Boolean societyNameExist = SocietyUtils.hasCreateSociety(societyName);
         FormWindow createSociety = WindowManager.getFormWindow(WindowType.CREATE_SOCIETY_WINDOW);
         String backButtonName = PluginUtils.getWindowConfigInfo("messageWindow.back.button");
         String backButtonImage = PluginUtils.getWindowConfigInfo("messageWindow.back.button.imgPath");
