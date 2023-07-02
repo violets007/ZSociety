@@ -83,7 +83,8 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.PLAYER_APPLY_LIST_WINDOW, player));
                 break;
             case 2:
-                list = (ArrayList<Object>) societyPlugin.getConfig().get("等级" + society.getGrade());
+                int nextGrade = society.getGrade() + 1;
+                list = (ArrayList<Object>) societyPlugin.getConfig().get("等级" + nextGrade);
                 if (list == null || list.size() <= 0) {
                     player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.maxGrade"), presidentWindow, backButtonName, backButtonImage));
                     return;
@@ -95,7 +96,7 @@ public class PresidentWindow extends SimpleWindow implements WindowLoader {
                     return;
                 }
                 society.setSocietyMoney(societyMoney - updateMoney);
-                society.setGrade(society.getGrade() + 1);
+                society.setGrade(nextGrade);
                 SocietyUtils.saveSociety(society);
                 player.showFormWindow(WindowManager.getFormWindow(WindowType.MESSAGE_WINDOW, PluginUtils.getLanguageInfo("message.presidentWindow.upGrade"), presidentWindow, backButtonName, backButtonImage));
                 break;
